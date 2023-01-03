@@ -19540,6 +19540,43 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Admin/Auth/Login.vue?vue&type=script&setup=true&lang=js":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Admin/Auth/Login.vue?vue&type=script&setup=true&lang=js ***!
+  \****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'Login',
+  setup: function setup(__props, _ref) {
+    var expose = _ref.expose;
+    expose();
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm)({
+      username: 'shiref',
+      password: 'password',
+      remember: false
+    });
+    var __returned__ = {
+      form: form,
+      useForm: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.useForm
+    };
+    Object.defineProperty(__returned__, '__isScriptSetup', {
+      enumerable: false,
+      value: true
+    });
+    return __returned__;
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Admin/Home.vue?vue&type=script&lang=js":
 /*!***********************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Admin/Home.vue?vue&type=script&lang=js ***!
@@ -19756,9 +19793,56 @@ var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "align-middle"
 }, "English", -1 /* HOISTED */);
 var _hoisted_15 = [_hoisted_13, _hoisted_14];
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<li class=\"nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1\"><a class=\"nav-link dropdown-toggle hide-arrow\" href=\"javascript:void(0);\" data-bs-toggle=\"dropdown\" data-bs-auto-close=\"outside\" aria-expanded=\"false\"><i class=\"ti ti-bell ti-md\"></i><span class=\"badge bg-danger rounded-pill badge-notifications\">5</span></a><ul class=\"dropdown-menu dropdown-menu-end py-0\"><li class=\"dropdown-menu-header border-bottom\"><div class=\"dropdown-header d-flex align-items-center py-3\"><h5 class=\"text-body mb-0 me-auto\"> Notification </h5><a href=\"javascript:void(0)\" class=\"dropdown-notifications-all text-body\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Mark all as read\"><i class=\"ti ti-mail-opened fs-4\"></i></a></div></li><li class=\"dropdown-notifications-list scrollable-container\"><ul class=\"list-group list-group-flush\"><li class=\"list-group-item list-group-item-action dropdown-notifications-item\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><img src=\"/assets/img/avatars/1.png\" class=\"h-auto rounded-circle\"></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\"> Congratulation Lettie 🎉 </h6><p class=\"mb-0\"> Won the monthly best seller gold badge </p><small class=\"text-muted\">1h ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><span class=\"avatar-initial rounded-circle bg-label-danger\">CF</span></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\"> Charles Franklin </h6><p class=\"mb-0\"> Accepted your connection </p><small class=\"text-muted\">12hr ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item marked-as-read\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><img src=\"/assets/img/avatars/2.png\" class=\"h-auto rounded-circle\"></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\">New Message ✉️</h6><p class=\"mb-0\"> You have new message from Natalie </p><small class=\"text-muted\">1h ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><span class=\"avatar-initial rounded-circle bg-label-success\"><i class=\"ti ti-shopping-cart\"></i></span></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\"> Whoo! You have new order 🛒 </h6><p class=\"mb-0\"> ACME Inc. made new order $1,154 </p><small class=\"text-muted\">1 day ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item marked-as-read\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><img src=\"/assets/img/avatars/9.png\" class=\"h-auto rounded-circle\"></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\"> Application has been approved 🚀 </h6><p class=\"mb-0\"> Your ABC project application has been approved. </p><small class=\"text-muted\">2 days ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item marked-as-read\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><span class=\"avatar-initial rounded-circle bg-label-success\"><i class=\"ti ti-chart-pie\"></i></span></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\"> Monthly report is generated </h6><p class=\"mb-0\"> July monthly financial report is generated </p><small class=\"text-muted\">3 days ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item marked-as-read\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><img src=\"/assets/img/avatars/5.png\" class=\"h-auto rounded-circle\"></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\"> Send connection request </h6><p class=\"mb-0\"> Peter sent you connection request </p><small class=\"text-muted\">4 days ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><img src=\"/assets/img/avatars/6.png\" class=\"h-auto rounded-circle\"></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\"> New message from Jane </h6><p class=\"mb-0\"> Your have new message from Jane </p><small class=\"text-muted\">5 days ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item marked-as-read\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><span class=\"avatar-initial rounded-circle bg-label-warning\"><i class=\"ti ti-alert-triangle\"></i></span></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\"> CPU is running high </h6><p class=\"mb-0\"> CPU Utilization Percent is currently at 88.63%, </p><small class=\"text-muted\">5 days ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li></ul></li><li class=\"dropdown-menu-footer border-top\"><a href=\"javascript:void(0);\" class=\"dropdown-item d-flex justify-content-center text-primary p-2 h-px-40 mb-1 align-items-center\"> View all notifications </a></li></ul></li>", 1);
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<li class=\"nav-item navbar-dropdown dropdown-user dropdown\"><a class=\"nav-link dropdown-toggle hide-arrow\" href=\"javascript:void(0);\" data-bs-toggle=\"dropdown\"><div class=\"avatar avatar-online\"><img src=\"/assets/img/avatars/1.png\" class=\"h-auto rounded-circle\"></div></a><ul class=\"dropdown-menu dropdown-menu-end\"><li><a class=\"dropdown-item\" href=\"pages-account-settings-account.html\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar avatar-online\"><img src=\"/assets/img/avatars/1.png\" class=\"h-auto rounded-circle\"></div></div><div class=\"flex-grow-1\"><span class=\"fw-semibold d-block\">John Doe</span><small class=\"text-muted\">Admin</small></div></div></a></li><li><div class=\"dropdown-divider\"></div></li><li><a class=\"dropdown-item\" href=\"pages-profile-user.html\"><i class=\"ti ti-user-check me-2 ti-sm\"></i><span class=\"align-middle\">My Profile</span></a></li><li><a class=\"dropdown-item\" href=\"pages-account-settings-account.html\"><i class=\"ti ti-settings me-2 ti-sm\"></i><span class=\"align-middle\">Settings</span></a></li><li><a class=\"dropdown-item\" href=\"pages-account-settings-billing.html\"><span class=\"d-flex align-items-center align-middle\"><i class=\"flex-shrink-0 ti ti-credit-card me-2 ti-sm\"></i><span class=\"flex-grow-1 align-middle\">Billing</span><span class=\"flex-shrink-0 badge badge-center rounded-pill bg-label-danger w-px-20 h-px-20\">2</span></span></a></li><li><div class=\"dropdown-divider\"></div></li><li><a class=\"dropdown-item\" href=\"pages-help-center-landing.html\"><i class=\"ti ti-lifebuoy me-2 ti-sm\"></i><span class=\"align-middle\">Help</span></a></li><li><a class=\"dropdown-item\" href=\"pages-faq.html\"><i class=\"ti ti-help me-2 ti-sm\"></i><span class=\"align-middle\">FAQ</span></a></li><li><a class=\"dropdown-item\" href=\"pages-pricing.html\"><i class=\"ti ti-currency-dollar me-2 ti-sm\"></i><span class=\"align-middle\">Pricing</span></a></li><li><div class=\"dropdown-divider\"></div></li><li><a class=\"dropdown-item\" href=\"auth-login-cover.html\" target=\"_blank\"><i class=\"ti ti-logout me-2 ti-sm\"></i><span class=\"align-middle\">Log Out</span></a></li></ul></li>", 1);
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<li class=\"nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1\"><a class=\"nav-link dropdown-toggle hide-arrow\" href=\"javascript:void(0);\" data-bs-toggle=\"dropdown\" data-bs-auto-close=\"outside\" aria-expanded=\"false\"><i class=\"ti ti-bell ti-md\"></i><span class=\"badge bg-danger rounded-pill badge-notifications\">5</span></a><ul class=\"dropdown-menu dropdown-menu-end py-0\"><li class=\"dropdown-menu-header border-bottom\"><div class=\"dropdown-header d-flex align-items-center py-3\"><h5 class=\"text-body mb-0 me-auto\">Notification</h5><a href=\"javascript:void(0)\" class=\"dropdown-notifications-all text-body\" data-bs-toggle=\"tooltip\" data-bs-placement=\"top\" title=\"Mark all as read\"><i class=\"ti ti-mail-opened fs-4\"></i></a></div></li><li class=\"dropdown-notifications-list scrollable-container\"><ul class=\"list-group list-group-flush\"><li class=\"list-group-item list-group-item-action dropdown-notifications-item\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><img src=\"/img/admin.png\" class=\"h-auto rounded-circle\"></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\">Congratulation Lettie 🎉</h6><p class=\"mb-0\">Won the monthly best seller gold badge</p><small class=\"text-muted\">1h ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><span class=\"avatar-initial rounded-circle bg-label-danger\">CF</span></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\">Charles Franklin</h6><p class=\"mb-0\">Accepted your connection</p><small class=\"text-muted\">12hr ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item marked-as-read\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><img src=\"/assets/img/avatars/2.png\" class=\"h-auto rounded-circle\"></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\">New Message ✉️</h6><p class=\"mb-0\">You have new message from Natalie</p><small class=\"text-muted\">1h ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><span class=\"avatar-initial rounded-circle bg-label-success\"><i class=\"ti ti-shopping-cart\"></i></span></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\">Whoo! You have new order 🛒</h6><p class=\"mb-0\">ACME Inc. made new order $1,154</p><small class=\"text-muted\">1 day ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item marked-as-read\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><img src=\"/assets/img/avatars/9.png\" class=\"h-auto rounded-circle\"></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\">Application has been approved 🚀</h6><p class=\"mb-0\">Your ABC project application has been approved.</p><small class=\"text-muted\">2 days ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item marked-as-read\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><span class=\"avatar-initial rounded-circle bg-label-success\"><i class=\"ti ti-chart-pie\"></i></span></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\">Monthly report is generated</h6><p class=\"mb-0\">July monthly financial report is generated</p><small class=\"text-muted\">3 days ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item marked-as-read\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><img src=\"/assets/img/avatars/5.png\" class=\"h-auto rounded-circle\"></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\">Send connection request</h6><p class=\"mb-0\">Peter sent you connection request</p><small class=\"text-muted\">4 days ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><img src=\"/assets/img/avatars/6.png\" class=\"h-auto rounded-circle\"></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\">New message from Jane</h6><p class=\"mb-0\">Your have new message from Jane</p><small class=\"text-muted\">5 days ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li><li class=\"list-group-item list-group-item-action dropdown-notifications-item marked-as-read\"><div class=\"d-flex\"><div class=\"flex-shrink-0 me-3\"><div class=\"avatar\"><span class=\"avatar-initial rounded-circle bg-label-warning\"><i class=\"ti ti-alert-triangle\"></i></span></div></div><div class=\"flex-grow-1\"><h6 class=\"mb-1\">CPU is running high</h6><p class=\"mb-0\">CPU Utilization Percent is currently at 88.63%,</p><small class=\"text-muted\">5 days ago</small></div><div class=\"flex-shrink-0 dropdown-notifications-actions\"><a href=\"javascript:void(0)\" class=\"dropdown-notifications-read\"><span class=\"badge badge-dot\"></span></a><a href=\"javascript:void(0)\" class=\"dropdown-notifications-archive\"><span class=\"ti ti-x\"></span></a></div></div></li></ul></li><li class=\"dropdown-menu-footer border-top\"><a href=\"javascript:void(0);\" class=\"dropdown-item d-flex justify-content-center text-primary p-2 h-px-40 mb-1 align-items-center\"> View all notifications </a></li></ul></li>", 1);
+var _hoisted_17 = {
+  "class": "nav-item navbar-dropdown dropdown-user dropdown"
+};
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  "class": "nav-link dropdown-toggle hide-arrow",
+  href: "javascript:void(0);",
+  "data-bs-toggle": "dropdown"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "avatar avatar-online"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: "/img/admin.png",
+  "class": "h-auto rounded-circle"
+})])], -1 /* HOISTED */);
+var _hoisted_19 = {
+  "class": "dropdown-menu dropdown-menu-end"
+};
+var _hoisted_20 = {
+  "class": "dropdown-item",
+  href: "pages-account-settings-account.html"
+};
+var _hoisted_21 = {
+  "class": "d-flex"
+};
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "flex-shrink-0 me-3"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "avatar avatar-online"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: "/img/admin.png",
+  "class": "h-auto rounded-circle"
+})])], -1 /* HOISTED */);
+var _hoisted_23 = {
+  "class": "flex-grow-1"
+};
+var _hoisted_24 = {
+  "class": "fw-semibold d-block"
+};
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", {
+  "class": "text-muted"
+}, "Role", -1 /* HOISTED */);
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<li><div class=\"dropdown-divider\"></div></li><li><a class=\"dropdown-item\" href=\"pages-profile-user.html\"><i class=\"ti ti-user-check me-2 ti-sm\"></i><span class=\"align-middle\">My Profile</span></a></li><li><a class=\"dropdown-item\" href=\"pages-account-settings-account.html\"><i class=\"ti ti-settings me-2 ti-sm\"></i><span class=\"align-middle\">Settings</span></a></li><li><div class=\"dropdown-divider\"></div></li>", 4);
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "ti ti-logout me-2 ti-sm"
+}, null, -1 /* HOISTED */);
+var _hoisted_31 = {
+  "class": "align-middle"
+};
 function render(_ctx, _cache) {
+  var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Language "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fi fis rounded-circle me-1 fs-3", {
       'fi-sa': _ctx.$page.props.locale === 'ar',
@@ -19772,7 +19856,18 @@ function render(_ctx, _cache) {
     "class": "dropdown-item",
     href: _ctx.route('language', 'en'),
     "data-language": "en"
-  }, _hoisted_15, 8 /* PROPS */, _hoisted_12)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("/ Language "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Notification "), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("/ Notification "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" User "), _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("/ User ")])])]);
+  }, _hoisted_15, 8 /* PROPS */, _hoisted_12)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("/ Language "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Notification "), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("/ Notification "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" User "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.authUser.fullName), 1 /* TEXT */), _hoisted_25])])])]), _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+    "class": "dropdown-item",
+    href: _ctx.route('admin.logout'),
+    method: "post",
+    as: "button"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Log Out')), 1 /* TEXT */)];
+    }),
+
+    _: 1 /* STABLE */
+  }, 8 /* PROPS */, ["href"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("/ User ")])])]);
 }
 
 /***/ }),
@@ -19794,147 +19889,112 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   rel: "stylesheet",
   href: "/assets/vendor/css/pages/page-auth.css"
 }, null, -1 /* HOISTED */);
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_2 = {
   "class": "container-xxl"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+};
+var _hoisted_3 = {
   "class": "authentication-wrapper authentication-basic container-p-y"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+};
+var _hoisted_4 = {
   "class": "authentication-inner py-4"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Login "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+};
+var _hoisted_5 = {
   "class": "card"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+};
+var _hoisted_6 = {
   "class": "card-body"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Logo "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "app-brand justify-content-center mb-4 mt-2"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "index.html",
-  "class": "app-brand-link gap-2"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "app-brand-logo demo"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  width: "32",
-  height: "22",
-  viewBox: "0 0 32 22",
-  fill: "none",
-  xmlns: "http://www.w3.org/2000/svg"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  "fill-rule": "evenodd",
-  "clip-rule": "evenodd",
-  d: "M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z",
-  fill: "#7367F0"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  opacity: "0.06",
-  "fill-rule": "evenodd",
-  "clip-rule": "evenodd",
-  d: "M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z",
-  fill: "#161616"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  opacity: "0.06",
-  "fill-rule": "evenodd",
-  "clip-rule": "evenodd",
-  d: "M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z",
-  fill: "#161616"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  "fill-rule": "evenodd",
-  "clip-rule": "evenodd",
-  d: "M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z",
-  fill: "#7367F0"
-})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "app-brand-text demo text-body fw-bold ms-1"
-}, "Vuexy")])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" /Logo "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
+};
+var _hoisted_7 = {
   "class": "mb-1 pt-2"
-}, "Welcome to Vuexy! 👋"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mb-4"
-}, " Please sign-in to your account and start the adventure "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-  id: "formAuthentication",
-  "class": "mb-3",
-  action: "index.html",
-  method: "POST"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+};
+var _hoisted_8 = {
   "class": "mb-3"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "email",
+};
+var _hoisted_9 = {
+  "for": "username",
   "class": "form-label"
-}, "Email or Username"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "text",
-  "class": "form-control",
-  id: "email",
-  name: "email-username",
-  placeholder: "Enter your email or username",
-  autofocus: ""
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+};
+var _hoisted_10 = ["placeholder"];
+var _hoisted_11 = {
+  key: 0,
+  "class": "text text-danger text-sm"
+};
+var _hoisted_12 = {
   "class": "mb-3 form-password-toggle"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+};
+var _hoisted_13 = {
   "class": "d-flex justify-content-between"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+};
+var _hoisted_14 = {
   "class": "form-label",
   "for": "password"
-}, "Password"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "auth-forgot-password-basic.html"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, "Forgot Password?")])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+};
+var _hoisted_15 = {
   "class": "input-group input-group-merge"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "password",
-  id: "password",
-  "class": "form-control",
-  name: "password",
-  placeholder: "············",
-  "aria-describedby": "password"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+};
+var _hoisted_16 = ["placeholder"];
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "input-group-text cursor-pointer"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "ti ti-eye-off"
-})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+})], -1 /* HOISTED */);
+var _hoisted_18 = {
   "class": "mb-3"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+};
+var _hoisted_19 = {
   "class": "form-check"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  "class": "form-check-input",
-  type: "checkbox",
-  id: "remember-me"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+};
+var _hoisted_20 = {
   "class": "form-check-label",
   "for": "remember-me"
-}, " Remember Me ")])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+};
+var _hoisted_21 = {
   "class": "mb-3"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+};
+var _hoisted_22 = {
   "class": "btn btn-primary d-grid w-100",
   type: "submit"
-}, " Sign in ")])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "text-center"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "New on our platform?"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "auth-register-basic.html"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Create an account")])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "divider my-4"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "divider-text"
-}, "or")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "d-flex justify-content-center"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "javascript:;",
-  "class": "btn btn-icon btn-label-facebook me-3"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "tf-icons fa-brands fa-facebook-f fs-5"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "javascript:;",
-  "class": "btn btn-icon btn-label-google-plus me-3"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "tf-icons fa-brands fa-google fs-5"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "javascript:;",
-  "class": "btn btn-icon btn-label-twitter"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "tf-icons fa-brands fa-twitter fs-5"
-})])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" /Login ")])])], -1 /* HOISTED */);
-
-function render(_ctx, _cache) {
+};
+function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Head, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_1];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("title", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Login')), 1 /* TEXT */), _hoisted_1];
     }),
     _: 1 /* STABLE */
-  }), _hoisted_2], 64 /* STABLE_FRAGMENT */);
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Login "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Welcome to Journalists association')) + " 👋", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    "class": "mb-3",
+    onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+      return $setup.form.post(_ctx.route('admin.login'));
+    }, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Username')), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "class": "form-control",
+    id: "username",
+    name: "username",
+    placeholder: _ctx.__('Enter your username'),
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $setup.form.username = $event;
+    }),
+    autofocus: ""
+  }, null, 8 /* PROPS */, _hoisted_10), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.username]]), $setup.form.errors.username ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.errors.username), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Password')), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "password",
+    id: "password",
+    "class": "form-control",
+    name: "password",
+    "aria-describedby": "password",
+    placeholder: _ctx.__('Enter your password'),
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $setup.form.password = $event;
+    })
+  }, null, 8 /* PROPS */, _hoisted_16), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.password]]), _hoisted_17])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "form-check-input",
+    type: "checkbox",
+    id: "remember-me",
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $setup.form.remember = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.form.remember]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Remember Me')), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.__('Sign in')), 1 /* TEXT */)])], 32 /* HYDRATE_EVENTS */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" /Login ")])])])], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -26832,12 +26892,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Login_vue_vue_type_template_id_608728aa__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Login.vue?vue&type=template&id=608728aa */ "./resources/js/Pages/Admin/Auth/Login.vue?vue&type=template&id=608728aa");
-/* harmony import */ var C_laragon_www_sju_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var _Login_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Login.vue?vue&type=script&setup=true&lang=js */ "./resources/js/Pages/Admin/Auth/Login.vue?vue&type=script&setup=true&lang=js");
+/* harmony import */ var C_laragon_www_sju_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
-const script = {}
+
+
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_laragon_www_sju_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_1__["default"])(script, [['render',_Login_vue_vue_type_template_id_608728aa__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Admin/Auth/Login.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_laragon_www_sju_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_Login_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_Login_vue_vue_type_template_id_608728aa__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/Pages/Admin/Auth/Login.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -26914,6 +26976,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_App_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_App_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./App.vue?vue&type=script&setup=true&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Layouts/Admin/App.vue?vue&type=script&setup=true&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Admin/Auth/Login.vue?vue&type=script&setup=true&lang=js":
+/*!************************************************************************************!*\
+  !*** ./resources/js/Pages/Admin/Auth/Login.vue?vue&type=script&setup=true&lang=js ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Login_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Login_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Login.vue?vue&type=script&setup=true&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Admin/Auth/Login.vue?vue&type=script&setup=true&lang=js");
  
 
 /***/ }),

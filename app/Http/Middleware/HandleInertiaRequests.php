@@ -2,8 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request;
+use App\Http\Resources\AdminResource;
 use Inertia\Middleware;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -14,6 +17,14 @@ class HandleInertiaRequests extends Middleware
      * @var string
      */
     protected $rootView = 'app';
+
+    public function rootView(Request $request)
+    {
+        if ($request->is('admin*')) {
+            return 'admin';
+        }
+        return parent::rootView($request);
+    }
 
     /**
      * Determines the current asset version.
@@ -36,6 +47,13 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+
+        if ($request->is('admin*')) {
+            $auth = new AdminResource(Auth::guard('admin')->user());
+        } else {
+            // Perform guard checks (Two different users can't be logged in)
+        }
+
         return array_merge(parent::share($request), [
             'locale' => function () {
                 return app()->getLocale();
@@ -45,6 +63,10 @@ class HandleInertiaRequests extends Middleware
                     base_path('lang/' . app()->getLocale() . '.json')
                 );
             },
+            'flash' => [
+                'message' => fn () => $request->session()->get('message')
+            ],
+            'authUser' => $auth
         ]);
     }
 }
