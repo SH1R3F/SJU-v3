@@ -62,7 +62,7 @@
             <li class="menu-item active open">
                 <a href="javascript:void(0);" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                    <div>Dashboards</div>
+                    <div>{{ __("Dashboard") }}</div>
                 </a>
             </li>
         </ul>

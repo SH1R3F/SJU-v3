@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ar" class="light-style layout-navbar-fixed layout-menu-fixed" dir="rtl">
+<html lang="{{ app()->getLocale() }}" class="light-style layout-navbar-fixed layout-menu-fixed"
+    dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="utf-8" />
@@ -39,7 +40,7 @@
         href="{{ asset('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
 
     <!-- Page CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/cards-advance.css') }}" />
+
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
 
@@ -47,6 +48,7 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
 
+    @routes
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
     <script src="{{ mix('/js/app.js') }}" defer></script>
     @inertiaHead
@@ -84,7 +86,7 @@
     <script src="{{ asset('assets/js/main.js') }}" defer></script>
 
     <!-- Page JS -->
-    <script src="{{ asset('assets/js/dashboards-analytics.js') }}" defer></script>
+
 </body>
 
 </html>

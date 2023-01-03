@@ -20,16 +20,21 @@
                 <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
                     <a
                         class="nav-link dropdown-toggle hide-arrow"
-                        href="javascript:void(0);"
                         data-bs-toggle="dropdown"
                     >
-                        <i class="fi fi-sa fis rounded-circle me-1 fs-3"></i>
+                        <i
+                            class="fi fis rounded-circle me-1 fs-3"
+                            :class="{
+                                'fi-sa': $page.props.locale === 'ar',
+                                'fi-gb': $page.props.locale === 'en',
+                            }"
+                        ></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
                             <a
                                 class="dropdown-item"
-                                href="javascript:void(0);"
+                                :href="route('language', 'ar')"
                                 data-language="sa"
                             >
                                 <i
@@ -41,11 +46,11 @@
                         <li>
                             <a
                                 class="dropdown-item"
-                                href="javascript:void(0);"
+                                :href="route('language', 'en')"
                                 data-language="en"
                             >
                                 <i
-                                    class="fi fi-us fis rounded-circle me-1 fs-3"
+                                    class="fi fi-gb fis rounded-circle me-1 fs-3"
                                 ></i>
                                 <span class="align-middle">English</span>
                             </a>

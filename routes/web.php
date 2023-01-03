@@ -18,3 +18,8 @@ Route::get('/', function () {
     Inertia::setRootView('admin');
     return inertia('Welcome');
 });
+
+Route::get('language/{language}', function ($language) {
+    Session()->put('locale', $language);
+    return redirect()->back();
+})->name('language')->where('language', 'en|ar');

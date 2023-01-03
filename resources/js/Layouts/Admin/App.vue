@@ -4,6 +4,7 @@ import Navbar from "./Navbar.vue";
 import Footer from "./Footer.vue";
 </script>
 <template>
+    <Head :title="__('Dashboard')" />
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
