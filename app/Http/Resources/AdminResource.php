@@ -18,7 +18,8 @@ class AdminResource extends JsonResource
     public function toArray($request)
     {
         return array_merge(parent::toArray($request), [
-            'fullName' => $this->fullName
+            'fullName' => $this->fullName,
+            'role' => $this->getRoleNames('name')[0]
         ]);
     }
 }

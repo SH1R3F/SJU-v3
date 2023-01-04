@@ -47,8 +47,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-
-        if ($request->is('admin*')) {
+        if ($request->is('admin*') && Auth::guard('admin')->check()) {
             $auth = new AdminResource(Auth::guard('admin')->user());
         } else {
             // Perform guard checks (Two different users can't be logged in)
@@ -66,7 +65,7 @@ class HandleInertiaRequests extends Middleware
             'flash' => [
                 'message' => fn () => $request->session()->get('message')
             ],
-            'authUser' => $auth
+            'authUser' => isset($auth) ? $auth : null
         ]);
     }
 }

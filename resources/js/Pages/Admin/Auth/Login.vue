@@ -8,6 +8,12 @@ const form = useForm({
 });
 </script>
 
+<script>
+export default {
+    layout: null,
+};
+</script>
+
 <template>
     <Head>
         <title>{{ __('Login') }}</title>
@@ -25,7 +31,7 @@ const form = useForm({
                             <div class="mb-3">
                                 <label for="username" class="form-label">{{ __('Username') }}</label>
                                 <input type="text" class="form-control" id="username" name="username" :placeholder="__('Enter your username')" v-model="form.username" autofocus />
-                                <span class="text text-danger text-sm" v-if="form.errors.username">{{ form.errors.username }}</span>
+                                <span class="text text-danger fs-6" v-if="form.errors.username">{{ form.errors.username }}</span>
                             </div>
                             <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\RoleController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -32,10 +33,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
      */
     Route::middleware('auth:admin')->group(function () {
         Route::get('/', function () {
-            return inertia('Welcome');
-        });
-        Route::get('/ay7aga/{sad}', function () {
-            return inertia('Welcome');
-        });
+            return inertia('Admin/Dashboard');
+        })->name('dashboard');
+
+        /* Roles Management */
+        Route::resource('roles', RoleController::class)->except(['create', 'edit', 'show']);
     });
 });

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Admin;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class AdminSeeder extends Seeder
 {
@@ -15,7 +16,8 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        Admin::factory()->create(['username' => 'shiref']);
+        $admin = Admin::factory()->create(['username' => 'shiref']);
+        $admin->assignRole('Site admin');
         Admin::factory(10)->create();
     }
 }

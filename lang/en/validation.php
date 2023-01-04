@@ -174,6 +174,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'permissions.*' => 'permission'
+    ],
 
 ];

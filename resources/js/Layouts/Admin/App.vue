@@ -1,10 +1,15 @@
 <script setup>
-import Aside from "./Aside.vue";
-import Navbar from "./Navbar.vue";
-import Footer from "./Footer.vue";
+import Aside from './Aside.vue';
+import Navbar from './Navbar.vue';
+import Footer from './Footer.vue';
 </script>
 <template>
-    <Head :title="__('Dashboard')" />
+    <Head>
+        <title>{{ __('Dashboard') }}</title>
+        <!-- Flash messages -->
+        <component is="script" defer v-if="$page.props.flash.message"> toastr.success('{{ $page.props.flash.message }}') </component>
+    </Head>
+
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -21,12 +26,7 @@ import Footer from "./Footer.vue";
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <!-- Content -->
-
-                    <div class="container-xxl flex-grow-1 container-p-y">
-                        <div class="row">
-                            <slot />
-                        </div>
-                    </div>
+                    <slot />
                     <!-- / Content -->
 
                     <!-- Footer -->

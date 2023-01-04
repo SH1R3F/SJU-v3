@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('password');
             $table->unsignedBigInteger('branch_id')->nullable();
             $table->rememberToken();
+            $table->boolean('active')->default(1)->comment('0 for disabled accounts, 1 for normal active accounts');
             $table->timestamps();
         });
     }
