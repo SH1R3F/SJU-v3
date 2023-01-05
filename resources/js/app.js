@@ -4,12 +4,17 @@ import { InertiaProgress } from '@inertiajs/progress';
 import { Link, usePage } from '@inertiajs/inertia-vue3';
 import route from 'ziggy-js';
 import AdminLayout from './Layouts/Admin/App.vue';
+import UserLayout from './Layouts/App.vue';
 
 createInertiaApp({
-    resolve: (name) => {
-        const page = require(`./Pages/${name}`).default;
-        if (page.layout === undefined && name.startsWith('Admin/')) {
-            page.layout = AdminLayout;
+    resolve: async (name) => {
+        const page = (await import(`./Pages/${name}`)).default;
+        if (page.layout === undefined) {
+            if (name.startsWith('Admin/')) {
+                page.layout = AdminLayout;
+            } else {
+                page.layout = UserLayout;
+            }
         }
         return page;
     },

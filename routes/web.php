@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,11 +15,22 @@ use Inertia\Inertia;
 |
 */
 
+/**
+ * Language and notifications routes
+ */
 Route::get('language/{language}', function ($language) {
     Session()->put('locale', $language);
     return redirect()->back();
 })->name('language')->where('language', 'en|ar');
 
 
+
+// Home page
+Route::get('/', [PageController::class, 'home'])->name('home');
+
+
+// Member routes
+require_once 'members/web.php';
+
 // Admin routes
-require_once 'admin/web.php';
+require_once 'admins/web.php';

@@ -1,0 +1,1097 @@
+.text-end {
+    text-align: end !important;
+}
+.text-start {
+    text-align: start !important;
+}
+hr {
+    border: 0;
+}
+.custom-control {
+    padding-left: 0;
+    padding-inline-start: 1.5rem;
+}
+body.rtl .custom-control-label.text-2::before,
+body.rtl .custom-control-label.text-2::after {
+    left: auto;
+    right: -1.5rem;
+}
+.progress-bar {
+    background-color: #7bc231;
+}
+/* Layout master */
+body {
+    font-family: 'Droid Arabic Kufi', sans-serif;
+}
+.mini-bar {
+    background: #007c42;
+    padding: 2px 0;
+}
+.mini-bar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.mini-bar ul li {
+    display: inline;
+    margin: 0 5px;
+    color: #fff;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+.mini-bar ul li a {
+    color: #fff;
+}
+.mini-bar ul li.dropdown ul {
+    padding: 5px 0;
+}
+.mini-bar ul li.dropdown ul li {
+    color: #000;
+    display: block;
+    margin: 0;
+    padding: 2px 20px;
+}
+.mini-bar ul li.dropdown ul li a {
+    color: #000;
+}
+.mini-bar ul li.dropdown ul li.active,
+.mini-bar ul li.dropdown ul li:hover {
+    background: #87c82f;
+}
+.mini-bar ul li.dropdown ul li.active a,
+.mini-bar ul li.dropdown ul li:hover a {
+    color: #fff;
+}
+
+.header {
+    height: 125px;
+    overflow: hidden;
+    padding: 7.5px 0;
+}
+
+.header .logo {
+    height: 110px;
+    text-align: start;
+    display: block;
+}
+
+.login-btn {
+    background: #85c72e;
+    border: none;
+    text-align: center;
+    height: 90px;
+    padding: 0 35px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+    margin-inline-start: auto;
+}
+.login-btn svg {
+    display: block;
+    width: 35px;
+    margin: auto;
+}
+.login-btn span {
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Login modal */
+.modal button.close {
+    margin-inline-start: auto;
+    margin-inline-end: 0;
+}
+.login-modal .trainees,
+.login-modal .members {
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;
+    text-align: center;
+    padding: 70px 30px;
+}
+.login-modal button a {
+    text-decoration: none;
+}
+.login-modal .trainees .login a {
+    color: #fff;
+}
+.login-modal .trainees .register a {
+    color: #000;
+}
+.login-modal .title {
+    padding-bottom: 32px;
+    font-size: 1.4rem;
+}
+.login-modal .members {
+    background: #60ca0f;
+    color: #fff;
+}
+.login-modal .members .register {
+    background: #fff;
+}
+.login-modal .members .register a {
+    color: #007c42;
+}
+.login-modal .members .login {
+    background: #00b74a;
+}
+.login-modal .members .login a {
+    color: #fff;
+}
+
+.navbar {
+    background-image: linear-gradient(to right, #007c42, #97d12c);
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+}
+.navbar .navbar-nav {
+    text-align: start;
+}
+.navbar .navbar-toggler {
+    margin-inline-start: auto;
+}
+
+.footer {
+    background: #3b3b3b;
+    padding: 20px 0 40px;
+    text-align: start;
+    color: #fff;
+}
+.footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+.footer ul li {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+.footer .social {
+    text-align: start;
+    font-size: 2rem;
+}
+.footer a {
+    text-decoration: none;
+    color: #fff;
+}
+.footer-bar {
+    text-align: start;
+    font-size: 0.7rem;
+    color: #909090;
+}
+.footer-bar .copyrights {
+    padding: 25px 0;
+}
+.footer-bar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+.footer-bar ul li {
+    display: inline;
+    margin: 0 5px;
+}
+.footer-bar ul li a {
+    color: #909090;
+}
+.footer-bar img {
+    height: auto;
+    max-height: 80px;
+    width: auto;
+    max-width: 100%;
+}
+
+/* Index page */
+.homepage .section {
+    padding: 60px 0;
+}
+.homepage .news-slider {
+    padding-bottom: 30px;
+}
+.homepage .news-slider .slider {
+    background: #007c42;
+    overflow: hidden;
+}
+.homepage .news-slider .slider img {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+}
+.homepage .news-slider .slider .description {
+    color: #fff;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-inline-start: 40px;
+    padding-inline-end: 20px;
+    text-align: start;
+}
+.homepage .news-slider .slider .description p {
+    margin-top: 30px;
+    max-height: 140px;
+    overflow: hidden;
+}
+.homepage .news-slider .slider .description a {
+    color: #85c72e;
+}
+
+.homepage .about-organization .about-us {
+    text-align: start;
+}
+.homepage .about-organization .about-us h2 {
+    color: #007c42;
+}
+.homepage .about-organization .about-us p {
+    color: #909090;
+}
+.homepage .about-organization .about-us .read-more {
+    background: #007c42;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    transition: all 0.3s;
+}
+.homepage .about-organization .about-us .read-more:hover {
+    background: #fff;
+    color: #007c42;
+    border: 1px solid #007c42;
+}
+.homepage .media-center {
+    background: #f5f5f5;
+}
+.homepage .section h2,
+.section a {
+    color: #007c42;
+}
+.homepage .section a {
+    padding-top: 10px;
+}
+.homepage .section h2 {
+    text-align: start;
+}
+.homepage .media-center .post,
+.newspage .related-posts .post,
+.allnews .page-content .post {
+    height: 260px;
+    background-size: 100% 100% !important;
+    display: flex;
+    flex-direction: column;
+}
+.homepage .media-center .post .category,
+.homepage .media-center .post .category a,
+.newspage .related-posts .post .category,
+.newspage .related-posts .post .category a,
+.allnews .page-content .post .category,
+.allnews .page-content .post .category a {
+    margin-inline-end: auto;
+    color: #fff;
+    min-width: 50px;
+    background: #007c42;
+    text-align: center;
+    padding: 5px;
+    display: block;
+    font-size: 13px;
+}
+.homepage .media-center .post .desc,
+.newspage .related-posts .post .desc,
+.allnews .page-content .post .desc {
+    color: #fff;
+    margin-top: auto;
+    text-align: start;
+    padding-top: 0;
+    padding-inline-start: 15px;
+    padding-bottom: 15px;
+    padding-inline-end: 0;
+}
+.homepage .media-center .post .desc span,
+.newspage .related-posts .post .desc span,
+.allnews .page-content .post .desc span {
+    font-size: 12px;
+}
+
+.homepage .regulations-events .regulation {
+    background: #f5f5f5;
+    padding: 35px 15px;
+}
+.homepage .regulations-events .regulation svg {
+    display: block;
+    margin: auto;
+}
+
+.regulations-events .regulation a,
+.regulations-events .regulation span {
+    color: #007c42;
+    font-weight: bold;
+    display: block;
+    font-size: 13px;
+    text-align: center;
+}
+.homepage .regulations-events .regulation span {
+    font-size: 12px;
+    margin-top: 10px;
+    font-weight: normal;
+}
+.homepage .regulations-events .event,
+.eventspage .event {
+    display: flex;
+    margin-bottom: 8px;
+}
+.homepage .regulations-events .event .date,
+.eventspage .event .date {
+    background: #007c42;
+    flex: 1;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+.homepage .regulations-events .event .date span,
+.eventspage .event .date span {
+    font-size: 2.4rem;
+    display: block;
+    font-weight: bold;
+}
+.homepage .regulations-events .event h6,
+.eventspage .event h6 {
+    flex: 3;
+    color: #007c42;
+    text-align: start;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    padding: 13px;
+    background: #f5f5f5;
+    margin-bottom: 0;
+}
+.eventspage .event .title a,
+.eventspage .event .title a {
+    color: #007c42;
+}
+
+.homepage .membership {
+    background-image: linear-gradient(to right, #007c42, #97d12c);
+    text-align: start;
+    color: #fff;
+}
+.homepage .membership h2 {
+    color: #fff;
+}
+.homepage .membership p {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+.homepage .membership button {
+    color: #fff;
+    border: 1px solid #fff;
+    background: none;
+    padding: 10px 30px;
+    transition: all 0.3s;
+}
+.homepage .membership button:hover {
+    background: #fff;
+    color: #007c42;
+}
+.homepage .membership .types .heading {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.homepage .membership .types > li {
+    margin-bottom: 7px;
+}
+.homepage .membership .types ol {
+    padding-top: 10px;
+    padding-bottom: 15px;
+    overflow: hidden;
+    transition: transform 0.4s ease;
+}
+.homepage .membership .types ol:not(.active) {
+    transform: scaleY(0);
+    height: 0;
+}
+.homepage .membership .types ol.active {
+    transform: scaleY(1);
+}
+.homepage .stats .stat {
+    text-align: center;
+}
+.homepage .stats .stat h3 {
+    color: #007c42;
+    font-weight: bold;
+    margin: 5px 0;
+}
+.homepage .stats .stat span {
+    color: #007c42;
+}
+
+.homepage .follow-us {
+    background: #f5f5f5;
+}
+.homepage .follow-us h2,
+.follow-us a {
+    color: #007c42;
+}
+.homepage .follow-us a {
+    padding-top: 10px;
+}
+.homepage .follow-us h2,
+.homepage .follow-us p {
+    text-align: start;
+    margin: 0;
+}
+.homepage .follow-us .follow-info {
+    padding: 60px 15px;
+}
+
+.homepage .follow-us .follow-info .social {
+    text-align: start;
+    font-size: 2rem;
+}
+.homepage .follow-us .follow-info .social a {
+    text-decoration: none;
+}
+.homepage .follow-us .follow-info .contact {
+    list-style-type: none;
+    text-align: start;
+    padding: 0;
+}
+.homepage .follow-us .follow-info .contact li {
+    margin-bottom: 10px;
+}
+.homepage .follow-us .follow-info .contact svg {
+    margin-left: 7px;
+}
+
+/* Newspage */
+.sjupage .section {
+    padding: 30px 0;
+}
+.sjupage .page-header {
+    background: #007c42;
+}
+.sjupage .page-header .breadcrumb {
+    background: none;
+}
+.sjupage .page-header .breadcrumb .breadcrumb-item a {
+    color: #fff;
+}
+.sjupage .page-header .breadcrumb .breadcrumb-item::before {
+    float: none;
+    padding-inline-end: 0.5rem;
+    color: #fff;
+}
+.sjupage .page-header h3 {
+    text-align: start;
+    color: #fff;
+}
+
+.sjupage .page-header .options {
+    color: #fff;
+    text-align: start;
+    margin: 20px 0 5px;
+    font-size: 0.85rem;
+}
+.sjupage .page-header .options .buttons {
+    display: inline-block;
+    margin-inline-start: 25px;
+}
+.sjupage .page-header .options .buttons a {
+    margin: 0 5px;
+    outline: none !important;
+}
+.sjupage .page-content {
+    margin: 45px 0 60px;
+}
+.sjupage .page-content .article,
+.sjupage .page-content .event-content {
+    text-align: start;
+    color: #909090;
+    line-height: 1.7;
+}
+.sjupage .page-content .article br,
+.sjupage .page-content .event-content br {
+    content: '';
+    display: block;
+    height: 15px;
+}
+.sjupage .page-content .related-posts,
+.sjupage .page-content .upcoming-events {
+    text-align: start;
+}
+.sjupage .page-content .related-posts h4,
+.sjupage .page-content .upcoming-events h4 {
+    color: #007c42;
+    margin-bottom: 20px;
+}
+.newspage .related-posts .post,
+.newspage .upcoming-events .post {
+    margin-bottom: 20px;
+}
+.newspage .related-posts .post .desc h5,
+.newspage .upcoming-events .post .desc h5 {
+    max-width: 90%;
+}
+
+/* Eventspage */
+.eventspage .page-header .options .buttons {
+    margin-inline-start: 0;
+}
+.eventspage .page-header .desc {
+    text-align: start;
+    display: flex;
+    align-items: center;
+}
+.eventspage .page-header .desc .date,
+.eventspage .page-header .desc h3 {
+    color: #fff;
+    display: inline-block;
+}
+
+.eventspage .page-header .desc .date {
+    border-inline-end: 1px solid #fff;
+    min-width: 80px;
+    text-align: center;
+    margin-inline-end: 20px;
+}
+.eventspage .page-header .desc .day {
+    font-size: 40px;
+    display: block;
+    font-weight: bold;
+}
+
+/* allnews page */
+.allnews .nav-tabs a,
+.eventspage .nav-tabs a {
+    font-size: 1rem;
+}
+.allnews .nav-tabs a.active,
+.eventspage .nav-tabs a.active {
+    color: #007c42;
+}
+.allnews .tab-content,
+.eventspage .tab-content {
+    padding-top: 30px;
+}
+
+.sju-pagination {
+    background: #f5f5f5;
+    padding: 15px 32px;
+    margin-top: 15px;
+
+    display: flex;
+    justify-content: flex-end;
+}
+.sju-pagination ul {
+    list-style-type: none;
+    margin: 0;
+}
+.sju-pagination ul li {
+    display: inline;
+    background-color: #fff;
+    color: #007c42;
+    border: 1px solid #efefef;
+}
+.sju-pagination ul li.active {
+    background-color: #007c42;
+    color: #fff;
+}
+.sju-pagination ul li a,
+.sju-pagination ul button a {
+    color: #007c42;
+    font-weight: bold;
+}
+.sju-pagination ul li.active a {
+    color: #fff;
+    background: none !important;
+    border: none !important;
+}
+.sju-pagination ul button {
+    border: none;
+    outline: none;
+    color: #007c42;
+    background: none;
+}
+
+/* Users login */
+.users,
+.members {
+    margin: 30px 0;
+    padding: 30px 0;
+}
+
+.signing-form,
+.page-content.account {
+    border: 1px solid #dfdfdf;
+    text-align: start;
+    border-radius: 7px;
+    padding: 40px 20px;
+    border-top: 4px solid #82c52f;
+}
+.signing-form > h5,
+.page-content.account h5,
+.registration-form h5 {
+    color: #007c42;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #82c52f;
+    padding: 0 5px 10px;
+    display: inline-block;
+}
+.help-block-error {
+    color: red;
+    font-size: 0.9rem;
+}
+.signing-intro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 250px;
+    text-align: center;
+}
+.signing-intro i {
+    margin-bottom: 30px;
+    font-size: 3rem;
+    color: #82c52f;
+}
+.signing-intro h4,
+.signing-intro a {
+    color: #2a943c;
+}
+.signing-form .form-check-input[type='radio'] {
+    float: none;
+    margin: 0;
+    margin-inline-end: 5px;
+}
+.form-check-input[type='radio']:checked:after {
+    width: 0.9rem;
+    height: 0.9rem;
+    border-color: #79c030;
+    background-color: #1e8d3e;
+    margin-top: 0.05rem;
+    margin-left: 0;
+    margin-inline-start: 0.05rem;
+}
+.signing-form ul,
+ul.password-rules {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Sidebar */
+.usermenu {
+    text-align: center;
+    max-width: 100%;
+}
+
+.usermenu .userimg {
+    background: #24913d;
+    text-align: center;
+    width: 200px;
+    max-width: 100%;
+    border-radius: 50%;
+    border: 2px solid #007c42;
+    margin: 0 auto 20px;
+    position: relative;
+}
+.usermenu .userimg .profile-image-button {
+    position: absolute;
+    z-index: 2;
+    bottom: 15px;
+    right: 15px;
+    width: 1.9rem;
+    height: 1.9rem;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 38px;
+    transition: ease all 0.1s;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.usermenu .userimg .profile-image-button i {
+    font-size: 0.9rem;
+}
+.usermenu .userimg img {
+    width: 100%;
+    border-radius: 50%;
+}
+.usermenu h6 {
+    font-weight: bold;
+    color: #007c42;
+}
+.usermenu ul {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+    text-align: start;
+}
+.usermenu ul li {
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    transition: all 0.3s;
+}
+.usermenu ul li:hover,
+.usermenu ul li.active {
+    background: #f8f8f8;
+}
+.usermenu ul li a {
+    color: #777777;
+    font-size: 0.9rem;
+}
+.usermenu ul li.active a {
+    color: #007c42;
+    font-weight: bold;
+}
+.usermenu ul li:last-of-type {
+    border: none;
+}
+/* Events */
+.page-content.events {
+    padding-bottom: 0;
+}
+.page-content.account table thead tr th {
+    border-top: 0;
+}
+.page-content.account table tbody tr:last-of-type td {
+    border-bottom: 0;
+}
+.page-content.account table td {
+    max-width: 300px;
+    font-size: 0.9rem;
+}
+.page-content.account table .title {
+    color: #007c42;
+}
+
+.users.profile h4,
+.members.profile h4 {
+    color: #007c42;
+}
+
+.users.profile form > .row,
+.members.profile form > .row {
+    margin: 20px 0;
+}
+
+/*
+    Customer support chat system
+*/
+.ticket {
+    padding-bottom: 10px;
+}
+.ticket .chat {
+    height: 600px;
+    overflow-y: scroll;
+    max-height: 80vh;
+}
+.ticket .chat .bubble {
+    /* float: left; */
+    align-self: flex-start;
+    font-size: 16px;
+    position: relative;
+    display: inline-block;
+    clear: both;
+    margin-bottom: 8px;
+    padding: 13px 14px;
+    vertical-align: top;
+    border-radius: 5px;
+    max-width: 85%;
+}
+.ticket .chat .bubble img {
+    max-width: 400px;
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 5px;
+    width: 100%;
+}
+.ticket .chat .bubble.support {
+    float: left;
+    align-self: flex-start;
+    background-color: #eceff1;
+    color: var(--dark);
+}
+
+.ticket .chat .bubble.me {
+    float: right;
+    color: var(--white);
+    background-color: #28a745;
+    align-self: flex-end;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+    border-color: #28a745;
+    background-color: #28a745;
+}
+.members.profile .nav-tabs .nav-item {
+    margin-bottom: 0px;
+    border-bottom: 1px solid #eee;
+}
+.registration-form .nav-tabs {
+    border-bottom: 2px solid #82c52f;
+}
+.registration-form .nav-tabs .nav-item.show .nav-link,
+.registration-form .nav-tabs .nav-link.active {
+    border-color: #82c52f #82c52f #fff;
+}
+.registration-form .divider-solid {
+    text-align: center;
+}
+.registration-form .divider-solid::before {
+    content: '';
+    display: block;
+    height: 1px;
+    background: #dadada;
+    width: 100%;
+    position: relative;
+}
+.registration-form .divider-solid i {
+    position: relative;
+    top: -11px;
+    background: #fff;
+    padding: 0 10px;
+    color: #8c8c8c;
+}
+.registration-form .fa-check {
+    margin-inline-end: 10px;
+}
+@media (max-width: 768px) {
+    .registration-form .nav-tabs {
+        padding: 0;
+    }
+    .registration-form .nav-tabs .nav-item {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+    }
+    .usermenu {
+        border-bottom: 2px dashed #e4e4e4;
+        margin-bottom: 30px;
+    }
+}
+.membership-cart {
+    position: relative;
+    font-size: 14px;
+    margin: auto;
+    border: 2px #ccc solid;
+    height: 580px;
+    width: 380px;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.membership-cart .cart-header {
+    position: absolute;
+    width: 75%;
+    background: #088245;
+    height: 120px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 0;
+    right: 0;
+}
+
+.membership-cart .cart-header-logo {
+    position: absolute;
+    top: 1em;
+    left: 10px;
+}
+
+.membership-cart .membership-id {
+    position: inherit;
+    top: 124px;
+    left: 0px;
+    background-color: #95c049;
+    height: 35px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.membership-cart .membership-body {
+    position: inherit;
+    top: 10em;
+    left: 0px;
+    height: 350px;
+    width: 100%;
+    margin: auto;
+    padding: 10px 0;
+    text-align: center;
+}
+.membership-cart .membership-number::before,
+.membership-cart .membership-number::after {
+    content: '';
+    display: inline-block;
+    height: 20px;
+    background: #9fc65b;
+    width: 2px;
+    margin: 0px 20px -4px 0;
+}
+
+.membership-cart .membership-number::after {
+    margin: 0px 0 -4px 20px;
+}
+
+@media (max-width: 768px) {
+    .membership-cart {
+        font-size: 10px;
+    }
+    .membership-cart .cart-header {
+        width: 19em;
+    }
+    .membership-cart .cart-header-logo {
+        transform: scale(0.8);
+        top: 18px;
+    }
+    .membership-cart .membership-body {
+        top: 14em;
+    }
+}
+.alert-text {
+    text-align: start;
+}
+.page-content.account .cart-totals tr > th {
+    text-align: start;
+}
+.page-content.account .cart-totals tr > td {
+    text-align: end;
+}
+.page-content.account .cart-totals {
+    min-width: 40%;
+}
+/* Payment gate */
+.wpwl-control,
+input.wpwl-control {
+    direction: ltr;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: none;
+    border-radius: 0px;
+    font-family: 'ff-good-headline-web-pro-con', 'Pathway Gothic One', sans-serif;
+    text-transform: none;
+    padding: 0px;
+    font-size: 18px;
+}
+.input-text:focus,
+input[type='text']:focus,
+input[type='tel']:focus,
+input[type='url']:focus,
+input[type='password']:focus,
+input[type='search']:focus,
+textarea:focus {
+    background-color: white;
+}
+.wpwl-brand-SOFORTUEBERWEISUNG,
+.wpwl-brand-GIROPAY {
+    cursor: pointer;
+}
+
+/* polls */
+.evalu_choose {
+    display: block;
+    background-color: #fafafa;
+    height: 40px;
+    border: 1px #ccc solid;
+    padding: 7px 40px !important;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* The Modal (background) */
+
+.modal.extend {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation */
+.modal-content,
+#caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {
+        -webkit-transform: scale(0);
+    }
+    to {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+/* The Close Button */
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+
+@media only screen and (max-width: 700px) {
+    .modal-content {
+        width: 100%;
+    }
+}
+
+.twitter-white {
+    fill: #ffffff;
+}
+.twitter-green {
+    fill: #007d41;
+}

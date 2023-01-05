@@ -123,9 +123,8 @@ export default {
     mounted() {
         $(document).ready(function () {
             $('.select2').select2();
-            $('.select2').on('select2:select', function (e) {
-                var data = e.params.data;
-                $(this).attr('data-result', $(this).attr('data-result') ? $(this).attr('data-result') + `,${data.id}` : data.id);
+            $('.select2').on('select2:select select2:unselect', function (e) {
+                $(this).attr('data-result', $('.select2').val().join(','));
             });
         });
     },
