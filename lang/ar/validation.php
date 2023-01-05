@@ -150,6 +150,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'recipients' => [
+            "required_if" => "حقل :attribute مطلوب في حال ما إذا كان :other هي تحديد.",
+        ],
     ],
 
     /*
@@ -167,7 +170,19 @@ return [
         'name' => 'الاسم',
         'email' => 'البريد الإلكتروني',
         'permissions' => 'الصلاحيات',
-        'permissions.*' => 'الصلاحية'
+        'permissions.*' => 'الصلاحية',
+        'fname' => 'الاسم الاول',
+        'lname' => 'الاسم الأخير',
+        'username' => 'اسم المستخدم',
+        'mobile' => 'رقم الجوال',
+        'role_id' => 'الدور',
+        'branch_id' => 'الفرع',
+        'password' => 'كلمة المرور',
+        'message' => 'الرسالة',
+        'via' => 'طريقة الإرسال',
+        'recipients' => 'المستقبلين',
+        'to_type' => 'طريقة الإرسال',
+        'select' => 'تحديد'
     ],
 
 ];

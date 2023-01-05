@@ -27,7 +27,7 @@ class RoleController extends Controller
         $roles = Role::with('users:id,fname,lname', 'permissions:id,name')->withCount('users')->get();
 
         return inertia('Admin/Roles/Index', [
-            'roles' => RoleResource::collection($roles->append('can'))->additional([
+            'roles' => RoleResource::collection($roles)->additional([
                 'can_create' => request()->user()->can('create', Role::class)
             ])
         ]);

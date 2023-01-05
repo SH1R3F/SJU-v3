@@ -17,9 +17,18 @@ class AdminResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return array_merge(parent::toArray($request), [
             'fullName' => $this->fullName,
-            'role' => $this->getRoleNames('name')[0]
+            'role' => count($this->getRoleNames('name')) ? $this->getRoleNames('name')[0] : '',
+            'branch' => $this->whenLoaded('branch'),
+
+            // Authorization
+            $this->mergeWhen(str_contains(request()->route()->getActionName(), '@index'), [
+                'editable'   => $request->user()->can('update', $this->resource),
+                'toggleable' => $request->user()->can('toggle', $this->resource),
+                'deleteable' => $request->user()->can('delete', $this->resource),
+            ])
         ]);
     }
 }

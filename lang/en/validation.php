@@ -175,7 +175,13 @@ return [
     */
 
     'attributes' => [
-        'permissions.*' => 'permission'
+        'name' => 'name',
+        'permissions.*' => 'permission',
+        'fname' => 'first name',
+        'lname' => 'last name',
+        'role_id' => 'role',
+        'branch_id' => 'branch',
+        'to_type' => 'sending method',
     ],
 
 ];

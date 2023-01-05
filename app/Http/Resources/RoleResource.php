@@ -19,12 +19,16 @@ class RoleResource extends JsonResource
             'name' => $this->name,
             'users_count' => $this->whenCounted('users'),
             'admins' => AdminResource::collection($this->whenLoaded('users')),
-            'permissions' => $this->whenLoaded('permissions')->pluck('id', 'name')->map(fn () => true),
+            'permissions' => $this->when($this->relationLoaded('permissions'), $this->permissions->pluck('id', 'name')->map(fn () => true)),
             'created_at' => $this->created_at,
-            'can' => $this->whenAppended('can', [
-                'edit' => $request->user()->can('update', $this->resource),
-                'delete' => $request->user()->can('delete', $this->resource),
-            ])
+
+            // Authorization
+            $this->mergeWhen(str_contains($request->route()->getActionName(), '@index'), [
+                'can' => [ // To be refactored
+                    'edit' => $request->user()->can('update', $this->resource),
+                    'delete' => $request->user()->can('delete', $this->resource),
+                ]
+            ]),
         ];
     }
 }

@@ -25,6 +25,8 @@ return new class extends Migration
             $table->rememberToken();
             $table->boolean('active')->default(1)->comment('0 for disabled accounts, 1 for normal active accounts');
             $table->timestamps();
+
+            $table->foreign('branch_id')->references('id')->on('branches')->nullOnDelete()->cascadeOnUpdate();
         });
     }
 

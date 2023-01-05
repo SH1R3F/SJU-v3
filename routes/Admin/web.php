@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\Auth\AuthController;
-use App\Http\Controllers\Admin\RoleController;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,5 +39,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
         /* Roles Management */
         Route::resource('roles', RoleController::class)->except(['create', 'edit', 'show']);
+
+        /**
+         * Admins Management
+         */
+        // Send notification to admins
+        Route::get('admins/notify', [AdminController::class, 'showNotifyForm'])->name('admins.notify');
+        Route::post('admins/notify', [AdminController::class, 'notify']);
+
+        // Manage admin resource
+        Route::get('admins/export', [AdminController::class, 'export'])->name('admins.export');
+        Route::post('admins/{admin}/toggle', [AdminController::class, 'toggle'])->name('admins.toggle');
+        Route::resource('admins', AdminController::class);
     });
 });

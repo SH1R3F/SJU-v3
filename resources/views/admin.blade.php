@@ -42,6 +42,7 @@
         href="{{ asset('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
 
     <!-- Page CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
 
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
@@ -89,7 +90,7 @@
     <script src="{{ asset('assets/js/main.js') }}" defer></script>
 
     <!-- Page JS -->
-
+    <script defer src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
 </body>
 
 </html>

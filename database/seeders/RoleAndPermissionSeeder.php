@@ -29,5 +29,13 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'create-role', 'guard_name' => 'admin']);
         Permission::create(['name' => 'update-role', 'guard_name' => 'admin']);
         Permission::create(['name' => 'delete-role', 'guard_name' => 'admin']);
+        // Admins permissions
+        Permission::create(['name' => 'viewAny-admin', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'create-admin', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'update-admin', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'delete-admin', 'guard_name' => 'admin']);
+        Permission::create(['name' => 'notify-admin', 'guard_name' => 'admin']);
+
+        $admin->syncPermissions(Permission::pluck('name'));
     }
 }

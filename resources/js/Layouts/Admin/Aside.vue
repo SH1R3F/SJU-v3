@@ -26,21 +26,21 @@
             </li>
 
             <!-- Roles and moderators -->
-            <li class="menu-item" :class="{ 'active open': $page.component.startsWith('Admin/Roles') }">
+            <li class="menu-item" :class="{ 'active open': $page.component.startsWith('Admin/Roles') || $page.component.startsWith('Admin/Admins') }">
                 <a href="javascript:;" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-key"></i>
                     <div>{{ __('Roles & moderators') }}</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item" :class="{ active: $page.component == 'Admin/Roles/Index' }">
+                    <li class="menu-item" :class="{ active: $page.component.startsWith('Admin/Roles') }">
                         <Link :href="route('admin.roles.index')" class="menu-link">
                             <div>{{ __('Roles & permissions') }}</div>
                         </Link>
                     </li>
-                    <li class="menu-item">
-                        <a href="dashboards-crm.html" class="menu-link">
+                    <li class="menu-item" :class="{ active: $page.component.startsWith('Admin/Admins') }">
+                        <Link :href="route('admin.admins.index')" class="menu-link">
                             <div>{{ __('Moderators') }}</div>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </li>
