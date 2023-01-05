@@ -59,6 +59,16 @@ class Admin extends Authenticatable
         return "{$this->fname} {$this->lname}";
     }
 
+    /**
+     * Prepare mobile number for sms to use
+     */
+    public function prepareMobileForSms()
+    {
+        // Make sure mobile is in format +[Key][Number]
+        return '+201003384936'; // I hard code it for now
+    }
+
+
     public function branch(): BelongsTo
     {
         return $this->belongsTo(Branch::class);

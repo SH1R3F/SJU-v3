@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Channels\SmsChannel;
+use App\Sms\SmsManager;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('sms', function ($app) {
+            return new SmsManager($app);
+        });
     }
 
     /**
@@ -23,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Notification::extend('sms', function () {
+            return new SmsChannel;
+        });
     }
 }

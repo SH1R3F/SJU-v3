@@ -33,9 +33,6 @@ class PushNotificationToAdmins extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        // SMS notifications to be added later
-        unset($this->via['sms']);
-
         return $this->via;
     }
 
@@ -51,6 +48,7 @@ class PushNotificationToAdmins extends Notification implements ShouldQueue
             ->line($this->message);
     }
 
+
     /**
      * Get the array representation of the notification.
      *
@@ -62,5 +60,15 @@ class PushNotificationToAdmins extends Notification implements ShouldQueue
         return [
             'message' => $this->message
         ];
+    }
+    /**
+     * Get the sms representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toSms($notifiable)
+    {
+        return $this->message;
     }
 }
