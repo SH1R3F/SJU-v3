@@ -3,6 +3,7 @@
 namespace App\Sms;
 
 use App\Sms\TwilioSmser;
+use App\Sms\VonageSmser;
 use Illuminate\Support\Manager;
 
 class SmsManager extends Manager
@@ -15,17 +16,28 @@ class SmsManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->config->get('sms.driver', 'twilio');
+        return $this->config->get('sms.default', 'twilio');
     }
 
 
     /**
      * Create an instance of the Twilio sms Driver.
      *
-     * @return \Illuminate\Hashing\BcryptHasher
+     * @return \App\Sms\TwilioSmser
      */
     public function createTwilioDriver()
     {
         return new TwilioSmser($this->config->get('sms.smsers.twilio') ?? []);
+    }
+
+
+    /**
+     * Create an instance of the Vonage sms Driver.
+     *
+     * @return \App\Sms\VonageSmser
+     */
+    public function createVonageDriver()
+    {
+        return new VonageSmser($this->config->get('sms.smsers.vonage') ?? []);
     }
 }

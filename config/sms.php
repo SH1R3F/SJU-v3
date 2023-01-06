@@ -33,6 +33,11 @@ return [
             'account_sid' => env('TWILIO_ACCOUNT_SID', null),
             'service_sid' => env('TWILIO_SMS_SERVICE_SID', null),
         ],
+        'vonage' => [
+            'api_key' => env('VONAGE_API_KEY', null),
+            'api_secret' => env('VONAGE_API_SECRET', null),
+            'from' => env('VONAGE_FROM', null),
+        ],
     ],
 
 ];

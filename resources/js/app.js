@@ -7,8 +7,8 @@ import AdminLayout from './Layouts/Admin/App.vue';
 import UserLayout from './Layouts/App.vue';
 
 createInertiaApp({
-    resolve: async (name) => {
-        const page = (await import(`./Pages/${name}`)).default;
+    resolve: (name) => {
+        const page = require(`./Pages/${name}`).default;
         if (page.layout === undefined) {
             if (name.startsWith('Admin/')) {
                 page.layout = AdminLayout;

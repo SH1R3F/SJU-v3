@@ -5,7 +5,6 @@ namespace App\Sms;
 use RuntimeException;
 use App\Sms\SmsInterface;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Notifications\Events\NotificationFailed;
 
 class TwilioSmser implements SmsInterface
 {
