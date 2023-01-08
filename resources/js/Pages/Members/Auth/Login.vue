@@ -1,26 +1,31 @@
+<script setup>
+import { useForm } from '@inertiajs/inertia-vue3';
+
+const form = useForm({
+    national_id: '',
+    password: '',
+});
+</script>
+
 <template>
+    <Head :title="__('Login')" />
     <div class="members site-login">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
                     <div class="signing-form">
-                        <!-- ADD TOASTR FOR LOGIN ERRORS -->
-
                         <h5>{{ __('Members login') }}</h5>
-
-                        <form action="<?php echo  base_url();?>members/login" method="post" class="needs-validation">
+                        <form @submit.prevent="form.post(route('member.login'))">
                             <div class="form-group">
-                                <label for="userEmail">{{ __('National ID number') }}</label>
-
-                                <input type="text" name="identity" class="form-control" id="userEmail" :placeholder="__('National ID number')" required />
+                                <label for="nid">{{ __('National ID number') }}</label>
+                                <input type="text" v-model="form.national_id" class="form-control" id="nid" :placeholder="__('National ID number')" />
+                                <span class="text text-danger text-sm" v-if="form.errors.national_id">{{ form.errors.national_id }}</span>
                             </div>
-
                             <div class="form-group">
-                                <label for="userPassword">{{ __('Password') }}</label>
-
-                                <input type="password" name="password" class="form-control" id="userPassword" placeholder="********" required />
-
-                                <a href="<?php echo base_url(); ?>members/forget_password" class="text-muted form-text">{{ __('Forgot your password?') }}</a>
+                                <label for="pass">{{ __('Password') }}</label>
+                                <input type="password" v-model="form.password" class="form-control" id="pass" placeholder="********" />
+                                <span class="text text-danger text-sm" v-if="form.errors.password">{{ form.errors.password }}</span>
+                                <a href="#to-be-added" class="text-muted form-text">{{ __('Forgot your password?') }}</a>
                             </div>
 
                             <div class="text-end">
@@ -39,7 +44,7 @@
 
                             <p>{{ __('You can register for membership through the following link') }}</p>
 
-                            <a href="<?php echo base_url(); ?>members/register">{{ __('Click here to register') }}</a>
+                            <Link :href="route('member.register')">{{ __('Click here to register') }}</Link>
                         </div>
                     </div>
                 </div>

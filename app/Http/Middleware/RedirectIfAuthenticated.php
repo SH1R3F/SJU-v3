@@ -2,11 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Admin;
-use App\Providers\RouteServiceProvider;
 use Closure;
+use App\Models\Admin;
+use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
 
 class RedirectIfAuthenticated
 {
@@ -30,6 +31,9 @@ class RedirectIfAuthenticated
                 switch ($guard) {
                     case 'admin':
                         $redirectTo = Admin::HOME;
+                        break;
+                    case 'member':
+                        $redirectTo = Member::HOME;
                         break;
                         // Add more guard checks
                 }

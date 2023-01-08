@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{ asset('css/libs/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/fontawesome.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/libs/bootstrap-datetimepicker.css') }}">
+    <script src="https://cdn.jsdelivr.net/gh/abublihi/datepicker-hijri@v1.1/build/datepicker-hijri.js"></script>
 
     <!-- Theme CSS -->
     <link href="{{ asset('/css/main.css') }}" rel="stylesheet" />

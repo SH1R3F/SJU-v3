@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use App\Http\Resources\AdminResource;
+use App\Http\Resources\MemberResource;
+use App\Models\Member;
 use Inertia\Middleware;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -49,8 +51,10 @@ class HandleInertiaRequests extends Middleware
     {
         if ($request->is('admin*') && Auth::guard('admin')->check()) {
             $auth = new AdminResource(Auth::guard('admin')->user());
-        } else {
-            // Perform guard checks (Two different users can't be logged in)
+        }
+        if (Auth::guard('member')->check()) {
+            $user = new MemberResource(Auth::guard('member')->user());
+            $home = Member::HOME;
         }
 
         return array_merge(parent::share($request), [
@@ -65,7 +69,9 @@ class HandleInertiaRequests extends Middleware
             'flash' => [
                 'message' => fn () => $request->session()->get('message')
             ],
-            'authUser' => isset($auth) ? $auth : null
+            'authUser' => isset($auth) ? $auth : null, // Admin
+            'userAuth' => isset($user) ? $user : null, // User
+            'userHome' => isset($home) ? $home : null, // User
         ]);
     }
 }

@@ -40,6 +40,6 @@ class VonageSmser implements SmsInterface
 
         if (!$json) throw new RuntimeException("Couldn't connect to vonage API");
 
-        if ($json['messages'][0]['status'] !== 0) throw new RuntimeException($json['messages'][0]['error-text']);
+        if ($json['messages'][0]['status'] != 0) throw new RuntimeException($json['messages'][0]['error-text']);
     }
 }

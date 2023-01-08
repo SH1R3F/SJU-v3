@@ -41,10 +41,10 @@ return [
             'provider' => 'users',
         ],
         // To be added
-        // 'member' => [
-        //     'driver' => 'session',
-        //     'provider' => 'users',
-        // ],
+        'member' => [
+            'driver' => 'session',
+            'provider' => 'members',
+        ],
         // 'subscriber' => [
         //     'driver' => 'session',
         //     'provider' => 'users',
@@ -85,6 +85,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
+        'members' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Member::class,
+        ],
     ],
 
     /*
@@ -111,6 +115,12 @@ return [
         ],
         'admins' => [
             'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'members' => [
+            'provider' => 'members',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
