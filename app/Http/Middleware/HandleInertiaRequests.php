@@ -53,7 +53,7 @@ class HandleInertiaRequests extends Middleware
             $auth = new AdminResource(Auth::guard('admin')->user());
         }
         if (Auth::guard('member')->check()) {
-            $user = new MemberResource(Auth::guard('member')->user());
+            $user = new MemberResource(Auth::guard('member')->user()->load('subscription'));
             $home = Member::HOME;
         }
 

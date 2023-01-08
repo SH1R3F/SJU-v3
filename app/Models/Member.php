@@ -15,6 +15,15 @@ class Member extends Authenticatable
 
     public const HOME = '/members';
 
+    /**
+     * Member status values
+     */
+    public const STATUS_REFUSED    = -2;
+    public const STATUS_DISABLED   = -1;
+    public const STATUS_UNAPPROVED = 0;
+    public const STATUS_APPROVED   = 1;
+    public const STATUS_ACCEPTED   = 2;
+
     public const DELIVERY_OPTION_PICKUP   = 1;
     public const DELIVERY_OPTION_DELIVERY = 2;
 
@@ -71,6 +80,8 @@ class Member extends Authenticatable
         'mobile' => 'integer',
         'email_verified_at' => 'datetime',
         'mobile_verified_at' => 'datetime',
+        'exp_flds_lngs' => 'array',
+        'status' => 'integer'
     ];
 
 

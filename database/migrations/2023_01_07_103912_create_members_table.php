@@ -58,6 +58,14 @@ return new class extends Migration
             $table->integer('mobile')->unique();
             $table->integer('mobile_code')->nullable();
             $table->string('password');
+            $table->tinyInteger('status')->default(Member::STATUS_UNAPPROVED);
+
+            $table->string('profile_photo')->nullable();
+            $table->string('national_id_photo')->nullable();
+            $table->string('statement_photo')->nullable();
+            $table->string('license_photo')->nullable();
+            $table->string('contract_photo')->nullable();
+            $table->json('exp_flds_lngs')->nullable();
 
             $table->timestamp('mobile_verified_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();

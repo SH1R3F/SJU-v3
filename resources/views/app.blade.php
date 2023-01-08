@@ -34,6 +34,7 @@
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
     <script src="{{ mix('/js/app.js') }}" defer></script>
 
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
     @routes
     @inertiaHead
 
@@ -44,7 +45,6 @@
 
     <!-- Core JS -->
     <!-- Vendor -->
-
     <script src="{{ asset('js/libs/jquery.min.js') }}"></script>
     <script src="{{ asset('js/libs/popper.min.js') }}"></script>
     <script src="{{ asset('js/libs/bootstrap.min.js') }}"></script>
@@ -55,6 +55,7 @@
     <script src="{{ asset('js/libs/bootstrap-hijri-datetimepicker.js') }}"></script>
     <script src="{{ asset('js/libs/jspdf.min.js') }}"></script>
     <script src="{{ asset('js/libs/dom2img.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}" defer></script>
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
 

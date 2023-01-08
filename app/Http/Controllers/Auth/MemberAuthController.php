@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\MemberRegistered;
 use App\Facades\Sms;
 use App\Models\Branch;
 use App\Models\Member;
@@ -239,6 +240,8 @@ class MemberAuthController extends Controller
         $member->save();
         // Register his subscription
         $member->subscription()->create(['type' => $member_type]);
+        // Fire event
+        event(new MemberRegistered($member));
 
         // Clear session
         session()->forget(['member', 'member_type']);

@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\MemberAuthController;
-use App\Http\Controllers\MemberController;
+use App\Http\Controllers\Member\MemberController;
+use App\Http\Controllers\Member\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,30 @@ Route::group(['prefix' => 'members', 'as' => 'member.'], function () {
      * Authenticated member routes
      */
     Route::group(['middleware' => ['auth:member']], function () {
-        Route::get('/', [MemberController::class, 'index']);
+
+
+
+        /**
+         * Complete profile information
+         */
+        Route::get('complete-profile', [MemberController::class, 'complete'])->name('complete-profile');
+
+        /**
+         * Member homepage
+         */
+        Route::get('/', [MemberController::class, 'index'])->name('home');
+
+        /**
+         * Profile page
+         */
+        Route::prefix('profile')->group(function () {
+            Route::get('/', [ProfileController::class, 'info'])->name('profile.info');
+            Route::post('/', [ProfileController::class, 'postInfo']);
+            Route::get('/experiences', [ProfileController::class, 'experiences'])->name('profile.experiences');
+            Route::get('/photo', [ProfileController::class, 'photo'])->name('profile.photo');
+            Route::get('/password', [ProfileController::class, 'password'])->name('profile.password');
+            Route::get('/id', [ProfileController::class, 'id'])->name('profile.id');
+            Route::get('/statement', [ProfileController::class, 'statement'])->name('profile.statement');
+        });
     });
 });
