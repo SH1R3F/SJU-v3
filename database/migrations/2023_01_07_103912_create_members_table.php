@@ -58,7 +58,6 @@ return new class extends Migration
             $table->integer('mobile')->unique();
             $table->integer('mobile_code')->nullable();
             $table->string('password');
-            $table->tinyInteger('status')->default(Member::STATUS_UNAPPROVED);
 
             $table->string('profile_photo')->nullable();
             $table->string('national_id_photo')->nullable();
@@ -69,6 +68,8 @@ return new class extends Migration
 
             $table->timestamp('mobile_verified_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+
+            $table->tinyInteger('status')->default(Member::STATUS_UNAPPROVED);
             $table->rememberToken();
             $table->timestamps();
 

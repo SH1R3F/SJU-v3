@@ -70,9 +70,9 @@ if (props.userAuth?.exp_flds_lngs_complete) percentage += 10;
                                                             {{ __('Profile picture') }}
                                                         </td>
                                                         <td>
-                                                            <a v-if="!userAuth?.profile_photo" href="#" class="btn btn-rounded btn-success btn-sm">
+                                                            <Link v-if="!userAuth?.profile_photo" :href="route('member.profile.photo')" class="btn btn-rounded btn-success btn-sm">
                                                                 {{ __('Upload') }}
-                                                            </a>
+                                                            </Link>
                                                         </td>
                                                     </tr>
 
@@ -85,9 +85,9 @@ if (props.userAuth?.exp_flds_lngs_complete) percentage += 10;
                                                             {{ __('A copy of the status or residence card') }}
                                                         </td>
                                                         <td>
-                                                            <a v-if="!userAuth?.national_id_photo" href="#" class="btn btn-rounded btn-success btn-sm">
+                                                            <Link v-if="!userAuth?.national_id_photo" :href="route('member.profile.id')" class="btn btn-rounded btn-success btn-sm">
                                                                 {{ __('Upload') }}
-                                                            </a>
+                                                            </Link>
                                                         </td>
                                                     </tr>
 
@@ -100,9 +100,9 @@ if (props.userAuth?.exp_flds_lngs_complete) percentage += 10;
                                                             {{ __('A statement from the employer regarding the current press position') }}
                                                         </td>
                                                         <td>
-                                                            <a v-if="!userAuth?.statement_photo" href="#" class="btn btn-rounded btn-success btn-sm">
+                                                            <Link v-if="!userAuth?.statement_photo" :href="route('member.profile.statement')" class="btn btn-rounded btn-success btn-sm">
                                                                 {{ __('Upload') }}
-                                                            </a>
+                                                            </Link>
                                                         </td>
                                                     </tr>
 
@@ -116,7 +116,9 @@ if (props.userAuth?.exp_flds_lngs_complete) percentage += 10;
                                                             {{ __('Newspaper license') }}
                                                         </td>
                                                         <td>
-                                                            <a v-if="!userAuth?.license_photo" href="#" class="btn btn-rounded btn-success btn-sm">{{ __('Upload') }}</a>
+                                                            <Link v-if="!userAuth?.license_photo" :href="route('member.profile.license')" class="btn btn-rounded btn-success btn-sm">{{
+                                                                __('Upload')
+                                                            }}</Link>
                                                         </td>
                                                     </tr>
 
@@ -130,9 +132,9 @@ if (props.userAuth?.exp_flds_lngs_complete) percentage += 10;
                                                             {{ __('Job contract') }}
                                                         </td>
                                                         <td>
-                                                            <a v-if="!userAuth?.contract_photo" href="#" class="btn btn-rounded btn-success btn-sm">
+                                                            <Link v-if="!userAuth?.contract_photo" :href="route('member.profile.contract')" class="btn btn-rounded btn-success btn-sm">
                                                                 {{ __('Upload') }}
-                                                            </a>
+                                                            </Link>
                                                         </td>
                                                     </tr>
 
@@ -148,9 +150,14 @@ if (props.userAuth?.exp_flds_lngs_complete) percentage += 10;
                                                             {{ __('Biography, experiences, fields, and languages') }}
                                                         </td>
                                                         <td>
-                                                            <a v-if="!userAuth?.exp_flds_lngs_complete" href="#" type="button" class="btn btn-rounded btn-success btn-sm">
+                                                            <Link
+                                                                v-if="!userAuth?.exp_flds_lngs_complete"
+                                                                :href="route('member.profile.experiences')"
+                                                                type="button"
+                                                                class="btn btn-rounded btn-success btn-sm"
+                                                            >
                                                                 {{ __('Complete') }}
-                                                            </a>
+                                                            </Link>
                                                         </td>
                                                     </tr>
 
@@ -163,9 +170,9 @@ if (props.userAuth?.exp_flds_lngs_complete) percentage += 10;
                                                             {{ __('Set the type of newspaper in the data') }}
                                                         </td>
                                                         <td>
-                                                            <a v-if="userAuth?.newspaper_type" href="#" type="button" class="btn btn-rounded btn-success btn-sm">
+                                                            <Link v-if="userAuth?.newspaper_type" :href="route('member.profile.info')" type="button" class="btn btn-rounded btn-success btn-sm">
                                                                 {{ __('Complete') }}
-                                                            </a>
+                                                            </Link>
                                                         </td>
                                                     </tr>
                                                 </tbody>

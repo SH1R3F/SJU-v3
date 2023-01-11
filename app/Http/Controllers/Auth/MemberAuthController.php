@@ -77,6 +77,8 @@ class MemberAuthController extends Controller
         // Validate mobile
         $request->validate(['mobile' => ['required', 'numeric', 'regex:/^(5)\d{8}$/', new MemberUniqueMobile]]);
 
+        // Throttle here
+
         $member = session()->get('member');
         $code = rand(111111, 999999);
         $member->mobile_code = $code;

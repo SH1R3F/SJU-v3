@@ -118,4 +118,35 @@ class Member extends Authenticatable
     {
         return $this->hasOne(Subscription::class);
     }
+
+    /**
+     * Did the member complete his profile with full information?
+     * @return bool
+     */
+    public function complete()
+    {
+        // Writing this way for better readability and easier maintainability
+        if (!$this->newspaper_type) return false;
+        if (!$this->profile_photo) return false;
+        if (!$this->national_id_photo) return false;
+        if (!$this->statement_photo) return false;
+        if ($this->newspaper_type == 2 && !$this->license_photo) return false;
+        if ($this->subscription->type == 3 && !$this->contract_photo) return false;
+        if (!$this->exp_flds_lngs_complete()) return false;
+
+        return true;
+    }
+
+    /**
+     * Did the member complete his experiences, fields & languages with full information?
+     * @return bool
+     */
+    public function exp_flds_lngs_complete()
+    {
+        if (!$this->exp_flds_lngs) return false;
+        if (!count($this->exp_flds_lngs['fields'])) return false;
+        if (!count($this->exp_flds_lngs['languages'])) return false;
+        if (!count($this->exp_flds_lngs['experiences'])) return false;
+        return true;
+    }
 }

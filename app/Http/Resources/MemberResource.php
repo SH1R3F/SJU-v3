@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class MemberResource extends JsonResource
@@ -31,6 +32,7 @@ class MemberResource extends JsonResource
             'sname_en' => $this->sname_en,
             'tname_en' => $this->tname_en,
             'lname_en' => $this->lname_en,
+            'fullName' => app()->getLocale() == 'ar' ? $this->full_name_ar : $this->full_name_en,
             'gender' => $this->gender,
             'birthday_h' => $this->birthday_h->format('Y/m/d'),
             'birthday_m' => $this->birthday_m->format('Y/m/d'),
@@ -55,13 +57,14 @@ class MemberResource extends JsonResource
             'subscription' => $this->whenLoaded('subscription'), // Convert to api resource later
             'newspaper_type' => $this->newspaper_type,
 
-            'profile_photo' => $this->profile_photo, // Convert to url later.
-            'national_id_photo' => $this->national_id_photo, // Convert to url later.
-            'statement_photo' => $this->statement_photo, // Convert to url later.
-            'license_photo' => $this->license_photo, // Convert to url later.
-            'contract_photo' => $this->contract_photo, // Convert to url later.
+            'profile_photo' => $this->when($this->profile_photo, Storage::url($this->profile_photo), $this->profile_photo),
+            'national_id_photo' => $this->when($this->national_id_photo, Storage::url($this->national_id_photo), $this->national_id_photo),
+            'statement_photo' => $this->when($this->statement_photo, Storage::url($this->statement_photo), $this->statement_photo),
+            'license_photo' => $this->when($this->license_photo, Storage::url($this->license_photo), $this->license_photo),
+            'contract_photo' => $this->when($this->contract_photo, Storage::url($this->contract_photo), $this->contract_photo),
+
             'exp_flds_lngs' => $this->exp_flds_lngs,
-            'exp_flds_lngs_complete' => true,
+            'exp_flds_lngs_complete' => $this->exp_flds_lngs_complete(),
             'status' => $this->status,
         ];
     }

@@ -217,6 +217,17 @@ return [
         'postcode' => 'الرمز البريدي',
         'postcity' => 'المدينة',
         'agreement' => 'التعهد',
+        'exp_flds_lngs' => [
+            'fields' => 'المجالات',
+            'experiences' => 'الخبرات',
+            'languages' => 'اللغات'
+        ],
+        'profile_photo' => 'الصورة الشخصية',
+        'new_password' => 'كلمة المرور الجديدة',
+        'national_id_photo' => 'صورة الهوية',
+        'statement_photo' => 'صورة إفادة العمل',
+        'contract_photo' => 'صورة عقد العمل',
+        'license_photo' => 'صورة ترخيص الصحيفة',
     ],
 
 ];

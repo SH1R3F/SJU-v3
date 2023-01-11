@@ -26,6 +26,7 @@ class MemberController extends Controller
      */
     public function complete()
     {
+        if (Auth::guard('member')->user()->complete()) return redirect()->route('member.home');
         return inertia('Members/Complete');
     }
 }

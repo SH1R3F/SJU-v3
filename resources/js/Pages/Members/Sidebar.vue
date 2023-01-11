@@ -2,25 +2,25 @@
     <!-- Users menu -->
     <div class="usermenu">
         <div class="userimg">
-            <img src="/img/user.png" width="196" height="196" />
-            <a href="#" class="profile-image-button bg-color-dark">
+            <img :src="$page.props.userAuth?.profile_photo || '/img/user.png'" width="196" height="196" />
+            <Link :href="route('member.profile.photo')" class="profile-image-button bg-color-dark">
                 <i class="fas fa-camera text-light"></i>
-            </a>
+            </Link>
         </div>
 
-        <h6>{{ $page.props.userAuth?.name }}</h6>
+        <h6>{{ $page.props.userAuth?.fullName }}</h6>
         <ul>
-            <li class="active">
+            <li :class="{ active: $page.url == '/members' }">
                 <a href="#">{{ __('Home') }}</a>
             </li>
-            <li>
+            <li :class="{ active: $page.url == '/events' }">
                 <a href="#">{{ __('Events') }}</a>
             </li>
-            <li>
+            <li :class="{ active: $page.url == '/membership' }">
                 <a href="#">{{ __('Membership ') }}</a>
             </li>
-            <li>
-                <a href="#">{{ __('My profile') }}</a>
+            <li :class="{ active: $page.url.startsWith('/members/profile') }">
+                <Link :href="route('member.profile.info')">{{ __('My profile') }}</Link>
             </li>
             <li>
                 <a href="#">{{ __('Technical support') }}</a>

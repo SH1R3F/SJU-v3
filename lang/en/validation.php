@@ -201,5 +201,10 @@ return [
         'postbox' => 'Post box',
         'postcode' => 'Post code',
         'postcity' => 'Post city',
+        'exp_flds_lngs' => [
+            'fields' => 'fields',
+            'experiences' => 'experiences',
+            'languages' => 'languages'
+        ]
     ],
 ];

@@ -41,7 +41,7 @@ const form = useForm({
                 <div class="col-md-9">
                     <!-- page content -->
                     <div class="registration-form">
-                        <nav-tabs active="info" />
+                        <nav-tabs />
 
                         <!-- Tab content -->
                         <div class="tab-content text-start pt-4" id="myTabContent">
