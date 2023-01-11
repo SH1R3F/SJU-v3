@@ -32,4 +32,40 @@ class Subscription extends Model
     {
         return $this->belongsTo(Member::class);
     }
+
+    /**
+     * Membership status in readable way
+     */
+    public function status()
+    {
+        switch ($this->status) {
+            case self::SUBSCRIPTION_ACTIVE:
+                return __('Active');
+                break;
+
+            default:
+                switch ($this->member->status) {
+                    case Member::STATUS_ACCEPTED:
+                        return __('Waiting paying');
+                        break;
+
+                    case Member::STATUS_APPROVED:
+                        return __('Waiting admin approval');
+                        break;
+
+                    case Member::STATUS_UNAPPROVED:
+                        return __('Waiting branch approval');
+                        break;
+
+                    case Member::STATUS_REFUSED:
+                        return __('Membership refused');
+                        break;
+
+                    default:
+                        return null;
+                        break;
+                }
+                break;
+        }
+    }
 }

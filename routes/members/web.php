@@ -57,11 +57,6 @@ Route::group(['prefix' => 'members', 'as' => 'member.'], function () {
         Route::get('complete-profile', [MemberController::class, 'complete'])->name('complete-profile');
 
         /**
-         * Member homepage
-         */
-        Route::get('/', [MemberController::class, 'index'])->name('home');
-
-        /**
          * Profile page
          */
         Route::prefix('profile')->group(function () {
@@ -96,6 +91,16 @@ Route::group(['prefix' => 'members', 'as' => 'member.'], function () {
          * Otherwise redirected to complete-profile page
          */
         Route::middleware('profile-is-complete')->group(function () {
+            /**
+             * Member homepage
+             * Displays notifications
+             */
+            Route::get('/', [MemberController::class, 'index'])->name('home');
+            /**
+             * Member subscription
+             * Displays current subscription information
+             */
+            Route::get('/subscription', [MemberController::class, 'subscription'])->name('subscription');
         });
     });
 });

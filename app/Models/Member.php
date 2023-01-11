@@ -107,7 +107,7 @@ class Member extends Authenticatable
     public function prepareMobileForSms()
     {
         // Make sure mobile is in format +[Key][Number]
-        return '+201003384936'; // I hard code it for now
+        return "+{$this->mobile}";
     }
 
 

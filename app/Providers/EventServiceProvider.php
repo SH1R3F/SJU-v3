@@ -20,7 +20,10 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        MemberRegistered::class => [],
+        MemberRegistered::class => [
+            // Sms welcoming message,
+            // In app notification that his request has been sent and being reviewed
+        ],
     ];
 
     /**

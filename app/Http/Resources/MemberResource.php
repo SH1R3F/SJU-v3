@@ -54,7 +54,7 @@ class MemberResource extends JsonResource
             'delivery_option' => $this->delivery_option,
             'delivery_address' => $this->delivery_address,
 
-            'subscription' => $this->whenLoaded('subscription'), // Convert to api resource later
+            'subscription' => new SubscriptionResource($this->whenLoaded('subscription')),
             'newspaper_type' => $this->newspaper_type,
 
             'profile_photo' => $this->when($this->profile_photo, Storage::url($this->profile_photo), $this->profile_photo),

@@ -29,4 +29,14 @@ class MemberController extends Controller
         if (Auth::guard('member')->user()->complete()) return redirect()->route('member.home');
         return inertia('Members/Complete');
     }
+
+    /**
+     * Member's subscription information page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function subscription()
+    {
+        return inertia('Members/Subscription');
+    }
 }

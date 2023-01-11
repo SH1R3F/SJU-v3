@@ -238,6 +238,9 @@ class MemberAuthController extends Controller
             $request->validate(['agreement' => 'required|accepted']);
         }
 
+        // Append country key to mobile field
+        $member->mobile = "966{$member->mobile}";
+
         // Register the member
         $member->save();
         // Register his subscription

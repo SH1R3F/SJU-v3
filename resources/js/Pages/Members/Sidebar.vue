@@ -11,13 +11,13 @@
         <h6>{{ $page.props.userAuth?.fullName }}</h6>
         <ul>
             <li :class="{ active: $page.url == '/members' }">
-                <a href="#">{{ __('Home') }}</a>
+                <Link :href="route('member.home')">{{ __('Home') }}</Link>
             </li>
             <li :class="{ active: $page.url == '/events' }">
                 <a href="#">{{ __('Events') }}</a>
             </li>
-            <li :class="{ active: $page.url == '/membership' }">
-                <a href="#">{{ __('Membership ') }}</a>
+            <li :class="{ active: $page.url.startsWith('/members/subscription') }">
+                <Link :href="route('member.subscription')">{{ __('Membership ') }}</Link>
             </li>
             <li :class="{ active: $page.url.startsWith('/members/profile') }">
                 <Link :href="route('member.profile.info')">{{ __('My profile') }}</Link>
