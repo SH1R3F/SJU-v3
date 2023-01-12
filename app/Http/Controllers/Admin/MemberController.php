@@ -60,12 +60,60 @@ class MemberController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Member $member)
     {
-        //
+        return inertia('Admin/Members/View/Index', [
+            'member' => new MemberResource($member->load('subscription', 'branch')),
+            'nationalities' => config('sju.nationalities', [])
+        ]);
+    }
+
+    /**
+     * Display contact info of the member.
+     *
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function showContact(Member $member)
+    {
+        $this->authorize('view', $member);
+
+        return inertia('Admin/Members/View/Contact', [
+            'member' => new MemberResource($member->load('subscription', 'branch'))
+        ]);
+    }
+
+    /**
+     * Display Experiences & fields of the member.
+     *
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function showExperiences(Member $member)
+    {
+        $this->authorize('view', $member);
+
+        return inertia('Admin/Members/View/Experiences', [
+            'member' => new MemberResource($member->load('subscription', 'branch'))
+        ]);
+    }
+
+    /**
+     * Display Documents of the member.
+     *
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function showDocuments(Member $member)
+    {
+        $this->authorize('view', $member);
+
+        return inertia('Admin/Members/View/Documents', [
+            'member' => new MemberResource($member->load('subscription', 'branch'))
+        ]);
     }
 
     /**

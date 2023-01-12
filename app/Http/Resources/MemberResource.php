@@ -34,6 +34,8 @@ class MemberResource extends JsonResource
             'tname_en' => $this->tname_en,
             'lname_en' => $this->lname_en,
             'fullName' => app()->getLocale() == 'ar' ? $this->full_name_ar : $this->full_name_en,
+            'fullNameAr' => $this->full_name_ar,
+            'fullNameEn' => $this->full_name_en,
             'gender' => $this->gender,
             'birthday_h' => $this->birthday_h->format('Y/m/d'),
             'birthday_m' => $this->birthday_m->format('Y/m/d'),
@@ -68,6 +70,7 @@ class MemberResource extends JsonResource
             'exp_flds_lngs' => $this->exp_flds_lngs,
             'exp_flds_lngs_complete' => $this->exp_flds_lngs_complete(),
             'status' => $this->status,
+            'created_at' => $this->created_at?->translatedFormat('l jS F Y'),
 
             // Authorization
             $this->mergeWhen(str_contains(request()->route()->getActionName(), '@index'), [
