@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Branch;
 use App\Models\Subscription;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -117,6 +118,14 @@ class Member extends Authenticatable
     public function subscription()
     {
         return $this->hasOne(Subscription::class);
+    }
+
+    /**
+     * Relation the the branch the member belongs to
+     */
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 
     /**

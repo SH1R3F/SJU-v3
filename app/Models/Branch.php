@@ -10,8 +10,19 @@ class Branch extends Model
 {
     use HasFactory;
 
+    /**
+     * Relation the the admins the branch has to
+     */
     public function admins(): HasMany
     {
         return $this->hasMany(Admin::class);
+    }
+
+    /**
+     * Relation the the members the branch has to
+     */
+    public function members(): HasMany
+    {
+        return $this->hasMany(Member::class);
     }
 }

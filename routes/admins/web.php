@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\MemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,5 +51,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('admins/export', [AdminController::class, 'export'])->name('admins.export');
         Route::post('admins/{admin}/toggle', [AdminController::class, 'toggle'])->name('admins.toggle');
         Route::resource('admins', AdminController::class);
+
+        /**
+         * Members management
+         */
+        Route::post('members/{member}/toggle', [MemberController::class, 'toggle'])->name('members.toggle');
+        Route::resource('members', MemberController::class);
     });
 });

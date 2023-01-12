@@ -44,6 +44,31 @@
                     </li>
                 </ul>
             </li>
+
+            <!-- Members -->
+            <li class="menu-item" :class="{ 'active open': $page.component.startsWith('Admin/Members') || $page.component.startsWith('Admin/Admins') }">
+                <a href="javascript:;" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-users"></i>
+                    <div>{{ __('Members') }}</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" :class="{ active: $page.component == 'Admin/Members/Index' }">
+                        <Link :href="route('admin.members.index')" class="menu-link">
+                            <div>{{ __('All members') }}</div>
+                        </Link>
+                    </li>
+                    <li class="menu-item" :class="{ active: $page.component == 'Admin/Members/Branch' }">
+                        <Link :href="route('admin.members.index')" class="menu-link">
+                            <div>{{ __('Branch approval') }}</div>
+                        </Link>
+                    </li>
+                    <li class="menu-item" :class="{ active: $page.component == 'Admin/Members/Admin' }">
+                        <Link :href="route('admin.members.index')" class="menu-link">
+                            <div>{{ __('Admin approval') }}</div>
+                        </Link>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </aside>
 </template>

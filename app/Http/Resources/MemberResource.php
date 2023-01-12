@@ -24,6 +24,7 @@ class MemberResource extends JsonResource
             'national_id_source' => $this->national_id_source,
             'national_id_date' => $this->national_id_date->format('Y/m/d'),
             'mobile' => $this->mobile,
+            'phone_number' => $this->prepareMobileForSms(),
             'fname_ar' => $this->fname_ar,
             'sname_ar' => $this->sname_ar,
             'tname_ar' => $this->tname_ar,
@@ -51,6 +52,7 @@ class MemberResource extends JsonResource
             'postcode' => $this->postcode,
             'postcity' => $this->postcity,
             'email' => $this->email,
+            'branch' => $this->whenLoaded('branch'),
             'delivery_option' => $this->delivery_option,
             'delivery_address' => $this->delivery_address,
 
@@ -66,6 +68,14 @@ class MemberResource extends JsonResource
             'exp_flds_lngs' => $this->exp_flds_lngs,
             'exp_flds_lngs_complete' => $this->exp_flds_lngs_complete(),
             'status' => $this->status,
+
+            // Authorization
+            $this->mergeWhen(str_contains(request()->route()->getActionName(), '@index'), [
+                'toggleable' => $request->user()->can('toggle', $this->resource),
+                'viewable'   => $request->user()->can('view', $this->resource),
+                'editable'   => $request->user()->can('update', $this->resource),
+                'deleteable' => $request->user()->can('delete', $this->resource),
+            ])
         ];
     }
 }

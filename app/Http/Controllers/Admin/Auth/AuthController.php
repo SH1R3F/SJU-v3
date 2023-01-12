@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
+use Inertia\Inertia;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,7 +28,8 @@ class AuthController extends Controller
     {
         $request->authenticate();
         $request->session()->regenerate();
-        return redirect()->intended(Admin::HOME);
+        // Force redirect for external js files to be run
+        return Inertia::location(redirect()->intended(Admin::HOME)->getTargetUrl());
     }
 
     /**

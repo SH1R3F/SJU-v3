@@ -54,11 +54,19 @@ class Subscription extends Model
                         break;
 
                     case Member::STATUS_UNAPPROVED:
-                        return __('Waiting branch approval');
+                        if ($this->member->complete()) {
+                            return __('Waiting branch approval');
+                        } else {
+                            return __("Didn't complete info");
+                        }
                         break;
 
                     case Member::STATUS_REFUSED:
                         return __('Membership refused');
+                        break;
+
+                    case Member::STATUS_DISABLED:
+                        return __('Disabled');
                         break;
 
                     default:

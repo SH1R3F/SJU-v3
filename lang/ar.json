@@ -93,6 +93,16 @@
     "Send": "إرسال",
     "Notification is being sent": "يتم الآن إرسال الإشعار",
 
+    "--------------- Members management -------------": "",
+    "All members": "كل الأعضاء",
+    "Branch approval": "موافقة الفرع",
+    "Admin approval": "موافقة الأدمن",
+    "Members management": "إدارة الأعضاء",
+    "Membership Status": "حالة العضوية",
+    "Membership number": "رقم العضوية",
+    "Member updated successfully": "تم تعديل العضو بنجاح",
+    "Disapprove": "إلغاء الموافقة",
+
     "--------------- Footer -------------": "",
     "made with ❤️": "صُنع بكل حب ❤️",
 
@@ -272,6 +282,7 @@
     "Waiting paying": "بإنتظار الدفع",
     "Waiting admin approval": "بإنتظار موافقة الأدمن",
     "Waiting branch approval": "بإنتظار موافقة الفرع",
+    "Didn't complete info": "لم يستكمل البيانات",
     "Membership refused": "العضوية مرفوضة",
 
     "------------- Nationalities -----------": "",

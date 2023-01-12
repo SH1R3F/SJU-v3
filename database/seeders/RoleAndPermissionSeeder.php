@@ -17,24 +17,32 @@ class RoleAndPermissionSeeder extends Seeder
     public function run()
     {
         // Seed roles
-        $admin   = Role::create(['name' => 'Site admin', 'guard_name' => 'admin']);
-        $manager = Role::create(['name' => 'Branch manager', 'guard_name' => 'admin']);
-        $editor  = Role::create(['name' => 'News editor', 'guard_name' => 'admin']);
+        $admin   = Role::updateOrCreate(['name' => 'Site admin'], ['name' => 'Site admin', 'guard_name' => 'admin']);
+        $manager = Role::updateOrCreate(['name' => 'Branch manager'], ['name' => 'Branch manager', 'guard_name' => 'admin']);
+        $editor  = Role::updateOrCreate(['name' => 'News editor'], ['name' => 'News editor', 'guard_name' => 'admin']);
 
         /**
          * Permissions Seeding
          */
         // Roles permissions
-        Permission::create(['name' => 'viewAny-role', 'guard_name' => 'admin']);
-        Permission::create(['name' => 'create-role', 'guard_name' => 'admin']);
-        Permission::create(['name' => 'update-role', 'guard_name' => 'admin']);
-        Permission::create(['name' => 'delete-role', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'viewAny-role'], ['name' => 'viewAny-role', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-role'], ['name' => 'create-role', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-role'], ['name' => 'update-role', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-role'], ['name' => 'delete-role', 'guard_name' => 'admin']);
         // Admins permissions
-        Permission::create(['name' => 'viewAny-admin', 'guard_name' => 'admin']);
-        Permission::create(['name' => 'create-admin', 'guard_name' => 'admin']);
-        Permission::create(['name' => 'update-admin', 'guard_name' => 'admin']);
-        Permission::create(['name' => 'delete-admin', 'guard_name' => 'admin']);
-        Permission::create(['name' => 'notify-admin', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'viewAny-admin'], ['name' => 'viewAny-admin', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-admin'], ['name' => 'create-admin', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-admin'], ['name' => 'update-admin', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-admin'], ['name' => 'delete-admin', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'notify-admin'], ['name' => 'notify-admin', 'guard_name' => 'admin']);
+        // Members permissions
+        Permission::updateOrCreate(['name' => 'viewAny-member'], ['name' => 'viewAny-member', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'view-member'], ['name' => 'view-member', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-member'], ['name' => 'create-member', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-member'], ['name' => 'update-member', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-member'], ['name' => 'delete-member', 'guard_name' => 'admin']);
+        // Permission::updateOrCreate(['name' => 'notify-member'], ['name' => 'notify-member', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'toggle-member'], ['name' => 'toggle-member', 'guard_name' => 'admin']); // Edit status (approve / disapprove, Accept, Lock, etc)
 
         $admin->syncPermissions(Permission::pluck('name'));
     }

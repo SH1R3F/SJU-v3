@@ -55,7 +55,7 @@ return new class extends Migration
             $table->boolean('delivery_status')->default(Member::DELIVERY_STATUS_DEFAULT);
 
             $table->string('email')->unique();
-            $table->integer('mobile')->unique();
+            $table->bigInteger('mobile')->unique();
             $table->integer('mobile_code')->nullable();
             $table->string('password');
 
