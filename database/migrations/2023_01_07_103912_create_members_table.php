@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('national_id_source');
             $table->date('national_id_date');
 
+            $table->string('membership_number')->unique()->nullable();
+
             $table->string('fname_ar');
             $table->string('sname_ar');
             $table->string('tname_ar');

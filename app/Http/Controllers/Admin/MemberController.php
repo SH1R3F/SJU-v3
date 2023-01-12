@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Branch;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,15 +25,20 @@ class MemberController extends Controller
     public function index()
     {
         $members = Member::with('subscription', 'branch')
-            // ->filter(request()) // To be added in member's model
+            ->filter(request())
             // ->when(branch manager, show only his branch's members) // To be added
             ->orderBy('id') // Might be dynamic too?
             ->paginate(request()->perPage ?: 10)
             ->withQueryString();
 
         return inertia('Admin/Members/All', [
-            'members' => MemberResource::collection($members),
-            'filters' => []
+            'members'  => MemberResource::collection($members)->additional([
+                'fulltime'  => Member::with('subscription')->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
+                'parttime'  => Member::with('subscription')->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
+                'affiliate' => Member::with('subscription')->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
+            ]),
+            'branches' => Branch::orderBy('id')->get(['id', 'name']),
+            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'branch', 'year'])
         ]);
     }
 

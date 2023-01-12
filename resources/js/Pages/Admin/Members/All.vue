@@ -2,34 +2,52 @@
 import { Inertia } from '@inertiajs/inertia';
 import { ref, watch } from 'vue';
 import Pagination from '../Components/Pagination.vue';
+import { debounce } from '../../../helpers';
 
 const props = defineProps({
     members: Object,
+    branches: Object,
     filters: Object,
 });
-
-console.log(props);
 
 /**
  * Filters
  */
 const perPage = ref(props.filters.perPage || 10);
-const search = ref(props.filters.search);
-const role = ref(props.filters.role || '');
+const name = ref(props.filters.name || '');
+const national_id = ref(props.filters.national_id || '');
+const membership_number = ref(props.filters.membership_number || '');
+const mobile = ref(props.filters.mobile || '');
+const type = ref(props.filters.type || '');
 const branch = ref(props.filters.branch || '');
+const year = ref(props.filters.year || '');
 
-watch(perPage, (val) => {
-    Inertia.get(route('admin.members.index'), { perPage: val, search: search.value, role: role.value, branch: branch.value }, { preserveState: true, replace: true });
+const appended = ref({
+    perPage: perPage.value,
+    name: name.value,
+    national_id: national_id.value,
+    membership_number: membership_number.value,
+    mobile: mobile.value,
+    type: type.value,
+    branch: branch.value,
+    year: year.value,
 });
-watch(search, (val) => {
-    Inertia.get(route('admin.members.index'), { search: val, perPage: perPage.value, role: role.value, branch: branch.value }, { preserveState: true, replace: true });
-});
-watch(role, (val) => {
-    Inertia.get(route('admin.members.index'), { role: val, perPage: perPage.value, search: search.value, branch: branch.value }, { preserveState: true, replace: true });
-});
-watch(branch, (val) => {
-    Inertia.get(route('admin.members.index'), { branch: val, role: role.value, perPage: perPage.value, search: search.value }, { preserveState: true, replace: true });
-});
+
+const filterReq = debounce(() => Inertia.get(route('admin.members.index'), appended.value, { preserveState: true, replace: true }), 500);
+watch(
+    () => [name.value, national_id.value, membership_number.value, mobile.value, type.value, branch.value, year.value, perPage.value],
+    ([nameVal, nidVal, memNum, mob, t, b, y, pp]) => {
+        appended.value.name = nameVal;
+        appended.value.national_id = nidVal;
+        appended.value.membership_number = memNum;
+        appended.value.mobile = mob;
+        appended.value.type = t;
+        appended.value.branch = b;
+        appended.value.year = y;
+        appended.value.perPage = pp;
+        filterReq();
+    }
+);
 </script>
 
 <template>
@@ -42,11 +60,10 @@ watch(branch, (val) => {
                     <div class="card-body">
                         <div class="d-flex align-items-start justify-content-between">
                             <div class="content-left">
-                                <span>{{ __('Site admin') }}</span>
                                 <div class="d-flex align-items-center my-1">
-                                    <h4 class="mb-0 me-2">12</h4>
+                                    <h4 class="mb-0 me-2">{{ props.members.fulltime }}</h4>
                                 </div>
-                                <span>{{ __('Total Users') }}</span>
+                                <span>{{ __('Full-time members') }}</span>
                             </div>
                             <span class="badge bg-label-primary rounded p-2">
                                 <i class="ti ti-user ti-sm"></i>
@@ -60,11 +77,10 @@ watch(branch, (val) => {
                     <div class="card-body">
                         <div class="d-flex align-items-start justify-content-between">
                             <div class="content-left">
-                                <span>{{ __('Branch manager') }}</span>
                                 <div class="d-flex align-items-center my-1">
-                                    <h4 class="mb-0 me-2">22</h4>
+                                    <h4 class="mb-0 me-2">{{ props.members.parttime }}</h4>
                                 </div>
-                                <span>{{ __('Total Users') }}</span>
+                                <span>{{ __('Part-time members') }}</span>
                             </div>
                             <span class="badge bg-label-success rounded p-2">
                                 <i class="ti ti-user-check ti-sm"></i>
@@ -78,11 +94,10 @@ watch(branch, (val) => {
                     <div class="card-body">
                         <div class="d-flex align-items-start justify-content-between">
                             <div class="content-left">
-                                <span>{{ __('News editor') }}</span>
                                 <div class="d-flex align-items-center my-1">
-                                    <h4 class="mb-0 me-2">13</h4>
+                                    <h4 class="mb-0 me-2">{{ props.members.affiliate }}</h4>
                                 </div>
-                                <span>{{ __('Total Users') }}</span>
+                                <span>{{ __('Affiliate members') }}</span>
                             </div>
                             <span class="badge bg-label-warning rounded p-2">
                                 <i class="ti ti-user-exclamation ti-sm"></i>
@@ -97,15 +112,34 @@ watch(branch, (val) => {
             <div class="card-header border-bottom">
                 <h5 class="card-title mb-3">{{ __('All members') }}</h5>
                 <div class="d-flex justify-content-between align-items-center row pb-2 gap-3 gap-md-0">
-                    <div class="col-md-6 user_role">
-                        <select id="UserRole" class="form-select text-capitalize" v-model="role">
-                            <option value="">{{ __('Select role') }}</option>
+                    <div class="col-md-12 mb-2">
+                        <input type="text" class="form-control" :placeholder="__('Name')" v-model="name" />
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <input type="text" class="form-control" :placeholder="__('National ID number')" v-model="national_id" />
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <input type="text" class="form-control" :placeholder="__('Membership number')" v-model="membership_number" />
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <input type="text" class="form-control" :placeholder="__('Mobile')" v-model="mobile" />
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <select class="form-select text-capitalize" v-model="type">
+                            <option value="">{{ __('Membership type') }}</option>
+                            <option value="1">{{ __('Full-time member') }}</option>
+                            <option value="2">{{ __('Part-time member') }}</option>
+                            <option value="3">{{ __('Affiliate member') }}</option>
                         </select>
                     </div>
-                    <div class="col-md-6 user_plan">
-                        <select id="UserBranch" class="form-select text-capitalize" v-model="branch">
-                            <option value="">{{ __('Select branch') }}</option>
+                    <div class="col-md-4 mb-2">
+                        <select class="form-select text-capitalize" v-model="branch">
+                            <option value="">{{ __('Membership branch') }}</option>
+                            <option v-for="branch in branches" :key="branch.id" :value="branch.id">{{ branch.name }}</option>
                         </select>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <input type="text" class="form-control" :placeholder="__('Year')" v-model="year" />
                     </div>
                 </div>
             </div>
@@ -127,11 +161,6 @@ watch(branch, (val) => {
                     </div>
                     <div class="col-md-10 mb-1">
                         <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column gap-1 mb-3 mb-md-0">
-                            <div class="dataTables_filter">
-                                <label>
-                                    <input type="search" class="form-control" :placeholder="__('Search...')" v-model="search" />
-                                </label>
-                            </div>
                             <div class="dt-buttons">
                                 <a :href="route('admin.admins.export')" target="_blank" class="dt-button buttons-collection btn btn-label-secondary me-1" type="button">
                                     <span>

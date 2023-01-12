@@ -7,6 +7,8 @@ use App\Models\Subscription;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Member extends Authenticatable
 {
@@ -85,6 +87,38 @@ class Member extends Authenticatable
         'status' => 'integer'
     ];
 
+    /**
+     * Filter members in admin panel
+     * @param \Illuminate\Http\Request  $request
+     */
+    public function scopeFilter($query, Request $request)
+    {
+        return $query
+            // Filter Full Name [ar, en]
+            ->when($request->name, function ($builder, $name) {
+                // Operator precedence
+                return $builder->where(function ($query) use ($name) {
+                    return $query
+                        ->where(DB::raw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar)"), 'LIKE', "%$name%")
+                        ->orWhere(DB::raw("CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en)"), 'LIKE', "%$name%");
+                });
+            })
+
+            // Filter by national id
+            ->when($request->national_id, fn ($builder, $national_id) => $builder->where('national_id', 'LIKE', "%$national_id%"))
+            // Filter by membership number
+            ->when($request->membership_number, fn ($builder, $membership_number) => $builder->where('membership_number', 'LIKE', "%$membership_number%"))
+            // Filter by mobile
+            ->when($request->mobile, fn ($builder, $mobile) => $builder->where('mobile', 'LIKE', "%$mobile%"))
+            // Filter by membership type
+            ->when($request->type, fn ($builder, $type) => $builder->whereHas('subscription', function ($query) use ($type) {
+                return $query->where('type', $type);
+            }))
+            // Filter by Branch
+            ->when($request->branch, fn ($builder, $branch) => $builder->where('branch_id', $branch))
+            // Filter by Year
+            ->when($request->year, fn ($builder, $year) => $builder->whereYear('created_at', $year));
+    }
 
     /**
      * Arabic fullname attribute
