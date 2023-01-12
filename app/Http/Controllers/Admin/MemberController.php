@@ -6,6 +6,7 @@ use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MemberResource;
+use Illuminate\Support\Facades\Storage;
 
 class MemberController extends Controller
 {
@@ -112,11 +113,15 @@ class MemberController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Member $member)
     {
-        //
+        // Delete his storage folder
+        Storage::deleteDirectory("members/{$member->id}");
+        // Delete member
+        $member->delete();
+        return redirect()->back()->with('message', __('Member deleted successfully'));
     }
 }
