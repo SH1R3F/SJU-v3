@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Branch;
 use App\Models\Member;
 use Illuminate\Http\Request;
+use App\Events\MemberRegistered;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MemberRequest;
 use App\Http\Resources\MemberResource;
 use Illuminate\Support\Facades\Storage;
 
@@ -49,18 +52,33 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Admin/Members/Create', [
+            'nationalities' => config('sju.nationalities'),
+            'branches' => Branch::orderBy('id')->get(['id', 'name']),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\MemberRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MemberRequest $request)
     {
-        //
+        // Create member
+        $data = $request->validated();
+        $data['password'] = bcrypt('123456');
+        $data['mobile'] = '966' . $data['mobile'];
+        $member = Member::create($data);
+
+        // Create subscription
+        $member->subscription()->create(['type' => $data['type']]);
+        // Fire event
+        event(new MemberRegistered($member));
+
+        // Response
+        return redirect()->route('admin.members.index')->with('message', __('Member created successfully'));
     }
 
     /**

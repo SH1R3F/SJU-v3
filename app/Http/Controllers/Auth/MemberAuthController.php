@@ -232,11 +232,10 @@ class MemberAuthController extends Controller
      */
     public function register(Request $request)
     {
+        $request->validate(['agreement' => 'required|accepted']);
+
         $member = session()->get('member');
         $member_type = session()->get('member_type');
-        if ($request->isMethod('POST')) {
-            $request->validate(['agreement' => 'required|accepted']);
-        }
 
         // Append country key to mobile field
         $member->mobile = "966{$member->mobile}";

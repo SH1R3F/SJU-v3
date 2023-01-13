@@ -102,6 +102,7 @@
     "Members management": "إدارة الأعضاء",
     "Membership Status": "حالة العضوية",
     "Membership number": "رقم العضوية",
+    "Member created successfully": "تم إنشاء العضو بنجاح",
     "Member updated successfully": "تم تعديل العضو بنجاح",
     "Member deleted successfully": "تم حذف العضو بنجاح",
     "Disapprove": "إلغاء الموافقة",
@@ -113,6 +114,7 @@
     "Show": "عرض",
     "Name": "الاسم",
     "Year": "العام",
+    "Create member": "إنشاء عضو",
 
     "--------------- Footer -------------": "",
     "made with ❤️": "صُنع بكل حب ❤️",

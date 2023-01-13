@@ -17,8 +17,8 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('national_id')->unique();
-            $table->string('national_id_source');
-            $table->date('national_id_date');
+            $table->string('national_id_source')->nullable();
+            $table->date('national_id_date')->nullable();
 
             $table->string('membership_number')->unique()->nullable();
 
@@ -26,10 +26,10 @@ return new class extends Migration
             $table->string('sname_ar');
             $table->string('tname_ar');
             $table->string('lname_ar');
-            $table->string('fname_en');
-            $table->string('sname_en');
-            $table->string('tname_en');
-            $table->string('lname_en');
+            $table->string('fname_en')->nullable();
+            $table->string('sname_en')->nullable();
+            $table->string('tname_en')->nullable();
+            $table->string('lname_en')->nullable();
             $table->boolean('gender')->comment('Female: 1, Male: 0');
             $table->date('birthday_h'); // Hijri date
             $table->date('birthday_m'); // Meladi date
@@ -47,9 +47,9 @@ return new class extends Migration
             $table->integer('fax')->nullable();
             $table->integer('fax_ext')->nullable();
 
-            $table->integer('postbox');
-            $table->integer('postcode');
-            $table->string('postcity');
+            $table->integer('postbox')->nullable();
+            $table->integer('postcode')->nullable();
+            $table->string('postcity')->nullable();
 
             $table->unsignedBigInteger('branch_id');
             $table->tinyInteger('delivery_option')->default(Member::DELIVERY_OPTION_PICKUP);

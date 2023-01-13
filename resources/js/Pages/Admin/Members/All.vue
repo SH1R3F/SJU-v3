@@ -168,10 +168,10 @@ watch(
                                         {{ __('Export') }}
                                     </span>
                                 </a>
-                                <Link v-if="true" :href="route('admin.admins.create')" type="button" class="dt-button add-new btn btn-primary me-1">
+                                <Link v-if="true" :href="route('admin.members.create')" type="button" class="dt-button add-new btn btn-primary me-1">
                                     <span>
                                         <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
-                                        <span class="d-none d-sm-inline-block">{{ __('Create moderator') }}</span>
+                                        <span class="d-none d-sm-inline-block">{{ __('Create member') }}</span>
                                     </span>
                                 </Link>
                                 <Link v-if="true" :href="route('admin.admins.notify')" type="button" class="dt-button btn btn-light me-1">
