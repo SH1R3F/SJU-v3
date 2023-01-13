@@ -55,11 +55,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         /**
          * Members management
          */
+        Route::get('members/branch-approval', [MemberController::class, 'branch'])->name('members.branch-approval');
         Route::get('members/export', [MemberController::class, 'export'])->name('members.export');
         Route::post('members/{member}/toggle', [MemberController::class, 'toggle'])->name('members.toggle');
-        Route::get('/members/{member}/contact', [MemberController::class, 'showContact'])->name('members.show.contact');
-        Route::get('/members/{member}/experiences', [MemberController::class, 'showExperiences'])->name('members.show.experiences');
-        Route::get('/members/{member}/documents', [MemberController::class, 'showDocuments'])->name('members.show.documents');
+        Route::post('members/{member}/approve', [MemberController::class, 'approve'])->name('members.approve');
+        Route::post('members/{member}/refuse', [MemberController::class, 'refuse'])->name('members.refuse');
+        Route::get('members/{member}/contact', [MemberController::class, 'showContact'])->name('members.show.contact');
+        Route::get('members/{member}/experiences', [MemberController::class, 'showExperiences'])->name('members.show.experiences');
+        Route::get('members/{member}/documents', [MemberController::class, 'showDocuments'])->name('members.show.documents');
         Route::resource('members', MemberController::class);
     });
 });

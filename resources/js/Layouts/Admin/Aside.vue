@@ -52,13 +52,13 @@
                     <div>{{ __('Members') }}</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item" :class="{ active: $page.component == 'Admin/Members/All' }">
+                    <li class="menu-item" :class="{ active: $page.component == 'Admin/Members/Accepted' }">
                         <Link :href="route('admin.members.index')" class="menu-link">
                             <div>{{ __('Members') }}</div>
                         </Link>
                     </li>
-                    <li class="menu-item" :class="{ active: $page.component == 'Admin/Members/Branch' }">
-                        <Link :href="route('admin.members.index')" class="menu-link">
+                    <li class="menu-item" :class="{ active: $page.component == 'Admin/Members/BranchApproval' }">
+                        <Link :href="route('admin.members.branch-approval')" class="menu-link">
                             <div>{{ __('Branch approval') }}</div>
                         </Link>
                     </li>

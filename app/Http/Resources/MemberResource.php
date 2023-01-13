@@ -74,13 +74,13 @@ class MemberResource extends JsonResource
             'created_at' => $this->created_at?->translatedFormat('l jS F Y'),
 
             // Authorization
-            $this->mergeWhen(str_contains($request->route()->getActionName(), '@index'), $this->withAuthorization($request))
+            $this->mergeWhen(in_array(explode('@', $request->route()->getActionName())[1], ['index', 'branch']), $this->withAuthorization($request))
         ];
     }
 
     private function withAuthorization($request)
     {
-        if (str_contains($request->route()->getActionName(), '@index')) {
+        if (in_array(explode('@', $request->route()->getActionName())[1], ['index', 'branch'])) {
             return [
                 'toggleable' => $request->user()->can('toggle', $this->resource),
                 'viewable'   => $request->user()->can('view', $this->resource),

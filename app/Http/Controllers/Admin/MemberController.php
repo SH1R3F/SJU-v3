@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Inertia\Inertia;
 use App\Models\Branch;
 use App\Models\Member;
 use Illuminate\Http\Request;
@@ -30,22 +31,48 @@ class MemberController extends Controller
     public function index()
     {
         $members = Member::with('subscription', 'branch')
-            // Only accepted members
-            // ->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])
+            // Only Accepted & Disabled members
+            ->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])
+            ->filter(request())
+            ->orderBy('id') // Might be dynamic too?
+            ->paginate(request()->perPage ?: 10)
+            ->withQueryString();
+
+        return inertia('Admin/Members/Accepted', [
+            'members'  => MemberResource::collection($members)->additional([
+                'fulltime'  => Member::with('subscription')->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
+                'parttime'  => Member::with('subscription')->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
+                'affiliate' => Member::with('subscription')->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
+                'can_create' => request()->user()->can('create', Member::class)
+            ]),
+            'branches' => Branch::orderBy('id')->get(['id', 'name']),
+            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'branch', 'year'])
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function branch()
+    {
+        $members = Member::with('subscription', 'branch')
+            // Only Awaiting branch approval members
+            ->where('status', Member::STATUS_UNAPPROVED)
             ->filter(request())
             // ->when(branch manager, show only his branch's members) // To be added
             ->orderBy('id') // Might be dynamic too?
             ->paginate(request()->perPage ?: 10)
             ->withQueryString();
 
-        return inertia('Admin/Members/All', [
+        return inertia('Admin/Members/BranchApproval', [
             'members'  => MemberResource::collection($members)->additional([
-                'fulltime'  => Member::with('subscription')->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
-                'parttime'  => Member::with('subscription')->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
-                'affiliate' => Member::with('subscription')->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
+                'fulltime'  => Member::with('subscription')->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
+                'parttime'  => Member::with('subscription')->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
+                'affiliate' => Member::with('subscription')->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
                 'can_create' => request()->user()->can('create', Member::class)
             ]),
-            'branches' => Branch::orderBy('id')->get(['id', 'name']),
             'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'branch', 'year'])
         ]);
     }
@@ -190,6 +217,44 @@ class MemberController extends Controller
     }
 
     // Approve and disapprove.
+
+    /**
+     * Branch approve member.
+     *
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(Member $member)
+    {
+        $this->authorize('toggle', $member);
+
+        $member->update([
+            'status' => Member::STATUS_APPROVED
+        ]);
+
+        return redirect()->back()->with('message', __('Member updated successfully'));
+    }
+
+    /**
+     * Branch refuse member.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function refuse(Request $request, Member $member)
+    {
+        $this->authorize('toggle', $member);
+
+        $request->validate(['reason'  => ['required', 'in:unsatisfy,other'], 'message' => ['required_if:reason,other', 'string', 'max:255']]);
+        $member->update([
+            'status' => Member::STATUS_REFUSED,
+            'refusal_reason' => $request->reason == 'unsatisfy' ? 'unsatisfy' : $request->message,
+        ]);
+
+        // Force redirect
+        return Inertia::location(redirect()->back()->with('message', __('Member updated successfully'))->getTargetUrl());
+    }
 
     /**
      * Update the specified resource in storage.
