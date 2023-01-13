@@ -31,7 +31,7 @@ const appended = ref({
     year: year.value,
 });
 
-const filterReq = debounce(() => Inertia.get(route('admin.members.index'), appended.value, { preserveState: true, replace: true }), 500);
+const filterReq = debounce(() => Inertia.get(route('admin.members.branch-approval'), appended.value, { preserveState: true, replace: true }), 500);
 watch(
     () => [name.value, national_id.value, membership_number.value, mobile.value, type.value, year.value, perPage.value],
     ([nameVal, nidVal, memNum, mob, t, y, pp]) => {
@@ -158,7 +158,12 @@ const form = useForm({
                     <div class="col-md-10 mb-1">
                         <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column gap-1 mb-3 mb-md-0">
                             <div class="dt-buttons">
-                                <a :href="route('admin.members.export')" class="dt-button buttons-collection btn btn-label-secondary me-1" type="button">
+                                <a
+                                    v-if="members.can_export"
+                                    :href="route('admin.members.export', { page: 'branch-approval', ...queryParams() })"
+                                    class="dt-button buttons-collection btn btn-label-secondary me-1"
+                                    type="button"
+                                >
                                     <span>
                                         <i class="ti ti-screen-share me-1 ti-xs"></i>
                                         {{ __('Export') }}
@@ -170,7 +175,7 @@ const form = useForm({
                                         <span class="d-none d-sm-inline-block">{{ __('Create member') }}</span>
                                     </span>
                                 </Link>
-                                <Link v-if="true" :href="route('admin.admins.notify')" type="button" class="dt-button btn btn-light me-1">
+                                <Link v-if="members.can_notify" :href="route('admin.admins.notify')" type="button" class="dt-button btn btn-light me-1">
                                     <span>
                                         <i class="ti ti-bell-ringing me-0 me-sm-1 ti-xs"></i>
                                         <span class="d-none d-sm-inline-block">{{ __('Notify') }}</span>
@@ -228,7 +233,7 @@ const form = useForm({
                                 <div class="d-flex align-items-center">
                                     <!-- Approve -->
                                     <Link
-                                        v-if="member.toggleable"
+                                        v-if="member.approveable"
                                         :href="route('admin.members.approve', member.id)"
                                         method="post"
                                         data-bs-placement="top"
@@ -246,14 +251,14 @@ const form = useForm({
                                         <i class="ti ti-trash ti-sm me-2"></i>
                                     </Link>
                                     <!-- Refuse -->
-                                    <span v-if="member.toggleable" data-bs-toggle="modal" :data-bs-target="`#enableOTP${member.id}`" :title="__('Refuse')" class="text-body cursor-pointer">
+                                    <span v-if="member.refuseable" data-bs-toggle="modal" :data-bs-target="`#refusalModal${member.id}`" :title="__('Refuse')" class="text-body cursor-pointer">
                                         <i class="ti ti-x ti-sm me-2"></i>
                                     </span>
                                 </div>
                             </td>
 
                             <!-- Enable OTP Modal -->
-                            <div class="modal fade" :id="`enableOTP${member.id}`" tabindex="-1" aria-hidden="true">
+                            <div class="modal fade" :id="`refusalModal${member.id}`" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog modal-simple modal-enable-otp modal-dialog-centered">
                                     <div class="modal-content p-3 p-md-5">
                                         <div class="modal-body">
@@ -273,7 +278,7 @@ const form = useForm({
                                                 </div>
                                                 <div class="col-12" v-if="form.reason == 'other'">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" :placeholder="__('Refusal reason')" v-model="form['message']" required />
+                                                        <input type="text" class="form-control" :placeholder="__('Refusal reason')" v-model="form['message']" maxlength="255" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-12">

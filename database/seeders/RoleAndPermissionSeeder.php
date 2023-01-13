@@ -35,14 +35,31 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::updateOrCreate(['name' => 'update-admin'], ['name' => 'update-admin', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'delete-admin'], ['name' => 'delete-admin', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'notify-admin'], ['name' => 'notify-admin', 'guard_name' => 'admin']);
-        // Members permissions
+
+        /**
+         * Member management permissions
+         */
+        // View accepted users page
         Permission::updateOrCreate(['name' => 'viewAny-member'], ['name' => 'viewAny-member', 'guard_name' => 'admin']);
+        // View branch approval members [unapproved] page
+        Permission::updateOrCreate(['name' => 'branch-member'], ['name' => 'branch-member', 'guard_name' => 'admin']);
+        // View admin acceptance members [approved]
+        Permission::updateOrCreate(['name' => 'acceptance-member'], ['name' => 'acceptance-member', 'guard_name' => 'admin']);
+        // View refused members [refused]
+        Permission::updateOrCreate(['name' => 'refused-member'], ['name' => 'refused-member', 'guard_name' => 'admin']);
+
+        Permission::updateOrCreate(['name' => 'export-member'], ['name' => 'export-member', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'view-member'], ['name' => 'view-member', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'create-member'], ['name' => 'create-member', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'update-member'], ['name' => 'update-member', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'delete-member'], ['name' => 'delete-member', 'guard_name' => 'admin']);
-        // Permission::updateOrCreate(['name' => 'notify-member'], ['name' => 'notify-member', 'guard_name' => 'admin']);
+
+        Permission::updateOrCreate(['name' => 'notify-member'], ['name' => 'notify-member', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'toggle-member'], ['name' => 'toggle-member', 'guard_name' => 'admin']); // Edit status (approve / disapprove, Accept, Lock, etc)
+        Permission::updateOrCreate(['name' => 'accept-member'], ['name' => 'accept-member', 'guard_name' => 'admin']); // Edit status (approve / disapprove, Accept, Lock, etc)
+        Permission::updateOrCreate(['name' => 'approve-member'], ['name' => 'approve-member', 'guard_name' => 'admin']); // Edit status (approve / disapprove, Accept, Lock, etc)
+        Permission::updateOrCreate(['name' => 'disapprove-member'], ['name' => 'disapprove-member', 'guard_name' => 'admin']); // Edit status (approve / disapprove, Accept, Lock, etc)
+        Permission::updateOrCreate(['name' => 'refuse-member'], ['name' => 'refuse-member', 'guard_name' => 'admin']); // Edit status (approve / disapprove, Accept, Lock, etc)
 
         $admin->syncPermissions(Permission::pluck('name'));
     }

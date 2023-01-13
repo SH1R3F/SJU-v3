@@ -47,6 +47,10 @@
     "Role created successfully": "تم إنشاء الدور بنجاح",
     "Role deleted successfully": "تم حذف الدور بنجاح",
     "Role updated successfully": "تم تعديل الدور بنجاح",
+    "Refused members": "الأعضاء المرفوضين",
+    "Disable / Enable": "إيقاف / تفعيل",
+    "Admin accept": "موافقة أدمن",
+    "Branch approve": "موافقة فرع",
 
     "--------------- Admins management -------------": "",
     "Total Users": "إجمالي المستخدمين",
@@ -125,6 +129,7 @@
     "Refusal reason": "سبب الرفض",
     "Not fulfilling the conditions": "غير مستوفي للشروط",
     "Other": "أخرى",
+    "Accept": "موافقة",
 
     "--------------- Footer -------------": "",
     "made with ❤️": "صُنع بكل حب ❤️",

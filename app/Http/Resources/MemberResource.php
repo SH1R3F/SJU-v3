@@ -74,18 +74,22 @@ class MemberResource extends JsonResource
             'created_at' => $this->created_at?->translatedFormat('l jS F Y'),
 
             // Authorization
-            $this->mergeWhen(in_array(explode('@', $request->route()->getActionName())[1], ['index', 'branch']), $this->withAuthorization($request))
+            $this->mergeWhen(in_array(explode('@', $request->route()->getActionName())[1], ['index', 'branch', 'acceptance']), $this->withAuthorization($request))
         ];
     }
 
     private function withAuthorization($request)
     {
-        if (in_array(explode('@', $request->route()->getActionName())[1], ['index', 'branch'])) {
+        if (in_array(explode('@', $request->route()->getActionName())[1], ['index', 'branch', 'acceptance'])) {
             return [
+                'acceptable' => $request->user()->can('accept', $this->resource),
                 'toggleable' => $request->user()->can('toggle', $this->resource),
                 'viewable'   => $request->user()->can('view', $this->resource),
                 'editable'   => $request->user()->can('update', $this->resource),
                 'deleteable' => $request->user()->can('delete', $this->resource),
+                'approveable' => $request->user()->can('approve', $this->resource),
+                'disapproveable' => $request->user()->can('disapprove', $this->resource),
+                'refuseable' => $request->user()->can('refuse', $this->resource),
             ];
         }
         return [];

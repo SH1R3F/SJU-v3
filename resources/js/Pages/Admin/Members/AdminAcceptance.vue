@@ -33,7 +33,7 @@ const appended = ref({
     year: year.value,
 });
 
-const filterReq = debounce(() => Inertia.get(route('admin.members.index'), appended.value, { preserveState: true, replace: true }), 500);
+const filterReq = debounce(() => Inertia.get(route('admin.members.admin-acceptance'), appended.value, { preserveState: true, replace: true }), 500);
 watch(
     () => [name.value, national_id.value, membership_number.value, mobile.value, type.value, branch.value, year.value, perPage.value],
     ([nameVal, nidVal, memNum, mob, t, b, y, pp]) => {
@@ -164,7 +164,7 @@ watch(
                             <div class="dt-buttons">
                                 <a
                                     v-if="members.can_export"
-                                    :href="route('admin.members.export', { page: 'accepted', ...queryParams() })"
+                                    :href="route('admin.members.export', { page: 'admin-acceptance', ...queryParams() })"
                                     class="dt-button buttons-collection btn btn-label-secondary me-1"
                                     type="button"
                                 >
@@ -235,29 +235,29 @@ watch(
                             </td>
                             <td>
                                 <div class="d-flex align-items-center">
+                                    <!-- Accept -->
                                     <Link
-                                        v-if="member.toggleable"
-                                        :href="route('admin.members.toggle', member.id)"
+                                        v-if="member.acceptable"
+                                        :href="route('admin.members.accept', member.id)"
                                         method="post"
-                                        as="span"
-                                        preserve-scroll
-                                        class="cursor-pointer"
                                         data-bs-placement="top"
                                         data-bs-toggle="tooltip"
-                                        :data-bs-original-title="member.status == -1 ? __('Disabled') : __('Enabled')"
-                                        :class="{ 'text-success': member.status != -1, 'text-body': member.status == -1 }"
+                                        :data-bs-original-title="__('Accept')"
+                                        preserve-scroll
+                                        as="span"
+                                        class="text-body cursor-pointer"
                                     >
-                                        <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': member.active != -1, 'ti-toggle-left': member.active == -1 }"></i>
+                                        <i class="ti ti-check ti-sm me-2"></i>
                                     </Link>
                                     <Link v-if="member.viewable" :href="route('admin.members.show', member.id)" class="text-body"><i class="ti ti-eye ti-sm me-2"></i></Link>
                                     <Link v-if="member.editable" :href="route('admin.members.edit', member.id)" class="text-body"><i class="ti ti-edit ti-sm me-2"></i></Link>
                                     <Link v-if="member.deleteable" :href="route('admin.members.destroy', member.id)" preserve-scroll as="span" method="delete" class="text-body cursor-pointer">
                                         <i class="ti ti-trash ti-sm me-2"></i>
                                     </Link>
-                                    <!-- Unaccept -->
+                                    <!-- Disapprove -->
                                     <Link
-                                        v-if="member.acceptable"
-                                        :href="route('admin.members.unaccept', member.id)"
+                                        v-if="member.disapproveable"
+                                        :href="route('admin.members.disapprove', member.id)"
                                         method="post"
                                         data-bs-placement="top"
                                         data-bs-toggle="tooltip"

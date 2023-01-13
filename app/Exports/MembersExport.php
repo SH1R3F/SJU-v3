@@ -12,6 +12,13 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 class MembersExport implements FromCollection, WithHeadings, WithMapping, WithEvents
 {
 
+    private $members;
+
+    public function __construct($members)
+    {
+        $this->members = $members;
+    }
+
     public function headings(): array
     {
         return [
@@ -59,12 +66,6 @@ class MembersExport implements FromCollection, WithHeadings, WithMapping, WithEv
      */
     public function collection()
     {
-        return Member::with('subscription', 'branch')
-            // Only accepted members
-            // ->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])
-            ->filter(request())
-            // ->when(branch manager, show only his branch's members) // To be added
-            ->orderBy('id') // Might be dynamic too?
-            ->get();
+        return $this->members;
     }
 }

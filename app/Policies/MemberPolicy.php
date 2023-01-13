@@ -24,8 +24,9 @@ class MemberPolicy
             return true;
         }
     }
+
     /**
-     * Determine whether the admin can view any models.
+     * Determine whether the admin can view index accepted members.
      *
      * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
@@ -33,6 +34,61 @@ class MemberPolicy
     public function viewAny(Admin $admin)
     {
         return $admin->hasPermissionTo('viewAny-member');
+    }
+
+    /**
+     * Determine whether the admin can view branch approval members.
+     *
+     * @param  \App\Models\Admin  $admin
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function viewBranch(Admin $admin)
+    {
+        return $admin->hasPermissionTo('branch-member');
+    }
+
+    /**
+     * Determine whether the admin can view branch approved waiting admin acceptance members.
+     *
+     * @param  \App\Models\Admin  $admin
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function viewAcceptance(Admin $admin)
+    {
+        return $admin->hasPermissionTo('acceptance-member');
+    }
+
+    /**
+     * Determine whether the admin can view refused members.
+     *
+     * @param  \App\Models\Admin  $admin
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function viewRefused(Admin $admin)
+    {
+        return $admin->hasPermissionTo('refused-member');
+    }
+
+    /**
+     * Determine whether the admin can export models.
+     *
+     * @param  \App\Models\Admin  $admin
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function export(Admin $admin)
+    {
+        return $admin->hasPermissionTo('export-member');
+    }
+
+    /**
+     * Determine whether the admin can notify models.
+     *
+     * @param  \App\Models\Admin  $admin
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function notify(Admin $admin)
+    {
+        return $admin->hasPermissionTo('notify-member');
     }
 
     /**
@@ -71,7 +127,7 @@ class MemberPolicy
     }
 
     /**
-     * Determine whether the admin can toggle the member.
+     * Determine whether the admin can Enable/Disable member.
      *
      * @param  \App\Models\Admin  $admin
      * @param  \App\Models\Member  $member
@@ -80,6 +136,54 @@ class MemberPolicy
     public function toggle(Admin $admin, Member $member)
     {
         return $admin->hasPermissionTo('toggle-member');
+    }
+
+    /**
+     * Determine whether the admin can Accept member.
+     *
+     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function accept(Admin $admin, Member $member)
+    {
+        return $admin->hasPermissionTo('accept-member');
+    }
+
+    /**
+     * Determine whether the admin can Approve member.
+     *
+     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function approve(Admin $admin, Member $member)
+    {
+        return $admin->hasPermissionTo('approve-member');
+    }
+
+    /**
+     * Determine whether the admin can Dispprove member.
+     *
+     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function disapprove(Admin $admin, Member $member)
+    {
+        return $admin->hasPermissionTo('disapprove-member');
+    }
+
+    /**
+     * Determine whether the admin can Refuse member.
+     *
+     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function refuse(Admin $admin, Member $member)
+    {
+        return $admin->hasPermissionTo('refuse-member');
     }
 
     /**

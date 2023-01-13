@@ -7,10 +7,12 @@ use App\Models\Branch;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Exports\MembersExport;
+use App\Services\MemberService;
 use App\Events\MemberRegistered;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MemberRequest;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\MemberResource;
 use Illuminate\Support\Facades\Storage;
@@ -24,26 +26,23 @@ class MemberController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display accepted members.
      *
+     * @param \App\Services\MemberService  $service
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(MemberService $service)
     {
-        $members = Member::with('subscription', 'branch')
-            // Only Accepted & Disabled members
-            ->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])
-            ->filter(request())
-            ->orderBy('id') // Might be dynamic too?
-            ->paginate(request()->perPage ?: 10)
-            ->withQueryString();
+        $members = $service->getMembers(request(), [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED]);
 
         return inertia('Admin/Members/Accepted', [
             'members'  => MemberResource::collection($members)->additional([
                 'fulltime'  => Member::with('subscription')->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
                 'parttime'  => Member::with('subscription')->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
                 'affiliate' => Member::with('subscription')->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
-                'can_create' => request()->user()->can('create', Member::class)
+                'can_create' => request()->user()->can('create', Member::class),
+                'can_export' => request()->user()->can('export', Member::class),
+                'can_notify' => request()->user()->can('notify', Member::class),
             ]),
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
             'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'branch', 'year'])
@@ -51,42 +50,111 @@ class MemberController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display approved [needing acceptance] members.
      *
+     * @param \App\Services\MemberService  $service
      * @return \Illuminate\Http\Response
      */
-    public function branch()
+    public function acceptance(MemberService $service)
     {
-        $members = Member::with('subscription', 'branch')
-            // Only Awaiting branch approval members
-            ->where('status', Member::STATUS_UNAPPROVED)
-            ->filter(request())
-            // ->when(branch manager, show only his branch's members) // To be added
-            ->orderBy('id') // Might be dynamic too?
-            ->paginate(request()->perPage ?: 10)
-            ->withQueryString();
+        $this->authorize('viewAcceptance', Member::class);
+
+        $members = $service->getMembers(request(), [Member::STATUS_APPROVED]);
+
+        return inertia('Admin/Members/AdminAcceptance', [
+            'members'  => MemberResource::collection($members)->additional([
+                'fulltime'  => Member::with('subscription')->where('status', Member::STATUS_APPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
+                'parttime'  => Member::with('subscription')->where('status', Member::STATUS_APPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
+                'affiliate' => Member::with('subscription')->where('status', Member::STATUS_APPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
+                'can_create' => request()->user()->can('create', Member::class),
+                'can_export' => request()->user()->can('export', Member::class),
+                'can_notify' => request()->user()->can('notify', Member::class),
+            ]),
+            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'branch', 'year']),
+            'branches' => Branch::orderBy('id')->get(['id', 'name']),
+        ]);
+    }
+
+    /**
+     * Display unapproved members.
+     *
+     * @param \App\Services\MemberService  $service
+     * @return \Illuminate\Http\Response
+     */
+    public function branch(MemberService $service)
+    {
+        $this->authorize('viewBranch', Member::class);
+
+        $members = $service->getMembers(request(), [Member::STATUS_UNAPPROVED]);
 
         return inertia('Admin/Members/BranchApproval', [
             'members'  => MemberResource::collection($members)->additional([
-                'fulltime'  => Member::with('subscription')->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
-                'parttime'  => Member::with('subscription')->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
-                'affiliate' => Member::with('subscription')->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
+                'fulltime'  => Member::with('subscription')->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', request()->user()->branch_id))->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
+                'parttime'  => Member::with('subscription')->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', request()->user()->branch_id))->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
+                'affiliate' => Member::with('subscription')->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', request()->user()->branch_id))->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
+                'can_create' => request()->user()->can('create', Member::class),
+                'can_export' => request()->user()->can('export', Member::class),
+                'can_notify' => request()->user()->can('notify', Member::class),
+            ]),
+            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'year']),
+            'branches' => Branch::orderBy('id')->get(['id', 'name']),
+        ]);
+    }
+
+    /**
+     * Display refused members.
+     *
+     * @param \App\Services\MemberService  $service
+     * @return \Illuminate\Http\Response
+     */
+    public function refused(MemberService $service)
+    {
+        $this->authorize('viewRefused', Member::class);
+
+        $members = $service->getMembers(request(), [Member::STATUS_REFUSED]);
+
+        return inertia('Admin/Members/Refused', [
+            'members'  => MemberResource::collection($members)->additional([
+                'fulltime'  => Member::with('subscription')->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', request()->user()->branch_id))->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
+                'parttime'  => Member::with('subscription')->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', request()->user()->branch_id))->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
+                'affiliate' => Member::with('subscription')->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', request()->user()->branch_id))->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
                 'can_create' => request()->user()->can('create', Member::class)
             ]),
-            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'branch', 'year'])
+            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'year']),
+            'branches' => Branch::orderBy('id')->get(['id', 'name']),
         ]);
     }
 
     /**
      * Display a listing of the resource.
      *
+     * @param string  $page
+     * @param \App\Services\MemberService  $service
      * @return \Illuminate\Http\Response
      */
-    public function export()
+    public function export(string $page, MemberService $service)
     {
-        $this->authorize('viewAny', Admin::class);
+        $this->authorize('export', Member::class);
 
-        return Excel::download(new MembersExport, 'Members.xlsx');
+        switch ($page) {
+            case 'accepted':
+                $this->authorize('viewAny', Member::class);
+                $status = [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED];
+                break;
+            case 'admin-acceptance':
+                $this->authorize('viewAcceptance', Member::class);
+                $status = [Member::STATUS_APPROVED];
+                break;
+            case 'branch-approval':
+                $this->authorize('viewBranch', Member::class);
+                $status = [Member::STATUS_UNAPPROVED];
+                break;
+            case 'refused':
+                $this->authorize('viewRefused', Member::class);
+                $status = [Member::STATUS_REFUSED];
+                break;
+        }
+        return Excel::download(new MembersExport($service->getMembers(request(), $status)), 'Members.xlsx');
     }
 
     /**
@@ -216,7 +284,39 @@ class MemberController extends Controller
         return redirect()->route('admin.members.index')->with('message', __('Member updated successfully'));
     }
 
-    // Approve and disapprove.
+    /**
+     * Admin accept member.
+     *
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function accept(Member $member)
+    {
+        $this->authorize('accept', $member);
+
+        $member->update([
+            'status' => Member::STATUS_ACCEPTED
+        ]);
+
+        return redirect()->back()->with('message', __('Member updated successfully'));
+    }
+
+    /**
+     * Admin unaccept member.
+     *
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function unaccept(Member $member)
+    {
+        $this->authorize('accept', $member);
+
+        $member->update([
+            'status' => Member::STATUS_APPROVED
+        ]);
+
+        return redirect()->back()->with('message', __('Member updated successfully'));
+    }
 
     /**
      * Branch approve member.
@@ -226,10 +326,27 @@ class MemberController extends Controller
      */
     public function approve(Member $member)
     {
-        $this->authorize('toggle', $member);
+        $this->authorize('approve', $member);
 
         $member->update([
             'status' => Member::STATUS_APPROVED
+        ]);
+
+        return redirect()->back()->with('message', __('Member updated successfully'));
+    }
+
+    /**
+     * Branch disapprove member.
+     *
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function disapprove(Member $member)
+    {
+        $this->authorize('disapprove', $member);
+
+        $member->update([
+            'status' => Member::STATUS_UNAPPROVED
         ]);
 
         return redirect()->back()->with('message', __('Member updated successfully'));
@@ -244,7 +361,7 @@ class MemberController extends Controller
      */
     public function refuse(Request $request, Member $member)
     {
-        $this->authorize('toggle', $member);
+        $this->authorize('refuse', $member);
 
         $request->validate(['reason'  => ['required', 'in:unsatisfy,other'], 'message' => ['required_if:reason,other', 'string', 'max:255']]);
         $member->update([
@@ -257,7 +374,7 @@ class MemberController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Disable / Enable members.
      *
      * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response

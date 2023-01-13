@@ -62,8 +62,8 @@
                             <div>{{ __('Branch approval') }}</div>
                         </Link>
                     </li>
-                    <li class="menu-item" :class="{ active: $page.component == 'Admin/Members/Admin' }">
-                        <Link :href="route('admin.members.index')" class="menu-link">
+                    <li class="menu-item" :class="{ active: $page.component == 'Admin/Members/AdminAcceptance' }">
+                        <Link :href="route('admin.members.admin-acceptance')" class="menu-link">
                             <div>{{ __('Admin approval') }}</div>
                         </Link>
                     </li>
