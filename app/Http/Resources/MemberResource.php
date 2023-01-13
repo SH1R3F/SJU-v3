@@ -71,16 +71,17 @@ class MemberResource extends JsonResource
             'exp_flds_lngs' => $this->exp_flds_lngs,
             'exp_flds_lngs_complete' => $this->exp_flds_lngs_complete(),
             'status' => $this->status,
+            'refusal_reason' => $this->refusal_reason === 'unsatisfy' ? __("Not fulfilling the conditions") : $this->refusal_reason,
             'created_at' => $this->created_at?->translatedFormat('l jS F Y'),
 
             // Authorization
-            $this->mergeWhen(in_array(explode('@', $request->route()->getActionName())[1], ['index', 'branch', 'acceptance']), $this->withAuthorization($request))
+            $this->mergeWhen(in_array(explode('@', $request->route()->getActionName())[1], ['index', 'branch', 'acceptance', 'refused']), $this->withAuthorization($request))
         ];
     }
 
     private function withAuthorization($request)
     {
-        if (in_array(explode('@', $request->route()->getActionName())[1], ['index', 'branch', 'acceptance'])) {
+        if (in_array(explode('@', $request->route()->getActionName())[1], ['index', 'branch', 'acceptance', 'refused'])) {
             return [
                 'acceptable' => $request->user()->can('accept', $this->resource),
                 'toggleable' => $request->user()->can('toggle', $this->resource),

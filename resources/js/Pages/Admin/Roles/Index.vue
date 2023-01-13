@@ -252,7 +252,7 @@ const editRole = (role) => {
                                                         </div>
                                                         <div class="form-check me-2 me-lg-3">
                                                             <input class="form-check-input" type="checkbox" id="disapproveMember" v-model="addForm.permissions['disapprove-member']" />
-                                                            <label class="form-check-label" for="disapproveMember"> {{ __('Disapprove') }} </label>
+                                                            <label class="form-check-label" for="disapproveMember"> {{ __('Disapprove / Unrefuse') }} </label>
                                                         </div>
                                                         <div class="form-check me-2 me-lg-3">
                                                             <input class="form-check-input" type="checkbox" id="refuseMember" v-model="addForm.permissions['refuse-member']" />
@@ -445,7 +445,7 @@ const editRole = (role) => {
                                                         </div>
                                                         <div class="form-check me-2 me-lg-3">
                                                             <input class="form-check-input" type="checkbox" id="editdisapproveMember" v-model="editForm.permissions['disapprove-member']" />
-                                                            <label class="form-check-label" for="editdisapproveMember"> {{ __('Disapprove') }} </label>
+                                                            <label class="form-check-label" for="editdisapproveMember"> {{ __('Disapprove / Unrefuse') }} </label>
                                                         </div>
                                                         <div class="form-check me-2 me-lg-3">
                                                             <input class="form-check-input" type="checkbox" id="editrefuseMember" v-model="editForm.permissions['refuse-member']" />

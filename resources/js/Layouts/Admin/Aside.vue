@@ -24,20 +24,23 @@
                     <div>{{ __('Dashboard') }}</div>
                 </Link>
             </li>
-
             <!-- Roles and moderators -->
-            <li class="menu-item" :class="{ 'active open': $page.component.startsWith('Admin/Roles') || $page.component.startsWith('Admin/Admins') }">
+            <li
+                v-if="$page.props.authUser?.can_view?.roles || $page.props.authUser?.can_view?.admins"
+                class="menu-item"
+                :class="{ 'active open': $page.component.startsWith('Admin/Roles') || $page.component.startsWith('Admin/Admins') }"
+            >
                 <a href="javascript:;" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-key"></i>
                     <div>{{ __('Roles & moderators') }}</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item" :class="{ active: $page.component.startsWith('Admin/Roles') }">
+                    <li v-if="$page.props.authUser?.can_view?.roles" class="menu-item" :class="{ active: $page.component.startsWith('Admin/Roles') }">
                         <Link :href="route('admin.roles.index')" class="menu-link">
                             <div>{{ __('Roles & permissions') }}</div>
                         </Link>
                     </li>
-                    <li class="menu-item" :class="{ active: $page.component.startsWith('Admin/Admins') }">
+                    <li v-if="$page.props.authUser?.can_view?.admins" class="menu-item" :class="{ active: $page.component.startsWith('Admin/Admins') }">
                         <Link :href="route('admin.admins.index')" class="menu-link">
                             <div>{{ __('Moderators') }}</div>
                         </Link>
@@ -46,25 +49,39 @@
             </li>
 
             <!-- Members -->
-            <li class="menu-item" :class="{ 'active open': $page.component.startsWith('Admin/Members') || $page.component.startsWith('Admin/Admins') }">
+            <li
+                v-if="
+                    $page.props.authUser?.can_view?.acceptedMembers ||
+                    $page.props.authUser?.can_view?.branchApproval ||
+                    $page.props.authUser?.can_view?.adminApproval ||
+                    $page.props.authUser?.can_view?.refusedMembers
+                "
+                class="menu-item"
+                :class="{ 'active open': $page.component.startsWith('Admin/Members') || $page.component.startsWith('Admin/Admins') }"
+            >
                 <a href="javascript:;" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-users"></i>
                     <div>{{ __('Members') }}</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item" :class="{ active: $page.component == 'Admin/Members/Accepted' }">
+                    <li v-if="$page.props.authUser?.can_view?.acceptedMembers" class="menu-item" :class="{ active: $page.component == 'Admin/Members/Accepted' }">
                         <Link :href="route('admin.members.index')" class="menu-link">
                             <div>{{ __('Members') }}</div>
                         </Link>
                     </li>
-                    <li class="menu-item" :class="{ active: $page.component == 'Admin/Members/BranchApproval' }">
+                    <li v-if="$page.props.authUser?.can_view?.branchApproval" class="menu-item" :class="{ active: $page.component == 'Admin/Members/BranchApproval' }">
                         <Link :href="route('admin.members.branch-approval')" class="menu-link">
                             <div>{{ __('Branch approval') }}</div>
                         </Link>
                     </li>
-                    <li class="menu-item" :class="{ active: $page.component == 'Admin/Members/AdminAcceptance' }">
+                    <li v-if="$page.props.authUser?.can_view?.adminApproval" class="menu-item" :class="{ active: $page.component == 'Admin/Members/AdminAcceptance' }">
                         <Link :href="route('admin.members.admin-acceptance')" class="menu-link">
                             <div>{{ __('Admin approval') }}</div>
+                        </Link>
+                    </li>
+                    <li v-if="$page.props.authUser?.can_view?.refusedMembers" class="menu-item" :class="{ active: $page.component == 'Admin/Members/Refused' }">
+                        <Link :href="route('admin.members.refused')" class="menu-link">
+                            <div>{{ __('Refused members') }}</div>
                         </Link>
                     </li>
                 </ul>

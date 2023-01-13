@@ -4,11 +4,13 @@ namespace App\Http\Middleware;
 
 use App\Http\Resources\AdminResource;
 use App\Http\Resources\MemberResource;
+use App\Models\Admin;
 use App\Models\Member;
 use Inertia\Middleware;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -50,7 +52,17 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         if ($request->is('admin*') && Auth::guard('admin')->check()) {
-            $auth = new AdminResource(Auth::guard('admin')->user());
+            $admin = Auth::guard('admin')->user();
+            $auth = (new AdminResource($admin))->additional([
+                'can_view' => [
+                    'roles' => $admin->can('viewAny', Role::class),
+                    'admins' => $admin->can('viewAny', Admin::class),
+                    'acceptedMembers' => $admin->can('viewAny', Member::class),
+                    'branchApproval' => $admin->can('viewBranch', Member::class),
+                    'adminApproval' => $admin->can('viewAcceptance', Member::class),
+                    'refusedMembers' => $admin->can('viewRefused', Member::class),
+                ]
+            ]);
         }
         if (Auth::guard('member')->check()) {
             $user = new MemberResource(Auth::guard('member')->user()->load('subscription'));

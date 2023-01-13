@@ -33,17 +33,8 @@ class MemberController extends Controller
      */
     public function index(MemberService $service)
     {
-        $members = $service->getMembers(request(), [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED]);
-
         return inertia('Admin/Members/Accepted', [
-            'members'  => MemberResource::collection($members)->additional([
-                'fulltime'  => Member::with('subscription')->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
-                'parttime'  => Member::with('subscription')->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
-                'affiliate' => Member::with('subscription')->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
-                'can_create' => request()->user()->can('create', Member::class),
-                'can_export' => request()->user()->can('export', Member::class),
-                'can_notify' => request()->user()->can('notify', Member::class),
-            ]),
+            'members'  => $service->getMembersResource(request(), [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED]),
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
             'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'branch', 'year'])
         ]);
@@ -59,17 +50,8 @@ class MemberController extends Controller
     {
         $this->authorize('viewAcceptance', Member::class);
 
-        $members = $service->getMembers(request(), [Member::STATUS_APPROVED]);
-
         return inertia('Admin/Members/AdminAcceptance', [
-            'members'  => MemberResource::collection($members)->additional([
-                'fulltime'  => Member::with('subscription')->where('status', Member::STATUS_APPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
-                'parttime'  => Member::with('subscription')->where('status', Member::STATUS_APPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
-                'affiliate' => Member::with('subscription')->where('status', Member::STATUS_APPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
-                'can_create' => request()->user()->can('create', Member::class),
-                'can_export' => request()->user()->can('export', Member::class),
-                'can_notify' => request()->user()->can('notify', Member::class),
-            ]),
+            'members'  => $service->getMembersResource(request(), [Member::STATUS_APPROVED]),
             'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'branch', 'year']),
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
         ]);
@@ -85,17 +67,8 @@ class MemberController extends Controller
     {
         $this->authorize('viewBranch', Member::class);
 
-        $members = $service->getMembers(request(), [Member::STATUS_UNAPPROVED]);
-
         return inertia('Admin/Members/BranchApproval', [
-            'members'  => MemberResource::collection($members)->additional([
-                'fulltime'  => Member::with('subscription')->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', request()->user()->branch_id))->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
-                'parttime'  => Member::with('subscription')->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', request()->user()->branch_id))->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
-                'affiliate' => Member::with('subscription')->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', request()->user()->branch_id))->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
-                'can_create' => request()->user()->can('create', Member::class),
-                'can_export' => request()->user()->can('export', Member::class),
-                'can_notify' => request()->user()->can('notify', Member::class),
-            ]),
+            'members'  => $service->getMembersResource(request(), [Member::STATUS_UNAPPROVED]),
             'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'year']),
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
         ]);
@@ -111,15 +84,8 @@ class MemberController extends Controller
     {
         $this->authorize('viewRefused', Member::class);
 
-        $members = $service->getMembers(request(), [Member::STATUS_REFUSED]);
-
         return inertia('Admin/Members/Refused', [
-            'members'  => MemberResource::collection($members)->additional([
-                'fulltime'  => Member::with('subscription')->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', request()->user()->branch_id))->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
-                'parttime'  => Member::with('subscription')->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', request()->user()->branch_id))->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
-                'affiliate' => Member::with('subscription')->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', request()->user()->branch_id))->where('status', Member::STATUS_UNAPPROVED)->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
-                'can_create' => request()->user()->can('create', Member::class)
-            ]),
+            'members'  => $service->getMembersResource(request(), [Member::STATUS_REFUSED]),
             'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'year']),
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
         ]);

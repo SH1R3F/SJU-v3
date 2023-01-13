@@ -33,7 +33,7 @@ const appended = ref({
     year: year.value,
 });
 
-const filterReq = debounce(() => Inertia.get(route('admin.members.refused'), appended.value, { preserveState: true, replace: true }), 500);
+const filterReq = debounce(() => Inertia.get(route('admin.members.index'), appended.value, { preserveState: true, replace: true }), 500);
 watch(
     () => [name.value, national_id.value, membership_number.value, mobile.value, type.value, branch.value, year.value, perPage.value],
     ([nameVal, nidVal, memNum, mob, t, b, y, pp]) => {
@@ -110,7 +110,7 @@ watch(
         <!-- Users List Table -->
         <div class="card">
             <div class="card-header border-bottom">
-                <h5 class="card-title mb-3">{{ __('Refused members') }}</h5>
+                <h5 class="card-title mb-3">{{ __('All members') }}</h5>
                 <div class="d-flex justify-content-between align-items-center row pb-2 gap-3 gap-md-0">
                     <div class="col-md-12 mb-2">
                         <input type="text" class="form-control" :placeholder="__('Name')" v-model="name" />
@@ -164,7 +164,7 @@ watch(
                             <div class="dt-buttons">
                                 <a
                                     v-if="members.can_export"
-                                    :href="route('admin.members.export', { page: 'admin-acceptance', ...queryParams() })"
+                                    :href="route('admin.members.export', { page: 'accepted', ...queryParams() })"
                                     class="dt-button buttons-collection btn btn-label-secondary me-1"
                                     type="button"
                                 >
@@ -197,7 +197,7 @@ watch(
                             <th>{{ __('Mobile') }}</th>
                             <th>{{ __('Membership type') }}</th>
                             <th>{{ __('Branch') }}</th>
-                            <th>{{ __('Membership Status') }}</th>
+                            <th>{{ __('Refusal reason') }}</th>
                             <th>{{ __('Actions') }}</th>
                         </tr>
                     </thead>
@@ -230,38 +230,22 @@ watch(
                             <td>
                                 {{ member.branch.name }}
                             </td>
-                            <td>
-                                {{ member.subscription.status }}
+                            <td style="max-width: 150px">
+                                {{ member.refusal_reason }}
                             </td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <!-- Accept -->
-                                    <Link
-                                        v-if="member.acceptable"
-                                        :href="route('admin.members.accept', member.id)"
-                                        method="post"
-                                        data-bs-placement="top"
-                                        data-bs-toggle="tooltip"
-                                        :data-bs-original-title="__('Accept')"
-                                        preserve-scroll
-                                        as="span"
-                                        class="text-body cursor-pointer"
-                                    >
-                                        <i class="ti ti-check ti-sm me-2"></i>
-                                    </Link>
                                     <Link v-if="member.viewable" :href="route('admin.members.show', member.id)" class="text-body"><i class="ti ti-eye ti-sm me-2"></i></Link>
                                     <Link v-if="member.editable" :href="route('admin.members.edit', member.id)" class="text-body"><i class="ti ti-edit ti-sm me-2"></i></Link>
                                     <Link v-if="member.deleteable" :href="route('admin.members.destroy', member.id)" preserve-scroll as="span" method="delete" class="text-body cursor-pointer">
                                         <i class="ti ti-trash ti-sm me-2"></i>
                                     </Link>
-                                    <!-- Disapprove -->
+                                    <!-- Cancel refused -->
                                     <Link
-                                        v-if="member.disapproveable"
+                                        v-if="member.refuseable"
                                         :href="route('admin.members.disapprove', member.id)"
                                         method="post"
-                                        data-bs-placement="top"
-                                        data-bs-toggle="tooltip"
-                                        :data-bs-original-title="__('Disapprove')"
+                                        :title="__('Cancel refuse')"
                                         preserve-scroll
                                         as="span"
                                         class="text-body cursor-pointer"

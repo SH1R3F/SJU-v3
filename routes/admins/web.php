@@ -57,6 +57,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
          */
         Route::get('members/branch-approval', [MemberController::class, 'branch'])->name('members.branch-approval');
         Route::get('members/admin-acceptance', [MemberController::class, 'acceptance'])->name('members.admin-acceptance');
+        Route::get('members/refused', [MemberController::class, 'refused'])->name('members.refused');
         Route::get('members/export/{page}', [MemberController::class, 'export'])->name('members.export');
         Route::post('members/{member}/toggle', [MemberController::class, 'toggle'])->name('members.toggle'); // To be changed
         Route::post('members/{member}/accept', [MemberController::class, 'accept'])->name('members.accept');

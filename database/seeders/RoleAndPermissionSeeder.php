@@ -53,13 +53,12 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::updateOrCreate(['name' => 'create-member'], ['name' => 'create-member', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'update-member'], ['name' => 'update-member', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'delete-member'], ['name' => 'delete-member', 'guard_name' => 'admin']);
-
         Permission::updateOrCreate(['name' => 'notify-member'], ['name' => 'notify-member', 'guard_name' => 'admin']);
-        Permission::updateOrCreate(['name' => 'toggle-member'], ['name' => 'toggle-member', 'guard_name' => 'admin']); // Edit status (approve / disapprove, Accept, Lock, etc)
-        Permission::updateOrCreate(['name' => 'accept-member'], ['name' => 'accept-member', 'guard_name' => 'admin']); // Edit status (approve / disapprove, Accept, Lock, etc)
-        Permission::updateOrCreate(['name' => 'approve-member'], ['name' => 'approve-member', 'guard_name' => 'admin']); // Edit status (approve / disapprove, Accept, Lock, etc)
-        Permission::updateOrCreate(['name' => 'disapprove-member'], ['name' => 'disapprove-member', 'guard_name' => 'admin']); // Edit status (approve / disapprove, Accept, Lock, etc)
-        Permission::updateOrCreate(['name' => 'refuse-member'], ['name' => 'refuse-member', 'guard_name' => 'admin']); // Edit status (approve / disapprove, Accept, Lock, etc)
+        Permission::updateOrCreate(['name' => 'toggle-member'], ['name' => 'toggle-member', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'accept-member'], ['name' => 'accept-member', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'approve-member'], ['name' => 'approve-member', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'disapprove-member'], ['name' => 'disapprove-member', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'refuse-member'], ['name' => 'refuse-member', 'guard_name' => 'admin']);
 
         $admin->syncPermissions(Permission::pluck('name'));
     }
