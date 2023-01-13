@@ -734,9 +734,14 @@ ul.password-rules {
 .usermenu ul li.active {
     background: #f8f8f8;
 }
-.usermenu ul li a {
+.usermenu ul li a,
+.usermenu ul li span {
     color: #777777;
     font-size: 0.9rem;
+    cursor: pointer;
+}
+.usermenu ul li span:hover {
+    text-decoration: underline;
 }
 .usermenu ul li.active a {
     color: #007c42;

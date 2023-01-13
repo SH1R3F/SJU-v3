@@ -38,7 +38,7 @@ class MemberResource extends JsonResource
             'fullNameEn' => $this->full_name_en,
             'gender' => $this->gender,
             'birthday_h' => $this->birthday_h->format('Y/m/d'),
-            'birthday_m' => $this->birthday_m->format('Y/m/d'),
+            'birthday_m' => $this->birthday_m->format('Y-m-d'),
             'nationality' => $this->nationality,
             'qualification' => $this->qualification,
             'major' => $this->major,
@@ -54,6 +54,7 @@ class MemberResource extends JsonResource
             'postcode' => $this->postcode,
             'postcity' => $this->postcity,
             'email' => $this->email,
+            'branch_id' => $this->branch_id,
             'branch' => $this->whenLoaded('branch'),
             'delivery_option' => $this->delivery_option,
             'delivery_address' => $this->delivery_address,
@@ -73,12 +74,20 @@ class MemberResource extends JsonResource
             'created_at' => $this->created_at?->translatedFormat('l jS F Y'),
 
             // Authorization
-            $this->mergeWhen(str_contains(request()->route()->getActionName(), '@index'), [
+            $this->mergeWhen(str_contains($request->route()->getActionName(), '@index'), $this->withAuthorization($request))
+        ];
+    }
+
+    private function withAuthorization($request)
+    {
+        if (str_contains($request->route()->getActionName(), '@index')) {
+            return [
                 'toggleable' => $request->user()->can('toggle', $this->resource),
                 'viewable'   => $request->user()->can('view', $this->resource),
                 'editable'   => $request->user()->can('update', $this->resource),
                 'deleteable' => $request->user()->can('delete', $this->resource),
-            ])
-        ];
+            ];
+        }
+        return [];
     }
 }

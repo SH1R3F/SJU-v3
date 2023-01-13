@@ -279,7 +279,7 @@ const form = useForm({
                                 </div>
 
                                 <!-- <?php if($memberinfo->approved == 1): ?> -->
-                                <a class="text-muted" v-if="true">{{ __('The data cannot be modified after the approval of the branch') }}</a>
+                                <a class="text-muted" v-if="userAuth?.status >= 1">{{ __('The data cannot be modified after the approval of the branch') }}</a>
                                 <div class="text-end">
                                     <input type="submit" class="btn btn-success" :value="__('Save')" :disabled="userAuth?.status >= 1" />
                                 </div>

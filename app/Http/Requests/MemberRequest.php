@@ -34,11 +34,11 @@ class MemberRequest extends FormRequest
             'sname_en' => ['nullable', 'string', 'max:255'],
             'tname_en' => ['nullable', 'string', 'max:255'],
             'lname_en' => ['nullable', 'string', 'max:255'],
-            'national_id' => ['required', 'numeric', 'digits_between:9,10', 'unique:members'],
-            'mobile' => ['required', 'numeric', 'regex:/^(5)\d{8}$/', new MemberUniqueMobile],
+            'national_id' => ['required', 'numeric', 'digits_between:9,10', Rule::when(request()->isMethod('POST'), Rule::unique('members'), Rule::unique('members')->ignore($this->member))],
+            'mobile' => ['required', 'numeric', 'regex:/^(9665)\d{8}$/', Rule::when(request()->isMethod('POST'), Rule::unique('members'), Rule::unique('members')->ignore($this->member))],
             'gender' => ['required', 'boolean'],
-            'birthday_h' => ['required', 'date', 'date_format:Y/m/d'],
-            'birthday_m' => ['required', 'date', 'date_format:Y-m-d'],
+            'birthday_h' => ['required', 'date'],
+            'birthday_m' => ['required', 'date'],
             'nationality' => ['required', 'string', Rule::in(array_keys(config('sju.nationalities', [])))],
             'qualification' => ['required', 'string', 'max:255'],
             'major' => ['required', 'string', 'max:255'],
@@ -54,9 +54,13 @@ class MemberRequest extends FormRequest
             'postbox' => ['nullable', 'numeric'],
             'postcode' => ['nullable', 'numeric'],
             'postcity' => ['nullable', 'string', 'max:255'],
-            'email' => ['required', 'email', 'unique:members'],
+            'email' => ['required', 'email', Rule::when(request()->isMethod('POST'), Rule::unique('members'), Rule::unique('members')->ignore($this->member))],
             'branch_id' => ['required', 'numeric', 'exists:branches,id'],
-            'type' => ['required', 'numeric', 'in:1,2,3'],
+            'type' => [
+                Rule::when(request()->isMethod('POST'), 'required', 'nullable'),
+                'numeric',
+                'in:1,2,3'
+            ],
         ];
     }
 }

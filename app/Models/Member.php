@@ -67,7 +67,7 @@ class Member extends Authenticatable
     protected $casts = [
         'national_id' => 'integer',
         'national_id_date' => 'date:Y-m-d',
-        'gender' => 'boolean',
+        'gender' => 'integer',
         'birthday_h' => 'date:Y-m-d',
         'birthday_m' => 'date:Y-m-d',
         'newspaper_type' => 'integer',

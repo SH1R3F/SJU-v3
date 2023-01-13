@@ -26,7 +26,7 @@
                 <a href="#">{{ __('Technical support') }}</a>
             </li>
             <li>
-                <a href="#">{{ __('Logout') }}</a>
+                <Link as="span" method="POST" :href="route('member.logout')">{{ __('Logout') }}</Link>
             </li>
         </ul>
     </div>

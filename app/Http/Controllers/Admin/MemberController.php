@@ -39,6 +39,7 @@ class MemberController extends Controller
                 'fulltime'  => Member::with('subscription')->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
                 'parttime'  => Member::with('subscription')->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
                 'affiliate' => Member::with('subscription')->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
+                'can_create' => request()->user()->can('create', Member::class)
             ]),
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
             'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'branch', 'year'])
@@ -69,7 +70,6 @@ class MemberController extends Controller
         // Create member
         $data = $request->validated();
         $data['password'] = bcrypt('123456');
-        $data['mobile'] = '966' . $data['mobile'];
         $member = Member::create($data);
 
         // Create subscription
@@ -143,24 +143,34 @@ class MemberController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Member $member)
     {
-        //
+        return inertia('Admin/Members/Edit', [
+            'member' => new MemberResource($member->load('subscription')),
+            'nationalities' => config('sju.nationalities'),
+            'branches' => Branch::orderBy('id')->get(['id', 'name']),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\MemberRequest  $request
+     * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MemberRequest $request, Member $member)
     {
-        //
+        $data = $request->validated();
+
+        // Update member
+        $member->update($data);
+
+        // Response
+        return redirect()->route('admin.members.index')->with('message', __('Member updated successfully'));
     }
 
     // Approve and disapprove.

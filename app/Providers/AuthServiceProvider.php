@@ -5,8 +5,10 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 
 use App\Models\Admin;
+use App\Models\Member;
 use App\Policies\RolePolicy;
 use App\Policies\AdminPolicy;
+use App\Policies\MemberPolicy;
 use Spatie\Permission\Models\Role;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -20,6 +22,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Role::class => RolePolicy::class,
         Admin::class => AdminPolicy::class,
+        Member::class => MemberPolicy::class,
     ];
 
     /**

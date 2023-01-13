@@ -61,7 +61,7 @@ watch(
                         <div class="d-flex align-items-start justify-content-between">
                             <div class="content-left">
                                 <div class="d-flex align-items-center my-1">
-                                    <h4 class="mb-0 me-2">{{ props.members.fulltime }}</h4>
+                                    <h4 class="mb-0 me-2">{{ members.fulltime }}</h4>
                                 </div>
                                 <span>{{ __('Full-time members') }}</span>
                             </div>
@@ -78,7 +78,7 @@ watch(
                         <div class="d-flex align-items-start justify-content-between">
                             <div class="content-left">
                                 <div class="d-flex align-items-center my-1">
-                                    <h4 class="mb-0 me-2">{{ props.members.parttime }}</h4>
+                                    <h4 class="mb-0 me-2">{{ members.parttime }}</h4>
                                 </div>
                                 <span>{{ __('Part-time members') }}</span>
                             </div>
@@ -95,7 +95,7 @@ watch(
                         <div class="d-flex align-items-start justify-content-between">
                             <div class="content-left">
                                 <div class="d-flex align-items-center my-1">
-                                    <h4 class="mb-0 me-2">{{ props.members.affiliate }}</h4>
+                                    <h4 class="mb-0 me-2">{{ members.affiliate }}</h4>
                                 </div>
                                 <span>{{ __('Affiliate members') }}</span>
                             </div>
@@ -168,7 +168,7 @@ watch(
                                         {{ __('Export') }}
                                     </span>
                                 </a>
-                                <Link v-if="true" :href="route('admin.members.create')" type="button" class="dt-button add-new btn btn-primary me-1">
+                                <Link v-if="members.can_create" :href="route('admin.members.create')" type="button" class="dt-button add-new btn btn-primary me-1">
                                     <span>
                                         <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
                                         <span class="d-none d-sm-inline-block">{{ __('Create member') }}</span>

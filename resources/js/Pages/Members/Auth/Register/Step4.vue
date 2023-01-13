@@ -6,7 +6,6 @@ const props = defineProps({
     member: Object,
     nationalities: Object,
 });
-
 const form = useForm({
     national_id_source: props.member.national_id_source || undefined,
     national_id_date: props.member.national_id_date || undefined,
@@ -18,7 +17,7 @@ const form = useForm({
     sname_en: props.member.sname_en || undefined,
     tname_en: props.member.tname_en || undefined,
     lname_en: props.member.lname_en || undefined,
-    gender: props.member.gender || undefined,
+    gender: props.member.gender?.toString() || undefined,
     birthday_h: props.member.birthday_h || undefined,
     birthday_m: props.member.birthday_m || undefined,
     nationality: props.member.nationality || undefined,
@@ -99,8 +98,8 @@ const onlyEnglish = (e) => {
 
                         <label class="col-lg-3 control-label pt-2">{{ __('ID date') }}</label>
                         <div class="col-lg-3">
-                            <input type="text" @change="changeDate" class="form-control" name="national_id_date" id="national_id_date" />
-                            <datepicker-hijri reference="national_id_date" placement="bottom" date-format="iYYYY/iMM/iDD"></datepicker-hijri>
+                            <input type="text" @change="changeDate" class="form-control" name="national_id_date" id="national_id_date" :value="form.national_id_date" />
+                            <datepicker-hijri reference="national_id_date" placement="bottom" date-format="iYYYY/iMM/iDD" :selected-date="form.national_id_date"></datepicker-hijri>
                             <span class="text text-danger text-sm" v-if="form.errors.national_id_date">{{ form.errors.national_id_date }}</span>
                         </div>
                     </div>
@@ -190,8 +189,8 @@ const onlyEnglish = (e) => {
                     <div class="form-group row">
                         <label class="col-lg-3 control-label pt-2">{{ __('Birthday (Hijri)') }}</label>
                         <div class="col-lg-3">
-                            <input type="text" @change="changeDate" class="form-control" name="birthday_h" id="birthday_h" />
-                            <datepicker-hijri reference="birthday_h" placement="bottom" date-format="iYYYY/iMM/iDD"></datepicker-hijri>
+                            <input type="text" @change="changeDate" class="form-control" name="birthday_h" id="birthday_h" :value="form.birthday_h" />
+                            <datepicker-hijri reference="birthday_h" placement="bottom" date-format="iYYYY/iMM/iDD" :selected-date="form.birthday_h"></datepicker-hijri>
                             <span class="text text-danger text-sm" v-if="form.errors.birthday_h">{{ form.errors.birthday_h }}</span>
                         </div>
 

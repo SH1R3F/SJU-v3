@@ -36,6 +36,18 @@ class MemberAuthController extends Controller
     }
 
     /**
+     * Perform the login action.
+     * @param \Illuminate\Http\Request  $request
+     */
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('member.login');
+    }
+
+    /**
      * Display the registration view.
      * Asks for national id
      */
@@ -156,11 +168,12 @@ class MemberAuthController extends Controller
     public function registerStep5(Request $request)
     {
         $member = session()->get('member');
+
         // Validate step 4 first.
         if ($request->isMethod('POST')) {
             $data = $request->validate([
                 'national_id_source' => ['required', 'string', 'max:255'],
-                'national_id_date' => ['required', 'date', 'date_format:Y/m/d'],
+                'national_id_date' => ['required', 'date'],
                 'fname_ar' => ['required', 'string', 'max:255'],
                 'sname_ar' => ['required', 'string', 'max:255'],
                 'tname_ar' => ['required', 'string', 'max:255'],
@@ -170,8 +183,8 @@ class MemberAuthController extends Controller
                 'tname_en' => ['required', 'string', 'max:255'],
                 'lname_en' => ['required', 'string', 'max:255'],
                 'gender' => ['required', 'boolean'],
-                'birthday_h' => ['required', 'date', 'date_format:Y/m/d'],
-                'birthday_m' => ['required', 'date', 'date_format:Y-m-d'],
+                'birthday_h' => ['required', 'date'],
+                'birthday_m' => ['required', 'date'],
                 'nationality' => ['required', 'string', Rule::in(array_keys(config('sju.nationalities', [])))],
                 'qualification' => ['required', 'string', 'max:255'],
                 'major' => ['required', 'string', 'max:255'],
@@ -189,7 +202,6 @@ class MemberAuthController extends Controller
                 'postcity' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'email', 'unique:members']
             ]);
-
             // If validated update session
             $member->fill($data);
             session()->put('member', $member);

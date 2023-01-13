@@ -18,6 +18,7 @@ class SubscriptionResource extends JsonResource
             'id' => $this->id,
             'member' => new MemberResource($this->whenLoaded('member')),
             'type' => __(config('sju.memberships')[$this->type]['name']),
+            'num' => $this->type,
             'start_date' => $this->start_date?->translatedFormat('l jS F Y'),
             'end_date' => $this->end_date?->translatedFormat('l jS F Y'),
             'status' => $this->status()

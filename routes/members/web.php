@@ -50,6 +50,8 @@ Route::group(['prefix' => 'members', 'as' => 'member.'], function () {
      * Authenticated member routes
      */
     Route::group(['middleware' => ['auth:member']], function () {
+        // Logout route
+        Route::post('auth/logout', [MemberAuthController::class, 'logout'])->name('logout');
 
         /**
          * Complete profile information
