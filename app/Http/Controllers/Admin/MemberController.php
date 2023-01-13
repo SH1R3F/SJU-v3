@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Branch;
 use App\Models\Member;
 use Illuminate\Http\Request;
+use App\Exports\MembersExport;
 use App\Events\MemberRegistered;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MemberRequest;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\MemberResource;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,6 +30,8 @@ class MemberController extends Controller
     public function index()
     {
         $members = Member::with('subscription', 'branch')
+            // Only accepted members
+            // ->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])
             ->filter(request())
             // ->when(branch manager, show only his branch's members) // To be added
             ->orderBy('id') // Might be dynamic too?
@@ -44,6 +48,18 @@ class MemberController extends Controller
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
             'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'branch', 'year'])
         ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function export()
+    {
+        $this->authorize('viewAny', Admin::class);
+
+        return Excel::download(new MembersExport, 'Members.xlsx');
     }
 
     /**

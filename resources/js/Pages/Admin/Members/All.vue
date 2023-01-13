@@ -162,7 +162,7 @@ watch(
                     <div class="col-md-10 mb-1">
                         <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column gap-1 mb-3 mb-md-0">
                             <div class="dt-buttons">
-                                <a :href="route('admin.admins.export')" target="_blank" class="dt-button buttons-collection btn btn-label-secondary me-1" type="button">
+                                <a :href="route('admin.members.export')" class="dt-button buttons-collection btn btn-label-secondary me-1" type="button">
                                     <span>
                                         <i class="ti ti-screen-share me-1 ti-xs"></i>
                                         {{ __('Export') }}

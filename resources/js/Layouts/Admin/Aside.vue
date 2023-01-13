@@ -54,7 +54,7 @@
                 <ul class="menu-sub">
                     <li class="menu-item" :class="{ active: $page.component == 'Admin/Members/All' }">
                         <Link :href="route('admin.members.index')" class="menu-link">
-                            <div>{{ __('All members') }}</div>
+                            <div>{{ __('Members') }}</div>
                         </Link>
                     </li>
                     <li class="menu-item" :class="{ active: $page.component == 'Admin/Members/Branch' }">
