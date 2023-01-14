@@ -159,6 +159,38 @@ class MemberController extends Controller
     }
 
     /**
+     * Show the membership card in pdf format.
+     *
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function card(Member $member)
+    {
+        $this->authorize('view', $member);
+
+        $pdf = \PDF::loadView('pdf.membership-card', compact('member'), [], [
+            'format' => [74, 120]
+        ]);
+
+        return $pdf->stream('membership-card.pdf');
+    }
+
+    /**
+     * Show the membership form in pdf format.
+     *
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function form(Member $member)
+    {
+        $this->authorize('view', $member);
+
+        $pdf = \PDF::loadView('pdf.membership-form', compact('member'));
+
+        return $pdf->stream('membership-form.pdf');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Member  $member

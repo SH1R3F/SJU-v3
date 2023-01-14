@@ -68,6 +68,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('members/{member}/contact', [MemberController::class, 'showContact'])->name('members.show.contact');
         Route::get('members/{member}/experiences', [MemberController::class, 'showExperiences'])->name('members.show.experiences');
         Route::get('members/{member}/documents', [MemberController::class, 'showDocuments'])->name('members.show.documents');
+        Route::get('members/{member}/card', [MemberController::class, 'card'])->name('members.card');
+        Route::get('members/{member}/form', [MemberController::class, 'form'])->name('members.form');
         Route::resource('members', MemberController::class);
     });
 });
