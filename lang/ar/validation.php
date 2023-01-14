@@ -228,6 +228,7 @@ return [
         'statement_photo' => 'صورة إفادة العمل',
         'contract_photo' => 'صورة عقد العمل',
         'license_photo' => 'صورة ترخيص الصحيفة',
+        'payment_method' => 'طريقة الدفع',
     ],
 
 ];

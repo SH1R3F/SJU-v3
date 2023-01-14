@@ -235,13 +235,17 @@ return [
     */
     'memberships' => [
         1 => [
-            'name' => 'Full-time member'
+            'name' => 'Full-time member',
+            'price' => 250,
         ],
         2 => [
-            'name' => 'Part-time member'
+            'name' => 'Part-time member',
+            'price' => 200,
         ],
         3 => [
-            'name' => 'Affiliate member'
+            'name' => 'Affiliate member',
+            'price' => 150,
         ],
+        'delivery_fees' => 32.20
     ]
 ];

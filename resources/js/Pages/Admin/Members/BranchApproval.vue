@@ -215,7 +215,7 @@ const form = useForm({
                                 </div>
                             </td>
                             <td>
-                                {{ 'membership-number' }}
+                                {{ member.membership_number }}
                             </td>
                             <td dir="ltr">
                                 {{ member.phone_number }}
@@ -228,6 +228,7 @@ const form = useForm({
                             </td>
                             <td>
                                 {{ member.subscription.status }}
+                                <span v-if="member.refusal_reason" class="cursor-pointer text-primary" @click="toastAlert(member.refusal_reason)"> ({{ __('After refuse') }}) </span>
                             </td>
                             <td>
                                 <div class="d-flex align-items-center">

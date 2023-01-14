@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'register-member' => \App\Http\Middleware\MemberRegistrationSteps::class,
         'profile-is-complete' => \App\Http\Middleware\CompleteProfile::class,
+        'can-pay' => \App\Http\Middleware\MemberCanPay::class,
     ];
 }

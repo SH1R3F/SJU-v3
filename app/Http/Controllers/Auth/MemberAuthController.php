@@ -11,6 +11,7 @@ use Illuminate\Validation\Rule;
 use App\Rules\MemberUniqueMobile;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Member\LoginRequest;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class MemberAuthController extends Controller
@@ -255,7 +256,7 @@ class MemberAuthController extends Controller
         // Register the member
         $member->save();
         // Register his subscription
-        $member->subscription()->create(['type' => $member_type]);
+        $member->subscriptions()->create(['type' => $member_type, 'end_date' => Carbon::now()->endOfYear()]);
         // Fire event
         event(new MemberRegistered($member));
 

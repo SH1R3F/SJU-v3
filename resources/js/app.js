@@ -23,7 +23,7 @@ createInertiaApp({
             .component('Link', Link)
             .component('Head', Head)
             .mixin({ methods: { route } })
-            .mixin(require('./translate'))
+            .mixin(require('./mixins'))
             .use(plugin)
             .mount(el);
     },

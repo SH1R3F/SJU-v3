@@ -5,6 +5,7 @@ namespace App\Providers;
 use Carbon\Carbon;
 use App\Sms\SmsManager;
 use App\Channels\SmsChannel;
+use App\Payment\PaymentManager;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Notification;
 
@@ -17,9 +18,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('sms', function ($app) {
-            return new SmsManager($app);
-        });
+        // Sms facade
+        $this->app->bind('sms', fn ($app) => new SmsManager($app));
+        // Payment facade
+        $this->app->bind('payment', fn ($app) => new PaymentManager($app));
     }
 
     /**

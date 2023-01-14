@@ -219,7 +219,7 @@ watch(
                                 </div>
                             </td>
                             <td>
-                                {{ 'membership-number' }}
+                                {{ member.membership_number }}
                             </td>
                             <td dir="ltr">
                                 {{ member.phone_number }}

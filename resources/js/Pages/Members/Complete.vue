@@ -12,8 +12,8 @@ if (props.userAuth?.national_id_photo) percentage += 10;
 if (props.userAuth?.statement_photo) percentage += 10;
 if (props.userAuth?.newspaper_type != 2) percentage += 10;
 if (props.userAuth?.newspaper_type == 2 && props.userAuth?.license_photo) percentage += 10;
-if (props.userAuth?.subscription.type == 3 && props.userAuth?.contract_photo) percentage += 10;
-if (props.userAuth?.subscription.type != 3) percentage += 10;
+if (props.userAuth?.subscription.num == 3 && props.userAuth?.contract_photo) percentage += 10;
+if (props.userAuth?.subscription.num != 3) percentage += 10;
 if (props.userAuth?.exp_flds_lngs_complete) percentage += 10;
 </script>
 
@@ -121,9 +121,8 @@ if (props.userAuth?.exp_flds_lngs_complete) percentage += 10;
                                                             }}</Link>
                                                         </td>
                                                     </tr>
-
                                                     <!-- if sub type is 3 upload job contract -->
-                                                    <tr v-if="userAuth?.subscription.type == 3">
+                                                    <tr v-if="userAuth?.subscription.num == 3">
                                                         <td>
                                                             <i style="font-size: 16px" class="fas fa-check text-success" v-if="userAuth?.contract_photo"></i>
                                                             <span v-if="!userAuth?.contract_photo">*</span>

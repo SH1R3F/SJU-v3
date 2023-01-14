@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Models\Branch;
+use App\Models\Transaction;
 use App\Models\Subscription;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class Member extends Authenticatable
 {
@@ -163,6 +165,14 @@ class Member extends Authenticatable
     }
 
     /**
+     * Relation the the transactions the member has made
+     */
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    /**
      * Did the member complete his profile with full information?
      * @return bool
      */
@@ -191,5 +201,16 @@ class Member extends Authenticatable
         if (!count($this->exp_flds_lngs['languages'])) return false;
         if (!count($this->exp_flds_lngs['experiences'])) return false;
         return true;
+    }
+
+    /**
+     * Check if member can access payment routes
+     * @return bool
+     */
+    public function canPay()
+    {
+        return is_null($this->subscription->end_date) ||
+            $this->subscription->end_date->lt(Carbon::today()) ||
+            $this->subscription->status !== Subscription::SUBSCRIPTION_ACTIVE;
     }
 }

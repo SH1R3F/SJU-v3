@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,8 +19,8 @@ class SubscriptionFactory extends Factory
     {
         return [
             'type' => rand(1, 3),
-            'start_date' => fake()->date,
-            'end_date' => fake()->date,
+            'start_date' => $date = fake()->date,
+            'end_date' => Carbon::parse($date)->endOfYear(),
         ];
     }
 }

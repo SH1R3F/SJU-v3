@@ -10,6 +10,7 @@ import Footer from './Footer.vue';
         <title>{{ __('Home') }}</title>
         <!-- Flash messages -->
         <component is="script" defer v-if="$page.props.flash.message"> toastr.success('{{ $page.props.flash.message }}') </component>
+        <component is="script" defer v-if="$page.props.flash.error"> toastr.error('{{ $page.props.flash.error }}') </component>
     </Head>
 
     <!-- Mini bar -->

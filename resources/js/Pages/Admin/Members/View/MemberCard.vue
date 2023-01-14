@@ -16,7 +16,7 @@ defineProps({
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-center flex-wrap mt-3 pt-3 pb-4 border-bottom">
+            <div class="d-flex justify-content-center flex-wrap mt-3 pt-3 pb-4 border-bottom" v-if="false">
                 <a
                     href="javascript:;"
                     data-bs-placement="top"
@@ -42,7 +42,7 @@ defineProps({
                     </li>
                     <li class="mb-2 pt-1">
                         <span class="fw-semibold me-2 d-inline-block">{{ __('Membership number') }}</span>
-                        <span>{{ 'رقم العضوية' }}</span>
+                        <span>{{ member.membership_number }}</span>
                     </li>
                     <li class="mb-2 pt-1">
                         <span class="fw-semibold me-2 d-inline-block">{{ __('Membership Status') }}</span>

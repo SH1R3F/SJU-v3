@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\MemberAuthController;
 use App\Http\Controllers\Member\MemberController;
+use App\Http\Controllers\Member\PaymentController;
 use App\Http\Controllers\Member\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -98,11 +99,22 @@ Route::group(['prefix' => 'members', 'as' => 'member.'], function () {
              * Displays notifications
              */
             Route::get('/', [MemberController::class, 'index'])->name('home');
+
             /**
              * Member subscription
              * Displays current subscription information
              */
             Route::get('/subscription', [MemberController::class, 'subscription'])->name('subscription');
+
+            /**
+             * Payment routes
+             */
+            Route::middleware('can-pay')->group(function () {
+                Route::get('/payment/card', [PaymentController::class, 'card'])->name('payment-card');
+                Route::post('/payment/gateway', [PaymentController::class, 'gateway'])->name('payment-gateway');
+                Route::get('/payment/gateway', fn () => redirect()->route('member.payment-card'));
+                Route::get('/payment/response', [PaymentController::class, 'response'])->name('payment-response');
+            });
         });
     });
 });

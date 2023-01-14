@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Controllers\Admin\MemberController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -60,6 +61,9 @@ class MemberResource extends JsonResource
             'delivery_address' => $this->delivery_address,
 
             'subscription' => new SubscriptionResource($this->whenLoaded('subscription')),
+            'membership_number' => $this->membership_number,
+            'can_pay'      => $this->canPay(),
+
             'newspaper_type' => $this->newspaper_type,
 
             'profile_photo' => $this->when($this->profile_photo, Storage::url($this->profile_photo), $this->profile_photo),
@@ -75,13 +79,18 @@ class MemberResource extends JsonResource
             'created_at' => $this->created_at?->translatedFormat('l jS F Y'),
 
             // Authorization
-            $this->mergeWhen(in_array(explode('@', $request->route()->getActionName())[1], ['index', 'branch', 'acceptance', 'refused']), $this->withAuthorization($request))
+            $this->merge($this->withAuthorization($request))
         ];
     }
 
     private function withAuthorization($request)
     {
-        if (in_array(explode('@', $request->route()->getActionName())[1], ['index', 'branch', 'acceptance', 'refused'])) {
+        $action = explode('@', $request->route()->getActionName());
+        $controller = $action[0];
+        $method = $action[1];
+
+        // Only for admin panel member's resource
+        if ($controller === MemberController::class && in_array($method, ['index', 'branch', 'acceptance', 'refused'])) {
             return [
                 'acceptable' => $request->user()->can('accept', $this->resource),
                 'toggleable' => $request->user()->can('toggle', $this->resource),

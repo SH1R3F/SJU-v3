@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Subscription;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('checkout_id');
+            $table->tinyInteger('payment_method')->comment('2 for Mada & 1 for Visa/Mastercard');
+            $table->json('response')->nullable();
             $table->unsignedBigInteger('member_id');
-            $table->tinyInteger('type')->comment('Membership type');
-            $table->date('start_date')->nullable();
-            $table->date('end_date');
-            $table->tinyInteger('status')->default(Subscription::SUBSCRIPTION_NEW);
             $table->timestamps();
 
             $table->foreign('member_id')->references('id')->on('members')->cascadeOnDelete()->cascadeOnUpdate();
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('transactions');
     }
 };

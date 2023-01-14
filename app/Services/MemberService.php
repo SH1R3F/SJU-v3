@@ -22,7 +22,7 @@ class MemberService
             ->whereIn('status', $statuses)
             ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', $request->user()->branch_id))
             ->filter($request)
-            ->orderBy('id') // Might be dynamic too?
+            ->orderBy('updated_at', 'DESC') // Might be dynamic too?
             ->paginate($request->perPage ?: 10)
             ->withQueryString();
     }
@@ -45,5 +45,25 @@ class MemberService
             'can_export' => request()->user()->can('export', Member::class),
             'can_notify' => request()->user()->can('notify', Member::class),
         ]);
+    }
+
+    /**
+     * Generate membership number for new subscribers
+     * 
+     * @param \App\Models\Member  $member
+     * @return void
+     */
+    public function membershipNumber(Member $member)
+    {
+        $append = $member->subscription->type;
+
+        // Get last member number
+        $last = Member::where('membership_number', 'LIKE', "$append-%")->orderBy('membership_number', 'DESC')->first();
+
+        // Number to start from.
+        $num = $last ? explode('-', $last->membership_number)[1] : (($append == 2) ? 20 : 10);
+
+        $membership_number = "$append-" . str_pad(intval($num) + 1, 4, '0', STR_PAD_LEFT);
+        $member->update(['membership_number' => $membership_number]);
     }
 }

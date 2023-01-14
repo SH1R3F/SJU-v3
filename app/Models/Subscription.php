@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Member;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -40,6 +41,7 @@ class Subscription extends Model
     {
         switch ($this->status) {
             case self::SUBSCRIPTION_ACTIVE:
+                if ($this->end_date->lt(Carbon::today())) return __('Expired');
                 return __('Active');
                 break;
 
