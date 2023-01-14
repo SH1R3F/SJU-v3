@@ -85,12 +85,8 @@ class MemberResource extends JsonResource
 
     private function withAuthorization($request)
     {
-        $action = explode('@', $request->route()->getActionName());
-        $controller = $action[0];
-        $method = $action[1];
-
         // Only for admin panel member's resource
-        if ($controller === MemberController::class && in_array($method, ['index', 'branch', 'acceptance', 'refused'])) {
+        if (in_array($request->route()->getAction()['as'], ['admin.members.index', 'admin.members.branch-approval', 'admin.members.admin-acceptance', 'admin.members.refused'])) {
             return [
                 'acceptable' => $request->user()->can('accept', $this->resource),
                 'toggleable' => $request->user()->can('toggle', $this->resource),

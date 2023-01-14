@@ -110,7 +110,7 @@ watch(
         <!-- Users List Table -->
         <div class="card">
             <div class="card-header border-bottom">
-                <h5 class="card-title mb-3">{{ __('Refused members') }}</h5>
+                <h5 class="card-title mb-3">{{ __('Members waiting admin approval') }}</h5>
                 <div class="d-flex justify-content-between align-items-center row pb-2 gap-3 gap-md-0">
                     <div class="col-md-12 mb-2">
                         <input type="text" class="form-control" :placeholder="__('Name')" v-model="name" />

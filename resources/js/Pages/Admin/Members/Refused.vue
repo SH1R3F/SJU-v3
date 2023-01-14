@@ -16,7 +16,6 @@ const props = defineProps({
 const perPage = ref(props.filters.perPage || 10);
 const name = ref(props.filters.name || '');
 const national_id = ref(props.filters.national_id || '');
-const membership_number = ref(props.filters.membership_number || '');
 const mobile = ref(props.filters.mobile || '');
 const type = ref(props.filters.type || '');
 const branch = ref(props.filters.branch || '');
@@ -26,7 +25,6 @@ const appended = ref({
     perPage: perPage.value,
     name: name.value,
     national_id: national_id.value,
-    membership_number: membership_number.value,
     mobile: mobile.value,
     type: type.value,
     branch: branch.value,
@@ -35,11 +33,10 @@ const appended = ref({
 
 const filterReq = debounce(() => Inertia.get(route('admin.members.index'), appended.value, { preserveState: true, replace: true }), 500);
 watch(
-    () => [name.value, national_id.value, membership_number.value, mobile.value, type.value, branch.value, year.value, perPage.value],
-    ([nameVal, nidVal, memNum, mob, t, b, y, pp]) => {
+    () => [name.value, national_id.value, mobile.value, type.value, branch.value, year.value, perPage.value],
+    ([nameVal, nidVal, mob, t, b, y, pp]) => {
         appended.value.name = nameVal;
         appended.value.national_id = nidVal;
-        appended.value.membership_number = memNum;
         appended.value.mobile = mob;
         appended.value.type = t;
         appended.value.branch = b;
@@ -110,18 +107,15 @@ watch(
         <!-- Users List Table -->
         <div class="card">
             <div class="card-header border-bottom">
-                <h5 class="card-title mb-3">{{ __('All members') }}</h5>
+                <h5 class="card-title mb-3">{{ __('Refused members') }}</h5>
                 <div class="d-flex justify-content-between align-items-center row pb-2 gap-3 gap-md-0">
                     <div class="col-md-12 mb-2">
                         <input type="text" class="form-control" :placeholder="__('Name')" v-model="name" />
                     </div>
-                    <div class="col-md-4 mb-2">
+                    <div class="col-md-6 mb-2">
                         <input type="text" class="form-control" :placeholder="__('National ID number')" v-model="national_id" />
                     </div>
-                    <div class="col-md-4 mb-2">
-                        <input type="text" class="form-control" :placeholder="__('Membership number')" v-model="membership_number" />
-                    </div>
-                    <div class="col-md-4 mb-2">
+                    <div class="col-md-6 mb-2">
                         <input type="text" class="form-control" :placeholder="__('Mobile')" v-model="mobile" />
                     </div>
                     <div class="col-md-4 mb-2">
@@ -193,7 +187,6 @@ watch(
                     <thead>
                         <tr>
                             <th>{{ __('User') }}</th>
-                            <th>{{ __('Membership number') }}</th>
                             <th>{{ __('Mobile') }}</th>
                             <th>{{ __('Membership type') }}</th>
                             <th>{{ __('Branch') }}</th>
@@ -217,9 +210,6 @@ watch(
                                         <small class="text-muted">{{ member.national_id }}</small>
                                     </div>
                                 </div>
-                            </td>
-                            <td>
-                                {{ member.membership_number }}
                             </td>
                             <td dir="ltr">
                                 {{ member.phone_number }}

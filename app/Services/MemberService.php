@@ -38,9 +38,9 @@ class MemberService
         $members = $this->getMembers($request, $statuses);
 
         return MemberResource::collection($members)->additional([
-            'fulltime'  => Member::with('subscription')->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
-            'parttime'  => Member::with('subscription')->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
-            'affiliate' => Member::with('subscription')->whereIn('status', [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED])->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
+            'fulltime'  => Member::with('subscription')->whereIn('status', $statuses)->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
+            'parttime'  => Member::with('subscription')->whereIn('status', $statuses)->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
+            'affiliate' => Member::with('subscription')->whereIn('status', $statuses)->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
             'can_create' => request()->user()->can('create', Member::class),
             'can_export' => request()->user()->can('export', Member::class),
             'can_notify' => request()->user()->can('notify', Member::class),
