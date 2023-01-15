@@ -68,7 +68,7 @@ class OppwaPayment implements PaymentInterface
         }
 
         // Save transaction info for verification later
-        $tr = $member->transactions()->create(['checkout_id' => $json['id'], 'payment_method' => $payment_method]);
+        $member->transactions()->create(['checkout_id' => $json['id'], 'payment_method' => $payment_method, 'cart_ref' => $ref]);
 
         return inertia('Members/Payment/OppwaGateway', [
             'memberships' => config('sju.memberships'),

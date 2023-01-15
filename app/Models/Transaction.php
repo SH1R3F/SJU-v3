@@ -18,7 +18,8 @@ class Transaction extends Model
         'checkout_id',
         'payment_method',
         'member_id',
-        'response'
+        'response',
+        'cart_ref'
     ];
 
     protected $casts = [

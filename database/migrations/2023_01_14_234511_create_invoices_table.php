@@ -13,16 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('checkout_id');
-            $table->tinyInteger('payment_method')->comment('2 for Mada & 1 for Visa/Mastercard');
-            $table->json('response')->nullable();
-            $table->string('cart_ref')->nullable();
+            $table->string('invoice_number')->unique();
             $table->unsignedBigInteger('member_id');
+            $table->unsignedBigInteger('subscription_id');
+            $table->unsignedDecimal('amount');
             $table->timestamps();
 
+            // I stopped here
             $table->foreign('member_id')->references('id')->on('members')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('subscription_id')->references('id')->on('subscriptions')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('invoices');
     }
 };
