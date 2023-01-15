@@ -19,6 +19,7 @@ class MemberService
     public function getMembers(Request $request, array $statuses)
     {
         return Member::with('subscription', 'branch')
+            ->select('id', 'fname_ar', 'sname_ar', 'tname_ar', 'lname_ar', 'fname_en', 'sname_en', 'tname_en', 'lname_en', 'national_id', 'profile_photo', 'membership_number', 'mobile', 'branch_id', 'status')
             ->whereIn('status', $statuses)
             ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', $request->user()->branch_id))
             ->filter($request)
@@ -38,9 +39,9 @@ class MemberService
         $members = $this->getMembers($request, $statuses);
 
         return MemberResource::collection($members)->additional([
-            'fulltime'  => Member::with('subscription')->whereIn('status', $statuses)->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
-            'parttime'  => Member::with('subscription')->whereIn('status', $statuses)->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
-            'affiliate' => Member::with('subscription')->whereIn('status', $statuses)->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
+            'fulltime'  => Member::whereIn('status', $statuses)->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
+            'parttime'  => Member::whereIn('status', $statuses)->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
+            'affiliate' => Member::whereIn('status', $statuses)->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
             'can_create' => request()->user()->can('create', Member::class),
             'can_export' => request()->user()->can('export', Member::class),
             'can_notify' => request()->user()->can('notify', Member::class),

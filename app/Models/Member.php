@@ -213,4 +213,49 @@ class Member extends Authenticatable
             $this->subscription->end_date->lt(Carbon::today()) ||
             $this->subscription->status !== Subscription::SUBSCRIPTION_ACTIVE;
     }
+
+    /**
+     * Membership status in readable way
+     */
+    public function status()
+    {
+        switch ($this->subscription->status) {
+            case Subscription::SUBSCRIPTION_ACTIVE:
+                if ($this->subscription->end_date->lt(Carbon::today())) return __('Expired');
+                return __('Active');
+                break;
+
+            default:
+                switch ($this->status) {
+                    case self::STATUS_ACCEPTED:
+                        return __('Waiting paying');
+                        break;
+
+                    case self::STATUS_APPROVED:
+                        return __('Waiting admin approval');
+                        break;
+
+                    case self::STATUS_UNAPPROVED:
+                        if ($this->complete()) {
+                            return __('Waiting branch approval');
+                        } else {
+                            return __("Didn't complete info");
+                        }
+                        break;
+
+                    case self::STATUS_REFUSED:
+                        return __('Membership refused');
+                        break;
+
+                    case self::STATUS_DISABLED:
+                        return __('Disabled');
+                        break;
+
+                    default:
+                        return null;
+                        break;
+                }
+                break;
+        }
+    }
 }

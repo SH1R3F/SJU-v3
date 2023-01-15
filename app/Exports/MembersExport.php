@@ -40,12 +40,12 @@ class MembersExport implements FromCollection, WithHeadings, WithMapping, WithEv
             $member->id,
             $member->fullNameAr,
             $member->national_id,
-            'Membership number',
+            $member->membership_number,
             $member->email,
             $member->mobile,
             $member->subscription->type,
             $member->branch?->name,
-            $member->subscription->status(),
+            $member->status(),
         ];
     }
 

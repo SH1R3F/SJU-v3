@@ -33,49 +33,4 @@ class Subscription extends Model
     {
         return $this->belongsTo(Member::class);
     }
-
-    /**
-     * Membership status in readable way
-     */
-    public function status()
-    {
-        switch ($this->status) {
-            case self::SUBSCRIPTION_ACTIVE:
-                if ($this->end_date->lt(Carbon::today())) return __('Expired');
-                return __('Active');
-                break;
-
-            default:
-                switch ($this->member->status) {
-                    case Member::STATUS_ACCEPTED:
-                        return __('Waiting paying');
-                        break;
-
-                    case Member::STATUS_APPROVED:
-                        return __('Waiting admin approval');
-                        break;
-
-                    case Member::STATUS_UNAPPROVED:
-                        if ($this->member->complete()) {
-                            return __('Waiting branch approval');
-                        } else {
-                            return __("Didn't complete info");
-                        }
-                        break;
-
-                    case Member::STATUS_REFUSED:
-                        return __('Membership refused');
-                        break;
-
-                    case Member::STATUS_DISABLED:
-                        return __('Disabled');
-                        break;
-
-                    default:
-                        return null;
-                        break;
-                }
-                break;
-        }
-    }
 }

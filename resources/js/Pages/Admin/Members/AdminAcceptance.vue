@@ -231,7 +231,7 @@ watch(
                                 {{ member.branch.name }}
                             </td>
                             <td>
-                                {{ member.subscription.status }}
+                                {{ member.membership_status }}
                             </td>
                             <td>
                                 <div class="d-flex align-items-center">

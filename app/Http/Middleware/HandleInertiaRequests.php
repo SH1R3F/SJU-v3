@@ -53,16 +53,7 @@ class HandleInertiaRequests extends Middleware
     {
         if ($request->is('admin*') && Auth::guard('admin')->check()) {
             $admin = Auth::guard('admin')->user();
-            $auth = (new AdminResource($admin))->additional([
-                'can_view' => [
-                    'roles' => $admin->can('viewAny', Role::class),
-                    'admins' => $admin->can('viewAny', Admin::class),
-                    'acceptedMembers' => $admin->can('viewAny', Member::class),
-                    'branchApproval' => $admin->can('viewBranch', Member::class),
-                    'adminApproval' => $admin->can('viewAcceptance', Member::class),
-                    'refusedMembers' => $admin->can('viewRefused', Member::class),
-                ]
-            ]);
+            $auth = (new AdminResource($admin))->additional(['can_view' => $this->adminPermissions($admin)]);
         }
         if (Auth::guard('member')->check()) {
             $user = new MemberResource(Auth::guard('member')->user()->load('subscription'));
@@ -86,5 +77,21 @@ class HandleInertiaRequests extends Middleware
             'userAuth' => isset($user) ? $user : null, // User
             'userHome' => isset($home) ? $home : null, // User
         ]);
+    }
+
+
+    /**
+     * List shared admin permissions for viewing things in admin panel
+     */
+    private function adminPermissions(Admin $admin)
+    {
+        return [
+            'roles' => $admin->can('viewAny', Role::class),
+            'admins' => $admin->can('viewAny', Admin::class),
+            'acceptedMembers' => $admin->can('viewAny', Member::class),
+            'branchApproval' => $admin->can('viewBranch', Member::class),
+            'adminApproval' => $admin->can('viewAcceptance', Member::class),
+            'refusedMembers' => $admin->can('viewRefused', Member::class),
+        ];
     }
 }

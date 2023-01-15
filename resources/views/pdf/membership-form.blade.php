@@ -316,11 +316,13 @@
     <div class="photo" style="background: url('{{ Storage::url($member->profile_photo) }}')"></div>
     {{-- Profile Picture --}}
 
-    <div class="num num-1">{{ $member->membership_number[0] }}</div>
-    <div class="num num-2">{{ $member->membership_number[2] }}</div>
-    <div class="num num-3">{{ $member->membership_number[3] }}</div>
-    <div class="num num-4">{{ $member->membership_number[4] }}</div>
-    <div class="num num-5">{{ $member->membership_number[5] }}</div>
+    @if ($member->membership_number)
+        <div class="num num-1">{{ $member->membership_number[0] }}</div>
+        <div class="num num-2">{{ $member->membership_number[2] }}</div>
+        <div class="num num-3">{{ $member->membership_number[3] }}</div>
+        <div class="num num-4">{{ $member->membership_number[4] }}</div>
+        <div class="num num-5">{{ $member->membership_number[5] }}</div>
+    @endif
 
     {{-- Arabic Name --}}
     <div class="name-ar">
@@ -380,29 +382,35 @@
     <div class="email" dir="ltr">{{ $member->email }} </div>
 
     {{-- line 11 --}}
-    <div class="experiences">
-        @foreach ($member->exp_flds_lngs['experiences'] as $exp)
-            {{ $exp['title'] }}: {{ $exp['years'] }},
-        @endforeach
-    </div>
+    @if ($member->exp_flds_lngs && in_array('experiences', $member->exp_flds_lngs))
+        <div class="experiences">
+            @foreach ($member->exp_flds_lngs['experiences'] as $exp)
+                {{ $exp['title'] }}: {{ $exp['years'] }},
+            @endforeach
+        </div>
+    @endif
 
     {{-- line 12 --}}
     <div class="qualification">{{ $member->qualification }} </div>
     <div class="major">{{ $member->major }} </div>
 
     {{-- line 13 --}}
-    <div class="fields">
-        @foreach ($member->exp_flds_lngs['fields'] as $fld)
-            {{ $fld['title'] }},
-        @endforeach
-    </div>
+    @if ($member->exp_flds_lngs && in_array('fields', $member->exp_flds_lngs))
+        <div class="fields">
+            @foreach ($member->exp_flds_lngs['fields'] as $fld)
+                {{ $fld['title'] }},
+            @endforeach
+        </div>
+    @endif
 
     {{-- line 14 --}}
-    <div class="languages">
-        @foreach ($member->exp_flds_lngs['languages'] as $lng)
-            {{ $lng['title'] }}: {{ $lng['level'] }},
-        @endforeach
-    </div>
+    @if ($member->exp_flds_lngs && in_array('languages', $member->exp_flds_lngs))
+        <div class="languages">
+            @foreach ($member->exp_flds_lngs['languages'] as $lng)
+                {{ $lng['title'] }}: {{ $lng['level'] }},
+            @endforeach
+        </div>
+    @endif
 
 </body>
 

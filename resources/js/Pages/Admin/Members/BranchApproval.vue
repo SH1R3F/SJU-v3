@@ -221,13 +221,13 @@ const form = useForm({
                                 {{ member.phone_number }}
                             </td>
                             <td>
-                                {{ member.subscription.type }}
+                                {{ member.subscription_type }}
                             </td>
                             <td>
-                                {{ member.branch.name }}
+                                {{ member.branch_name }}
                             </td>
                             <td>
-                                {{ member.subscription.status }}
+                                {{ member.membership_status }}
                                 <span v-if="member.refusal_reason" class="cursor-pointer text-primary" @click="toastAlert(member.refusal_reason)"> ({{ __('After refuse') }}) </span>
                             </td>
                             <td>

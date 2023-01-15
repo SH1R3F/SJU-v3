@@ -78,6 +78,8 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('branch_id')->references('id')->on('branches')->restrictOnDelete()->cascadeOnUpdate();
+
+            $table->index('updated_at');
         });
     }
 

@@ -9,6 +9,7 @@ const props = defineProps({
     branches: Object,
     filters: Object,
 });
+console.log(props.members);
 
 /**
  * Filters
@@ -231,7 +232,7 @@ watch(
                                 {{ member.branch.name }}
                             </td>
                             <td>
-                                {{ member.subscription.status }}
+                                {{ member.membership_status }}
                             </td>
                             <td>
                                 <div class="d-flex align-items-center">

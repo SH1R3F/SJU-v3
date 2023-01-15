@@ -21,7 +21,7 @@ class SubscriptionResource extends JsonResource
             'num' => $this->type,
             'start_date' => $this->start_date?->translatedFormat('l jS F Y'),
             'end_date' => $this->end_date?->translatedFormat('l jS F Y'),
-            'status' => $this->status()
+            'status' => $this->status
         ];
     }
 }

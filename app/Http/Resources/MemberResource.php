@@ -23,7 +23,7 @@ class MemberResource extends JsonResource
             'id'    => $this->id,
             'national_id' => $this->national_id,
             'national_id_source' => $this->national_id_source,
-            'national_id_date' => $this->national_id_date->format('Y/m/d'),
+            'national_id_date' => $this->national_id_date?->format('Y/m/d'),
             'mobile' => $this->mobile,
             'phone_number' => $this->prepareMobileForSms(),
             'fname_ar' => $this->fname_ar,
@@ -38,8 +38,8 @@ class MemberResource extends JsonResource
             'fullNameAr' => $this->full_name_ar,
             'fullNameEn' => $this->full_name_en,
             'gender' => $this->gender,
-            'birthday_h' => $this->birthday_h->format('Y/m/d'),
-            'birthday_m' => $this->birthday_m->format('Y-m-d'),
+            'birthday_h' => $this->birthday_h?->format('Y/m/d'),
+            'birthday_m' => $this->birthday_m?->format('Y-m-d'),
             'nationality' => $this->nationality,
             'qualification' => $this->qualification,
             'major' => $this->major,
@@ -75,6 +75,8 @@ class MemberResource extends JsonResource
             'exp_flds_lngs' => $this->exp_flds_lngs,
             'exp_flds_lngs_complete' => $this->exp_flds_lngs_complete(),
             'status' => $this->status,
+            'membership_status' => $this->status(),
+
             'refusal_reason' => $this->refusal_reason === 'unsatisfy' ? __("Not fulfilling the conditions") : $this->refusal_reason,
             'created_at' => $this->created_at?->translatedFormat('l jS F Y'),
 
