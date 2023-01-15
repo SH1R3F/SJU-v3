@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\MemberController;
+use App\Http\Controllers\Admin\InvoiceController;
+use App\Http\Controllers\Admin\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,5 +72,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('members/{member}/card', [MemberController::class, 'card'])->name('members.card');
         Route::get('members/{member}/form', [MemberController::class, 'form'])->name('members.form');
         Route::resource('members', MemberController::class);
+
+        /**
+         * Invoices management
+         */
+        Route::resource('invoices', InvoiceController::class)->only(['index', 'show']);
     });
 });

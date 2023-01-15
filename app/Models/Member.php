@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use App\Models\Branch;
+use App\Models\Invoice;
 use App\Models\Transaction;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
@@ -170,6 +171,14 @@ class Member extends Authenticatable
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    /**
+     * Relation the the invoices the member has made
+     */
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
     }
 
     /**

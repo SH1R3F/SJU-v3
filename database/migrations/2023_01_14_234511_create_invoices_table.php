@@ -21,7 +21,6 @@ return new class extends Migration
             $table->unsignedDecimal('amount');
             $table->timestamps();
 
-            // I stopped here
             $table->foreign('member_id')->references('id')->on('members')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('subscription_id')->references('id')->on('subscriptions')->cascadeOnDelete()->cascadeOnUpdate();
         });

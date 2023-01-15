@@ -9,7 +9,6 @@ const props = defineProps({
     branches: Object,
     filters: Object,
 });
-console.log(props.members);
 
 /**
  * Filters
