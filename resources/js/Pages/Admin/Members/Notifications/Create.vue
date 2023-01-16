@@ -3,7 +3,7 @@ import { useForm } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue';
 
 const props = defineProps({
-    admins: Object,
+    members: Object,
 });
 
 const form = useForm({
@@ -17,18 +17,18 @@ const somethin = ref(null);
 
 const sendNotification = () => {
     form.recipients = somethin.value.getAttribute('data-result')?.split(',') || [];
-    form.post(route('admin.admins.notify'));
+    form.post(route('admin.members.notify'));
 };
 </script>
 
 <template>
-    <Head :title="__('Notify moderators')" />
+    <Head :title="__('Notify members')" />
 
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <!-- User information -->
         <div class="card mb-4">
-            <h5 class="card-header">{{ __('Notify moderators') }}</h5>
+            <h5 class="card-header">{{ __('Notify members') }}</h5>
             <div class="card-body">
                 <form @submit.prevent="sendNotification">
                     <!-- Message -->
@@ -72,7 +72,7 @@ const sendNotification = () => {
                             <label class="form-label">{{ __('Send to') }}</label>
                             <div class="input-group" v-show="form.to_type === 'select'">
                                 <select id="select2Multiple" class="select2 form-select" ref="somethin" multiple>
-                                    <option v-for="admin in admins.data" :key="admin.id" :value="admin.id">{{ admin.fullName }}</option>
+                                    <option v-for="member in members.data" :key="member.id" :value="member.id">{{ member.fullName }}</option>
                                 </select>
                             </div>
                             <span class="fs-6 text-danger" v-if="form.errors.recipients">{{ form.errors.recipients }}</span>
@@ -83,19 +83,19 @@ const sendNotification = () => {
                                 </div>
                                 <div class="form-check mt-1">
                                     <input class="form-check-input" type="radio" name="sendTo" id="all" value="all" v-model="form.to_type" />
-                                    <label class="form-check-label" for="all"> {{ __('All Moderators') }} </label>
+                                    <label class="form-check-label" for="all"> {{ __('All members') }} </label>
                                 </div>
                                 <div class="form-check mt-1">
-                                    <input class="form-check-input" type="radio" name="sendTo" id="admins" value="Site admin" v-model="form.to_type" />
-                                    <label class="form-check-label" for="admins"> {{ __('Site admins') }} </label>
+                                    <input class="form-check-input" type="radio" name="sendTo" id="fulltime" value="fulltime" v-model="form.to_type" />
+                                    <label class="form-check-label" for="fulltime"> {{ __('Full-time members') }} </label>
                                 </div>
                                 <div class="form-check mt-1">
-                                    <input class="form-check-input" type="radio" name="sendTo" id="managers" value="Branch manager" v-model="form.to_type" />
-                                    <label class="form-check-label" for="managers"> {{ __('Branch managers') }} </label>
+                                    <input class="form-check-input" type="radio" name="sendTo" id="parttime" value="parttime" v-model="form.to_type" />
+                                    <label class="form-check-label" for="parttime"> {{ __('Part-time members') }} </label>
                                 </div>
                                 <div class="form-check mt-1">
-                                    <input class="form-check-input" type="radio" name="sendTo" id="editors" value="News editor" v-model="form.to_type" />
-                                    <label class="form-check-label" for="editors"> {{ __('News editors') }} </label>
+                                    <input class="form-check-input" type="radio" name="sendTo" id="affiliate" value="affiliate" v-model="form.to_type" />
+                                    <label class="form-check-label" for="affiliate"> {{ __('Affiliate members') }} </label>
                                 </div>
                             </div>
 
@@ -106,7 +106,7 @@ const sendNotification = () => {
 
                     <div>
                         <button type="submit" class="btn btn-primary me-2">{{ __('Send') }}</button>
-                        <Link :href="route('admin.admins.index')" as="button" type="reset" class="btn btn-label-secondary me-2">{{ __('Cancel') }}</Link>
+                        <Link :href="route('admin.members.index')" as="button" type="reset" class="btn btn-label-secondary me-2">{{ __('Cancel') }}</Link>
                     </div>
                 </form>
             </div>

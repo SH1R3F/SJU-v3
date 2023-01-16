@@ -15,7 +15,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\AdminResource;
 use App\Http\Resources\BranchResource;
 use App\Http\Requests\NotifyAdminsRequest;
-use App\Notifications\PushNotificationToAdmins;
+use App\Notifications\PushNotificationToUsers;
 use Illuminate\Support\Facades\Notification;
 
 class AdminController extends Controller
@@ -186,7 +186,7 @@ class AdminController extends Controller
 
         $recipients = $service->prepareRecipients($request->validated());
 
-        Notification::send($recipients, new PushNotificationToAdmins($request->validated()));
+        Notification::send($recipients, new PushNotificationToUsers($request->validated()));
 
         return redirect()->route('admin.admins.index')->with('message', __('Notification is being sent'));
     }

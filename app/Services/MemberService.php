@@ -66,4 +66,29 @@ class MemberService
         $membership_number = "$append-" . str_pad(intval($num) + 1, 4, '0', STR_PAD_LEFT);
         $member->update(['membership_number' => $membership_number]);
     }
+
+
+    /**
+     * Prepare the recipients of a single notification
+     */
+    public function prepareRecipients(array $data)
+    {
+        switch ($data['to_type']) {
+            case 'select':
+                return Member::whereIn('id', $data['recipients'])->get();
+                break;
+            case 'all':
+                return Member::all();
+                break;
+            case 'fulltime':
+                return Member::whereHas('subscription', fn ($query) => $query->where('type', 1))->get();
+                break;
+            case 'parttime':
+                return Member::whereHas('subscription', fn ($query) => $query->where('type', 2))->get();
+                break;
+            case 'affiliate':
+                return Member::whereHas('subscription', fn ($query) => $query->where('type', 3))->get();
+                break;
+        }
+    }
 }

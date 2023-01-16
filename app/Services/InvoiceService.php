@@ -23,8 +23,9 @@ class InvoiceService
             'amount' => $data['amount'],
             'order_data' => $data
         ]);
-        // Send it by mail
 
+        // Send it by mail
+        // TO BE ADDED
 
     }
 

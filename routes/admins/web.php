@@ -53,6 +53,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::post('admins/{admin}/toggle', [AdminController::class, 'toggle'])->name('admins.toggle');
         Route::resource('admins', AdminController::class);
 
+
+        // Send notification to members
+        Route::get('members/notify', [MemberController::class, 'showNotifyForm'])->name('members.notify');
+        Route::post('members/notify', [MemberController::class, 'notify']);
+
         /**
          * Members management
          */
@@ -76,6 +81,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         /**
          * Invoices management
          */
+
         Route::resource('invoices', InvoiceController::class)->only(['index', 'show']);
     });
 });

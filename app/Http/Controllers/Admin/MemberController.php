@@ -14,6 +14,9 @@ use App\Http\Requests\MemberRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\MemberResource;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\NotifyMembersRequest;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\PushNotificationToUsers;
 
 class MemberController extends Controller
 {
@@ -399,5 +402,36 @@ class MemberController extends Controller
         // Delete member
         $member->delete();
         return redirect()->back()->with('message', __('Member deleted successfully'));
+    }
+
+    /**
+     * Show the form to send a notification to admins.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showNotifyForm()
+    {
+        $this->authorize('notify', Member::class);
+        $members = Member::orderBy('id')->get(['id', 'fname_ar', 'sname_ar', 'tname_ar', 'lname_ar', 'fname_en', 'sname_en', 'tname_en', 'lname_en']);
+
+        return inertia('Admin/Members/Notifications/Create', [
+            'members' => MemberResource::collection($members)
+        ]);
+    }
+
+    /**
+     * Send the notification to specified users.
+     *
+     * @param  \App\Http\Requests\NotifyMembersRequest  $request
+     * @param  \App\Services\AdminService  $service
+     * @return \Illuminate\Http\Response
+     */
+    public function notify(NotifyMembersRequest $request, MemberService $service)
+    {
+        $this->authorize('notify', Member::class);
+
+        $recipients = $service->prepareRecipients($request->validated());
+        Notification::send($recipients, new PushNotificationToUsers($request->validated()));
+        return redirect()->route('admin.members.index')->with('message', __('Notification is being sent'));
     }
 }
