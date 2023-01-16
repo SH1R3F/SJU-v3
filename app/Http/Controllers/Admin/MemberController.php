@@ -423,7 +423,7 @@ class MemberController extends Controller
      * Send the notification to specified users.
      *
      * @param  \App\Http\Requests\NotifyMembersRequest  $request
-     * @param  \App\Services\AdminService  $service
+     * @param  \App\Services\MemberService  $service
      * @return \Illuminate\Http\Response
      */
     public function notify(NotifyMembersRequest $request, MemberService $service)
