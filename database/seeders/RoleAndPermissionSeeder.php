@@ -59,6 +59,7 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::updateOrCreate(['name' => 'approve-member'], ['name' => 'approve-member', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'disapprove-member'], ['name' => 'disapprove-member', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'refuse-member'], ['name' => 'refuse-member', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'manage-invoice'], ['name' => 'manage-invoice', 'guard_name' => 'admin']);
 
         $admin->syncPermissions(Permission::pluck('name'));
     }

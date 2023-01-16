@@ -77,17 +77,17 @@ class MemberFactory extends Factory
             'license_photo' => rand(0, 1) ? 'members/1231323121/CCIFvqUu8S1MUbeYYlwIiyW6rTLBRYfFiAyx2uxH.jpg' : null,
             'contract_photo' => rand(0, 1) ? 'members/1231323121/CCIFvqUu8S1MUbeYYlwIiyW6rTLBRYfFiAyx2uxH.jpg' : null,
             'exp_flds_lngs' => rand(0, 1) ? [
-                'fields' => [
+                'fields' => [[
                     'title' => fake()->sentence
-                ],
-                'languages' => [
+                ]],
+                'languages' => [[
                     'title' => fake()->sentence,
                     'level' => fake()->word
-                ],
-                'experiences' => [
+                ]],
+                'experiences' => [[
                     'title' => fake()->sentence,
                     'years' => rand(1, 6)
-                ],
+                ]],
             ] : null,
         ];
     }

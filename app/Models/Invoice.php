@@ -13,10 +13,11 @@ class Invoice extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['invoice_number', 'member_id', 'subscription_id', 'amount'];
+    protected $fillable = ['invoice_number', 'member_id', 'subscription_id', 'amount', 'order_data'];
 
     protected $casts = [
-        'amount' => 'float'
+        'amount' => 'float',
+        'order_data' => 'array'
     ];
 
     /**

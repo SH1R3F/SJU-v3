@@ -3,6 +3,7 @@
 namespace App\Payment;
 
 use Illuminate\Http\Request;
+use App\Services\InvoiceService;
 
 interface PaymentInterface
 {

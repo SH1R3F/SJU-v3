@@ -33,14 +33,14 @@ defineProps({
                                     <td>{{ userAuth.subscription.type }}</td>
                                     <td>{{ userAuth.subscription.start_date }}</td>
                                     <td>{{ userAuth.subscription.end_date }}</td>
-                                    <td>{{ userAuth.subscription.status }}</td>
+                                    <td>{{ userAuth.membership_status }}</td>
                                 </tr>
                             </tbody>
                         </table>
                         <!-- Subscriptions table -->
 
                         <!-- Payment-alert button -->
-                        <section class="call-to-action call-to-action-primary m-0 row alert alert-success" v-if="userAuth.can_pay">
+                        <section class="call-to-action call-to-action-primary m-0 row alert alert-success" v-if="userAuth.status == 2 && userAuth.can_pay">
                             <div class="col-sm-9 col-lg-9 text-start">
                                 <div class="call-to-action-content">
                                     <h3>
@@ -64,7 +64,7 @@ defineProps({
                         <!-- Payment-alert button -->
 
                         <!-- Membership Card -->
-                        <template v-if="!userAuth.can_pay">
+                        <template v-if="userAuth.status == 2 && !userAuth.can_pay">
                             <hr class="my-5 border-0" />
                             <h5>{{ __('Membership card') }}</h5>
                             <div class="row m-4">

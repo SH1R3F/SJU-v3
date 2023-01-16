@@ -54,10 +54,11 @@
                     $page.props.authUser?.can_view?.acceptedMembers ||
                     $page.props.authUser?.can_view?.branchApproval ||
                     $page.props.authUser?.can_view?.adminApproval ||
-                    $page.props.authUser?.can_view?.refusedMembers
+                    $page.props.authUser?.can_view?.refusedMembers ||
+                    $page.props.authUser?.can_view?.invoices
                 "
                 class="menu-item"
-                :class="{ 'active open': $page.component.startsWith('Admin/Members') || $page.component.startsWith('Admin/Admins') }"
+                :class="{ 'active open': $page.component.startsWith('Admin/Members') || $page.component.startsWith('Admin/Invoices') }"
             >
                 <a href="javascript:;" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-users"></i>
@@ -82,6 +83,11 @@
                     <li v-if="$page.props.authUser?.can_view?.refusedMembers" class="menu-item" :class="{ active: $page.component == 'Admin/Members/Refused' }">
                         <Link :href="route('admin.members.refused')" class="menu-link">
                             <div>{{ __('Refused members') }}</div>
+                        </Link>
+                    </li>
+                    <li v-if="$page.props.authUser?.can_view?.invoices" class="menu-item" :class="{ active: $page.component.startsWith('Admin/Invoices') }">
+                        <Link :href="route('admin.invoices.index')" class="menu-link">
+                            <div>{{ __('Invoices') }}</div>
                         </Link>
                     </li>
                 </ul>

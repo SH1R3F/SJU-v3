@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\InvoiceResource;
+use App\Models\Subscription;
 
 class InvoiceController extends Controller
 {
@@ -35,35 +36,20 @@ class InvoiceController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Invoice $invoice)
     {
-        //
+        $this->authorize('view', $invoice);
+
+        $invoice->load('subscription', 'member', 'member.branch');
+        return inertia('Admin/Invoices/View', [
+            'invoice' => new InvoiceResource($invoice),
+            'types' => config('sju.memberships')
+        ]);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Payment;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Services\InvoiceService;
 use App\Payment\PaymentInterface;
 use Illuminate\Support\Facades\Http;
 
@@ -16,6 +17,8 @@ class OppwaPayment implements PaymentInterface
     private $url;
     private $auth;
 
+    private $invoice;
+
 
     public function __construct(array $config)
     {
@@ -26,6 +29,8 @@ class OppwaPayment implements PaymentInterface
         $this->visa = $config[$env]['visa'];
         $this->url  = $config[$env]['url'];
         $this->auth = $config[$env]['auth'];
+
+        $this->invoice = new InvoiceService;
     }
 
 
@@ -99,7 +104,11 @@ class OppwaPayment implements PaymentInterface
         // Save first response for any debuging later
         if (!$transaction->response) $transaction->update(['response' => $json]);
 
-        if (preg_match('/^(000\.000\.|000\.100\.1|000\.[36])/', $json['result']['code'])) return Transaction::STATUS_SUCCESS;
+        if (preg_match('/^(000\.000\.|000\.100\.1|000\.[36])/', $json['result']['code'])) {
+            // Create invoice
+            $this->invoice->create($transaction->member, $json);
+            return Transaction::STATUS_SUCCESS;
+        }
         if (preg_match('/^(000\.400\.0[^3]|000\.400\.100)/', $json['result']['code'])) return Transaction::STATUS_PENDING;
         if (str_contains($json['result']['description'], 'have you paid more than 30min ago')) return Transaction::STATUS_EXPIRED;
 

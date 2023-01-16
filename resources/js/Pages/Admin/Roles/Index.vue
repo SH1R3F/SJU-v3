@@ -202,6 +202,10 @@ const editRole = (role) => {
                                                             <input class="form-check-input" type="checkbox" id="refusedMembers" v-model="addForm.permissions['refused-member']" />
                                                             <label class="form-check-label" for="refusedMembers"> {{ __('Refused members') }} </label>
                                                         </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="invoices" v-model="addForm.permissions['manage-invoice']" />
+                                                            <label class="form-check-label" for="invoices"> {{ __('Invoices') }} </label>
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -394,6 +398,10 @@ const editRole = (role) => {
                                                         <div class="form-check me-2 me-lg-3">
                                                             <input class="form-check-input" type="checkbox" id="editrefusedMembers" v-model="editForm.permissions['refused-member']" />
                                                             <label class="form-check-label" for="editrefusedMembers"> {{ __('Refused members') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editInvoices" v-model="editForm.permissions['manage-invoice']" />
+                                                            <label class="form-check-label" for="editInvoices"> {{ __('Invoices') }} </label>
                                                         </div>
                                                     </div>
                                                 </td>

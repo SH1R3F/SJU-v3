@@ -2,15 +2,16 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Resources\AdminResource;
-use App\Http\Resources\MemberResource;
 use App\Models\Admin;
 use App\Models\Member;
+use App\Models\Invoice;
 use Inertia\Middleware;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\AdminResource;
+use App\Http\Resources\MemberResource;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -92,6 +93,7 @@ class HandleInertiaRequests extends Middleware
             'branchApproval' => $admin->can('viewBranch', Member::class),
             'adminApproval' => $admin->can('viewAcceptance', Member::class),
             'refusedMembers' => $admin->can('viewRefused', Member::class),
+            'invoices' =>  $admin->can('viewAny', Invoice::class),
         ];
     }
 }

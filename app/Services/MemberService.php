@@ -19,7 +19,6 @@ class MemberService
     public function getMembers(Request $request, array $statuses)
     {
         return Member::with('subscription', 'branch')
-            ->select('id', 'fname_ar', 'sname_ar', 'tname_ar', 'lname_ar', 'fname_en', 'sname_en', 'tname_en', 'lname_en', 'national_id', 'profile_photo', 'membership_number', 'mobile', 'branch_id', 'status')
             ->whereIn('status', $statuses)
             ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', $request->user()->branch_id))
             ->filter($request)

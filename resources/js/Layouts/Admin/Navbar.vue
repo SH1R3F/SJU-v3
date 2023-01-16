@@ -241,8 +241,8 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <span class="fw-semibold d-block">{{ $page.props.authUser?.fullName }}</span>
-                                        <small class="text-muted">{{ __($page.props.authUser?.role) }}</small>
+                                        <span class="fw-semibold d-block">{{ $page.props.authUser?.data?.fullName }}</span>
+                                        <small class="text-muted">{{ __($page.props.authUser?.data?.role) }}</small>
                                     </div>
                                 </div>
                             </a>

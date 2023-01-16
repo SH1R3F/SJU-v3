@@ -39,7 +39,7 @@ class InvoicePolicy
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-invoice');
+        return $admin->hasPermissionTo('manage-invoice');
     }
 
     /**
@@ -51,6 +51,6 @@ class InvoicePolicy
      */
     public function view(Admin $admin, Invoice $invoice)
     {
-        return $admin->hasPermissionTo('view-invoice');
+        return $admin->hasPermissionTo('manage-invoice');
     }
 }

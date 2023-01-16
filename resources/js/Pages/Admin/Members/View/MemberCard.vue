@@ -46,7 +46,7 @@ defineProps({
                     </li>
                     <li class="mb-2 pt-1">
                         <span class="fw-semibold me-2 d-inline-block">{{ __('Membership Status') }}</span>
-                        <span class="badge bg-label-secondary">{{ member.subscription.status }}</span>
+                        <span class="badge bg-label-secondary">{{ member.membership_status }}</span>
                     </li>
                     <li class="mb-2 pt-1">
                         <span class="fw-semibold me-2 d-inline-block">{{ __('Branch') }} </span>

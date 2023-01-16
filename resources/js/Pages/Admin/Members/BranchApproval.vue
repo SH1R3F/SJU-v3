@@ -207,9 +207,9 @@ const form = useForm({
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <a href="app-user-view-account.html" class="text-body text-truncate">
+                                        <Link :href="route('admin.members.show', member.id)" class="text-body text-truncate">
                                             <span class="fw-semibold">{{ member.fullName }}</span>
-                                        </a>
+                                        </Link>
                                         <small class="text-muted">{{ member.national_id }}</small>
                                     </div>
                                 </div>
@@ -221,10 +221,10 @@ const form = useForm({
                                 {{ member.phone_number }}
                             </td>
                             <td>
-                                {{ member.subscription_type }}
+                                {{ member.subscription.type }}
                             </td>
                             <td>
-                                {{ member.branch_name }}
+                                {{ member.branch.name }}
                             </td>
                             <td>
                                 {{ member.membership_status }}

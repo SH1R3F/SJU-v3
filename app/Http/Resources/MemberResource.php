@@ -2,8 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Controllers\Admin\MemberController;
+use App\Http\Resources\InvoiceResource;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Admin\MemberController;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class MemberResource extends JsonResource
@@ -63,6 +64,7 @@ class MemberResource extends JsonResource
             'subscription' => new SubscriptionResource($this->whenLoaded('subscription')),
             'membership_number' => $this->membership_number,
             'can_pay'      => $this->canPay(),
+            'invoice' => new InvoiceResource($this->invoices()->latest()->first()),
 
             'newspaper_type' => $this->newspaper_type,
 

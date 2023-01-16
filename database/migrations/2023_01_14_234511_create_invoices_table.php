@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('member_id');
             $table->unsignedBigInteger('subscription_id');
             $table->unsignedDecimal('amount');
+            $table->json('order_data')->nullable();
             $table->timestamps();
 
             $table->foreign('member_id')->references('id')->on('members')->cascadeOnDelete()->cascadeOnUpdate();

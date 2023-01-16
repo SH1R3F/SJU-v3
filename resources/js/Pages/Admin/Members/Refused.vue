@@ -204,9 +204,9 @@ watch(
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <a href="app-user-view-account.html" class="text-body text-truncate">
+                                        <Link :href="route('admin.members.show', member.id)" class="text-body text-truncate">
                                             <span class="fw-semibold">{{ member.fullName }}</span>
-                                        </a>
+                                        </Link>
                                         <small class="text-muted">{{ member.national_id }}</small>
                                     </div>
                                 </div>

@@ -95,9 +95,10 @@ watch(
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <a href="pages-profile-user.html" class="text-body text-truncate"
-                                            ><span class="fw-semibold">{{ invoice.member.fullName }}</span></a
-                                        ><small class="text-truncate text-muted">{{ invoice.member.national_id }}</small>
+                                        <Link :href="route('admin.members.show', invoice.member.id)" class="text-body text-truncate">
+                                            <span class="fw-semibold">{{ invoice.member.fullName }}</span>
+                                        </Link>
+                                        <small class="text-truncate text-muted">{{ invoice.member.national_id }}</small>
                                     </div>
                                 </div>
                             </td>

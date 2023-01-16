@@ -8,6 +8,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class InvoiceResource extends JsonResource
 {
+
+    public static $wrap = null;
+
     /**
      * Transform the resource into an array.
      *
@@ -23,6 +26,7 @@ class InvoiceResource extends JsonResource
             'member_id' => $this->member_id,
             'member' => new MemberResource($this->whenLoaded('member')),
             'subscription_id' => $this->subscription_id,
+            'subscription_ref' => $this->subscription_ref,
             'subscription' => new SubscriptionResource($this->whenLoaded('subscription')),
             'created_at' => $this->created_at?->translatedFormat('l jS F Y'),
         ];

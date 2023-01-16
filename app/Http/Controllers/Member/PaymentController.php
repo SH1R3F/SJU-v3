@@ -49,7 +49,7 @@ class PaymentController extends Controller
      * @param \App\Services\InvoiceService  $request
      * @param \App\Services\MemberService  $request
      */
-    public function response(Request $request, InvoiceService $invoice, MemberService $service)
+    public function response(Request $request, MemberService $service)
     {
         $status = Payment::verify($request);
 
@@ -67,9 +67,6 @@ class PaymentController extends Controller
 
         // Give membership number
         $service->membershipNumber($member);
-
-        // Create invoice
-        $invoice->create($member);
 
         return redirect()->route('member.subscription')->with('message', Transaction::responses($status));
     }

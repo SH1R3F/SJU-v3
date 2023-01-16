@@ -188,15 +188,13 @@ class Member extends Authenticatable
     public function complete()
     {
         // Writing this way for better readability and easier maintainability
-        if (!$this->newspaper_type) return false;
-        if (!$this->profile_photo) return false;
-        if (!$this->national_id_photo) return false;
-        if (!$this->statement_photo) return false;
-        if ($this->newspaper_type == 2 && !$this->license_photo) return false;
-        if ($this->subscription->type == 3 && !$this->contract_photo) return false;
-        if (!$this->exp_flds_lngs_complete()) return false;
-
-        return true;
+        return !is_null($this->newspaper_type) &&
+            !is_null($this->profile_photo) &&
+            !is_null($this->national_id_photo) &&
+            !is_null($this->statement_photo) &&
+            !($this->newspaper_type == 2 && is_null($this->license_photo)) &&
+            !($this->subscription->type == 3 && is_null($this->contract_photo)) &&
+            $this->exp_flds_lngs_complete();
     }
 
     /**
