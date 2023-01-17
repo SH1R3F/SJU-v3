@@ -12,6 +12,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\AdminResource;
 use App\Http\Resources\MemberResource;
+use App\Models\TechnicalSupportTicket;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -94,6 +95,10 @@ class HandleInertiaRequests extends Middleware
             'adminApproval' => $admin->can('viewAcceptance', Member::class),
             'refusedMembers' => $admin->can('viewRefused', Member::class),
             'invoices' =>  $admin->can('viewAny', Invoice::class),
+            // Technical support
+            'support_members' =>  $admin->can('viewMembers', TechnicalSupportTicket::class),
+            'support_subscribers' =>  $admin->can('viewSubscribers', TechnicalSupportTicket::class),
+            'support_volunteers' =>  $admin->can('viewVolunteers', TechnicalSupportTicket::class),
         ];
     }
 }

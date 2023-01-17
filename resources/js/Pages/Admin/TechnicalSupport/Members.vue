@@ -5,7 +5,7 @@ import Pagination from '../Components/Pagination.vue';
 import { debounce } from '../../../helpers';
 
 const props = defineProps({
-    invoices: Object,
+    tickets: Object,
     filters: Object,
 });
 
@@ -13,24 +13,30 @@ const props = defineProps({
  * Filters
  */
 const perPage = ref(props.filters.perPage || 10);
+const title = ref(props.filters.title || '');
 const name = ref(props.filters.name || '');
-const national_id = ref(props.filters.national_id || '');
-const membership_number = ref(props.filters.membership_number || '');
+const status = ref(props.filters.status || '');
+const mobile = ref(props.filters.mobile || '');
+const email = ref(props.filters.email || '');
 
 const appended = ref({
     perPage: perPage.value,
+    title: title.value,
     name: name.value,
-    national_id: national_id.value,
-    membership_number: membership_number.value,
+    status: status.value,
+    mobile: mobile.value,
+    email: email.value,
 });
 
-const filterReq = debounce(() => Inertia.get(route('admin.invoices.index'), appended.value, { preserveState: true, replace: true }), 500);
+const filterReq = debounce(() => Inertia.get(route('admin.tickets.index'), appended.value, { preserveState: true, replace: true }), 500);
 watch(
-    () => [name.value, national_id.value, membership_number.value, perPage.value],
-    ([nameVal, nidVal, memNum, pp]) => {
+    () => [title.value, name.value, status.value, mobile.value, email.value, perPage.value],
+    ([titleVal, nameVal, stat, mobVal, emailVal, pp]) => {
+        appended.value.title = titleVal;
         appended.value.name = nameVal;
-        appended.value.national_id = nidVal;
-        appended.value.membership_number = memNum;
+        appended.value.status = stat;
+        appended.value.mobile = mobVal;
+        appended.value.email = emailVal;
         appended.value.perPage = pp;
         filterReq();
     }
@@ -38,22 +44,32 @@ watch(
 </script>
 
 <template>
-    <Head :title="__('Subscriptions invoices')" />
+    <Head :title="__('Technical support')" />
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <!-- Invoices List Table -->
         <div class="card">
             <div class="card-header border-bottom">
-                <h5 class="card-title mb-3">{{ __('Invoices') }}</h5>
+                <h5 class="card-title mb-3">{{ __('Members tickets') }}</h5>
                 <div class="d-flex justify-content-between align-items-center row pb-2 gap-3 gap-md-0">
                     <div class="col-md-12 mb-2">
+                        <input type="text" class="form-control" :placeholder="__('Ticket title')" v-model="title" />
+                    </div>
+                    <div class="col-md-6 mb-2">
                         <input type="text" class="form-control" :placeholder="__('Name')" v-model="name" />
                     </div>
                     <div class="col-md-6 mb-2">
-                        <input type="text" class="form-control" :placeholder="__('National ID number')" v-model="national_id" />
+                        <select class="form-control" v-model="status">
+                            <option value="">{{ __('Choose') }}</option>
+                            <option value="0">{{ __('Open') }}</option>
+                            <option value="1">{{ __('Closed') }}</option>
+                        </select>
                     </div>
                     <div class="col-md-6 mb-2">
-                        <input type="text" class="form-control" :placeholder="__('Membership number')" v-model="membership_number" />
+                        <input type="text" class="form-control" :placeholder="__('Mobile')" v-model="mobile" />
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input type="text" class="form-control" :placeholder="__('Email')" v-model="email" />
                     </div>
                 </div>
             </div>
@@ -78,64 +94,77 @@ watch(
                     <thead>
                         <tr>
                             <th>{{ __('User') }}</th>
-                            <th>{{ __('Membership number') }}</th>
-                            <th>{{ __('Amount') }}</th>
-                            <th class="text-truncate">{{ __('Date') }}</th>
-                            <th>{{ __('Membership type') }}</th>
+                            <th>{{ __('Mobile') }}</th>
+                            <th>{{ __('Ticket title') }}</th>
+                            <th>{{ __('Status') }}</th>
+                            <th class="text-truncate">{{ __('Last update') }}</th>
                             <th class="cell-fit">{{ __('Actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="invoice in invoices.data">
+                        <tr v-for="ticket in tickets.data">
                             <td>
                                 <div class="d-flex justify-content-start align-items-center">
                                     <div class="avatar-wrapper">
                                         <div class="avatar avatar-sm me-3">
-                                            <img :src="invoice.member.profile_photo || '/img/user-dark.png'" class="rounded-circle" />
+                                            <img :src="ticket.supportable.profile_photo || '/img/user-dark.png'" class="rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <Link :href="route('admin.members.show', invoice.member.id)" class="text-body text-truncate">
-                                            <span class="fw-semibold">{{ invoice.member.fullName }}</span>
+                                        <Link :href="route('admin.members.show', 1)" class="text-body text-truncate">
+                                            <span class="fw-semibold">{{ ticket.supportable.fullName }}</span>
                                         </Link>
-                                        <small class="text-truncate text-muted">{{ invoice.member.national_id }}</small>
+                                        <small class="text-truncate text-muted">{{ ticket.supportable.email }}</small>
                                     </div>
                                 </div>
                             </td>
-                            <td>{{ invoice.member.membership_number }}</td>
-                            <td>{{ invoice.amount }}</td>
-                            <td>{{ invoice.created_at }}</td>
+                            <td>{{ ticket.supportable.mobile }}</td>
+                            <td>{{ ticket.title }}</td>
                             <td>
                                 <span
                                     class="badge"
                                     :class="{
-                                        'bg-label-success': invoice.member.subscription.num == 1,
-                                        'bg-label-secondary': invoice.member.subscription.num == 2,
-                                        'bg-label-warning': invoice.member.subscription.num == 3,
+                                        'bg-label-success': ticket.status,
+                                        'bg-label-secondary': !ticket.status,
                                     }"
                                     text-capitalized=""
                                 >
-                                    {{ invoice.member.subscription.type }}
+                                    {{ ticket.status ? __('Closed') : __('Open') }}
                                 </span>
                             </td>
+                            <td>{{ ticket.updated_at }}</td>
                             <td>
                                 <div class="d-flex align-items-center">
                                     <Link
-                                        :href="route('admin.invoices.show', invoice.id)"
-                                        data-bs-toggle="tooltip"
+                                        v-if="ticket.viewable"
+                                        :href="route('admin.tickets.show', ticket.id)"
                                         class="text-body"
+                                        data-bs-toggle="tooltip"
                                         data-bs-placement="top"
                                         :aria-label="__('Show')"
                                         :data-bs-original-title="__('Show')"
                                     >
                                         <i class="ti ti-eye mx-2 ti-sm"></i>
                                     </Link>
+                                    <Link
+                                        v-if="ticket.deleteable"
+                                        :href="route('admin.tickets.destroy', ticket.id)"
+                                        method="DELETE"
+                                        as="span"
+                                        data-bs-toggle="tooltip"
+                                        class="text-body"
+                                        data-bs-placement="top"
+                                        :aria-label="__('Delete')"
+                                        :data-bs-original-title="__('Delete')"
+                                    >
+                                        <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
+                                    </Link>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <Pagination :meta="invoices.meta" />
+                <Pagination :meta="tickets.meta" />
             </div>
         </div>
     </div>

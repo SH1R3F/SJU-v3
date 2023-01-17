@@ -6,10 +6,14 @@ namespace App\Providers;
 
 use App\Models\Admin;
 use App\Models\Member;
+use App\Models\Invoice;
 use App\Policies\RolePolicy;
 use App\Policies\AdminPolicy;
 use App\Policies\MemberPolicy;
+use App\Policies\InvoicePolicy;
 use Spatie\Permission\Models\Role;
+use App\Models\TechnicalSupportTicket;
+use App\Policies\TechnicalSupportPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -23,6 +27,8 @@ class AuthServiceProvider extends ServiceProvider
         Role::class => RolePolicy::class,
         Admin::class => AdminPolicy::class,
         Member::class => MemberPolicy::class,
+        Invoice::class => InvoicePolicy::class,
+        TechnicalSupportTicket::class => TechnicalSupportPolicy::class,
     ];
 
     /**

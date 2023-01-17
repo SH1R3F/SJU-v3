@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\TechnicalSupportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,7 +82,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         /**
          * Invoices management
          */
-
         Route::resource('invoices', InvoiceController::class)->only(['index', 'show']);
+
+
+        /**
+         * Technical Support Management
+         */
+        Route::get('technical-support/volunteers-tickets', [TechnicalSupportController::class, 'volunteers'])->name('tickets.volunteers');
+        Route::get('technical-support/subscribers-tickets', [TechnicalSupportController::class, 'subscribers'])->name('tickets.subscribers');
+        // Route::get('technical-support/members-tickets', [TechnicalSupportController::class, 'members'])->name('tickets.members');
+        Route::post('technical-support/{ticket}/toggle', [TechnicalSupportController::class, 'toggle'])->name('tickets.toggle');
+        Route::post('technical-support/{ticket}/', [TechnicalSupportController::class, 'message'])->name('tickets.message');
+        Route::resource('technical-support/tickets', TechnicalSupportController::class)->only(['index', 'show', 'destroy']);
     });
 });

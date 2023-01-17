@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\TechnicalSupportTicket;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -264,5 +265,13 @@ class Member extends Authenticatable
                 }
                 break;
         }
+    }
+
+    /**
+     * Technical support tickets relationship
+     */
+    public function tickets()
+    {
+        return $this->morphMany(TechnicalSupportTicket::class, 'supportable');
     }
 }

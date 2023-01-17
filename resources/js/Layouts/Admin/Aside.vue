@@ -92,6 +92,35 @@
                     </li>
                 </ul>
             </li>
+
+            <!-- Technical support -->
+            <li
+                v-if="$page.props.authUser?.can_view?.support_members || $page.props.authUser?.can_view?.support_subscribers || $page.props.authUser?.can_view?.support_volunteers"
+                class="menu-item"
+                :class="{ 'active open': $page.component.startsWith('Admin/TechnicalSupport') }"
+            >
+                <a href="javascript:;" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-key"></i>
+                    <div>{{ __('Technical support') }}</div>
+                </a>
+                <ul class="menu-sub">
+                    <li v-if="$page.props.authUser?.can_view?.support_members" class="menu-item" :class="{ active: $page.component == 'Admin/TechnicalSupport/Members' }">
+                        <Link :href="route('admin.tickets.index')" class="menu-link">
+                            <div>{{ __('Members tickets') }}</div>
+                        </Link>
+                    </li>
+                    <li v-if="$page.props.authUser?.can_view?.support_subscribers" class="menu-item" :class="{ active: $page.component == 'Admin/TechnicalSupport/Subscribers' }">
+                        <Link :href="route('admin.tickets.subscribers')" class="menu-link">
+                            <div>{{ __('Subscribers tickets') }}</div>
+                        </Link>
+                    </li>
+                    <li v-if="$page.props.authUser?.can_view?.support_volunteers" class="menu-item" :class="{ active: $page.component == 'Admin/TechnicalSupport/Volunteers' }">
+                        <Link :href="route('admin.tickets.volunteers')" class="menu-link">
+                            <div>{{ __('Volunteers tickets') }}</div>
+                        </Link>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </aside>
 </template>

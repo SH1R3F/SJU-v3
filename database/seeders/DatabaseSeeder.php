@@ -8,6 +8,7 @@ use Database\Seeders\AdminSeeder;
 use Database\Seeders\BranchSeeder;
 use Database\Seeders\MemberSeeder;
 use Database\Seeders\InvoiceSeeder;
+use Database\Seeders\TechnicalSupportSeeder;
 use Database\Seeders\RoleAndPermissionSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,5 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeeder::class);
         $this->call(MemberSeeder::class);
         $this->call(InvoiceSeeder::class);
+        $this->call(TechnicalSupportSeeder::class);
     }
 }

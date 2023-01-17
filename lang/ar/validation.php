@@ -229,6 +229,8 @@ return [
         'contract_photo' => 'صورة عقد العمل',
         'license_photo' => 'صورة ترخيص الصحيفة',
         'payment_method' => 'طريقة الدفع',
+        'attachment' => 'المرفق',
+        'body' => 'الرسالة',
     ],
 
 ];

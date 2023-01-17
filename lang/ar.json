@@ -152,6 +152,21 @@
     "Total": "الإجمالي",
     "PAID": "مدفوعة",
 
+    "--------------- Technical Support -------------": "",
+    "Members tickets": "تذاكر الأعضاء",
+    "Subscribers tickets": "تذاكر المشتركين",
+    "Volunteers tickets": "تذاكر المتطوعين",
+    "Ticket title": "عنوان التذكرة",
+    "Open": "مفتوحة",
+    "Closed": "مغلقة",
+    "Close ticket": "غلق التذكرة",
+    "Open ticket": "فتح التذكرة",
+    "Last update": "آخر تحديث",
+    "ticket updated successfully": "تم تحديث التذكرة بنجاح",
+    "ticket deleted successfully": "تم حذف التذكرة بنجاح",
+    "Type your message here": "أكتب رسالتك هنا",
+    "Message sent successfully": "تم إرسال الرسالة بنجاح",
+
     "--------------- Footer -------------": "",
     "made with ❤️": "صُنع بكل حب ❤️",
 
