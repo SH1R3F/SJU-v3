@@ -3,9 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use App\Models\TechnicalSupportTicket;
+use App\Http\Resources\TechnicalSupportTicketResource;
 
 class TechnicalSupportController extends Controller
 {
+
+    private $auth;
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (Auth::guard('member')->check()) {
+                $this->auth = Auth::guard('member')->user();
+            }
+
+            return $next($request);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +31,10 @@ class TechnicalSupportController extends Controller
      */
     public function index()
     {
-        //
+        $tickets = $this->auth->tickets()->orderBy('id')->get();
+        return inertia('TechnicalSupport/Index', [
+            'tickets' => TechnicalSupportTicketResource::collection($tickets)
+        ]);
     }
 
     /**
@@ -23,7 +44,7 @@ class TechnicalSupportController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('TechnicalSupport/Create');
     }
 
     /**
@@ -34,51 +55,90 @@ class TechnicalSupportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'body' => ['required', 'string'],
+            'attachment' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif', 'max:2048']
+        ]);
+
+        if ($request->hasFile('attachment')) {
+            $data['attachment'] = $request->file('attachment')->store("support/attachments");
+        }
+
+        $ticket = $this->auth->tickets()->create($data);
+
+        $ticket->messages()->create([
+            'body' => $data['body'],
+            'attachment' => $data['attachment'],
+            'sender' => TechnicalSupportTicket::SENDER_USER
+        ]);
+
+        return redirect()->route('support.show', $ticket->id)->with('message', __('Ticket created successfully'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\TechnicalSupportTicket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(TechnicalSupportTicket $ticket)
     {
-        //
+        abort_if(!$ticket->supportable->is($this->auth), Response::HTTP_FORBIDDEN);
+
+        return inertia('TechnicalSupport/Show', [
+            'ticket' => new TechnicalSupportTicketResource($ticket->load('messages'))
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
-     * Update the specified resource in storage.
+     * Store a new message to the ticket.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\TechnicalSupportTicket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function message(Request $request, TechnicalSupportTicket $ticket)
     {
-        //
+        abort_if(!$ticket->supportable->is($this->auth), Response::HTTP_FORBIDDEN);
+
+        if (!$request->body && !$request->attachment) return;
+
+        $data = $request->validate([
+            'body' => ['nullable', 'string'],
+            'attachment' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif', 'max:2048']
+        ]);
+
+        if ($request->hasFile('attachment')) {
+            $data['attachment'] = $request->file('attachment')->store("support/attachments");
+        }
+
+        $ticket->messages()->create([
+            'body' => $data['body'],
+            'attachment' => $data['attachment'],
+            'sender' => TechnicalSupportTicket::SENDER_USER
+        ]);
+        $ticket->update(['status' => TechnicalSupportTicket::STATUS_OPEN]);
+        $ticket->touch();
+
+        return redirect()->back()->with('message', __('Message sent successfully'));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * toggle status of a ticket.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\TechnicalSupportTicket  $ticket
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function toggle(Request $request, TechnicalSupportTicket $ticket)
     {
-        //
+        abort_if(!$ticket->supportable->is($this->auth), Response::HTTP_FORBIDDEN);
+
+        $ticket->update(['status' => !$ticket->status]);
+        $ticket->touch();
+
+        return redirect()->back()->with('message', __('ticket updated successfully'));
     }
 }

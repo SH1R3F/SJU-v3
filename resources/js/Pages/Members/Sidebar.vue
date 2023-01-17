@@ -22,8 +22,8 @@
             <li :class="{ active: $page.url.startsWith('/members/profile') }">
                 <Link :href="route('member.profile.info')">{{ __('My profile') }}</Link>
             </li>
-            <li>
-                <a href="#">{{ __('Technical support') }}</a>
+            <li :class="{ active: $page.url.startsWith('/technical-support') }">
+                <Link :href="route('support.index')">{{ __('Technical support') }}</Link>
             </li>
             <li>
                 <Link as="span" method="POST" :href="route('member.logout')">{{ __('Logout') }}</Link>

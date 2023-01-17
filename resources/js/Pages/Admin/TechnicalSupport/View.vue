@@ -103,7 +103,7 @@ export default {
                                                         {{ msg.body }}
 
                                                         <a v-if="msg.attachment" :href="msg.attachment" target="_block">
-                                                            <img :src="msg.attachment" class="d-block mt-2" style="max-width: 100px" />
+                                                            <img :src="msg.attachment" class="d-block mt-2" style="max-width: 300px" />
                                                         </a>
                                                     </p>
                                                 </div>

@@ -231,6 +231,7 @@ return [
         'payment_method' => 'طريقة الدفع',
         'attachment' => 'المرفق',
         'body' => 'الرسالة',
+        'title' => 'العنوان'
     ],
 
 ];
