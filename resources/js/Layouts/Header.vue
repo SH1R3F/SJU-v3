@@ -52,7 +52,7 @@
 
                     <Link as="span" v-else :href="$page.props.userHome">
                         <button class="login-btn">
-                            <svg style="margin-right: -3px" xmlns="http://www.w3.org/2000/svg" width="45.485" height="39.798" viewBox="0 0 45.485 39.798">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="45.485" height="39.798" viewBox="0 0 45.485 39.798">
                                 <g id="user_6_" data-name="user (6)" transform="translate(0 -0.008)">
                                     <path
                                         id="Path_3"

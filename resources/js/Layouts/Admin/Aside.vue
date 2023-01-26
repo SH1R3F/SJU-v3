@@ -100,7 +100,7 @@
                 :class="{ 'active open': $page.component.startsWith('Admin/TechnicalSupport') }"
             >
                 <a href="javascript:;" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons ti ti-key"></i>
+                    <i class="menu-icon tf-icons ti ti-headset"></i>
                     <div>{{ __('Technical support') }}</div>
                 </a>
                 <ul class="menu-sub">

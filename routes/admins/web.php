@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\TechnicalSupportController;
 
 /*
@@ -94,5 +95,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::post('technical-support/{ticket}/toggle', [TechnicalSupportController::class, 'toggle'])->name('tickets.toggle');
         Route::post('technical-support/{ticket}/', [TechnicalSupportController::class, 'message'])->name('tickets.message');
         Route::resource('technical-support/tickets', TechnicalSupportController::class)->only(['index', 'show', 'destroy']);
+
+        /**
+         * Courses management
+         */
+        Route::post('courses/{course}/toggle', [CourseController::class, 'toggle'])->name('courses.toggle');
+        Route::resource('courses', CourseController::class);
     });
 });
