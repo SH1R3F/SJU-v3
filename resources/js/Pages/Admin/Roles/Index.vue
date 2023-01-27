@@ -266,6 +266,114 @@ const editRole = (role) => {
                                                 </td>
                                             </tr>
                                             <!-- Members permission -->
+
+                                            <!-- Courses permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Courses management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistCourse" v-model="addForm.permissions['viewAny-course']" />
+                                                            <label class="form-check-label" for="addlistCourse"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addcreateCourse" v-model="addForm.permissions['create-course']" />
+                                                            <label class="form-check-label" for="addcreateCourse"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addupdateCourse" v-model="addForm.permissions['update-course']" />
+                                                            <label class="form-check-label" for="addupdateCourse"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="adddeleteCourse" v-model="addForm.permissions['delete-course']" />
+                                                            <label class="form-check-label" for="adddeleteCourse"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Courses permission -->
+
+                                            <!-- Templates permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Templates management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistTemplate" v-model="addForm.permissions['viewAny-template']" />
+                                                            <label class="form-check-label" for="addlistTemplate"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addcreateTemplate" v-model="addForm.permissions['create-template']" />
+                                                            <label class="form-check-label" for="addcreateTemplate"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addupdateTemplate" v-model="addForm.permissions['update-template']" />
+                                                            <label class="form-check-label" for="addupdateTemplate"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="adddeleteTemplate" v-model="addForm.permissions['delete-template']" />
+                                                            <label class="form-check-label" for="adddeleteTemplate"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Templates permission -->
+
+                                            <!-- Questionnaires permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Questionnaires management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistQuestionnaire" v-model="addForm.permissions['viewAny-questionnaire']" />
+                                                            <label class="form-check-label" for="addlistQuestionnaire"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addcreateQuestionnaire" v-model="addForm.permissions['create-questionnaire']" />
+                                                            <label class="form-check-label" for="addcreateQuestionnaire"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addupdateQuestionnaire" v-model="addForm.permissions['update-questionnaire']" />
+                                                            <label class="form-check-label" for="addupdateQuestionnaire"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="adddeleteQuestionnaire" v-model="addForm.permissions['delete-questionnaire']" />
+                                                            <label class="form-check-label" for="adddeleteQuestionnaire"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Questionnaires permission -->
+
+                                            <!-- Technical support -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Technical support') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistSupportmember" v-model="addForm.permissions['members-ticket']" />
+                                                            <label class="form-check-label" for="addlistSupportmember"> {{ __('List members tickets') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistSupportsubscriber" v-model="addForm.permissions['subscribers-ticket']" />
+                                                            <label class="form-check-label" for="addlistSupportsubscriber"> {{ __('List subscribers tickets') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistSupportvolunteer" v-model="addForm.permissions['volunteers-ticket']" />
+                                                            <label class="form-check-label" for="addlistSupportvolunteer"> {{ __('List volunteers tickets') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addViewTicket" v-model="addForm.permissions['view-ticket']" />
+                                                            <label class="form-check-label" for="addViewTicket"> {{ __('View ticket') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="adddeleteTicket" v-model="addForm.permissions['delete-ticket']" />
+                                                            <label class="form-check-label" for="adddeleteTicket"> {{ __('Delete ticket') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Technical support -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -463,6 +571,114 @@ const editRole = (role) => {
                                                 </td>
                                             </tr>
                                             <!-- Members permission -->
+
+                                            <!-- Courses permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Courses management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistCourse" v-model="editForm.permissions['viewAny-course']" />
+                                                            <label class="form-check-label" for="editlistCourse"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreateCourse" v-model="editForm.permissions['create-course']" />
+                                                            <label class="form-check-label" for="editcreateCourse"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editupdateCourse" v-model="editForm.permissions['update-course']" />
+                                                            <label class="form-check-label" for="editupdateCourse"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteCourse" v-model="editForm.permissions['delete-course']" />
+                                                            <label class="form-check-label" for="editdeleteCourse"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Courses permission -->
+
+                                            <!-- Templates permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Templates management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistTemplate" v-model="editForm.permissions['viewAny-template']" />
+                                                            <label class="form-check-label" for="editlistTemplate"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreateTemplate" v-model="editForm.permissions['create-template']" />
+                                                            <label class="form-check-label" for="editcreateTemplate"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editupdateTemplate" v-model="editForm.permissions['update-template']" />
+                                                            <label class="form-check-label" for="editupdateTemplate"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteTemplate" v-model="editForm.permissions['delete-template']" />
+                                                            <label class="form-check-label" for="editdeleteTemplate"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Templates permission -->
+
+                                            <!-- Questionnaires permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Questionnaires management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistQuestionnaire" v-model="editForm.permissions['viewAny-questionnaire']" />
+                                                            <label class="form-check-label" for="editlistQuestionnaire"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreateQuestionnaire" v-model="editForm.permissions['create-questionnaire']" />
+                                                            <label class="form-check-label" for="editcreateQuestionnaire"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editupdateQuestionnaire" v-model="editForm.permissions['update-questionnaire']" />
+                                                            <label class="form-check-label" for="editupdateQuestionnaire"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteQuestionnaire" v-model="editForm.permissions['delete-questionnaire']" />
+                                                            <label class="form-check-label" for="editdeleteQuestionnaire"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Questionnaires permission -->
+
+                                            <!-- Technical support -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Technical support') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistSupportmember" v-model="editForm.permissions['members-ticket']" />
+                                                            <label class="form-check-label" for="editlistSupportmember"> {{ __('List members tickets') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistSupportsubscriber" v-model="editForm.permissions['subscribers-ticket']" />
+                                                            <label class="form-check-label" for="editlistSupportsubscriber"> {{ __('List subscribers tickets') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistSupportvolunteer" v-model="editForm.permissions['volunteers-ticket']" />
+                                                            <label class="form-check-label" for="editlistSupportvolunteer"> {{ __('List volunteers tickets') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editViewTicket" v-model="editForm.permissions['view-ticket']" />
+                                                            <label class="form-check-label" for="editViewTicket"> {{ __('View ticket') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteTicket" v-model="editForm.permissions['delete-ticket']" />
+                                                            <label class="form-check-label" for="editdeleteTicket"> {{ __('Delete ticket') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Technical support -->
                                         </tbody>
                                     </table>
                                 </div>

@@ -61,11 +61,39 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::updateOrCreate(['name' => 'refuse-member'], ['name' => 'refuse-member', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'manage-invoice'], ['name' => 'manage-invoice', 'guard_name' => 'admin']);
 
+        /**
+         * Technical support management permissions
+         */
         Permission::updateOrCreate(['name' => 'members-ticket'], ['name' => 'members-ticket', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'subscribers-ticket'], ['name' => 'subscribers-ticket', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'volunteers-ticket'], ['name' => 'volunteers-ticket', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'view-ticket'], ['name' => 'view-ticket', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'delete-ticket'], ['name' => 'delete-ticket', 'guard_name' => 'admin']);
+
+        /**
+         * Course management permissions
+         */
+        Permission::updateOrCreate(['name' => 'viewAny-course'], ['name' => 'viewAny-course', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-course'], ['name' => 'create-course', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-course'], ['name' => 'update-course', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-course'], ['name' => 'delete-course', 'guard_name' => 'admin']);
+
+        /**
+         * Template management permissions
+         */
+        Permission::updateOrCreate(['name' => 'viewAny-template'], ['name' => 'viewAny-template', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-template'], ['name' => 'create-template', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-template'], ['name' => 'update-template', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-template'], ['name' => 'delete-template', 'guard_name' => 'admin']);
+
+        /**
+         * Template management permissions
+         */
+        Permission::updateOrCreate(['name' => 'viewAny-questionnaire'], ['name' => 'viewAny-questionnaire', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-questionnaire'], ['name' => 'create-questionnaire', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-questionnaire'], ['name' => 'update-questionnaire', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-questionnaire'], ['name' => 'delete-questionnaire', 'guard_name' => 'admin']);
+
 
         $admin->syncPermissions(Permission::pluck('name'));
     }
