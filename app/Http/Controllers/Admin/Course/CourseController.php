@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Course;
 
-use App\Models\Course;
+use App\Models\Course\Course;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CourseResource;
@@ -104,7 +104,7 @@ class CourseController extends Controller
      * Toggle active status for a resource.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Course\Course  $course
      * @return \Illuminate\Http\Response
      */
     public function toggle(Request $request, Course $course)
@@ -117,7 +117,7 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Course\Course  $course
      * @return \Illuminate\Http\Response
      */
     public function destroy(Course $course)

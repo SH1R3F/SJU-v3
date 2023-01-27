@@ -45,6 +45,10 @@ Route::middleware('auth:member')->group(function () {
     Route::post('/technical-support/{ticket}/toggle', [TechnicalSupportController::class, 'toggle'])->name('support.toggle');
 });
 
+Route::get('certval', function () {
+    return 'Here you verify certificates';
+})->name('verify-certificate');
+
 // Member routes
 require_once 'members/web.php';
 

@@ -8,6 +8,8 @@ use App\Models\Invoice;
 use Inertia\Middleware;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\Course\Course;
+use App\Models\Course\Template;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\AdminResource;
@@ -99,6 +101,10 @@ class HandleInertiaRequests extends Middleware
             'support_members' =>  $admin->can('viewMembers', TechnicalSupportTicket::class),
             'support_subscribers' =>  $admin->can('viewSubscribers', TechnicalSupportTicket::class),
             'support_volunteers' =>  $admin->can('viewVolunteers', TechnicalSupportTicket::class),
+            // Courses
+            'courses' =>  $admin->can('viewAny', Course::class),
+            'templates' =>  $admin->can('viewAny', Template::class),
+            // 'questionnaires' =>  $admin->can('viewAny', Questionnaire::class),
         ];
     }
 }

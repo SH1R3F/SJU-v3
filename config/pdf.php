@@ -35,10 +35,11 @@ return [
         'almarai' => [
             'R'  => 'Almarai-Regular.ttf',
             'B'  => 'Almarai-Bold.ttf',
-            'l'  => 'Almarai-Light.ttf',
+            'L'  => 'Almarai-Light.ttf',
             'useOTL' => 0xFF,
             'useKashida' => 75,
         ]
     ],
     'unAGlyphs' => true,
+    // 'default_font' => 'almarai',
 ];

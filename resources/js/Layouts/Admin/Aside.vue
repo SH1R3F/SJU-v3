@@ -93,6 +93,26 @@
                 </ul>
             </li>
 
+            <!-- Courses -->
+            <li v-if="$page.props.authUser?.can_view?.courses || $page.props.authUser?.can_view?.templates" class="menu-item" :class="{ 'active open': $page.component.startsWith('Admin/Courses') }">
+                <a href="javascript:;" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-certificate"></i>
+                    <div>{{ __('Courses') }}</div>
+                </a>
+                <ul class="menu-sub">
+                    <li v-if="$page.props.authUser?.can_view?.courses" class="menu-item" :class="{ active: $page.component.startsWith('Admin/Courses') && !$page.component.includes('Templates') }">
+                        <Link :href="route('admin.courses.index')" class="menu-link">
+                            <div>{{ __('Courses') }}</div>
+                        </Link>
+                    </li>
+                    <li v-if="$page.props.authUser?.can_view?.templates" class="menu-item" :class="{ active: $page.component.startsWith('Admin/Courses/Templates') }">
+                        <Link :href="route('admin.templates.index')" class="menu-link">
+                            <div>{{ __('Templates') }}</div>
+                        </Link>
+                    </li>
+                </ul>
+            </li>
+
             <!-- Technical support -->
             <li
                 v-if="$page.props.authUser?.can_view?.support_members || $page.props.authUser?.can_view?.support_subscribers || $page.props.authUser?.can_view?.support_volunteers"

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
+use App\Models\Course\Course;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 
@@ -42,7 +42,7 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Course\Course  $course
      * @return \Illuminate\Http\Response
      */
     public function show(Course $course)
@@ -53,7 +53,7 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Course\Course  $course
      * @return \Illuminate\Http\Response
      */
     public function edit(Course $course)
@@ -65,7 +65,7 @@ class CourseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateCourseRequest  $request
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Course\Course  $course
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCourseRequest $request, Course $course)
@@ -76,7 +76,7 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Course\Course  $course
      * @return \Illuminate\Http\Response
      */
     public function destroy(Course $course)

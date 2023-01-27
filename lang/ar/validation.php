@@ -231,7 +231,17 @@ return [
         'payment_method' => 'طريقة الدفع',
         'attachment' => 'المرفق',
         'body' => 'الرسالة',
-        'title' => 'العنوان'
+        'title' => 'العنوان',
+        'file' => 'الملف',
+        'mode' => 'اللغة',
+        'layout' => 'خيارات العرض',
+        'male_title' => 'لقب الذكر',
+        'female_title' => 'لقب الأنثى',
+        'qr_margin_top' => 'هامش الكود لأعلى',
+        'qr_margin_right' => 'هامش الكود لليمين',
+        'qr_margin_bottom' => 'هامش الكود للأسفل',
+        'qr_margin_left' => 'هامش الكود لليسار',
+        'qr_position' => 'كود التحقق'
     ],
 
 ];

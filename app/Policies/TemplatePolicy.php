@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Course\Course;
 use App\Models\Admin;
+use App\Models\Template;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CoursePolicy
+class TemplatePolicy
 {
     use HandlesAuthorization;
 
@@ -35,19 +35,19 @@ class CoursePolicy
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-course');
+        return $admin->hasPermissionTo('viewAny-template');
     }
 
     /**
      * Determine whether the admin can view the model.
      *
      * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Course\Course  $course
+     * @param  \App\Models\Template  $template
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(Admin $admin, Course $course)
+    public function view(Admin $admin, Template $template)
     {
-        return $admin->hasPermissionTo('view-course');
+        return $admin->hasPermissionTo('view-template');
     }
 
     /**
@@ -58,41 +58,30 @@ class CoursePolicy
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-course');
+        return $admin->hasPermissionTo('create-template');
     }
 
     /**
      * Determine whether the admin can update the model.
      *
      * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Course\Course  $course
+     * @param  \App\Models\Template  $template
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(Admin $admin, Course $course)
+    public function update(Admin $admin, Template $template)
     {
-        return $admin->hasPermissionTo('update-course');
+        return $admin->hasPermissionTo('update-template');
     }
 
-    /**
-     * Determine whether the user can toggle the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Course\Course  $course
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function toggle(Admin $admin, Course $course)
-    {
-        return $admin->hasPermissionTo('update-course');
-    }
     /**
      * Determine whether the admin can delete the model.
      *
      * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Course\Course  $course
+     * @param  \App\Models\Template  $template
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(Admin $admin, Course $course)
+    public function delete(Admin $admin, Template $template)
     {
-        return $admin->hasPermissionTo('delete-course');
+        return $admin->hasPermissionTo('delete-template');
     }
 }
