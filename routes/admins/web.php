@@ -7,8 +7,10 @@ use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\Course\CourseController;
+use App\Http\Controllers\Admin\Course\QuestionController;
 use App\Http\Controllers\Admin\Course\TemplateController;
 use App\Http\Controllers\Admin\TechnicalSupportController;
+use App\Http\Controllers\Admin\Course\QuestionnaireController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +104,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
          */
         Route::prefix('courses')->group(function () {
             Route::resource('templates', TemplateController::class);
+            Route::resource('questionnaires', QuestionnaireController::class)->except(['show']);
+            Route::resource('questionnaires/{questionnaire}/questions', QuestionController::class)->except(['show']);
         });
 
         /**

@@ -94,13 +94,21 @@
             </li>
 
             <!-- Courses -->
-            <li v-if="$page.props.authUser?.can_view?.courses || $page.props.authUser?.can_view?.templates" class="menu-item" :class="{ 'active open': $page.component.startsWith('Admin/Courses') }">
+            <li
+                v-if="$page.props.authUser?.can_view?.courses || $page.props.authUser?.can_view?.templates || $page.props.authUser?.can_view?.questionnaires"
+                class="menu-item"
+                :class="{ 'active open': $page.component.startsWith('Admin/Courses') }"
+            >
                 <a href="javascript:;" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-certificate"></i>
                     <div>{{ __('Courses') }}</div>
                 </a>
                 <ul class="menu-sub">
-                    <li v-if="$page.props.authUser?.can_view?.courses" class="menu-item" :class="{ active: $page.component.startsWith('Admin/Courses') && !$page.component.includes('Templates') }">
+                    <li
+                        v-if="$page.props.authUser?.can_view?.courses"
+                        class="menu-item"
+                        :class="{ active: $page.component.startsWith('Admin/Courses') && !$page.component.includes('Templates') && !$page.component.includes('Questionnaires') }"
+                    >
                         <Link :href="route('admin.courses.index')" class="menu-link">
                             <div>{{ __('Courses') }}</div>
                         </Link>
@@ -108,6 +116,11 @@
                     <li v-if="$page.props.authUser?.can_view?.templates" class="menu-item" :class="{ active: $page.component.startsWith('Admin/Courses/Templates') }">
                         <Link :href="route('admin.templates.index')" class="menu-link">
                             <div>{{ __('Templates') }}</div>
+                        </Link>
+                    </li>
+                    <li v-if="$page.props.authUser?.can_view?.questionnaires" class="menu-item" :class="{ active: $page.component.startsWith('Admin/Courses/Questionnaires') }">
+                        <Link :href="route('admin.questionnaires.index')" class="menu-link">
+                            <div>{{ __('Questionnaires') }}</div>
                         </Link>
                     </li>
                 </ul>

@@ -9,6 +9,7 @@ use App\Models\Member;
 use App\Models\Invoice;
 use App\Policies\RolePolicy;
 use App\Models\Course\Course;
+use App\Models\Course\Questionnaire;
 use App\Policies\AdminPolicy;
 use App\Policies\CoursePolicy;
 use App\Policies\MemberPolicy;
@@ -16,6 +17,7 @@ use App\Models\Course\Template;
 use App\Policies\InvoicePolicy;
 use App\Policies\TemplatePolicy;
 use Spatie\Permission\Models\Role;
+use App\Policies\QuestionnairePolicy;
 use App\Models\TechnicalSupportTicket;
 use App\Policies\TechnicalSupportPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -34,6 +36,7 @@ class AuthServiceProvider extends ServiceProvider
         Invoice::class => InvoicePolicy::class,
         Course::class => CoursePolicy::class,
         Template::class => TemplatePolicy::class,
+        Questionnaire::class => QuestionnairePolicy::class,
         TechnicalSupportTicket::class => TechnicalSupportPolicy::class,
     ];
 

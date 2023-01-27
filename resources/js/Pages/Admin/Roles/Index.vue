@@ -329,6 +329,10 @@ const editRole = (role) => {
                                                             <label class="form-check-label" for="addlistQuestionnaire"> {{ __('List') }} </label>
                                                         </div>
                                                         <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addviewQuestionnaire" v-model="addForm.permissions['view-questionnaire']" />
+                                                            <label class="form-check-label" for="addviewQuestionnaire"> {{ __('View') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
                                                             <input class="form-check-input" type="checkbox" id="addcreateQuestionnaire" v-model="addForm.permissions['create-questionnaire']" />
                                                             <label class="form-check-label" for="addcreateQuestionnaire"> {{ __('Create') }} </label>
                                                         </div>
@@ -632,6 +636,10 @@ const editRole = (role) => {
                                                         <div class="form-check me-2 me-lg-3">
                                                             <input class="form-check-input" type="checkbox" id="editlistQuestionnaire" v-model="editForm.permissions['viewAny-questionnaire']" />
                                                             <label class="form-check-label" for="editlistQuestionnaire"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editviewQuestionnaire" v-model="editForm.permissions['view-questionnaire']" />
+                                                            <label class="form-check-label" for="editviewQuestionnaire"> {{ __('View') }} </label>
                                                         </div>
                                                         <div class="form-check me-2 me-lg-3">
                                                             <input class="form-check-input" type="checkbox" id="editcreateQuestionnaire" v-model="editForm.permissions['create-questionnaire']" />

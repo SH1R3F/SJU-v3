@@ -241,7 +241,18 @@ return [
         'qr_margin_right' => 'هامش الكود لليمين',
         'qr_margin_bottom' => 'هامش الكود للأسفل',
         'qr_margin_left' => 'هامش الكود لليسار',
-        'qr_position' => 'كود التحقق'
+        'qr_position' => 'كود التحقق',
+        'question' => 'السؤال',
+        'answer1' => 'الإجابة1',
+        'answer2' => 'الإجابة2',
+        'answer3' => 'الإجابة3',
+        'answer4' => 'الإجابة4',
+        'color1' => 'اللون1',
+        'color2' => 'اللون2',
+        'color3' => 'اللون3',
+        'color4' => 'اللون4',
+        'commentable' => 'كتابة تعليق',
+        'order' => 'الترتيب'
     ],
 
 ];

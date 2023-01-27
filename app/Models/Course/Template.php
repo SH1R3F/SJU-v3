@@ -28,7 +28,7 @@ class Template extends Model
     /**
      * Relation to the courses it has
      */
-    public function template()
+    public function courses()
     {
         return $this->hasMany(Course::class, 'template_id');
     }

@@ -421,7 +421,7 @@ const form = useForm({
 
                             <div>
                                 <button type="submit" class="btn btn-primary me-2">{{ __('Create') }}</button>
-                                <Link :href="route('admin.members.index')" as="button" type="reset" class="btn btn-label-secondary me-2">{{ __('Cancel') }}</Link>
+                                <Link :href="route('admin.courses.index')" as="button" type="reset" class="btn btn-label-secondary me-2">{{ __('Cancel') }}</Link>
                             </div>
                         </form>
                     </div>

@@ -90,6 +90,7 @@ class RoleAndPermissionSeeder extends Seeder
          * Template management permissions
          */
         Permission::updateOrCreate(['name' => 'viewAny-questionnaire'], ['name' => 'viewAny-questionnaire', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'view-questionnaire'], ['name' => 'view-questionnaire', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'create-questionnaire'], ['name' => 'create-questionnaire', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'update-questionnaire'], ['name' => 'update-questionnaire', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'delete-questionnaire'], ['name' => 'delete-questionnaire', 'guard_name' => 'admin']);

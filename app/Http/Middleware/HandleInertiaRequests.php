@@ -9,6 +9,7 @@ use Inertia\Middleware;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
+use App\Models\Course\Questionnaire;
 use App\Models\Course\Template;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
@@ -104,7 +105,7 @@ class HandleInertiaRequests extends Middleware
             // Courses
             'courses' =>  $admin->can('viewAny', Course::class),
             'templates' =>  $admin->can('viewAny', Template::class),
-            // 'questionnaires' =>  $admin->can('viewAny', Questionnaire::class),
+            'questionnaires' =>  $admin->can('viewAny', Questionnaire::class),
         ];
     }
 }

@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Models\Course;
+
+use Illuminate\Http\Request;
+use App\Models\Course\Course;
+use App\Models\Course\Question;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class Questionnaire extends Model
+{
+    use HasFactory;
+
+    protected $table = 'courses_questionnaires';
+
+    protected $fillable = ['name_ar', 'name_en', 'status'];
+
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
+    public function scopeFilter($query, Request $request)
+    {
+        return $query->when($request->search, fn ($builder, $search) => $builder->where('name_ar', 'LIKE', "%$search%")->orWhere('name_en', 'LIKE', "%$search%"));
+    }
+
+    /**
+     * Relation to the courses it has
+     */
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'questionnaire_id');
+    }
+
+    /**
+     * Relation to the questions it has
+     */
+    public function questions()
+    {
+        return $this->hasMany(Question::class, 'questionnaire_id');
+    }
+}
