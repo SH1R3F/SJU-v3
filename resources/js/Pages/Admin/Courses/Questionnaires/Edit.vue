@@ -8,7 +8,7 @@ const props = defineProps({
 const form = useForm({
     name_ar: props.questionnaire.name_ar || '',
     name_en: props.questionnaire.name_en || '',
-    status: props.questionnaire.status || 1,
+    status: props.questionnaire.status,
 });
 </script>
 
@@ -21,7 +21,7 @@ const form = useForm({
                 <div class="card mb-4">
                     <h5 class="card-header">{{ __('Edit questionnaire') }}</h5>
                     <div class="card-body">
-                        <form @submit.prevent="form.post(route('admin.questionnaires.store'))">
+                        <form @submit.prevent="form.put(route('admin.questionnaires.update', questionnaire.id))">
                             <!-- Name -->
                             <div class="row">
                                 <div class="mb-3 col-12">
@@ -47,8 +47,8 @@ const form = useForm({
                                     <label class="form-label" for="status">{{ __('Status') }}</label>
                                     <div class="input-group">
                                         <select class="form-control m-select2-no" id="status" v-model="form.status">
-                                            <option value="1">{{ __('Active') }}</option>
-                                            <option value="0">{{ __('Inactive') }}</option>
+                                            <option value="true">{{ __('Active') }}</option>
+                                            <option value="false">{{ __('Inactive') }}</option>
                                         </select>
                                     </div>
                                     <span class="fs-6 text-danger" v-if="form.errors.status">{{ form.errors.status }}</span>

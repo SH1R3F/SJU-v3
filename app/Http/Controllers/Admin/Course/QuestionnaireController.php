@@ -58,7 +58,7 @@ class QuestionnaireController extends Controller
         $questionnaire = Questionnaire::create($data);
 
         // Redirect to edit template.
-        return redirect()->route('admin.questionnaires.show', $questionnaire->id)->with('message', __('Questionnaire created successfully'));
+        return redirect()->route('admin.questions.index', $questionnaire->id)->with('message', __('Questionnaire created successfully'));
     }
 
     /**
@@ -78,12 +78,23 @@ class QuestionnaireController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Course\Questionnaire  $questionnaire
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Questionnaire $questionnaire)
     {
-        //
+        $request->merge(['status' => $request->boolean('status')]);
+        $data = $request->validate([
+            'name_ar' => ['required', 'string', 'max:255'],
+            'name_en' => ['required', 'string', 'max:255'],
+            'status' => ['required', 'boolean'],
+        ]);
+
+        // Store it
+        $questionnaire->update($data);
+
+        // Redirect to edit template.
+        return redirect()->route('admin.questionnaires.index')->with('message', __('Questionnaire updated successfully'));
     }
 
     /**

@@ -18,7 +18,7 @@ const form = useForm({
     answer4: props.question.answer4 || '',
     color4: props.question.color4 || '#000000',
     order: props.question.color || '',
-    status: props.question.status || 1,
+    status: props.question.status,
 });
 </script>
 
@@ -31,7 +31,7 @@ const form = useForm({
                 <div class="card mb-4">
                     <h5 class="card-header">{{ __('Edit question') }}</h5>
                     <div class="card-body">
-                        <form @submit.prevent="form.post(route('admin.questions.store', id))">
+                        <form @submit.prevent="form.put(route('admin.questions.update', { questionnaire: id, question: question.id }))">
                             <!-- Name -->
                             <div class="row">
                                 <div class="mb-3 col-12">
@@ -150,8 +150,8 @@ const form = useForm({
                                     <label class="form-label" for="status">{{ __('Status') }}</label>
                                     <div class="input-group">
                                         <select class="form-control m-select2-no" id="status" v-model="form.status">
-                                            <option value="1">{{ __('Active') }}</option>
-                                            <option value="0">{{ __('Inactive') }}</option>
+                                            <option value="true">{{ __('Active') }}</option>
+                                            <option value="false">{{ __('Inactive') }}</option>
                                         </select>
                                     </div>
                                     <p class="fs-6 text-danger" v-if="form.errors.status">{{ form.errors.status }}</p>
@@ -160,7 +160,7 @@ const form = useForm({
                             <!-- Status -->
 
                             <div>
-                                <button type="submit" class="btn btn-primary me-2">{{ __('Create') }}</button>
+                                <button type="submit" class="btn btn-primary me-2">{{ __('Edit') }}</button>
                                 <Link :href="route('admin.questionnaires.index')" as="button" type="reset" class="btn btn-label-secondary me-2">{{ __('Cancel') }}</Link>
                             </div>
                         </form>

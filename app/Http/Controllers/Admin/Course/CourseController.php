@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers\Admin\Course;
 
-use App\Models\Course\Course;
+use App\Models\Course\Type;
+use App\Models\Course\Place;
 use Illuminate\Http\Request;
+use App\Models\Course\Course;
+use App\Models\Course\Gender;
+use App\Models\Course\Category;
+use App\Models\Course\Template;
+use App\Services\CourseService;
 use App\Http\Controllers\Controller;
+use App\Models\Course\Questionnaire;
 use App\Http\Resources\CourseResource;
+use App\Http\Requests\Course\CourseRequest;
 
 class CourseController extends Controller
 {
@@ -23,7 +31,13 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::query()
-            // ->filter(request())
+            ->filter(request())
+            ->addSelect([
+                'course_type' => Type::select('name')->whereColumn('courses_types.id', 'courses.course_type_id')->take(1),
+                'course_place' => Place::select('name')->whereColumn('courses_places.id', 'courses.course_place_id')->take(1),
+                'course_gender' => Gender::select('name')->whereColumn('courses_genders.id', 'courses.course_gender_id')->take(1),
+                'course_category' => Category::select('name')->whereColumn('courses_categories.id', 'courses.course_category_id')->take(1),
+            ])
             ->orderBy('id')
             ->paginate(request()->perPage ?: 10)
             ->withQueryString();
@@ -46,24 +60,26 @@ class CourseController extends Controller
     {
 
         return inertia('Admin/Courses/Create', [
-            'types' => [],
-            'genders' => [],
-            'categories' => [],
-            'locations' => [],
-            'templates' => [],
-            'questionnaires' => [],
+            'types' => Type::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
+            'genders' => Gender::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
+            'categories' => Category::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
+            'places' => Place::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
+            'templates' => Template::orderBy('id')->select('id', 'name')->get(),
+            'questionnaires' => Questionnaire::where('status', 1)->orderBy('id')->select('id', 'name_ar')->get(),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Course\CourseRequest  $request
+     * @param  \App\Services\CourseService  $service
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CourseRequest $request, CourseService $service)
     {
-        //
+        $course = $service->create($request->validated());
+        return redirect()->route('admin.courses.index')->with('message', __('Course created successfully'));
     }
 
     /**
@@ -80,24 +96,35 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Course\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Course $course)
     {
-        //
+        return inertia('Admin/Courses/Edit', [
+            'course' => new CourseResource($course),
+            'types' => Type::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
+            'genders' => Gender::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
+            'categories' => Category::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
+            'places' => Place::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
+            'templates' => Template::orderBy('id')->select('id', 'name')->get(),
+            'questionnaires' => Questionnaire::where('status', 1)->orderBy('id')->select('id', 'name_ar')->get(),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\Course\CourseRequest  $request
+     * @param  \App\Models\Course\Course  $course
+     * @param  \App\Services\CourseService  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CourseRequest $request, Course $course, CourseService $service)
     {
-        //
+        $service->update($request->validated(), $course);
+
+        return redirect()->route('admin.courses.index')->with('message', __('Course updated successfully'));
     }
 
     /**

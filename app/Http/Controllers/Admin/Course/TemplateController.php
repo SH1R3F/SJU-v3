@@ -109,7 +109,7 @@ class TemplateController extends Controller
     public function destroy(Template $template)
     {
         // Delete files
-        Storage::delete($template->files ?? '', $template->preview ?? '');
+        Storage::delete($template->file ?? '', $template->preview ?? '');
         $template->delete();
         return redirect()->back()->with('message', __('Template deleted successfully'));
     }

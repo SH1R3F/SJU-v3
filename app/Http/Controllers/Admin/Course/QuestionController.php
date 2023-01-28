@@ -72,15 +72,16 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Course\QuestionRequest  $request
      * @param  \App\Models\Course\Questionnaire  $questionnaire
      * @param  \App\Models\Course\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Questionnaire $questionnaire, Question $question)
+    public function update(QuestionRequest $request, Questionnaire $questionnaire, Question $question)
     {
         $this->authorize('view', $questionnaire);
-        //
+        $questionnaire->questions()->update($request->validated());
+        return redirect()->route('admin.questions.index', $questionnaire->id)->with('message', __('Question updated successfully'));
     }
 
     /**

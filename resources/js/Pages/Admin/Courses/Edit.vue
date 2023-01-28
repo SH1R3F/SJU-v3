@@ -8,40 +8,42 @@ const props = defineProps({
     places: Object,
     templates: Object,
     questionnaires: Object,
+    course: Object,
 });
 
 const form = useForm({
-    title_ar: '',
-    title_en: '',
-    region: '',
-    course_type_id: '',
-    course_category_id: '',
-    course_gender_id: '',
-    course_place_id: '',
-    map_link: '',
-    lng: 27.0001404,
-    lat: 49.6574203,
-    seats: '',
-    date_from: '',
-    date_to: '',
-    time_from: '',
-    time_to: '',
-    days: {},
-    minutes: '',
-    percentage: '',
-    cost: 0,
-    price: '',
-    currency: '',
-    payment_method: '',
-    images: [],
-    trainer: '',
-    summary: '',
-    content: '',
-    zoom: '',
-    youtube: '',
-    template_id: '',
-    questionnaire_id: '',
-    attendance_mins: '',
+    title_ar: props.course.title_ar || '',
+    title_en: props.course.title_en || '',
+    region: props.course.region || '',
+    course_type_id: props.course.course_type_id || '',
+    course_category_id: props.course.course_category_id || '',
+    course_gender_id: props.course.course_gender_id || '',
+    course_place_id: props.course.course_place_id || '',
+    map_link: props.course.map_link || '',
+    lng: props.course.lng || 27.0001404,
+    lat: props.course.lat || 49.6574203,
+    seats: props.course.seats || '',
+    date_from: props.course.date_from || '',
+    date_to: props.course.date_to || '',
+    time_from: props.course.time_from || '',
+    time_to: props.course.time_to || '',
+    days: props.course.days || {},
+    minutes: props.course.minutes || '',
+    percentage: props.course.percentage || '',
+    cost: props.course.cost || 0,
+    price: props.course.price || '',
+    currency: props.course.currency || '',
+    payment_method: props.course.payment_method || '',
+    images: props.course.images || [],
+    trainer: props.course.trainer || '',
+    summary: props.course.summary || '',
+    content: props.course.content || '',
+    zoom: props.course.zoom || '',
+    youtube: props.course.youtube || '',
+    template_id: props.course.template_id || '',
+    questionnaire_id: props.course.questionnaire_id || '',
+    attendance_mins: props.course.attendance_mins || '',
+    _method: 'PUT',
 });
 
 const handleImages = ($event) => {
@@ -59,17 +61,15 @@ const handleImages = ($event) => {
 </script>
 
 <template>
-    <Head :title="__('Create course')"> </Head>
+    <Head :title="__('Edit course')" />
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
-            <!-- Member Content -->
             <div class="col-12 order-0 order-md-1">
-                <!-- Member information -->
                 <div class="card mb-4">
-                    <h5 class="card-header">{{ __('Create course') }}</h5>
+                    <h5 class="card-header">{{ __('Edit course') }}</h5>
                     <div class="card-body">
-                        <form @submit.prevent="form.post(route('admin.courses.store'))">
+                        <form @submit.prevent="form.post(route('admin.courses.update', course.id))">
                             <!-- Course title -->
                             <div class="row">
                                 <div class="mb-3 col-12 col-sm-6">
@@ -459,15 +459,13 @@ const handleImages = ($event) => {
                             <!-- Attendance end -->
 
                             <div>
-                                <button type="submit" class="btn btn-primary me-2">{{ __('Create') }}</button>
+                                <button type="submit" class="btn btn-primary me-2">{{ __('Edit') }}</button>
                                 <Link :href="route('admin.courses.index')" as="button" type="reset" class="btn btn-label-secondary me-2">{{ __('Cancel') }}</Link>
                             </div>
                         </form>
                     </div>
                 </div>
-                <!-- Member information -->
             </div>
-            <!--/ Member Content -->
         </div>
     </div>
     <!-- / Content -->

@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Course\Course;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('title_ar')->index();
             $table->string('title_en')->nullable()->index();
-            $table->string('course_number')->unique();
+            $table->string('course_number')->unique()->nullable();
             $table->unsignedBigInteger('course_category_id')->nullable();
             $table->unsignedBigInteger('course_type_id')->nullable();
             $table->unsignedBigInteger('course_gender_id')->nullable();
@@ -31,7 +32,7 @@ return new class extends Migration
             $table->date('date_to')->index();
             $table->time('time_from');
             $table->time('time_to');
-            $table->json('days');
+            $table->json('days')->nullable();
             $table->unsignedInteger('minutes');
             $table->unsignedInteger('percentage');
             $table->tinyInteger('cost')->default(0);
@@ -49,6 +50,8 @@ return new class extends Migration
             $table->unsignedBigInteger('questionnaire_id')->nullable();
             $table->unsignedInteger('attendance_mins')->nullable();
 
+            $table->integer('status')->default(Course::STATUS_AVAILABLE);
+
             $table->timestamps();
 
             $table->foreign('course_category_id')->references('id')->on('courses_categories')->restrictOnDelete()->cascadeOnUpdate();
@@ -56,8 +59,8 @@ return new class extends Migration
             $table->foreign('course_gender_id')->references('id')->on('courses_genders')->restrictOnDelete()->cascadeOnUpdate();
             $table->foreign('course_place_id')->references('id')->on('courses_places')->restrictOnDelete()->cascadeOnUpdate();
 
-            // $table->foreign('template_id')->references('id')->on('templates')->restrictOnDelete()->cascadeOnUpdate();
-            // $table->foreign('questionnaire_id')->references('id')->on('questionnaires')->restrictOnDelete()->cascadeOnUpdate();
+            $table->foreign('template_id')->references('id')->on('courses_templates')->restrictOnDelete()->cascadeOnUpdate();
+            $table->foreign('questionnaire_id')->references('id')->on('courses_questionnaires')->restrictOnDelete()->cascadeOnUpdate();
         });
     }
 

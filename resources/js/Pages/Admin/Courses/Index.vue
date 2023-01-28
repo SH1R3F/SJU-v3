@@ -130,17 +130,17 @@ watch(
                                 </div>
                             </td>
                             <td>{{ course.date_from }}</td>
-                            <td>{{ course.type }}</td>
-                            <td>{{ course.category }}</td>
-                            <td>{{ course.gender }}</td>
-                            <td>{{ course.location }}</td>
+                            <td>{{ course.course_type }}</td>
+                            <td>{{ course.course_category }}</td>
+                            <td>{{ course.course_gender }}</td>
+                            <td>{{ course.course_place }}</td>
                             <td>{{ course.region }}</td>
-                            <td>{{ course.status }}</td>
+                            <td>{{ course.state }}</td>
                             <td>
                                 <div class="d-flex align-items-center">
                                     <Link
-                                        v-if="ticket.viewable"
-                                        :href="route('admin.courses.show', ticket.id)"
+                                        v-if="course.viewable"
+                                        :href="route('admin.courses.show', course.id)"
                                         class="text-body"
                                         data-bs-toggle="tooltip"
                                         data-bs-placement="top"
@@ -150,8 +150,8 @@ watch(
                                         <i class="ti ti-eye mx-2 ti-sm"></i>
                                     </Link>
                                     <Link
-                                        v-if="ticket.editable"
-                                        :href="route('admin.courses.edit', ticket.id)"
+                                        v-if="course.editable"
+                                        :href="route('admin.courses.edit', course.id)"
                                         class="text-body"
                                         data-bs-toggle="tooltip"
                                         data-bs-placement="top"
@@ -175,8 +175,8 @@ watch(
                                         <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': course.status == 1, 'ti-toggle-left': course.status == 2 }"></i>
                                     </Link>
                                     <Link
-                                        v-if="ticket.deleteable"
-                                        :href="route('admin.courses.destroy', ticket.id)"
+                                        v-if="course.deleteable"
+                                        :href="route('admin.courses.destroy', course.id)"
                                         method="DELETE"
                                         as="span"
                                         data-bs-toggle="tooltip"

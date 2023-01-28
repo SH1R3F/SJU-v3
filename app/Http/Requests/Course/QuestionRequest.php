@@ -38,4 +38,11 @@ class QuestionRequest extends FormRequest
             'status' => ['required', 'boolean']
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'status' => $this->boolean('status')
+        ]);
+    }
 }
