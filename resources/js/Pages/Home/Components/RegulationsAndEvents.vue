@@ -1,3 +1,10 @@
+<script setup>
+defineProps({
+    courses: Object,
+    locale: String,
+});
+</script>
+
 <template>
     <div class="section regulations-events">
         <div class="container">
@@ -74,18 +81,20 @@
                 <div class="col-lg-5">
                     <div class="row">
                         <h2 class="col-10">{{ __('Events') }}</h2>
-                        <Link href="/events" class="col-2 text-end">{{ __('More') }}</Link>
+                        <Link :href="route('courses.index')" class="col-2 text-end">{{ __('More') }}</Link>
                     </div>
 
                     <div class="row mt-3">
-                        <div class="col-12 event" v-for="x in 2">
+                        <div class="col-12 event" v-for="course in courses">
                             <div class="date">
-                                <span>2</span>
-                                12/2
+                                <span>{{ new Date(course.date_from).getDate() }}</span>
+                                {{ new Date(course.date_from).toLocaleString(locale == 'ar' ? 'ar-EG' : 'default', { month: 'long' }) }}
                             </div>
 
                             <h6 class="title">
-                                <Link href="/events/register/1"> event name </Link>
+                                <Link :href="route('courses.register', course.id)">
+                                    {{ course.title }}
+                                </Link>
                             </h6>
                         </div>
                     </div>

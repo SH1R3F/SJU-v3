@@ -42,7 +42,7 @@ const form = useForm({
                             </label>
 
                             <div class="col-lg-3">
-                                <h4>{{ member.mobile }}</h4>
+                                <h4>966{{ member.mobile }}</h4>
                                 <Link :href="route('member.register.step2')" class="text-success">{{ __('Change') }}</Link>
                             </div>
                         </div>

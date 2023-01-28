@@ -1,3 +1,4 @@
+<script></script>
 <template>
     <!-- Users menu -->
     <div class="usermenu">
@@ -13,8 +14,8 @@
             <li :class="{ active: $page.url == '/members' }">
                 <Link :href="route('member.home')">{{ __('Home') }}</Link>
             </li>
-            <li :class="{ active: $page.url == '/events' }">
-                <a href="#">{{ __('Events') }}</a>
+            <li :class="{ active: $page.url == '/members/courses' }">
+                <Link :href="route('member.courses')">{{ __('Courses') }}</Link>
             </li>
             <li :class="{ active: $page.url.startsWith('/members/subscription') }">
                 <Link :href="route('member.subscription')">{{ __('Membership ') }}</Link>

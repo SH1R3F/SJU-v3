@@ -20,7 +20,7 @@ class TemplateController extends Controller
     public function index()
     {
         $templates = Template::filter(request())
-            ->orderBy('id')
+            ->orderBy('id', 'DESC')
             ->paginate(request()->perPage ?: 10)
             ->withQueryString();
 

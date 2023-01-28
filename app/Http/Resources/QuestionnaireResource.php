@@ -25,15 +25,22 @@ class QuestionnaireResource extends JsonResource
                 'name' => app()->getLocale() == 'ar' ? $this->name_ar : $this->name_en,
                 'state' => $this->status ? __('Active') : __('Inactive'),
 
-                'questions' => $this->when($this->relationLoaded('questions'), QuestionResource::collection($this->questions()->orderBy('id')->get())),
+                'questions' => $this->when($this->relationLoaded('questions'), QuestionResource::collection($this->questions()->orderBy('order')->orderBy('id')->get())),
 
                 // Authorization
-                $this->mergeWhen(str_contains(request()->route()->getActionName(), '@index'), [
-                    'viewable'   => $request->user()->can('view', $this->resource),
-                    'editable'   => $request->user()->can('update', $this->resource),
-                    'deleteable' => $request->user()->can('delete', $this->resource),
-                ])
+                $this->merge($this->withAuthorization($request))
             ]
         );
+    }
+
+    private function withAuthorization($request)
+    {
+        if (!str_contains(request()->route()->getActionName(), '@index')) return [];
+
+        return [
+            'viewable'   => $request->user()->can('view', $this->resource),
+            'editable'   => $request->user()->can('update', $this->resource),
+            'deleteable' => $request->user()->can('delete', $this->resource),
+        ];
     }
 }

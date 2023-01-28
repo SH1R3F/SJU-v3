@@ -2,12 +2,14 @@
 
 namespace App\Models\Course;
 
+use App\Models\Member;
 use App\Models\Course\Type;
 use App\Models\Course\Place;
 use Illuminate\Http\Request;
 use App\Models\Course\Gender;
 use App\Models\Course\Category;
 use App\Models\Course\Template;
+use App\Models\Course\Questionnaire;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -44,7 +46,7 @@ class Course extends Model
         $statuses = [
             0 => 'Hidden',
             1 => 'Available',
-            2 => 'Ended',
+            2 => 'Registration ended',
             3 => 'Postponed',
             4 => 'Completed',
             5 => 'Private',
@@ -71,6 +73,14 @@ class Course extends Model
     public function template()
     {
         return $this->belongsTo(Template::class, 'template_id');
+    }
+
+    /**
+     * Relation to the questionnaire it belongs to
+     */
+    public function questionnaire()
+    {
+        return $this->belongsTo(Questionnaire::class, 'questionnaire_id');
     }
 
     /**
@@ -103,5 +113,13 @@ class Course extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'course_category_id');
+    }
+
+    /**
+     * Relation to the coursables
+     */
+    public function members()
+    {
+        return $this->morphedByMany(Member::class, 'taggable');
     }
 }

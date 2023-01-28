@@ -8,7 +8,7 @@ const form = useForm({
     variables: [
         {
             field: '{free_text}',
-            text: '',
+            text: ' ',
             height: 0,
             width_type: 'specify',
             width: 0,
@@ -31,7 +31,7 @@ const form = useForm({
 
 const variable = {
     field: '{free_text}',
-    text: '',
+    text: ' ',
     height: 0,
     width_type: 'specify',
     width: 0,
@@ -144,7 +144,7 @@ const variable = {
                                 <div class="mb-3 col-12 col-md-2" v-if="variable.field === '{free_text}'">
                                     <label class="form-label" :for="`text-${i}`">{{ __('Text') }}</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" :id="`text-${i}`" v-model="variable.text" :placeholder="__('Text')" />
+                                        <textarea class="form-control" :id="`text-${i}`" v-model="variable.text" rows="1" :placeholder="__('Text')"></textarea>
                                     </div>
                                 </div>
                                 <div class="mb-3 col-12 col-md-1">
@@ -212,7 +212,7 @@ const variable = {
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-default" @click.prevent="form.variables.push(variable)">{{ __('Add field') }}</button>
+                            <button class="btn btn-default" @click.prevent="form.variables.push(JSON.parse(JSON.stringify(variable)))">{{ __('Add field') }}</button>
                             <!-- Variables to be added -->
                             <hr />
 

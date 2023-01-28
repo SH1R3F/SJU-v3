@@ -80,7 +80,7 @@ class QuestionController extends Controller
     public function update(QuestionRequest $request, Questionnaire $questionnaire, Question $question)
     {
         $this->authorize('view', $questionnaire);
-        $questionnaire->questions()->update($request->validated());
+        $question->update($request->validated());
         return redirect()->route('admin.questions.index', $questionnaire->id)->with('message', __('Question updated successfully'));
     }
 

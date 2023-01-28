@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Member;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
+use App\Models\Course\Course;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\CourseResource;
 
 class MemberController extends Controller
 {
@@ -38,5 +40,28 @@ class MemberController extends Controller
     public function subscription()
     {
         return inertia('Members/Subscription');
+    }
+
+    /**
+     * Display my courses page for members
+     */
+    public function courses()
+    {
+        $upcoming = Course::query()
+            ->whereIn('status', [1, 2, 3, 4])
+            // Uncomment this if you want registered courses not to appear in upcoming courses
+            // ->whereNotIn('id', Auth::guard('member')->user()->courses->pluck('id'))
+            ->whereDate('date_from', '>=', now())->orderBy('date_from', 'ASC')
+            ->get();
+
+        $registered = Auth::guard('member')->user()
+            ->courses()
+            ->orderBy('date_from', 'DESC')
+            ->get();
+
+        return inertia('Members/Courses', [
+            'upcoming' => CourseResource::collection($upcoming),
+            'registered' => CourseResource::collection($registered),
+        ]);
     }
 }

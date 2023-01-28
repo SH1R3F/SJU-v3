@@ -17,7 +17,7 @@ const form = useForm({
     color3: props.question.color3 || '#000000',
     answer4: props.question.answer4 || '',
     color4: props.question.color4 || '#000000',
-    order: props.question.color || '',
+    order: props.question.order || undefined,
     status: props.question.status,
 });
 </script>

@@ -1,3 +1,4 @@
+<script></script>
 <template>
     <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade section news-slider" data-mdb-ride="carousel">
         <div class="container">

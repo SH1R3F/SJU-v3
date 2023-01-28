@@ -8,7 +8,10 @@ use App\Models\Invoice;
 use App\Models\Transaction;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use App\Models\Course\Course;
+use App\Models\Course\Certificate;
 use Illuminate\Support\Facades\DB;
+use App\Models\Course\Questionnaire;
 use App\Models\TechnicalSupportTicket;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -90,6 +93,19 @@ class Member extends Authenticatable
         'exp_flds_lngs' => 'array',
         'status' => 'integer'
     ];
+
+    /**
+     * Register any events for your application.
+     *
+     * @return void
+     */
+    public static function boot()
+    {
+        parent::boot();
+        Member::creating(function (Member $member) { // For multistep registration
+            $member->mobile = str_starts_with($member->mobile, "966") ? $member->mobile : "966{$member->mobile}";
+        });
+    }
 
     /**
      * Filter members in admin panel
@@ -273,5 +289,29 @@ class Member extends Authenticatable
     public function tickets()
     {
         return $this->morphMany(TechnicalSupportTicket::class, 'supportable');
+    }
+
+    /**
+     * Relationship to the courses it has
+     */
+    public function courses()
+    {
+        return $this->morphToMany(Course::class, 'coursable')->withPivot('attendance');
+    }
+
+    /**
+     * Relationship to the questionnaires it has
+     */
+    public function questionnaires()
+    {
+        return $this->morphToMany(Questionnaire::class, 'questionable')->withPivot('answers');
+    }
+
+    /**
+     * Relation to the certificates he has
+     */
+    public function certificates()
+    {
+        return $this->morphMany(Certificate::class, 'certificatable');
     }
 }

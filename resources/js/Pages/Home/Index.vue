@@ -7,6 +7,11 @@ import RegulationsAndEvents from './Components/RegulationsAndEvents.vue';
 import Membership from './Components/Membership.vue';
 import Statistics from './Components/Statistics.vue';
 import FollowUs from './Components/FollowUs.vue';
+
+defineProps({
+    courses: Object,
+    locale: String,
+});
 </script>
 
 <template>
@@ -28,7 +33,7 @@ import FollowUs from './Components/FollowUs.vue';
         <!-- Studio -->
 
         <!-- Regulations and Events -->
-        <regulations-and-events />
+        <regulations-and-events :locale="locale" :courses="courses.data" />
         <!-- Regulations and Events -->
 
         <!-- Membership -->

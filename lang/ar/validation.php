@@ -282,6 +282,8 @@ return [
         'template_id' => 'القالب',
         'questionnaire_id' => 'الإستبيان',
         'attendance_mins' => 'دقائق التحضير',
+        'choice' => 'الإختيار',
+        'answer' => 'الإجابة'
     ],
 
 ];

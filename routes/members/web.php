@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\MemberAuthController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\Member\MemberController;
 use App\Http\Controllers\Member\PaymentController;
 use App\Http\Controllers\Member\ProfileController;
@@ -88,6 +89,11 @@ Route::group(['prefix' => 'members', 'as' => 'member.'], function () {
             Route::post('/license', [ProfileController::class, 'postLicense']);
         });
 
+        /**
+         * My Courses
+         * Displays current registered courses and upcoming courses
+         */
+        Route::get('/courses', [MemberController::class, 'courses'])->name('courses');
 
         /**
          * Routes that require member information to be complete

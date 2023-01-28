@@ -2,6 +2,7 @@
 
 namespace App\Models\Course;
 
+use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
 use App\Models\Course\Question;
@@ -39,5 +40,13 @@ class Questionnaire extends Model
     public function questions()
     {
         return $this->hasMany(Question::class, 'questionnaire_id');
+    }
+
+    /**
+     * Relation to the questionables
+     */
+    public function members()
+    {
+        return $this->morphedByMany(Member::class, 'questionable');
     }
 }

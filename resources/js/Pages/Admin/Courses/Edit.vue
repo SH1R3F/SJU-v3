@@ -43,6 +43,7 @@ const form = useForm({
     template_id: props.course.template_id || '',
     questionnaire_id: props.course.questionnaire_id || '',
     attendance_mins: props.course.attendance_mins || '',
+    status: props.course.status || 1,
     _method: 'PUT',
 });
 
@@ -439,6 +440,25 @@ const handleImages = ($event) => {
                                 </div>
                             </div>
                             <!-- Template & Questionnaire -->
+
+                            <!-- Status -->
+                            <div class="row">
+                                <div class="mb-3 col-12">
+                                    <label class="form-label" for="status">{{ __('Status') }}</label>
+                                    <div class="input-group">
+                                        <select class="form-control m-select2-no" id="status" v-model="form.status">
+                                            <option value="1">{{ __('Available') }}</option>
+                                            <option value="0">{{ __('Hidden') }}</option>
+                                            <option value="2">{{ __('Ended') }}</option>
+                                            <option value="3">{{ __('Postponed') }}</option>
+                                            <option value="4">{{ __('Completed') }}</option>
+                                            <option value="5">{{ __('Private') }}</option>
+                                        </select>
+                                    </div>
+                                    <span class="fs-6 text-danger" v-if="form.errors.status">{{ form.errors.status }}</span>
+                                </div>
+                            </div>
+                            <!-- Status -->
 
                             <!-- Attendance end -->
                             <div class="row">

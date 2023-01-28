@@ -1,3 +1,4 @@
+<script></script>
 <template>
     <div class="section media-center">
         <div class="container">

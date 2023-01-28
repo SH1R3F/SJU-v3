@@ -32,12 +32,21 @@ class CourseResource extends JsonResource
                 'images' => collect($this->images)->map(fn ($img) => Storage::url($img)),
 
                 // Authorization
-                $this->mergeWhen(str_contains(request()->route()->getActionName(), '@index'), [
-                    'viewable'   => $request->user()->can('view', $this->resource),
-                    'editable'   => $request->user()->can('update', $this->resource),
-                    'deleteable' => $request->user()->can('delete', $this->resource),
-                ])
+                $this->merge($this->withAuthorization($request))
             ]
         );
+    }
+
+    private function withAuthorization($request)
+    {
+        if (str_contains(request()->route()->getActionName(), '@index') && strpos($request->route()->getAction()['as'], 'dmin')) {
+            return [
+                'viewable'   => $request->user()->can('view', $this->resource),
+                'editable'   => $request->user()->can('update', $this->resource),
+                'toggleable' => $request->user()->can('toggle', $this->resource),
+                'deleteable' => $request->user()->can('delete', $this->resource),
+            ];
+        }
+        return [];
     }
 }

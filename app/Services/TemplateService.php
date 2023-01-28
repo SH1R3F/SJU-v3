@@ -82,7 +82,6 @@ class TemplateService
             logger("___________________________ERROR PREVIEWING TEMPLATE__________________________");
             logger($e->getMessage());
             logger("______________________________________________________________________________");
-            dd($e);
         }
     }
 
@@ -101,7 +100,7 @@ class TemplateService
         }
 
         $html = '';
-        foreach ($template->variables as $variable) {
+        foreach ($template->variables ?? [] as $variable) {
 
             // Text value
             $text = $variable['field'];
@@ -121,7 +120,7 @@ class TemplateService
             $font_color     = $variable['fontcolor'];
             $font_type      = $variable['fontfamily'] . ';';
 
-            $html .= "<div style='position: absolute; $position_y $position_fixed $position_x'><span style='font-weight: bold; font-size: $font_size; font-family: $font_type; color: $font_color;'>$text</span></div>";
+            $html .= $text ? "<div style='position: absolute; $position_y $position_fixed $position_x'><span style='font-weight: bold; font-size: $font_size; font-family: $font_type; color: $font_color;'>$text</span></div>" : '';
         }
         return $html;
     }

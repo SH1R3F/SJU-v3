@@ -91,7 +91,6 @@ class MemberAuthController extends Controller
         $request->validate(['mobile' => ['required', 'numeric', 'regex:/^(5)\d{8}$/', new MemberUniqueMobile]]);
 
         // Throttle here
-
         $member = session()->get('member');
         $code = rand(111111, 999999);
         $member->mobile_code = $code;
@@ -250,13 +249,10 @@ class MemberAuthController extends Controller
         $member = session()->get('member');
         $member_type = session()->get('member_type');
 
-        // Append country key to mobile field
-        $member->mobile = "966{$member->mobile}";
-
         // Register the member
         $member->save();
         // Register his subscription
-        $member->subscriptions()->create(['type' => $member_type, 'end_date' => Carbon::now()->endOfYear()]);
+        $member->subscription()->create(['type' => $member_type, 'end_date' => Carbon::now()->endOfYear()]);
         // Fire event
         event(new MemberRegistered($member));
 
