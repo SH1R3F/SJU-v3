@@ -120,6 +120,6 @@ class Course extends Model
      */
     public function members()
     {
-        return $this->morphedByMany(Member::class, 'taggable');
+        return $this->morphedByMany(Member::class, 'coursable')->withPivot('attendance');
     }
 }

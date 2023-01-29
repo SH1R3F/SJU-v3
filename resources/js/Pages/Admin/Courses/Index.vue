@@ -190,6 +190,8 @@ watch(
                                 </div>
                             </td>
                         </tr>
+
+                        <!-- Add subscribers and volunteers here too -->
                     </tbody>
                 </table>
                 <Pagination :meta="courses.meta" />

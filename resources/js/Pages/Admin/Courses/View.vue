@@ -1,149 +1,157 @@
 <script setup>
-import { useForm } from '@inertiajs/inertia-vue3';
-
 const props = defineProps({
-    ticket: Object,
+    course: Object,
 });
-
-let msgGroups = [];
-let group = [];
-props.ticket.messages.forEach((msg, i) => {
-    if (msg.sender == group[0]?.sender) {
-        group.push(msg);
-    } else {
-        msgGroups.push(group);
-        group = [msg];
-    }
-    if (i + 1 == props.ticket.messages.length) msgGroups.push(group);
-});
-msgGroups = msgGroups.filter((group) => group.length);
-
-const form = useForm({
-    body: '',
-    attachment: '',
-});
-</script>
-
-<script defer>
-export default {
-    mounted() {
-        $(document).ready(() => {
-            setTimeout(() => {
-                $('#chatParent').animate(
-                    {
-                        scrollTop: $('#chatParent')[0].scrollHeight,
-                    },
-                    500
-                );
-            }, 300);
-        });
-    },
-};
+console.log(props.course);
 </script>
 
 <template>
-    <Head>
-        <title>{{ __('Technical support') }}</title>
-        <link rel="stylesheet" href="/assets/vendor/css/pages/app-chat.css" />
-    </Head>
+    <Head :title="__('View course')" />
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
-        <div class="app-chat card overflow-hidden">
-            <div class="row g-0">
-                <!-- Chat History -->
-                <div class="col app-chat-history bg-body">
-                    <div class="chat-history-wrapper">
-                        <div class="chat-history-header border-bottom">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex overflow-hidden align-items-center">
-                                    <i class="ti ti-menu-2 ti-sm cursor-pointer d-lg-none d-block me-2" data-bs-toggle="sidebar" data-overlay data-target="#app-chat-contacts"></i>
-                                    <div class="flex-shrink-0 avatar">
-                                        <img
-                                            :src="ticket.supportable.profile_photo || '/img/user-dark.png'"
-                                            alt="Avatar"
-                                            class="rounded-circle"
-                                            data-bs-toggle="sidebar"
-                                            data-overlay
-                                            data-target="#app-chat-sidebar-right"
-                                        />
-                                        <i class="ti ti-x ti-sm cursor-pointer close-sidebar" data-bs-toggle="sidebar" data-overlay data-target="#app-chat-sidebar-left"></i>
-                                    </div>
-                                    <div class="chat-contact-info flex-grow-1 ms-2">
-                                        <h6 class="m-0">{{ ticket.supportable.fullName }}</h6>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <Link
-                                        as="i"
-                                        :href="route('admin.tickets.toggle', ticket.id)"
-                                        method="post"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        :aria-label="ticket.status ? __('Open ticket') : __('Close ticket')"
-                                        :data-bs-original-title="ticket.status ? __('Open ticket') : __('Close ticket')"
-                                        class="ti cursor-pointer d-sm-block d-none me-3"
-                                        :class="{ 'ti-toggle-left': ticket.status, 'ti-toggle-right': !ticket.status }"
-                                    ></Link>
+        <div class="row">
+            <!-- Course Sidebar -->
+            <div class="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="user-avatar-section">
+                            <div class="d-flex align-items-center flex-column">
+                                <img class="img-fluid rounded mb-3 pt-1 mt-4" :src="course.image || '/img/course.png'" height="200" width="200" alt="Course" />
+                                <div class="user-info text-center">
+                                    <h4 class="mb-2">{{ course.title_ar }}</h4>
+                                    <h4 class="mb-2">{{ course.title_en }}</h4>
+                                    <span class="badge bg-label-secondary mt-1">{{ course.course_number }}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="chat-history-body bg-body" id="chatParent" style="overflow-y: auto">
-                            <ul class="list-unstyled chat-history">
-                                <li class="chat-message" v-for="msgGroup in msgGroups" :class="{ 'chat-message-right': msgGroup[0].sender }">
-                                    <div class="d-flex overflow-hidden">
-                                        <div class="user-avatar flex-shrink-0 me-3" v-if="!msgGroup[0].sender">
-                                            <div class="avatar avatar-sm">
-                                                <img src="/img/user-dark.png" alt="Avatar" class="rounded-circle" />
-                                            </div>
-                                        </div>
-                                        <div class="chat-message-wrapper flex-grow-1">
-                                            <div v-for="msg in msgGroup" :key="msg.id" class="d-flex" :class="{ 'justify-content-end': msg.sender }">
-                                                <div class="chat-message-text mb-1 d-inline-block">
-                                                    <p class="mb-0 d-inline">
-                                                        {{ msg.body }}
-
-                                                        <a v-if="msg.attachment" :href="msg.attachment" target="_block">
-                                                            <img :src="msg.attachment" class="d-block mt-2" style="max-width: 300px" />
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="text-muted mt-1" :class="{ 'text-end': msgGroup[msgGroup.length - 1].sender }">
-                                                <small>{{ msgGroup[msgGroup.length - 1].created_at }}</small>
-                                            </div>
-                                        </div>
-                                        <div class="user-avatar flex-shrink-0 me-3" v-if="msgGroup[0].sender">
-                                            <div class="avatar avatar-sm">
-                                                <img src="/img/admin.png" alt="Avatar" class="rounded-circle" />
-                                            </div>
-                                        </div>
-                                    </div>
+                        <p class="mt-4 small text-uppercase text-muted">{{ __('Details') }}</p>
+                        <div class="info-container">
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Training minutes') }}</span>
+                                    <span>{{ course.minutes }} {{ __('Minute') }}</span>
+                                </li>
+                                <li class="mb-2">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Passing percentage') }}</span>
+                                    <span>{{ course.percentage }}%</span>
+                                </li>
+                                <li class="mb-2">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Course date') }}</span>
+                                    <span>{{ course.date_from }}</span>
+                                </li>
+                                <li class="mb-2">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Region') }}</span>
+                                    <span>{{ course.region }}</span>
+                                </li>
+                                <li class="mb-2 pt-1">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Type') }}</span>
+                                    <span>{{ course.course_type }}</span>
+                                </li>
+                                <li class="mb-2 pt-1">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Location') }}</span>
+                                    <span class="badge bg-label-secondary">{{ course.course_place }}</span>
+                                </li>
+                                <li class="mb-2 pt-1">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Gender') }} </span>
+                                    <span>{{ course.course_gender }}</span>
+                                </li>
+                                <li class="mb-2 pt-1">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Category') }}</span>
+                                    <span>{{ course.course_category }}</span>
                                 </li>
                             </ul>
                         </div>
-                        <!-- Chat message form -->
-                        <div class="chat-history-footer shadow-sm">
-                            <form class="form-send-message d-flex justify-content-between align-items-center" @submit.prevent="form.post(route('admin.tickets.message', ticket.id))">
-                                <input class="form-control message-input border-0 me-3 shadow-none" :placeholder="__('Type your message here')" v-model="form.body" />
-                                <div class="message-actions d-flex align-items-center">
-                                    <label for="attach-doc" class="form-label mb-0" :class="{ 'text-success': form.attachment }">
-                                        <i class="ti ti-photo ti-sm cursor-pointer mx-3"></i>
-                                        <input type="file" id="attach-doc" hidden @change="form.attachment = $event.target.files[0]" />
-                                    </label>
-                                    <button class="btn btn-primary d-flex send-msg-btn" type="submit">
-                                        <i class="ti ti-send me-md-1 me-0"></i>
-                                        <span class="align-middle d-md-inline-block d-none">{{ __('Send') }}</span>
-                                    </button>
-                                </div>
-                            </form>
+                        <p class="mt-4 small text-uppercase text-muted">{{ __('Course statistics') }}</p>
+                        <div class="info-container">
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Total attendance') }}</span>
+                                    <span>22 {{ __('Users') }}</span>
+                                </li>
+                                <li class="mb-2">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Passed number') }}</span>
+                                    <span>22 {{ __('Users') }}</span>
+                                </li>
+                                <li class="mb-2">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Non-Passed number') }}</span>
+                                    <span>22 {{ __('Users') }}</span>
+                                </li>
+                                <li class="mb-2">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Attendance duration') }}</span>
+                                    <span>{{ course.attendance_mins ? `${course.attendance_mins} ${__('Minute')}` : __('Unspecified') }}</span>
+                                </li>
+                                <li class="mb-2 pt-1">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Attendance link') }}</span>
+                                    <a :href="route('courses.attend', course.id)">{{ route('courses.attend', course.id) }}</a>
+                                </li>
+                            </ul>
                         </div>
-                        <p class="text text-danger fs-sm" v-if="form.errors.body">{{ form.errors.body }}</p>
-                        <p class="text text-danger fs-sm" v-if="form.errors.attachment">{{ form.errors.attachment }}</p>
-                        <progress v-if="form.progress" :value="form.progress.percentage" max="100">{{ form.progress.percentage }}%</progress>
                     </div>
                 </div>
-                <!-- /Chat History -->
             </div>
+            <!--/ Course Sidebar -->
+
+            <!-- Course Content -->
+            <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
+                <!-- Coursables table -->
+                <div class="card mb-4 p-4">
+                    <div class="table-responsive mb-3">
+                        <table class="table datatable-project border-top">
+                            <thead>
+                                <tr>
+                                    <th class="cell-fit">#</th>
+                                    <th>{{ __('Name') }}</th>
+                                    <th>{{ __('Type') }}</th>
+                                    <th>{{ __('Mobile') }}</th>
+                                    <th>{{ __('Email') }}</th>
+                                    <th>{{ __('Passed') }}</th>
+                                    <th class="cell-fit">{{ __('Actions') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(member, i) in course.members" :key="member.id">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ member.fullName }}</td>
+                                    <td>{{ __('Member') }}</td>
+                                    <td>966{{ member.mobile }}</td>
+                                    <td>{{ member.email }}</td>
+                                    <td>
+                                        <Link
+                                            :href="route('admin.courses.attendance.toggle', { course: course.id, type: 'member', id: member.id })"
+                                            method="post"
+                                            as="span"
+                                            preserve-scroll
+                                            class="cursor-pointer"
+                                            data-bs-placement="top"
+                                            data-bs-toggle="tooltip"
+                                            :data-bs-original-title="member.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
+                                            :class="{ 'text-success': member.pivot?.attendance, 'text-body': !member.pivot?.attendance }"
+                                        >
+                                            <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': member.pivot?.attendance, 'ti-toggle-left': !member.pivot?.attendance }"></i>
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <Link
+                                            :href="route('admin.courses.attendance.delete', { course: course.id, type: 'member', id: member.id })"
+                                            method="DELETE"
+                                            as="span"
+                                            data-bs-toggle="tooltip"
+                                            class="text-body"
+                                            data-bs-placement="top"
+                                            :aria-label="__('Delete')"
+                                            :data-bs-original-title="__('Delete')"
+                                        >
+                                            <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
+                                        </Link>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /Coursables table -->
+            </div>
+            <!--/ Course Content -->
         </div>
     </div>
     <!-- / Content -->

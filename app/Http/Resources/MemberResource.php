@@ -81,6 +81,7 @@ class MemberResource extends JsonResource
 
             'refusal_reason' => $this->refusal_reason === 'unsatisfy' ? __("Not fulfilling the conditions") : $this->refusal_reason,
             'created_at' => $this->created_at?->translatedFormat('l jS F Y'),
+            'pivot' => $this->pivot,
 
             // Authorization
             $this->merge($this->withAuthorization($request))

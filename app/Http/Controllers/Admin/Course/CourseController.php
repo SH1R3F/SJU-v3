@@ -85,12 +85,24 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Course\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Course $course)
     {
-        //
+        $course = $course
+            ->with('members')
+            ->addSelect([
+                'course_type' => Type::select('name')->whereColumn('courses_types.id', 'courses.course_type_id')->take(1),
+                'course_place' => Place::select('name')->whereColumn('courses_places.id', 'courses.course_place_id')->take(1),
+                'course_gender' => Gender::select('name')->whereColumn('courses_genders.id', 'courses.course_gender_id')->take(1),
+                'course_category' => Category::select('name')->whereColumn('courses_categories.id', 'courses.course_category_id')->take(1),
+            ])
+            ->first();
+
+        return inertia('Admin/Courses/View', [
+            'course' => new CourseResource($course),
+        ]);
     }
 
     /**
@@ -130,17 +142,67 @@ class CourseController extends Controller
     /**
      * Toggle active status for a resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Course\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function toggle(Request $request, Course $course)
+    public function toggle(Course $course)
     {
         $this->authorize('toggle', $course);
 
         $course->update(['status' => $state = $course->active == 2 ? 1 : 2]);
         return redirect()->back()->with('message', __($state == 2 ? 'Course hidden successfully' : 'Course enabled successfully'));
     }
+
+    /**
+     * Toggle attendance status for a resource.
+     *
+     * @param  \App\Models\Course\Course  $course
+     * @param  string  $type
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function toggleAttendance(Course $course, $type, $id)
+    {
+        $this->authorize('update', $course);
+        $class = [
+            'member' => 'App\Models\Member',
+            'subscriber' => 'App\Models\Subscriber',
+            'volunteer' => 'App\Models\Volunteer',
+        ];
+        if (!in_array($type, array_keys($class))) return;
+
+        $user = $class[$type]::findOrFail($id);
+
+        $pivot = $user->courses()->where('course_id', $course->id)->first()?->pivot;
+        $user->courses()->updateExistingPivot($course->id, ['attendance' => !$pivot?->attendance]);
+
+        return redirect()->back()->with('message', __('Updated successfully'));
+    }
+
+    /**
+     * Delete attendance for a resource.
+     *
+     * @param  \App\Models\Course\Course  $course
+     * @param  string  $type
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteAttendance(Course $course, $type, $id)
+    {
+        $this->authorize('update', $course);
+        $class = [
+            'member' => 'App\Models\Member',
+            'subscriber' => 'App\Models\Subscriber',
+            'volunteer' => 'App\Models\Volunteer',
+        ];
+        if (!in_array($type, array_keys($class))) return;
+
+        $user = $class[$type]::findOrFail($id);
+
+        $user->courses()->where('course_id', $course->id)->detach();
+        return redirect()->back()->with('message', __('Updated successfully'));
+    }
+
     /**
      * Remove the specified resource from storage.
      *

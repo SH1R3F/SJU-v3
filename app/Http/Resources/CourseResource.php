@@ -2,8 +2,9 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\MemberResource;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class CourseResource extends JsonResource
 {
@@ -28,8 +29,11 @@ class CourseResource extends JsonResource
                 'course_gender' => $this->course_gender,
                 'course_place' => $this->course_place,
                 'state' => __($this->state($this->status)),
-                'image' => $this->when($this->image, Storage::url($this->image)),
+                'image' => $this->when($this->image, Storage::url($this->image), null),
                 'images' => collect($this->images)->map(fn ($img) => Storage::url($img)),
+
+                // Corusables
+                'members' => MemberResource::collection($this->whenLoaded('members')),
 
                 // Authorization
                 $this->merge($this->withAuthorization($request))
