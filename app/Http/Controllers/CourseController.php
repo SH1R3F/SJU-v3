@@ -62,7 +62,7 @@ class CourseController extends Controller
             ->take(4)
             ->get();
 
-        $registered = $this->auth->courses()->where('course_id', $course->id)->count();
+        $registered = $this->auth?->courses()->where('course_id', $course->id)->count();
 
         return inertia('Courses/Register', [
             'course' => new CourseResource($course),
@@ -99,7 +99,7 @@ class CourseController extends Controller
      */
     public function showAttendForm(Course $course)
     {
-        if (!$this->auth->courses()->where('course_id', $course->id)->count()) return redirect()->route('courses.register', $course->id)->with('message', __('Please register first'));
+        if (!$this->auth?->courses()->where('course_id', $course->id)->count()) return redirect()->route('courses.register', $course->id)->with('message', __('Please register first'));
 
         $courses = Course::query()
             ->whereNot('id', $course->id)
@@ -108,7 +108,7 @@ class CourseController extends Controller
             ->take(4)
             ->get();
 
-        $attended = $this->auth->courses()->where('course_id', $course->id)->first()?->pivot?->attendance;
+        $attended = $this->auth?->courses()->where('course_id', $course->id)->first()?->pivot?->attendance;
 
         return inertia('Courses/Attend', [
             'course' => new CourseResource($course),

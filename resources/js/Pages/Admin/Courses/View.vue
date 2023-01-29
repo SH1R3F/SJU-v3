@@ -1,8 +1,32 @@
 <script setup>
+import { computed } from 'vue';
+
 const props = defineProps({
     course: Object,
 });
-console.log(props.course);
+
+const all = computed(() => {
+    return props.course.members?.length || 0 + props.course.subscribers?.length || 0 + props.course.volunteers?.length || 0;
+});
+const passed = computed(() => {
+    return (
+        props.course.members?.reduce((total, current) => {
+            return current.pivot?.attendance;
+        }, 0) ||
+        0 +
+            props.course.subscribers?.reduce((total, current) => {
+                return current.pivot?.attendance;
+            }, 0) ||
+        0 +
+            props.course.volunteers?.reduce((total, current) => {
+                return current.pivot?.attendance;
+            }, 0) ||
+        0
+    );
+});
+const unpassed = computed(() => {
+    return all.value - passed.value;
+});
 </script>
 
 <template>
@@ -66,15 +90,15 @@ console.log(props.course);
                             <ul class="list-unstyled">
                                 <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Total attendance') }}</span>
-                                    <span>22 {{ __('Users') }}</span>
+                                    <span>{{ course.members?.length || 0 + course.subscribers?.length || 0 + course.volunteers?.length || 0 }} {{ __('Users') }}</span>
                                 </li>
                                 <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Passed number') }}</span>
-                                    <span>22 {{ __('Users') }}</span>
+                                    <span>{{ passed }} {{ __('Users') }}</span>
                                 </li>
                                 <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Non-Passed number') }}</span>
-                                    <span>22 {{ __('Users') }}</span>
+                                    <span>{{ unpassed }} {{ __('Users') }}</span>
                                 </li>
                                 <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Attendance duration') }}</span>
@@ -111,7 +135,9 @@ console.log(props.course);
                             <tbody>
                                 <tr v-for="(member, i) in course.members" :key="member.id">
                                     <td>{{ i + 1 }}</td>
-                                    <td>{{ member.fullName }}</td>
+                                    <td>
+                                        <Link :href="route('admin.members.show', member.id)">{{ member.fullName }}</Link>
+                                    </td>
                                     <td>{{ __('Member') }}</td>
                                     <td>966{{ member.mobile }}</td>
                                     <td>{{ member.email }}</td>
@@ -143,6 +169,14 @@ console.log(props.course);
                                         >
                                             <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
                                         </Link>
+                                    </td>
+                                </tr>
+
+                                <!-- Add subscribers and volunteers here too -->
+
+                                <tr v-if="!all">
+                                    <td colspan="7" class="text-muted text-center p-3">
+                                        {{ __('No one registered for this course') }}
                                     </td>
                                 </tr>
                             </tbody>
