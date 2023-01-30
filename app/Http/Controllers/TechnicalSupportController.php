@@ -31,7 +31,7 @@ class TechnicalSupportController extends Controller
      */
     public function index()
     {
-        $tickets = $this->auth->tickets()->orderBy('id')->get();
+        $tickets = $this->auth->tickets()->orderBy('id', 'DESC')->get();
         return inertia('TechnicalSupport/Index', [
             'tickets' => TechnicalSupportTicketResource::collection($tickets)
         ]);

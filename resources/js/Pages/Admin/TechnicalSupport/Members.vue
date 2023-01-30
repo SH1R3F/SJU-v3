@@ -111,7 +111,7 @@ watch(
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <Link :href="route('admin.members.show', 1)" class="text-body text-truncate">
+                                        <Link :href="route('admin.members.show', member.id)" class="text-body text-truncate">
                                             <span class="fw-semibold">{{ ticket.supportable.fullName }}</span>
                                         </Link>
                                         <small class="text-truncate text-muted">{{ ticket.supportable.email }}</small>

@@ -38,7 +38,7 @@ class CourseController extends Controller
                 'course_gender' => Gender::select('name')->whereColumn('courses_genders.id', 'courses.course_gender_id')->take(1),
                 'course_category' => Category::select('name')->whereColumn('courses_categories.id', 'courses.course_category_id')->take(1),
             ])
-            ->orderBy('id')
+            ->orderBy('id', 'DESC')
             ->paginate(request()->perPage ?: 10)
             ->withQueryString();
 
@@ -60,12 +60,12 @@ class CourseController extends Controller
     {
 
         return inertia('Admin/Courses/Create', [
-            'types' => Type::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
-            'genders' => Gender::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
-            'categories' => Category::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
-            'places' => Place::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
-            'templates' => Template::orderBy('id')->select('id', 'name')->get(),
-            'questionnaires' => Questionnaire::where('status', 1)->orderBy('id')->select('id', 'name_ar')->get(),
+            'types' => Type::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
+            'genders' => Gender::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
+            'categories' => Category::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
+            'places' => Place::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
+            'templates' => Template::orderBy('id', 'DESC')->select('id', 'name')->get(),
+            'questionnaires' => Questionnaire::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name_ar')->get(),
         ]);
     }
 
@@ -115,12 +115,12 @@ class CourseController extends Controller
     {
         return inertia('Admin/Courses/Edit', [
             'course' => new CourseResource($course),
-            'types' => Type::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
-            'genders' => Gender::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
-            'categories' => Category::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
-            'places' => Place::where('status', 1)->orderBy('id')->select('id', 'name')->get(),
-            'templates' => Template::orderBy('id')->select('id', 'name')->get(),
-            'questionnaires' => Questionnaire::where('status', 1)->orderBy('id')->select('id', 'name_ar')->get(),
+            'types' => Type::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
+            'genders' => Gender::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
+            'categories' => Category::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
+            'places' => Place::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
+            'templates' => Template::orderBy('id', 'DESC')->select('id', 'name')->get(),
+            'questionnaires' => Questionnaire::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name_ar')->get(),
         ]);
     }
 

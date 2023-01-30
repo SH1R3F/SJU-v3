@@ -87,13 +87,31 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::updateOrCreate(['name' => 'delete-template'], ['name' => 'delete-template', 'guard_name' => 'admin']);
 
         /**
-         * Template management permissions
+         * Questionnaire management permissions
          */
         Permission::updateOrCreate(['name' => 'viewAny-questionnaire'], ['name' => 'viewAny-questionnaire', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'view-questionnaire'], ['name' => 'view-questionnaire', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'create-questionnaire'], ['name' => 'create-questionnaire', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'update-questionnaire'], ['name' => 'update-questionnaire', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'delete-questionnaire'], ['name' => 'delete-questionnaire', 'guard_name' => 'admin']);
+
+        /**
+         * Page management permissions
+         */
+        Permission::updateOrCreate(['name' => 'viewAny-page'], ['name' => 'viewAny-page', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'view-page'], ['name' => 'view-page', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-page'], ['name' => 'create-page', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-page'], ['name' => 'update-page', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-page'], ['name' => 'delete-page', 'guard_name' => 'admin']);
+
+        /**
+         * Article management permissions
+         */
+        Permission::updateOrCreate(['name' => 'viewAny-article'], ['name' => 'viewAny-article', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'view-article'], ['name' => 'view-article', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-article'], ['name' => 'create-article', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-article'], ['name' => 'update-article', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-article'], ['name' => 'delete-article', 'guard_name' => 'admin']);
 
 
         $admin->syncPermissions(Permission::pluck('name'));

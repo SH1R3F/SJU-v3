@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\NewsSeeder;
 use Database\Seeders\AdminSeeder;
 use Database\Seeders\BranchSeeder;
 use Database\Seeders\CourseSeeder;
@@ -28,5 +29,6 @@ class DatabaseSeeder extends Seeder
         $this->call(InvoiceSeeder::class);
         $this->call(TechnicalSupportSeeder::class);
         $this->call(CourseSeeder::class);
+        $this->call(NewsSeeder::class);
     }
 }

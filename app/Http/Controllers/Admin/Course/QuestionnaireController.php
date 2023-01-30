@@ -17,7 +17,7 @@ class QuestionnaireController extends Controller
     public function index()
     {
         $questionnaires = Questionnaire::filter(request())
-            ->orderBy('id')
+            ->orderBy('id', 'DESC')
             ->paginate(request()->perPage ?: 10)
             ->withQueryString();
 

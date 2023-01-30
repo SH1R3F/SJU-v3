@@ -349,6 +349,62 @@ const editRole = (role) => {
                                             </tr>
                                             <!-- Questionnaires permission -->
 
+                                            <!-- Pages permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Pages management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistPage" v-model="addForm.permissions['viewAny-page']" />
+                                                            <label class="form-check-label" for="addlistPage"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addcreatePage" v-model="addForm.permissions['create-page']" />
+                                                            <label class="form-check-label" for="addcreatePage"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addupdatePage" v-model="addForm.permissions['update-page']" />
+                                                            <label class="form-check-label" for="addupdatePage"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="adddeletePage" v-model="addForm.permissions['delete-page']" />
+                                                            <label class="form-check-label" for="adddeletePage"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Pages permission -->
+
+                                            <!-- Articles permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Articles management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistArticle" v-model="addForm.permissions['viewAny-article']" />
+                                                            <label class="form-check-label" for="addlistArticle"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addviewArticle" v-model="addForm.permissions['view-article']" />
+                                                            <label class="form-check-label" for="addviewArticle"> {{ __('View') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addcreateArticle" v-model="addForm.permissions['create-article']" />
+                                                            <label class="form-check-label" for="addcreateArticle"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addupdateArticle" v-model="addForm.permissions['update-article']" />
+                                                            <label class="form-check-label" for="addupdateArticle"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="adddeleteArticle" v-model="addForm.permissions['delete-article']" />
+                                                            <label class="form-check-label" for="adddeleteArticle"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Articles permission -->
+
                                             <!-- Technical support -->
                                             <tr>
                                                 <td class="text-nowrap fw-semibold">{{ __('Technical support') }}</td>
@@ -657,6 +713,62 @@ const editRole = (role) => {
                                                 </td>
                                             </tr>
                                             <!-- Questionnaires permission -->
+
+                                            <!-- Pages permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Pages management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistPage" v-model="editForm.permissions['viewAny-page']" />
+                                                            <label class="form-check-label" for="editlistPage"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreatePage" v-model="editForm.permissions['create-page']" />
+                                                            <label class="form-check-label" for="editcreatePage"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editupdatePage" v-model="editForm.permissions['update-page']" />
+                                                            <label class="form-check-label" for="editupdatePage"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeletePage" v-model="editForm.permissions['delete-page']" />
+                                                            <label class="form-check-label" for="editdeletePage"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Pages permission -->
+
+                                            <!-- Articles permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Articles management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistArticle" v-model="editForm.permissions['viewAny-article']" />
+                                                            <label class="form-check-label" for="editlistArticle"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editviewArticle" v-model="editForm.permissions['view-article']" />
+                                                            <label class="form-check-label" for="editviewArticle"> {{ __('View') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreateArticle" v-model="editForm.permissions['create-article']" />
+                                                            <label class="form-check-label" for="editcreateArticle"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editupdateArticle" v-model="editForm.permissions['update-article']" />
+                                                            <label class="form-check-label" for="editupdateArticle"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteArticle" v-model="editForm.permissions['delete-article']" />
+                                                            <label class="form-check-label" for="editdeleteArticle"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Articles permission -->
 
                                             <!-- Technical support -->
                                             <tr>

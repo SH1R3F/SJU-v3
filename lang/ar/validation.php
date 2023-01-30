@@ -276,6 +276,8 @@ return [
         'images' => 'الصور',
         'trainer' => 'المدرب',
         'summary' => 'المختصر',
+        'summary_ar' => 'المختصر',
+        'summary_en' => 'المختصر',
         'content' => 'المحتوي',
         'zoom' => 'زوم',
         'youtube' => 'يوتيوب',
@@ -283,7 +285,16 @@ return [
         'questionnaire_id' => 'الإستبيان',
         'attendance_mins' => 'دقائق التحضير',
         'choice' => 'الإختيار',
-        'answer' => 'الإجابة'
+        'answer' => 'الإجابة',
+        'title_ar' => 'العنوان',
+        'title_en' => 'العنوان',
+        'content_ar' => 'المحتوي',
+        'content_en' => 'المحتوي',
+        'slug_ar' => 'المعرف',
+        'slug_en' => 'المعرف',
+        'news_date' => 'تاريخ الخبر',
+        'category_id' => 'التصنيف',
+        'news_date' => 'تاريخ الخبر',
     ],
 
 ];

@@ -5,6 +5,9 @@ import { Link, usePage } from '@inertiajs/inertia-vue3';
 import route from 'ziggy-js';
 import AdminLayout from './Layouts/Admin/App.vue';
 import UserLayout from './Layouts/App.vue';
+import { QuillEditor } from '@vueup/vue-quill';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 
 createInertiaApp({
     resolve: (name) => {
@@ -22,6 +25,7 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .component('Link', Link)
             .component('Head', Head)
+            .component('QuillEditor', QuillEditor)
             .mixin({ methods: { route } })
             .mixin(require('./mixins'))
             .use(plugin)

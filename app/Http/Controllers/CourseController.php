@@ -176,7 +176,7 @@ class CourseController extends Controller
             // What question should we show?
             $answers = Session::get("3answers_{$course->questionnaire->id}", []);
 
-            $questions = $course->questionnaire->questions()->orderBy('order')->orderBy('id')->get();
+            $questions = $course->questionnaire->questions()->orderBy('order')->orderBy('id', 'DESC')->get();
             foreach ($questions as $question) {
                 if (collect($answers)->contains('id', '=', $question->id)) continue;
 

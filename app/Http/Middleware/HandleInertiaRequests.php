@@ -2,16 +2,18 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Page;
 use App\Models\Admin;
 use App\Models\Member;
+use App\Models\Article;
 use App\Models\Invoice;
 use Inertia\Middleware;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
-use App\Models\Course\Questionnaire;
 use App\Models\Course\Template;
 use Spatie\Permission\Models\Role;
+use App\Models\Course\Questionnaire;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\AdminResource;
 use App\Http\Resources\MemberResource;
@@ -106,6 +108,8 @@ class HandleInertiaRequests extends Middleware
             'courses' =>  $admin->can('viewAny', Course::class),
             'templates' =>  $admin->can('viewAny', Template::class),
             'questionnaires' =>  $admin->can('viewAny', Questionnaire::class),
+            'pages' =>  $admin->can('viewAny', Page::class),
+            'articles' =>  $admin->can('viewAny', Article::class),
         ];
     }
 }

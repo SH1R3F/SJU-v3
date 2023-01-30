@@ -46,7 +46,7 @@ class CourseService
         $imgs = [];
         foreach ($images as $img) {
             if (str_starts_with($img, 'data:image')) {
-                $path = upload_base64_image($img, "courses/images/$date_from");
+                $path = upload_base64_image($img, "uploads/images/$date_from");
                 array_push($imgs, $path);
                 continue;
             }

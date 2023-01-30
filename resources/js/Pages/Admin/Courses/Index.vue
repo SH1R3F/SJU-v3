@@ -122,7 +122,7 @@ watch(
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <Link :href="route('admin.courses.show', 1)" class="text-body text-truncate">
+                                        <Link :href="route('admin.courses.show', course.id)" class="text-body text-truncate">
                                             <span class="fw-semibold">{{ course.title }}</span>
                                         </Link>
                                         <small class="text-truncate text-muted">{{ course.course_number }}</small>
