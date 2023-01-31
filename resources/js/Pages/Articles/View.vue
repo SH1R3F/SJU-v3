@@ -170,7 +170,7 @@ const props = defineProps({
                             :style="`background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7)), url('${article.image || '/img/article.png'}');`"
                         >
                             <div class="category" v-if="article.category">
-                                <Link :href="route('categories.show', article.category.id)">
+                                <Link :href="route('articles.index', article.category.id)">
                                     {{ article.category.title }}
                                 </Link>
                             </div>

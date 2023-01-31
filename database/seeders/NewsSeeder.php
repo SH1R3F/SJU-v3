@@ -23,8 +23,8 @@ class NewsSeeder extends Seeder
         Category::updateOrCreate(['id' => 5], ['id' => 5, 'title_ar' => 'مكة المكرمة', 'title_en' => 'Mecca']);
         Category::updateOrCreate(['id' => 6], ['id' => 6, 'title_ar' => 'المدينة المنورة', 'title_en' => 'Medina']);
         Category::updateOrCreate(['id' => 7], ['id' => 7, 'title_ar' => 'الدمام', 'title_en' => 'Dammam']);
-        Category::updateOrCreate(['id' => 8], ['id' => 8, 'title_ar' => 'النادي السعودي للصحافة', 'title_en' => 'Saudi Press Club']);
-        Category::updateOrCreate(['id' => 9], ['id' => 9, 'title_ar' => 'نادي جدة للصحافة', 'title_en' => 'Jeddah Press Club']);
+        Category::updateOrCreate(['id' => 8], ['id' => 8, 'title_ar' => 'النادي السعودي للصحافة', 'title_en' => 'Saudi Press Club', 'status' => 0]);
+        Category::updateOrCreate(['id' => 9], ['id' => 9, 'title_ar' => 'نادي جدة للصحافة', 'title_en' => 'Jeddah Press Club', 'status' => 0]);
         Category::updateOrCreate(['id' => 10], ['id' => 10, 'title_ar' => 'الرياض', 'title_en' => '']);
         Category::updateOrCreate(['id' => 11], ['id' => 11, 'title_ar' => 'القصيم', 'title_en' => '']);
         Category::updateOrCreate(['id' => 12], ['id' => 12, 'title_ar' => 'الباحة', 'title_en' => '']);
@@ -35,6 +35,6 @@ class NewsSeeder extends Seeder
         Category::updateOrCreate(['id' => 17], ['id' => 17, 'title_ar' => 'نجران', 'title_en' => '']);
         Category::updateOrCreate(['id' => 18], ['id' => 18, 'title_ar' => 'تبوك', 'title_en' => '']);
         Category::updateOrCreate(['id' => 19], ['id' => 19, 'title_ar' => 'الطائف', 'title_en' => '']);
-        Category::updateOrCreate(['id' => 20], ['id' => 20, 'title_ar' => 'عام', 'title_en' => 'General']);
+        Category::updateOrCreate(['id' => 20], ['id' => 20, 'title_ar' => 'عام', 'title_en' => 'General', 'order' => 0]);
     }
 }

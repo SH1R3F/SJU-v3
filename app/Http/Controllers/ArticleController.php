@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use App\Http\Resources\ArticleResource;
+use App\Http\Resources\CategoryResource;
 
 class ArticleController extends Controller
 {
@@ -11,21 +13,25 @@ class ArticleController extends Controller
     /**
      * Display articles
      * 
+     * @param int  $category_id
      * @return response
      */
-    public function index()
+    public function articles($category_id = null)
     {
-        dd('index');
-    }
+        $articles = Article::query()
+            ->with('category')
+            ->when($category_id, fn ($query) => $query->where('category_id', $category_id))
+            ->where('status', 1)
+            ->orderBy('id', 'DESC')
+            ->paginate(18);
 
-    /**
-     * Display articles related to a category
-     * 
-     * @return response
-     */
-    public function category()
-    {
-        dd('category');
+        $categories = Category::where('status', 1)->orderBy('order')->orderBy('id')->get();
+
+        return inertia('Articles/Index', [
+            'categories' => CategoryResource::collection($categories),
+            'articles' => ArticleResource::collection($articles),
+            'category_id' => $category_id ?? '0'
+        ]);
     }
 
     /**

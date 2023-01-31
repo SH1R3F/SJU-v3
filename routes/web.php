@@ -67,9 +67,8 @@ Route::post('courses/questions/{question}', [CourseController::class, 'question'
 /**
  * Articles Routes
  */
-Route::get('categories/{category}', [ArticleController::class, 'category'])->name('categories.show');
 Route::get('article/{article}', [ArticleController::class, 'show'])->name('articles.show');
-Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('articles/{category_id?}', [ArticleController::class, 'articles'])->name('articles.index');
 
 // Member routes
 require_once 'members/web.php';

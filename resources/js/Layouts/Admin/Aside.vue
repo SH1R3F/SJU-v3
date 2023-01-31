@@ -135,12 +135,12 @@
                 </a>
                 <ul class="menu-sub">
                     <li v-if="$page.props.authUser?.can_view?.pages" class="menu-item" :class="{ active: $page.component.startsWith('Admin/News/Pages') }">
-                        <Link :href="route('admin.templates.index')" class="menu-link">
+                        <Link :href="route('admin.pages.index')" class="menu-link">
                             <div>{{ __('Pages') }}</div>
                         </Link>
                     </li>
                     <li v-if="$page.props.authUser?.can_view?.articles" class="menu-item" :class="{ active: $page.component.startsWith('Admin/News/Articles') }">
-                        <Link :href="route('admin.questionnaires.index')" class="menu-link">
+                        <Link :href="route('admin.articles.index')" class="menu-link">
                             <div>{{ __('Articles') }}</div>
                         </Link>
                     </li>

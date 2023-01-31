@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('title_ar');
             $table->string('title_en')->nullable();
+            $table->integer('order')->nullable()->default(1);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }
