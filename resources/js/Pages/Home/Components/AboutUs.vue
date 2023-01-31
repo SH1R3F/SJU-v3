@@ -1,3 +1,4 @@
+<script></script>
 <template>
     <div class="section about-organization">
         <div class="container">

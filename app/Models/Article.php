@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,11 +11,11 @@ class Article extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title_ar', 'title_en', 'image', 'images', 'summary_ar', 'summary_en', 'content_ar', 'content_en', 'admin_id', 'status', 'category_id'];
+    protected $fillable = ['title_ar', 'title_en', 'image', 'images', 'summary_ar', 'summary_en', 'content_ar', 'content_en', 'admin_id', 'status', 'category_id', 'news_date'];
 
     protected $casts = [
         'images' => 'array',
-        'status' => 'boolean'
+        'status' => 'boolean',
     ];
 
     /**
@@ -31,5 +32,13 @@ class Article extends Model
                         ->orWhere('title_en', 'LIKE', "%$title%");
                 });
             });
+    }
+
+    /**
+     * Relationship to the category
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->boolean('status')->default(1);
             $table->unsignedBigInteger('category_id')->nullable();
+            $table->date('news_date');
 
             $table->softDeletes();
             $table->timestamps();

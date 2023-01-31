@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ArticleResource extends JsonResource
@@ -25,9 +26,12 @@ class ArticleResource extends JsonResource
 
             [
                 'title' => app()->getLocale() == 'ar' ? $this->title_ar : $this->title_en,
+                'summary' => app()->getLocale() == 'ar' ? $this->summary_ar : $this->summary_en,
+                'content' => app()->getLocale() == 'ar' ? $this->content_ar : $this->content_en,
                 'article_category' => $this->article_category,
                 'image' => $this->when($this->image, Storage::url($this->image), null),
                 'images' => collect($this->images)->map(fn ($img) => Storage::url($img)),
+                'category' => new CategoryResource($this->whenLoaded('category')),
 
                 // Authorization
                 $this->merge($this->withAuthorization($request))

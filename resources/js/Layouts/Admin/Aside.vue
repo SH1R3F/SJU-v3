@@ -130,7 +130,7 @@
             <!-- News section -->
             <li v-if="$page.props.authUser?.can_view?.pages || $page.props.authUser?.can_view?.articles" class="menu-item" :class="{ 'active open': $page.component.startsWith('Admin/News') }">
                 <a href="javascript:;" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons ti ti-certificate"></i>
+                    <i class="menu-icon tf-icons ti ti-news"></i>
                     <div>{{ __('News section') }}</div>
                 </a>
                 <ul class="menu-sub">

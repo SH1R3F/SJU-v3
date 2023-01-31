@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TechnicalSupportController;
 
 /*
@@ -61,7 +62,14 @@ Route::post('courses/{course}/attend', [CourseController::class, 'attend'])->mid
 Route::get('courses/{course}/certificate', [CourseController::class, 'certificate'])->name('courses.certificate')->middleware('auth:member'); // Other authentications to be added too auth:member,subscriber,volunteer
 Route::get('courses/{course}/questionnaire', [CourseController::class, 'questionnaire'])->name('courses.questionnaire')->middleware('auth:member'); // Other authentications to be added too auth:member,subscriber,volunteer
 Route::post('courses/questions/{question}', [CourseController::class, 'question'])->name('courses.question')->middleware('auth:member'); // Other authentications to be added too auth:member,subscriber,volunteer
-// Route::resource('courses', CourseController::class)->except([]);
+
+
+/**
+ * Articles Routes
+ */
+Route::get('categories/{category}', [ArticleController::class, 'category'])->name('categories.show');
+Route::get('article/{article}', [ArticleController::class, 'show'])->name('articles.show');
+Route::get('articles', [ArticleController::class, 'index'])->name('articles.index');
 
 // Member routes
 require_once 'members/web.php';

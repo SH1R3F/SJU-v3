@@ -10,6 +10,7 @@ import FollowUs from './Components/FollowUs.vue';
 
 defineProps({
     courses: Object,
+    articles: Object,
     locale: String,
 });
 </script>
@@ -17,7 +18,7 @@ defineProps({
 <template>
     <div class="homepage">
         <!-- News Slider -->
-        <Slider />
+        <Slider :articles="articles" />
         <!-- News Slider -->
 
         <!-- About the organization -->
