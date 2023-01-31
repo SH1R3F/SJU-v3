@@ -12,6 +12,7 @@ defineProps({
     courses: Object,
     articles: Object,
     locale: String,
+    stats: Object,
 });
 </script>
 
@@ -26,7 +27,7 @@ defineProps({
         <!-- About the organization -->
 
         <!-- Media center -->
-        <media-center />
+        <media-center :articles="articles.data.slice(0, 3)" />
         <!-- Media center -->
 
         <!-- Studio -->
@@ -42,7 +43,7 @@ defineProps({
         <!-- Membership -->
 
         <!-- Statistics -->
-        <Statistics />
+        <Statistics :stats="stats" />
         <!-- Statistics -->
 
         <!-- Follow us -->

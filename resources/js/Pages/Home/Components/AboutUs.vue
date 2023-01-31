@@ -19,7 +19,7 @@
                     </p>
 
                     <Link href="/about-us">
-                        <button class="read-more">{{ __('Read more') }}</button>
+                        <Link as="button" :href="route('pages.show', 'about-authority')" class="read-more">{{ __('Read more') }}</Link>
                     </Link>
                 </div>
             </div>

@@ -181,7 +181,7 @@ const props = defineProps({
                                 </Link>
 
                                 <span>
-                                    {{ article.news_date }}
+                                    {{ arabic_date(article.news_date) }}
                                 </span>
                             </div>
                         </div>

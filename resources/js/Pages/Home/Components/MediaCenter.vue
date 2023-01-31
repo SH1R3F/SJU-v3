@@ -1,23 +1,27 @@
-<script></script>
+<script setup>
+defineProps({
+    articles: Object,
+});
+</script>
 <template>
     <div class="section media-center">
         <div class="container">
             <div class="row">
                 <h2 class="col-10">{{ __('Media center') }}</h2>
-                <Link href="/news" class="col-2 text-end">{{ __('More') }}</Link>
+                <Link :href="route('articles.index')" class="col-2 text-end">{{ __('More') }}</Link>
             </div>
 
             <div class="row mt-3">
-                <div class="col-md-4 mb-3" v-for="x in 3">
-                    <div class="post" style="background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7)), url('https://sju.org.sa/data/images/uploads/2022-12-29/a8f54abee6.jpeg')">
+                <div class="col-md-4 mb-3" v-for="article in articles">
+                    <div class="post" :style="`background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7)), url('${article.image || '/img/article.png'}')`">
                         <div class="category">
-                            <Link href="/news/?catid=1">
-                                {{ __('Uncategorized') }}
+                            <Link :href="route('articles.index', article.category.id)">
+                                {{ article.category.title }}
                             </Link>
                         </div>
                         <div class="desc">
-                            <h5>فرع هيئة الصحفيين السعوديين بمنطقة الجوف يقيم محاضرة بعنوان "صناعة المحتوى الإعلامي"</h5>
-                            <span>Wednesday 28 / 12 / 20221</span>
+                            <Link as="h5" :href="route('articles.show', article.id)">{{ article.title }}</Link>
+                            <span>{{ arabic_date(article.news_date) }}</span>
                         </div>
                     </div>
                 </div>

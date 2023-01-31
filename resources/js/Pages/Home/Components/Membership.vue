@@ -7,7 +7,7 @@
                 <div class="col-md-5 mb-5">
                     <p>{{ __('Everyone who practices journalistic work has the right to apply for membership in the commission') }}</p>
 
-                    <Link href="/members/register">
+                    <Link :href="route('member.register')">
                         <button>{{ __('Apply for a membership') }}</button>
                     </Link>
                 </div>

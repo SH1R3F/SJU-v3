@@ -1,3 +1,8 @@
+<script setup>
+defineProps({
+    stats: Object,
+});
+</script>
 <template>
     <div class="section stats">
         <div class="container">
@@ -103,7 +108,7 @@
                         </g>
                     </svg>
 
-                    <h3>2,337</h3>
+                    <h3>{{ stats.members }}</h3>
 
                     <span>{{ __('Total members') }}</span>
                 </div>
@@ -187,7 +192,7 @@
                         </g>
                     </svg>
 
-                    <h3>44</h3>
+                    <h3>{{ stats.memberships }}</h3>
 
                     <span>{{ __('Memberships') }}</span>
                 </div>
@@ -230,7 +235,7 @@
                         </g>
                     </svg>
 
-                    <h3>451</h3>
+                    <h3>{{ stats.courses }}</h3>
 
                     <span>{{ __('Conferences') }}</span>
                 </div>
@@ -324,7 +329,7 @@
                         </g>
                     </svg>
 
-                    <h3>442</h3>
+                    <h3>{{ stats.courses }}</h3>
 
                     <span>{{ __('Workshops') }}</span>
                 </div>

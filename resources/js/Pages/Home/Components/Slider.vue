@@ -1,13 +1,13 @@
 <script setup>
-defineProps({
+const props = defineProps({
     articles: Object,
 });
 </script>
 <template>
-    <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade section news-slider" data-mdb-ride="carousel">
+    <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade section news-slider" data-mdb-ride="carousel" v-if="articles.data.length">
         <div class="container">
             <div class="carousel-inner">
-                <div class="carousel-item slider" v-for="(article, i) in articles.data" :key="article.id" :class="{ active: i == 1 }">
+                <div class="carousel-item slider" v-for="(article, i) in articles.data" :key="article.id" :class="{ active: i == 0 }">
                     <div class="row">
                         <div class="col-lg-8 order-lg-last">
                             <img :src="article.image || '/img/article.png'" :alt="article.title" />
