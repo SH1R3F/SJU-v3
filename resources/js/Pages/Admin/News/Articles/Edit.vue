@@ -155,5 +155,6 @@ const handleImages = ($event) => {
     direction: rtl;
     text-align: right;
     min-height: 100px;
+    max-height: 500px;
 }
 </style>

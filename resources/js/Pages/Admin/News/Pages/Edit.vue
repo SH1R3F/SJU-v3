@@ -4,7 +4,7 @@ import { useForm } from '@inertiajs/inertia-vue3';
 const props = defineProps({
     page: Object,
 });
-
+console.log(props.page);
 const form = useForm({
     slug_ar: props.page.slug_ar || '',
     slug_en: props.page.slug_en || '',
@@ -97,5 +97,6 @@ const form = useForm({
     direction: rtl;
     text-align: right;
     min-height: 100px;
+    max-height: 500px;
 }
 </style>
