@@ -1,6 +1,6 @@
+<script></script>
 <template>
     <!-- Navbar -->
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <button
@@ -18,13 +18,13 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mt-2 mt-lg-0">
                     <li class="nav-item mx-2">
-                        <Link href="/" class="nav-link">{{ __('Home') }}</Link>
+                        <Link :href="route('home')" class="nav-link">{{ __('Home') }}</Link>
                     </li>
                     <li class="nav-item mx-2">
-                        <Link href="/news" class="nav-link">{{ __('News') }}</Link>
+                        <Link :href="route('articles.index')" class="nav-link">{{ __('News') }}</Link>
                     </li>
                     <li class="nav-item mx-2">
-                        <Link href="/about-us" class="nav-link">{{ __('About us') }}</Link>
+                        <Link :href="route('pages.show', 'About-authority')" class="nav-link">{{ __('About us') }}</Link>
                     </li>
                     <li class="nav-item mx-2">
                         <Link href="/honor-code" class="nav-link">{{ __('Honor code') }}</Link>

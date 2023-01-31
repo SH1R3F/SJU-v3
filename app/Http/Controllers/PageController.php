@@ -6,6 +6,8 @@ use App\Models\Article;
 use App\Models\Course\Course;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\ArticleResource;
+use App\Http\Resources\PageResource;
+use App\Models\Page;
 
 class PageController extends Controller
 {
@@ -30,6 +32,18 @@ class PageController extends Controller
         return inertia('Home/Index', [
             'courses' => CourseResource::collection($courses),
             'articles' => ArticleResource::collection($articles),
+        ]);
+    }
+
+    /**
+     * Show a page by slug
+     */
+    public function page($slug)
+    {
+        $page = Page::where('slug_ar', $slug)->orWhere('slug_en', $slug)->firstOrFail();
+
+        return inertia('Pages/View', [
+            'page' => new PageResource($page),
         ]);
     }
 }

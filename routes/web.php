@@ -63,6 +63,10 @@ Route::get('courses/{course}/certificate', [CourseController::class, 'certificat
 Route::get('courses/{course}/questionnaire', [CourseController::class, 'questionnaire'])->name('courses.questionnaire')->middleware('auth:member'); // Other authentications to be added too auth:member,subscriber,volunteer
 Route::post('courses/questions/{question}', [CourseController::class, 'question'])->name('courses.question')->middleware('auth:member'); // Other authentications to be added too auth:member,subscriber,volunteer
 
+/**
+ * Pages Routes
+ */
+Route::get('page/{slug}', [PageController::class, 'page'])->name('pages.show');
 
 /**
  * Articles Routes
