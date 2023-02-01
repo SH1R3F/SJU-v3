@@ -10,6 +10,12 @@ use App\Http\Resources\PageResource;
 
 class PageController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Page::class, 'page');
+    }
+
     /**
      * Display a listing of the resource.
      *

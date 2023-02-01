@@ -17,6 +17,7 @@ use App\Models\Course\Questionnaire;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\AdminResource;
 use App\Http\Resources\MemberResource;
+use App\Models\Media;
 use App\Models\TechnicalSupportTicket;
 
 class HandleInertiaRequests extends Middleware
@@ -110,6 +111,7 @@ class HandleInertiaRequests extends Middleware
             'questionnaires' =>  $admin->can('viewAny', Questionnaire::class),
             'pages' =>  $admin->can('viewAny', Page::class),
             'articles' =>  $admin->can('viewAny', Article::class),
+            'studio' =>  $admin->can('viewAny', Media::class),
         ];
     }
 }

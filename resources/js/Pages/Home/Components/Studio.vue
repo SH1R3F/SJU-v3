@@ -1,3 +1,10 @@
+<script setup>
+defineProps({
+    photos: Object,
+    videos: Object,
+});
+</script>
+
 <template>
     <div class="section media-center">
         <div class="container">
@@ -18,28 +25,23 @@
                     </li>
                 </ul>
 
-                <div class="tab-content" id="pills-all">
+                <div class="tab-content">
                     <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
                         <div class="row mt-3">
-                            <div class="col-md-4 mb-3" v-for="i in 6">
-                                <div
-                                    class="post img-popup"
-                                    style="background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7)), url('https://sju.org.sa/data/media/photos/ksa2022.jpeg')"
-                                    src="https://sju.org.sa/data/media/photos/ksa2022.jpeg"
-                                >
+                            <div class="col-md-4 mb-3" v-for="photo in photos">
+                                <div class="post img-popup" :style="`background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7)), url('${photo.path}')`" :src="photo.path">
                                     <div class="category">
                                         <span>{{ __('Photo') }}</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-4 mb-3" v-for="x in 0">
+                            <div class="col-md-4 mb-3" v-for="video in videos">
                                 <iframe
                                     class=""
                                     width="352"
                                     height="260"
-                                    src="https://www.youtube.com/embed/4pK-npQiW4I"
-                                    title="YouTube video player"
+                                    :src="video.path"
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen
@@ -50,12 +52,8 @@
 
                     <div class="tab-pane fade" id="pills-photos" role="tabpanel" aria-labelledby="pills-photos-tab">
                         <div class="row mt-3">
-                            <div class="col-md-4 mb-3" v-for="i in 6">
-                                <div
-                                    class="post img-popup"
-                                    style="background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7)), url('https://sju.org.sa/data/media/photos/ksa2022.jpeg')"
-                                    src="https://sju.org.sa/data/media/photos/ksa2022.jpeg"
-                                >
+                            <div class="col-md-4 mb-3" v-for="photo in photos">
+                                <div class="post img-popup" :style="`background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7)), url('${photo.path}')`" :src="photo.path">
                                     <div class="category">
                                         <span>{{ __('Photo') }}</span>
                                     </div>
@@ -66,13 +64,12 @@
 
                     <div class="tab-pane fade" id="pills-videos" role="tabpanel" aria-labelledby="pills-videos-tab">
                         <div class="row mt-3">
-                            <div class="col-md-4 mb-3" v-for="x in 0">
+                            <div class="col-md-4 mb-3" v-for="video in videos">
                                 <iframe
                                     class=""
                                     width="352"
                                     height="260"
-                                    src="https://www.youtube.com/embed/4pK-npQiW4I"
-                                    title="YouTube video player"
+                                    :src="video.path"
                                     frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen

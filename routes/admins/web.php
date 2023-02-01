@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Course\QuestionController;
 use App\Http\Controllers\Admin\Course\TemplateController;
 use App\Http\Controllers\Admin\TechnicalSupportController;
 use App\Http\Controllers\Admin\Course\QuestionnaireController;
+use App\Http\Controllers\Admin\MediaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -133,5 +134,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
              */
             Route::resource('articles', ArticleController::class)->except(['show']);
         });
+
+        /**
+         * Studio
+         */
+        Route::get('studio/{type?}', [MediaController::class, 'index'])->where('type', 'photo|video')->name('media.index');
+        Route::get('studio/create', [MediaController::class, 'create'])->name('media.create');
+        Route::post('studio/', [MediaController::class, 'store'])->name('media.store');
+        Route::delete('studio/{media}', [MediaController::class, 'destroy'])->name('media.destroy');
     });
 });

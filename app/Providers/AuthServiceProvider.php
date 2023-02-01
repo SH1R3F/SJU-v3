@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Models\Page;
 use App\Models\Admin;
+use App\Models\Media;
 use App\Models\Member;
 use App\Models\Article;
 use App\Models\Invoice;
@@ -13,6 +14,7 @@ use App\Policies\PagePolicy;
 use App\Policies\RolePolicy;
 use App\Models\Course\Course;
 use App\Policies\AdminPolicy;
+use App\Policies\MediaPolicy;
 use App\Policies\CoursePolicy;
 use App\Policies\MemberPolicy;
 use App\Models\Course\Template;
@@ -43,6 +45,7 @@ class AuthServiceProvider extends ServiceProvider
         Questionnaire::class => QuestionnairePolicy::class,
         Page::class => PagePolicy::class,
         Article::class => ArticlePolicy::class,
+        Media::class => MediaPolicy::class,
         TechnicalSupportTicket::class => TechnicalSupportPolicy::class,
     ];
 

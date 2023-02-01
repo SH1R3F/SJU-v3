@@ -8,9 +8,11 @@ import Membership from './Components/Membership.vue';
 import Statistics from './Components/Statistics.vue';
 import FollowUs from './Components/FollowUs.vue';
 
-defineProps({
+const props = defineProps({
     courses: Object,
     articles: Object,
+    photos: Object,
+    videos: Object,
     locale: String,
     stats: Object,
 });
@@ -31,7 +33,7 @@ defineProps({
         <!-- Media center -->
 
         <!-- Studio -->
-        <Studio />
+        <Studio :photos="photos.data" :videos="videos.data" />
         <!-- Studio -->
 
         <!-- Regulations and Events -->

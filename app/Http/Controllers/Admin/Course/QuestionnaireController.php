@@ -9,6 +9,12 @@ use App\Http\Resources\QuestionnaireResource;
 
 class QuestionnaireController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Questionnaire::class, 'questionnaire');
+    }
+
     /**
      * Display a listing of the resource.
      *

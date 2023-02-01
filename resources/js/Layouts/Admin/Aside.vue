@@ -148,6 +148,27 @@
             </li>
             <!-- News section -->
 
+            <!-- Studio -->
+            <li v-if="$page.props.authUser?.can_view?.studio" class="menu-item" :class="{ 'active open': $page.component.startsWith('Admin/Media') }">
+                <a href="javascript:;" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-camera-plus"></i>
+                    <div>{{ __('Studio') }}</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" :class="{ active: $page.url.includes('admin/studio/photo') || $page.url.endsWith('admin/studio') }">
+                        <Link :href="route('admin.media.index', 'photo')" class="menu-link">
+                            <div>{{ __('Photos') }}</div>
+                        </Link>
+                    </li>
+                    <li class="menu-item" :class="{ active: $page.url.includes('admin/studio/video') }">
+                        <Link :href="route('admin.media.index', 'video')" class="menu-link">
+                            <div>{{ __('Videos') }}</div>
+                        </Link>
+                    </li>
+                </ul>
+            </li>
+            <!-- Studio -->
+
             <!-- Technical support -->
             <li
                 v-if="$page.props.authUser?.can_view?.support_members || $page.props.authUser?.can_view?.support_subscribers || $page.props.authUser?.can_view?.support_volunteers"

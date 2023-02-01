@@ -9,6 +9,8 @@ use App\Models\Course\Course;
 use App\Http\Resources\PageResource;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\ArticleResource;
+use App\Http\Resources\MediaResource;
+use App\Models\Media;
 use App\Models\Subscription;
 
 class PageController extends Controller
@@ -34,6 +36,8 @@ class PageController extends Controller
         return inertia('Home/Index', [
             'courses' => CourseResource::collection($courses),
             'articles' => ArticleResource::collection($articles),
+            'photos' => MediaResource::collection(Media::where('type', 'photo')->orderBy('id', 'DESC')->get()),
+            'videos' => MediaResource::collection(Media::where('type', 'video')->orderBy('id', 'DESC')->get()),
             'stats' => [
                 'members' => Member::where('status', 2)->count(),
                 'memberships' => Subscription::where('status', 1)->count(),

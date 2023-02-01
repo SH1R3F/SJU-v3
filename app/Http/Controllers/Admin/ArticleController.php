@@ -12,6 +12,12 @@ use App\Http\Resources\CategoryResource;
 
 class ArticleController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Article::class, 'article');
+    }
+
     /**
      * Display a listing of the resource.
      *

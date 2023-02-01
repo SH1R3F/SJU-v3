@@ -12,6 +12,12 @@ use App\Http\Requests\Course\TemplateRequest;
 
 class TemplateController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Template::class, 'template');
+    }
+
     /**
      * Display a listing of the resource.
      *

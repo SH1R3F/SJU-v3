@@ -338,6 +338,15 @@
     "Article deleted successfully": "تم حذف المقال بنجاح",
     "Article": "المقال",
 
+    "------------- Studio -----------": "",
+    "Photos library": "مكتبة الصور",
+    "Videos library": "مكتبة الفيديو",
+    "Upload media": "رفع وسائط",
+    "Link": "الرابط",
+    "Upload file": "رفع ملف",
+    "Media uploaded successfully": "تم رفع الوسائط بنجاح",
+    "Media deleted successfully": "تم حذف الوسائط بنجاح",
+
     "--------------- Technical Support -------------": "",
     "Members tickets": "تذاكر الأعضاء",
     "Subscribers tickets": "تذاكر المشتركين",
