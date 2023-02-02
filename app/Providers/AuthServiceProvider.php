@@ -10,6 +10,7 @@ use App\Models\Media;
 use App\Models\Member;
 use App\Models\Article;
 use App\Models\Invoice;
+use App\Models\Subscriber;
 use App\Policies\PagePolicy;
 use App\Policies\RolePolicy;
 use App\Models\Course\Course;
@@ -21,6 +22,7 @@ use App\Models\Course\Template;
 use App\Policies\ArticlePolicy;
 use App\Policies\InvoicePolicy;
 use App\Policies\TemplatePolicy;
+use App\Policies\SubscriberPolicy;
 use Spatie\Permission\Models\Role;
 use App\Models\Course\Questionnaire;
 use App\Policies\QuestionnairePolicy;
@@ -39,6 +41,7 @@ class AuthServiceProvider extends ServiceProvider
         Role::class => RolePolicy::class,
         Admin::class => AdminPolicy::class,
         Member::class => MemberPolicy::class,
+        Subscriber::class => SubscriberPolicy::class,
         Invoice::class => InvoicePolicy::class,
         Course::class => CoursePolicy::class,
         Template::class => TemplatePolicy::class,

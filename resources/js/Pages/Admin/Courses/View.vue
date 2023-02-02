@@ -173,6 +173,44 @@ const unpassed = computed(() => {
                                 </tr>
 
                                 <!-- Add subscribers and volunteers here too -->
+                                <tr v-for="(subscriber, i) in course.subscribers" :key="subscriber.id">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>
+                                        <Link :href="route('admin.subscribers.show', subscriber.id)">{{ subscriber.fullName }}</Link>
+                                    </td>
+                                    <td>{{ __('Subscriber') }}</td>
+                                    <td>{{ subscriber.mobile_key }}{{ subscriber.mobile }}</td>
+                                    <td>{{ subscriber.email }}</td>
+                                    <td>
+                                        <Link
+                                            :href="route('admin.courses.attendance.toggle', { course: course.id, type: 'subscriber', id: subscriber.id })"
+                                            method="post"
+                                            as="span"
+                                            preserve-scroll
+                                            class="cursor-pointer"
+                                            data-bs-placement="top"
+                                            data-bs-toggle="tooltip"
+                                            :data-bs-original-title="subscriber.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
+                                            :class="{ 'text-success': subscriber.pivot?.attendance, 'text-body': !subscriber.pivot?.attendance }"
+                                        >
+                                            <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': subscriber.pivot?.attendance, 'ti-toggle-left': !subscriber.pivot?.attendance }"></i>
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <Link
+                                            :href="route('admin.courses.attendance.delete', { course: course.id, type: 'subscriber', id: subscriber.id })"
+                                            method="DELETE"
+                                            as="span"
+                                            data-bs-toggle="tooltip"
+                                            class="text-body"
+                                            data-bs-placement="top"
+                                            :aria-label="__('Delete')"
+                                            :data-bs-original-title="__('Delete')"
+                                        >
+                                            <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
+                                        </Link>
+                                    </td>
+                                </tr>
 
                                 <tr v-if="!all">
                                     <td colspan="7" class="text-muted text-center p-3">

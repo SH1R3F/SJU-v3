@@ -1,9 +1,12 @@
 <script setup>
 import MembersSidebar from '../Members/Sidebar.vue';
+import SubscribersSidebar from '../Subscribers/Sidebar.vue';
+import VolunteersSidebar from '../Subscribers/Sidebar.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
     userAuth: Object,
+    userHome: String,
     ticket: Object,
 });
 
@@ -13,30 +16,15 @@ const form = useForm({
 });
 </script>
 
-<script defer>
-export default {
-    mounted() {
-        $(document).ready(() => {
-            setTimeout(() => {
-                $('#chat').animate(
-                    {
-                        scrollTop: $('#chat')[0].scrollHeight,
-                    },
-                    500
-                );
-            }, 300);
-        });
-    },
-};
-</script>
-
 <template>
     <Head :title="__('Technical Support')" />
     <div class="members">
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <MembersSidebar />
+                    <MembersSidebar v-if="userHome == '/members'" />
+                    <SubscribersSidebar v-else-if="userHome == '/subscribers'" />
+                    <VolunteersSidebar v-else-if="userHome == '/volunteers'" />
                 </div>
 
                 <div class="col-md-9">
@@ -88,7 +76,9 @@ export default {
 
                     <p class="text-muted text-start">
                         {{ ticket.status ? __("Problem didn't solve?") : __('Problem solved?') }}
-                        <Link :href="route('support.toggle', ticket.id)" method="post" as="span" class="text-success">{{ ticket.status ? __('Open ticket') : __('Close ticket') }}</Link>
+                        <Link :href="route('support.toggle', ticket.id)" method="post" as="span" class="text-success" style="cursor: pointer">
+                            {{ ticket.status ? __('Open ticket') : __('Close ticket') }}
+                        </Link>
                     </p>
                     <!-- page content -->
                 </div>
@@ -96,3 +86,20 @@ export default {
         </div>
     </div>
 </template>
+
+<script defer>
+export default {
+    mounted() {
+        $(document).ready(() => {
+            setTimeout(() => {
+                $('#chat').animate(
+                    {
+                        scrollTop: $('#chat')[0].scrollHeight,
+                    },
+                    500
+                );
+            }, 300);
+        });
+    },
+};
+</script>

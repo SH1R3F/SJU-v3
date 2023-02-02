@@ -17,7 +17,9 @@ use App\Models\Course\Questionnaire;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\AdminResource;
 use App\Http\Resources\MemberResource;
+use App\Http\Resources\SubscriberResource;
 use App\Models\Media;
+use App\Models\Subscriber;
 use App\Models\TechnicalSupportTicket;
 
 class HandleInertiaRequests extends Middleware
@@ -66,6 +68,9 @@ class HandleInertiaRequests extends Middleware
         if (Auth::guard('member')->check()) {
             $user = new MemberResource(Auth::guard('member')->user()->load('subscription'));
             $home = Member::HOME;
+        } else if (Auth::guard('subscriber')->check()) {
+            $user = new SubscriberResource(Auth::guard('subscriber')->user());
+            $home = Subscriber::HOME;
         }
 
         return array_merge(parent::share($request), [
@@ -100,6 +105,7 @@ class HandleInertiaRequests extends Middleware
             'branchApproval' => $admin->can('viewBranch', Member::class),
             'adminApproval' => $admin->can('viewAcceptance', Member::class),
             'refusedMembers' => $admin->can('viewRefused', Member::class),
+            'subscribers' => $admin->can('viewAny', Subscriber::class),
             'invoices' =>  $admin->can('viewAny', Invoice::class),
             // Technical support
             'support_members' =>  $admin->can('viewMembers', TechnicalSupportTicket::class),

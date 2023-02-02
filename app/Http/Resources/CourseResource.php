@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Http\Resources\MemberResource;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\SubscriberResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CourseResource extends JsonResource
@@ -34,6 +35,7 @@ class CourseResource extends JsonResource
 
                 // Corusables
                 'members' => MemberResource::collection($this->whenLoaded('members')),
+                'subscribers' => SubscriberResource::collection($this->whenLoaded('subscribers')),
 
                 // Authorization
                 $this->merge($this->withAuthorization($request))

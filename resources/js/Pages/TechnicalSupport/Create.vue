@@ -1,9 +1,12 @@
 <script setup>
 import MembersSidebar from '../Members/Sidebar.vue';
+import SubscribersSidebar from '../Subscribers/Sidebar.vue';
+import VolunteersSidebar from '../Subscribers/Sidebar.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
     userAuth: Object,
+    userHome: String,
 });
 
 const form = useForm({
@@ -19,7 +22,9 @@ const form = useForm({
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <MembersSidebar />
+                    <MembersSidebar v-if="userHome == '/members'" />
+                    <SubscribersSidebar v-else-if="userHome == '/subscribers'" />
+                    <VolunteersSidebar v-else-if="userHome == '/volunteers'" />
                 </div>
 
                 <div class="col-md-9">

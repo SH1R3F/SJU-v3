@@ -47,7 +47,7 @@ class MediaPolicy
      */
     public function view(Admin $admin, Media $media)
     {
-        return $admin->hasPermissionTo('view-media');
+        // return $admin->hasPermissionTo('view-media');
     }
 
     /**
@@ -70,7 +70,7 @@ class MediaPolicy
      */
     public function update(Admin $admin, Media $media)
     {
-        return $admin->hasPermissionTo('update-media');
+        // return $admin->hasPermissionTo('update-media');
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Models\Course;
 
 use App\Models\Member;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
 use App\Models\Course\Question;
@@ -48,5 +49,10 @@ class Questionnaire extends Model
     public function members()
     {
         return $this->morphedByMany(Member::class, 'questionable');
+    }
+
+    public function subscribers()
+    {
+        return $this->morphedByMany(Subscriber::class, 'questionable');
     }
 }

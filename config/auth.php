@@ -45,14 +45,14 @@ return [
             'driver' => 'session',
             'provider' => 'members',
         ],
-        // 'subscriber' => [
-        //     'driver' => 'session',
-        //     'provider' => 'users',
-        // ],
-        // 'volunteer' => [
-        //     'driver' => 'session',
-        //     'provider' => 'users',
-        // ],
+        'subscriber' => [
+            'driver' => 'session',
+            'provider' => 'subscribers',
+        ],
+        'volunteer' => [
+            'driver' => 'session',
+            'provider' => 'volunteers',
+        ],
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
@@ -89,6 +89,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Member::class,
         ],
+        'subscribers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Subscriber::class,
+        ],
+        'volunteers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Volunteer::class,
+        ],
     ],
 
     /*
@@ -121,6 +129,18 @@ return [
         ],
         'members' => [
             'provider' => 'members',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'subscribers' => [
+            'provider' => 'subscribers',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'volunteers' => [
+            'provider' => 'volunteers',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

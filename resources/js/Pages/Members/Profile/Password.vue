@@ -27,7 +27,6 @@ const form = useForm({
                         <!-- Tab content -->
                         <div class="tab-content text-start" id="myTabContent">
                             <div class="tab-pane fade show text-start pt-4 active" role="tabpanel" aria-labelledby="home-tab">
-                                <!-- I stopped here! -->
                                 <form
                                     @submit.prevent="
                                         form.post(route('member.profile.password'), {

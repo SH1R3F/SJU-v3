@@ -94,6 +94,26 @@
                 </ul>
             </li>
 
+            <!-- Subscribers -->
+            <li v-if="$page.props.authUser?.can_view?.subscribers" class="menu-item" :class="{ 'active open': $page.component.startsWith('Admin/Subscribers') }">
+                <a href="javascript:;" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-certificate"></i>
+                    <div>{{ __('Subscribers') }}</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" :class="{ active: $page.url.includes('admin/subscribers/active') || $page.url == '/admin/subscribers' }">
+                        <Link :href="route('admin.subscribers.index', 'active')" class="menu-link">
+                            <div>{{ __('Active subscribers') }}</div>
+                        </Link>
+                    </li>
+                    <li class="menu-item" :class="{ active: $page.url.includes('admin/subscribers/inactive') }">
+                        <Link :href="route('admin.subscribers.index', 'inactive')" class="menu-link">
+                            <div>{{ __('Inactive subscribers') }}</div>
+                        </Link>
+                    </li>
+                </ul>
+            </li>
+
             <!-- Courses -->
             <li
                 v-if="$page.props.authUser?.can_view?.courses || $page.props.authUser?.can_view?.templates || $page.props.authUser?.can_view?.questionnaires"

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | Web Members Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your admin side of the application.
+| Here is where you can register web routes for your members side of the application.
 |
 */
 
@@ -21,7 +21,7 @@ Route::group(['prefix' => 'members', 'as' => 'member.'], function () {
     /**
      * Authentication routes
      */
-    Route::prefix('auth')->middleware('guest:member')->group(function () {
+    Route::prefix('auth')->middleware('guest:member,subscriber,volunteer')->group(function () {
         Route::get('/login', [MemberAuthController::class, 'showLoginForm'])->name('login');
         Route::post('/login', [MemberAuthController::class, 'login']);
 

@@ -205,6 +205,9 @@ return [
             'fields' => 'fields',
             'experiences' => 'experiences',
             'languages' => 'languages'
-        ]
+        ],
+        'sname' => 'Second name',
+        'tname' => 'Third name',
+        'hearabout' => 'How did you know the authority',
     ],
 ];

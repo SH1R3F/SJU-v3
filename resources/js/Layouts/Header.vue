@@ -1,3 +1,4 @@
+<script></script>
 <template>
     <div class="header">
         <div class="container">
@@ -97,13 +98,13 @@
 
                                 <div class="row">
                                     <div class="col-12">
-                                        <a href="<?php echo base_url(); ?>users/login">
+                                        <a :href="route('subscriber.login')">
                                             <button class="btn btn-success w-100 login mb-2 text-light">{{ __('Login') }}</button>
                                         </a>
                                     </div>
 
                                     <div class="col-12">
-                                        <a href="<?php echo base_url(); ?>users/register">
+                                        <a :href="route('subscriber.register')">
                                             <button class="btn w-100 register text-success">{{ __('Register') }}</button>
                                         </a>
                                     </div>

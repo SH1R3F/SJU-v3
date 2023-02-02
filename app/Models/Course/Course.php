@@ -3,6 +3,7 @@
 namespace App\Models\Course;
 
 use App\Models\Member;
+use App\Models\Subscriber;
 use App\Models\Course\Type;
 use App\Models\Course\Place;
 use Illuminate\Http\Request;
@@ -121,5 +122,10 @@ class Course extends Model
     public function members()
     {
         return $this->morphedByMany(Member::class, 'coursable')->withPivot('attendance');
+    }
+
+    public function subscribers()
+    {
+        return $this->morphedByMany(Subscriber::class, 'coursable')->withPivot('attendance');
     }
 }

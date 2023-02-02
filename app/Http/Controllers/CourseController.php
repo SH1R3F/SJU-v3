@@ -22,6 +22,8 @@ class CourseController extends Controller
         $this->middleware(function ($request, $next) {
             if (Auth::guard('member')->check()) {
                 $this->auth = Auth::guard('member')->user();
+            } else if (Auth::guard('subscriber')->check()) {
+                $this->auth = Auth::guard('subscriber')->user();
             }
 
             return $next($request);

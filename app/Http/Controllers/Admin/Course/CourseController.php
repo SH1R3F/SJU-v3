@@ -91,7 +91,7 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         $course = $course
-            ->with('members')
+            ->with('members', 'subscribers')
             ->addSelect([
                 'course_type' => Type::select('name')->whereColumn('courses_types.id', 'courses.course_type_id')->take(1),
                 'course_place' => Place::select('name')->whereColumn('courses_places.id', 'courses.course_place_id')->take(1),

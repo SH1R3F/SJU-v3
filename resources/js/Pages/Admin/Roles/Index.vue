@@ -405,6 +405,28 @@ const editRole = (role) => {
                                             </tr>
                                             <!-- Articles permission -->
 
+                                            <!-- Studio permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Studio management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistMedia" v-model="addForm.permissions['viewAny-media']" />
+                                                            <label class="form-check-label" for="addlistMedia"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addcreateMedia" v-model="addForm.permissions['create-media']" />
+                                                            <label class="form-check-label" for="addcreateMedia"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="adddeleteMedia" v-model="addForm.permissions['delete-media']" />
+                                                            <label class="form-check-label" for="adddeleteMedia"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Studio permission -->
+
                                             <!-- Technical support -->
                                             <tr>
                                                 <td class="text-nowrap fw-semibold">{{ __('Technical support') }}</td>
@@ -769,6 +791,28 @@ const editRole = (role) => {
                                                 </td>
                                             </tr>
                                             <!-- Articles permission -->
+
+                                            <!-- Studio permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Studio management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistMedia" v-model="editForm.permissions['viewAny-media']" />
+                                                            <label class="form-check-label" for="editlistMedia"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreateMedia" v-model="editForm.permissions['create-media']" />
+                                                            <label class="form-check-label" for="editcreateMedia"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteMedia" v-model="editForm.permissions['delete-media']" />
+                                                            <label class="form-check-label" for="editdeleteMedia"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Studio permission -->
 
                                             <!-- Technical support -->
                                             <tr>

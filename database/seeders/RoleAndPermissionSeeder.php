@@ -62,6 +62,15 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::updateOrCreate(['name' => 'manage-invoice'], ['name' => 'manage-invoice', 'guard_name' => 'admin']);
 
         /**
+         * Subscribers management permissions
+         */
+        Permission::updateOrCreate(['name' => 'viewAny-subscriber'], ['name' => 'viewAny-subscriber', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'view-subscriber'], ['name' => 'view-subscriber', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-subscriber'], ['name' => 'create-subscriber', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-subscriber'], ['name' => 'update-subscriber', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-subscriber'], ['name' => 'delete-subscriber', 'guard_name' => 'admin']);
+
+        /**
          * Technical support management permissions
          */
         Permission::updateOrCreate(['name' => 'members-ticket'], ['name' => 'members-ticket', 'guard_name' => 'admin']);
@@ -112,6 +121,13 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::updateOrCreate(['name' => 'create-article'], ['name' => 'create-article', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'update-article'], ['name' => 'update-article', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'delete-article'], ['name' => 'delete-article', 'guard_name' => 'admin']);
+
+        /**
+         * Studio management permissions
+         */
+        Permission::updateOrCreate(['name' => 'viewAny-media'], ['name' => 'viewAny-media', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-media'], ['name' => 'create-media', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-media'], ['name' => 'delete-media', 'guard_name' => 'admin']);
 
 
         $admin->syncPermissions(Permission::pluck('name'));

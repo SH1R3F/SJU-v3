@@ -4,16 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\Course\CourseController;
 use App\Http\Controllers\Admin\Course\QuestionController;
 use App\Http\Controllers\Admin\Course\TemplateController;
 use App\Http\Controllers\Admin\TechnicalSupportController;
 use App\Http\Controllers\Admin\Course\QuestionnaireController;
-use App\Http\Controllers\Admin\MediaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
          * Invoices management
          */
         Route::resource('invoices', InvoiceController::class)->only(['index', 'show']);
+
+
+        /**
+         * Subscribers management
+         */
+        Route::get('subscribers/{status?}', [SubscriberController::class, 'index'])->where('status', 'active|inactive')->name('subscribers.index');
+        Route::get('subscribers/{subscriber}/certificate/{course}', [SubscriberController::class, 'certificate'])->name('subscribers.certificate');
+        Route::resource('subscribers', SubscriberController::class)->except('index');
 
 
         /**
