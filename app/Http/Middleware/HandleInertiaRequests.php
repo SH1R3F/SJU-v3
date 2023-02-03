@@ -4,10 +4,13 @@ namespace App\Http\Middleware;
 
 use App\Models\Page;
 use App\Models\Admin;
+use App\Models\Media;
 use App\Models\Member;
 use App\Models\Article;
 use App\Models\Invoice;
 use Inertia\Middleware;
+use App\Models\Volunteer;
+use App\Models\Subscriber;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
@@ -17,10 +20,9 @@ use App\Models\Course\Questionnaire;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\AdminResource;
 use App\Http\Resources\MemberResource;
-use App\Http\Resources\SubscriberResource;
-use App\Models\Media;
-use App\Models\Subscriber;
 use App\Models\TechnicalSupportTicket;
+use App\Http\Resources\VolunteerResource;
+use App\Http\Resources\SubscriberResource;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -71,6 +73,9 @@ class HandleInertiaRequests extends Middleware
         } else if (Auth::guard('subscriber')->check()) {
             $user = new SubscriberResource(Auth::guard('subscriber')->user());
             $home = Subscriber::HOME;
+        } else if (Auth::guard('volunteer')->check()) {
+            $user = new VolunteerResource(Auth::guard('volunteer')->user());
+            $home = Volunteer::HOME;
         }
 
         return array_merge(parent::share($request), [
@@ -106,6 +111,7 @@ class HandleInertiaRequests extends Middleware
             'adminApproval' => $admin->can('viewAcceptance', Member::class),
             'refusedMembers' => $admin->can('viewRefused', Member::class),
             'subscribers' => $admin->can('viewAny', Subscriber::class),
+            'volunteers' => $admin->can('viewAny', Volunteer::class),
             'invoices' =>  $admin->can('viewAny', Invoice::class),
             // Technical support
             'support_members' =>  $admin->can('viewMembers', TechnicalSupportTicket::class),

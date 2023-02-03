@@ -63,6 +63,7 @@ Route::group(['prefix' => 'subscribers', 'as' => 'subscriber.'], function () {
              * My Courses
              * Displays current registered courses and upcoming courses
              */
+            Route::get('/', [SubscriberController::class, 'courses']);
             Route::get('/courses', [SubscriberController::class, 'courses'])->name('courses');
 
             /**

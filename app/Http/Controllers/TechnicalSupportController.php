@@ -20,6 +20,8 @@ class TechnicalSupportController extends Controller
                 $this->auth = Auth::guard('member')->user();
             } else if (Auth::guard('subscriber')->check()) {
                 $this->auth = Auth::guard('subscriber')->user();
+            } else if (Auth::guard('volunteer')->check()) {
+                $this->auth = Auth::guard('volunteer')->user();
             }
 
             return $next($request);

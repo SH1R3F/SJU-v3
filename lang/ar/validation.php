@@ -299,6 +299,14 @@ return [
         'tname' => 'اسم الجد',
         'country' => 'الدولة',
         'hearabout' => 'كيف تعرفت علي الهيئة',
+        'marital_status' => 'الحالة الإجتماعية',
+        'governorate' => 'المحافظة',
+        'national_address' => 'العنوان الوطني',
+        'job_title' => 'الصفة المهنية',
+        'residence' => 'مكان الإقامة',
+        'fields' => 'المجالات',
+        'education_level' => 'المرحلة الدراسية',
+        'experiences' => 'الخبرات',
     ],
 
 ];

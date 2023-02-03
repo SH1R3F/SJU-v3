@@ -6,6 +6,7 @@ use App\Events\MemberRegistered;
 use App\Events\SubscriberRegistered;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
+use App\Listeners\NewVolunteerNotification;
 use App\Listeners\NewSubscriberNotification;
 use App\Listeners\SendMemberEmailVerificationNotification;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -25,6 +26,9 @@ class EventServiceProvider extends ServiceProvider
         MemberRegistered::class => [],
         SubscriberRegistered::class => [
             NewSubscriberNotification::class
+        ],
+        VolunteerRegistered::class => [
+            NewVolunteerNotification::class
         ],
     ];
 

@@ -80,5 +80,8 @@ require_once 'members/web.php';
 // Subscriber routes
 require_once 'subscribers/web.php';
 
+// Subscriber routes
+require_once 'volunteers/web.php';
+
 // Admin routes
 require_once 'admins/web.php';

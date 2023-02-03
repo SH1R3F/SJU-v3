@@ -11,6 +11,7 @@ use App\Models\Course\Gender;
 use App\Models\Course\Category;
 use App\Models\Course\Template;
 use App\Models\Course\Questionnaire;
+use App\Models\Volunteer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -127,5 +128,10 @@ class Course extends Model
     public function subscribers()
     {
         return $this->morphedByMany(Subscriber::class, 'coursable')->withPivot('attendance');
+    }
+
+    public function volunteers()
+    {
+        return $this->morphedByMany(Volunteer::class, 'coursable')->withPivot('attendance');
     }
 }

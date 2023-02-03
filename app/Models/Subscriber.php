@@ -20,7 +20,7 @@ class Subscriber extends Authenticatable implements MustVerifyEmail
 
     protected $guard = 'subscriber';
 
-    public const HOME = '/subscribers/courses';
+    public const HOME = '/subscribers';
 
     public const STATUS_INACTIVE = -1;
     public const STATUS_DISABLED = 0;
@@ -66,7 +66,7 @@ class Subscriber extends Authenticatable implements MustVerifyEmail
     public function scopeFilter($query, Request $request)
     {
         return $query
-            // Filter Full Name [ar, en]
+            // Filter Full Name
             ->when($request->name, function ($builder, $name) {
                 // Operator precedence
                 return $builder->where(function ($query) use ($name) {
@@ -135,5 +135,18 @@ class Subscriber extends Authenticatable implements MustVerifyEmail
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmail);
+    }
+
+    /**
+     * Mark the given user's email as verified.
+     *
+     * @return bool
+     */
+    public function markEmailAsVerified()
+    {
+        return $this->forceFill([
+            'email_verified_at' => $this->freshTimestamp(),
+            'status' => self::STATUS_ACTIVE,
+        ])->save();
     }
 }

@@ -1,14 +1,6 @@
 <script setup>
 import { useForm } from '@inertiajs/inertia-vue3';
 
-defineProps({
-    countries: Object,
-    cities: Object,
-    nationalities: Object,
-    qualifications: Object,
-    sources: Object,
-});
-
 const form = useForm({
     email: '',
     password: '',

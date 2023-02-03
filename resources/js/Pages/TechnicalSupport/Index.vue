@@ -1,7 +1,7 @@
 <script setup>
 import MembersSidebar from '../Members/Sidebar.vue';
 import SubscribersSidebar from '../Subscribers/Sidebar.vue';
-import VolunteersSidebar from '../Subscribers/Sidebar.vue';
+import VolunteersSidebar from '../Volunteers/Sidebar.vue';
 
 const props = defineProps({
     userAuth: Object,
