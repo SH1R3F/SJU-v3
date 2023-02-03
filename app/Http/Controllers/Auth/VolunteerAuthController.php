@@ -9,6 +9,7 @@ use Illuminate\Http\UploadedFile;
 use App\Events\VolunteerRegistered;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 use App\Http\Requests\Volunteer\LoginRequest;
 use App\Http\Requests\Volunteer\RegisterRequest;
 use App\Http\Requests\Volunteer\EmailVerificationRequest;

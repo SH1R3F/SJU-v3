@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Auth\MemberAuthController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\Member\MemberController;
 use App\Http\Controllers\Member\PaymentController;
 use App\Http\Controllers\Member\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\MemberAuthController;
+use App\Http\Controllers\Member\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,8 +44,11 @@ Route::group(['prefix' => 'members', 'as' => 'member.'], function () {
 
         /**
          * Forgot password routes
-         * TO BE ADDED
          */
+        Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+        Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+        Route::get('/password/reset/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+        Route::post('/password/reset', [ForgotPasswordController::class, 'reset'])->name('password.change');
     });
 
 

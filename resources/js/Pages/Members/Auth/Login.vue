@@ -25,7 +25,7 @@ const form = useForm({
                                 <label for="pass">{{ __('Password') }}</label>
                                 <input type="password" v-model="form.password" class="form-control" id="pass" placeholder="********" />
                                 <span class="text text-danger text-sm" v-if="form.errors.password">{{ form.errors.password }}</span>
-                                <a href="#to-be-added" class="text-muted form-text">{{ __('Forgot your password?') }}</a>
+                                <Link :href="route('member.password.request')" class="text-muted form-text">{{ __('Forgot your password?') }}</Link>
                             </div>
 
                             <div class="text-end">

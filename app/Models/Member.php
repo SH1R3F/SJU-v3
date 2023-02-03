@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Course\Questionnaire;
 use App\Models\TechnicalSupportTicket;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\ResetMemberPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -313,5 +314,16 @@ class Member extends Authenticatable
     public function certificates()
     {
         return $this->morphMany(Certificate::class, 'certificatable');
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetMemberPassword($token));
     }
 }

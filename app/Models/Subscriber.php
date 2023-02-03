@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Course\Questionnaire;
 use App\Models\TechnicalSupportTicket;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\ResetSubscriberPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -156,5 +157,16 @@ class Subscriber extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => $this->freshTimestamp(),
             'status' => self::STATUS_ACTIVE,
         ])->save();
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetSubscriberPassword($token));
     }
 }

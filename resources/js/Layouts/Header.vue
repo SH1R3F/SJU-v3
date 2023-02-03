@@ -140,13 +140,13 @@
 
                                 <div class="row">
                                     <div class="col-12">
-                                        <a href="<?php echo base_url(); ?>volunteers/login">
+                                        <a :href="route('volunteer.login')">
                                             <button class="btn btn-success w-100 login mb-2 text-light">{{ __('Login') }}</button>
                                         </a>
                                     </div>
 
                                     <div class="col-12">
-                                        <a href="<?php echo base_url(); ?>volunteers/register">
+                                        <a :href="route('volunteer.register')">
                                             <button class="btn w-100 register text-success">{{ __('Register') }}</button>
                                         </a>
                                     </div>

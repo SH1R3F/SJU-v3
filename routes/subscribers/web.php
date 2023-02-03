@@ -5,6 +5,7 @@ use App\Http\Controllers\Member\MemberController;
 use App\Http\Controllers\Member\ProfileController;
 use App\Http\Controllers\Auth\SubscriberAuthController;
 use App\Http\Controllers\Subscriber\SubscriberController;
+use App\Http\Controllers\Subscriber\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +31,11 @@ Route::group(['prefix' => 'subscribers', 'as' => 'subscriber.'], function () {
 
         /**
          * Forgot password routes
-         * TO BE ADDED
          */
+        Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+        Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+        Route::get('/password/reset/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+        Route::post('/password/reset', [ForgotPasswordController::class, 'reset'])->name('password.change');
     });
 
 

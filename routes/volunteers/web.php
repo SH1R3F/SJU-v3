@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\VolunteerAuthController;
+use App\Http\Controllers\Volunteer\ForgotPasswordController;
 use App\Http\Controllers\Volunteer\VolunteerController;
 
 /*
@@ -28,8 +29,11 @@ Route::group(['prefix' => 'volunteers', 'as' => 'volunteer.'], function () {
 
         /**
          * Forgot password routes
-         * TO BE ADDED
          */
+        Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+        Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+        Route::get('/password/reset/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+        Route::post('/password/reset', [ForgotPasswordController::class, 'reset'])->name('password.change');
     });
 
 

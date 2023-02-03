@@ -11,6 +11,7 @@ use App\Models\Course\Questionnaire;
 use App\Models\TechnicalSupportTicket;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\ResetVolunteerPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -174,5 +175,16 @@ class Volunteer extends Authenticatable implements MustVerifyEmail
     public function branch()
     {
         return $this->belongsTo(Branch::class);
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetVolunteerPassword($token));
     }
 }
