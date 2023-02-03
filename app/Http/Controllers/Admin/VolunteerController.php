@@ -15,6 +15,9 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\StoreVolunteer;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\VolunteerResource;
+use Illuminate\Support\Facades\Notification;
+use App\Http\Requests\NotifyVolunteersRequest;
+use App\Notifications\PushNotificationToUsers;
 
 class VolunteerController extends Controller
 {
@@ -42,7 +45,8 @@ class VolunteerController extends Controller
         return inertia('Admin/Volunteers/Index', [
             'volunteers' => VolunteerResource::collection($volunteers)->additional([
                 'can_export' => request()->user()->can('export', Volunteer::class),
-                'can_create' => request()->user()->can('create', Volunteer::class)
+                'can_create' => request()->user()->can('create', Volunteer::class),
+                'can_notify' => request()->user()->can('viewAny', Volunteer::class),
             ]),
             'status' => $status,
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
@@ -220,5 +224,51 @@ class VolunteerController extends Controller
         Storage::delete($volunteer->profile_photo);
         $volunteer->delete();
         return redirect()->back()->with('message', __('Volunteer deleted successfully'));
+    }
+
+    /**
+     * Show the form to send a notification to volunteers.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showNotifyForm()
+    {
+        $this->authorize('viewAny', Volunteer::class);
+
+        $volunteers = Volunteer::orderBy('id')->get(['id', 'fname_ar', 'sname_ar', 'tname_ar', 'lname_ar', 'fname_en', 'sname_en', 'tname_en', 'lname_en']);
+
+        return inertia('Admin/Volunteers/Notifications/Create', [
+            'volunteers' => VolunteerResource::collection($volunteers)
+        ]);
+    }
+
+    /**
+     * Send the notification to specified users.
+     *
+     * @param  \App\Http\Requests\NotifyVolunteersRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function notify(NotifyVolunteersRequest $request)
+    {
+        $this->authorize('viewAny', Volunteer::class);
+
+        switch ($request['to_type']) {
+            case 'select':
+                $recipients = Volunteer::whereIn('id', $request['recipients'])->get();
+                break;
+            case 'all':
+                $recipients = Volunteer::all();
+                break;
+            case 'active':
+                $recipients = Volunteer::where('status', 1)->get();
+                break;
+            case 'inactive':
+                $recipients = Volunteer::where('status', '!=', 1)->get();
+                break;
+        }
+
+        Notification::send($recipients, new PushNotificationToUsers($request->validated()));
+
+        return redirect()->route('admin.volunteers.index')->with('message', __('Notification is being sent'));
     }
 }

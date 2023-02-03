@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\RoleController;
@@ -58,11 +59,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('admins/notify', [AdminController::class, 'showNotifyForm'])->name('admins.notify');
         Route::post('admins/notify', [AdminController::class, 'notify']);
 
+        Route::post('admins/notifications/read-all', function (Request $request) {
+            $request->user()->unreadNotifications->markAsRead();
+        })->name('read-all-notifications');
+
+        Route::post('admins/notifications/{id}/read', function (Request $request, $id) {
+            $request->user()->unreadNotifications->where('id', $id)->markAsRead();
+        })->name('read-notification');
+
         // Manage admin resource
         Route::get('admins/export', [AdminController::class, 'export'])->name('admins.export');
         Route::post('admins/{admin}/toggle', [AdminController::class, 'toggle'])->name('admins.toggle');
         Route::resource('admins', AdminController::class);
-
 
         // Send notification to members
         Route::get('members/notify', [MemberController::class, 'showNotifyForm'])->name('members.notify');
@@ -93,6 +101,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
          */
         Route::resource('invoices', InvoiceController::class)->only(['index', 'show']);
 
+        // Send notification to subscribers
+        Route::get('subscribers/notify', [SubscriberController::class, 'showNotifyForm'])->name('subscribers.notify');
+        Route::post('subscribers/notify', [SubscriberController::class, 'notify']);
 
         /**
          * Subscribers management
@@ -102,6 +113,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('subscribers/{status?}', [SubscriberController::class, 'index'])->where('status', 'active|inactive')->name('subscribers.index');
         Route::get('subscribers/{subscriber}/certificate/{course}', [SubscriberController::class, 'certificate'])->name('subscribers.certificate');
         Route::resource('subscribers', SubscriberController::class)->except('index');
+
+        // Send notification to volunteers
+        Route::get('volunteers/notify', [VolunteerController::class, 'showNotifyForm'])->name('volunteers.notify');
+        Route::post('volunteers/notify', [VolunteerController::class, 'notify']);
 
         /**
          * Volunteers management

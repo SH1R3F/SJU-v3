@@ -175,7 +175,7 @@ const form = useForm({
                                         <span class="d-none d-sm-inline-block">{{ __('Create member') }}</span>
                                     </span>
                                 </Link>
-                                <Link v-if="members.can_notify" :href="route('admin.admins.notify')" type="button" class="dt-button btn btn-light me-1">
+                                <Link v-if="members.can_notify" :href="route('admin.members.notify')" type="button" class="dt-button btn btn-light me-1">
                                     <span>
                                         <i class="ti ti-bell-ringing me-0 me-sm-1 ti-xs"></i>
                                         <span class="d-none d-sm-inline-block">{{ __('Notify') }}</span>

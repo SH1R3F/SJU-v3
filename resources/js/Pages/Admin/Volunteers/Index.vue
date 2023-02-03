@@ -126,7 +126,7 @@ watch(
                                         <span class="d-none d-sm-inline-block">{{ __('Create volunteer') }}</span>
                                     </span>
                                 </Link>
-                                <Link v-if="false" :href="route('admin.volunteers.notify')" type="button" class="dt-button btn btn-light me-1">
+                                <Link v-if="volunteers.can_notify" :href="route('admin.volunteers.notify')" type="button" class="dt-button btn btn-light me-1">
                                     <span>
                                         <i class="ti ti-bell-ringing me-0 me-sm-1 ti-xs"></i>
                                         <span class="d-none d-sm-inline-block">{{ __('Notify') }}</span>

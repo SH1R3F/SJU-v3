@@ -63,9 +63,11 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $notifications = [];
         if ($request->is('admin*') && Auth::guard('admin')->check()) {
             $admin = Auth::guard('admin')->user();
             $auth = (new AdminResource($admin))->additional(['can_view' => $this->adminPermissions($admin)]);
+            $notifications = $admin->unreadNotifications;
         }
         if (Auth::guard('member')->check()) {
             $user = new MemberResource(Auth::guard('member')->user()->load('subscription'));
@@ -94,6 +96,7 @@ class HandleInertiaRequests extends Middleware
             'authUser' => isset($auth) ? $auth : null, // Admin
             'userAuth' => isset($user) ? $user : null, // User
             'userHome' => isset($home) ? $home : null, // User
+            'notifications' => $notifications
         ]);
     }
 

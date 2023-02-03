@@ -12,6 +12,9 @@ use App\Services\CertificateService;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\StoreSubscriber;
 use App\Http\Resources\SubscriberResource;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\PushNotificationToUsers;
+use App\Http\Requests\NotifySubscribersRequest;
 
 class SubscriberController extends Controller
 {
@@ -39,7 +42,8 @@ class SubscriberController extends Controller
         return inertia('Admin/Subscribers/Index', [
             'subscribers' => SubscriberResource::collection($subscribers)->additional([
                 'can_export' => request()->user()->can('export', Subscriber::class),
-                'can_create' => request()->user()->can('create', Subscriber::class)
+                'can_create' => request()->user()->can('create', Subscriber::class),
+                'can_notify' => request()->user()->can('viewAny', Subscriber::class),
             ]),
             'status' => $status,
             'filters' => request()->only(['perPage', 'name', 'mobile'])
@@ -54,7 +58,7 @@ class SubscriberController extends Controller
      */
     public function export($status = 'active')
     {
-        $this->authorize('export', Volunteer::class);
+        $this->authorize('export', Subscriber::class);
 
         $subscribers = Subscriber::withCount('courses')
             ->when($status == 'active', fn ($query) => $query->where('status', 1))
@@ -205,5 +209,51 @@ class SubscriberController extends Controller
         $subscriber->delete();
 
         return redirect()->back()->with('message', __('Subscriber deleted successfully'));
+    }
+
+    /**
+     * Show the form to send a notification to subscribers.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showNotifyForm()
+    {
+        $this->authorize('viewAny', Subscriber::class);
+
+        $subscribers = Subscriber::orderBy('id')->get(['id', 'fname', 'sname', 'tname', 'lname']);
+
+        return inertia('Admin/Subscribers/Notifications/Create', [
+            'subscribers' => SubscriberResource::collection($subscribers)
+        ]);
+    }
+
+    /**
+     * Send the notification to specified users.
+     *
+     * @param  \App\Http\Requests\NotifySubscribersRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function notify(NotifySubscribersRequest $request)
+    {
+        $this->authorize('viewAny', Subscriber::class);
+
+        switch ($request['to_type']) {
+            case 'select':
+                $recipients = Subscriber::whereIn('id', $request['recipients'])->get();
+                break;
+            case 'all':
+                $recipients = Subscriber::all();
+                break;
+            case 'active':
+                $recipients = Subscriber::where('status', 1)->get();
+                break;
+            case 'inactive':
+                $recipients = Subscriber::where('status', '!=', 1)->get();
+                break;
+        }
+
+        Notification::send($recipients, new PushNotificationToUsers($request->validated()));
+
+        return redirect()->route('admin.subscribers.index')->with('message', __('Notification is being sent'));
     }
 }

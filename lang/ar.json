@@ -4,6 +4,9 @@
     "Roles & moderators": "الأدوار والمدراء",
     "Roles & permissions": "الأدوار والصلاحيات",
     "Moderators": "المدراء",
+    "Notifications": "الإشعارات",
+    "Mark all as read": "قراءة الجميع",
+    "You don't have any unseen notifications": "ليس لديك أي إشعارات جديدة",
 
     "--------------- Admin Login -------------": "",
     "Login": "تسجيل الدخول",
@@ -176,6 +179,8 @@
     "Enrolled courses": "الفعاليات المشترك بها",
     "Subscriber enabled successfully": "تم تفعيل المشترك بنجاح",
     "Subscriber disabled successfully": "تم إلغاء تفعيل المشترك بنجاح",
+    "Notify subscribers": "إشعار المشتركين",
+    "All subscribers": "كل المشتركين",
 
     "--------------- Volunteer management -------------": "",
     "Volunteers management": "إدارة المتطوعين",
@@ -189,6 +194,8 @@
     "Volunteer didn't attend this course": "المتطوع لم يحضر الفعالية",
     "Volunteer enabled successfully": "تم تفعيل المتطوع بنجاح",
     "Volunteer disabled successfully": "تم إلغاء تفعيل المتطوع بنجاح",
+    "Notify volunteers": "إشعار المتطوعين",
+    "All volunteers": "كل المتطوعين",
 
     "--------------- Courses management -------------": "",
     "Courses": "الفعاليات",

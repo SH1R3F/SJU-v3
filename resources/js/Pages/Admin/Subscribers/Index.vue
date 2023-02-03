@@ -88,7 +88,7 @@ watch(
                                         <span class="d-none d-sm-inline-block">{{ __('Create subscriber') }}</span>
                                     </span>
                                 </Link>
-                                <Link v-if="false" :href="route('admin.subscribers.notify')" type="button" class="dt-button btn btn-light me-1">
+                                <Link v-if="subscribers.can_notify" :href="route('admin.subscribers.notify')" type="button" class="dt-button btn btn-light me-1">
                                     <span>
                                         <i class="ti ti-bell-ringing me-0 me-sm-1 ti-xs"></i>
                                         <span class="d-none d-sm-inline-block">{{ __('Notify') }}</span>
