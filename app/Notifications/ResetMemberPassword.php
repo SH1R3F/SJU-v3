@@ -8,8 +8,11 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Lang;
 
-class ResetMemberPassword extends Notification
+class ResetMemberPassword extends Notification implements ShouldQueue
 {
+
+    use Queueable;
+
     /**
      * The password reset token.
      *
@@ -96,7 +99,7 @@ class ResetMemberPassword extends Notification
             return call_user_func(static::$createUrlCallback, $notifiable, $this->token);
         }
 
-        return url(route('volunteer.password.reset', [
+        return url(route('member.password.reset', [
             'token' => $this->token,
             'email' => $notifiable->getEmailForPasswordReset(),
         ], false));
