@@ -267,6 +267,74 @@ const editRole = (role) => {
                                             </tr>
                                             <!-- Members permission -->
 
+                                            <!-- Subscribers permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Subscribers management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="viewAnySubscriber" v-model="addForm.permissions['viewAny-subscriber']" />
+                                                            <label class="form-check-label" for="viewAnySubscriber"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="exportSubscribers" v-model="addForm.permissions['export-subscriber']" />
+                                                            <label class="form-check-label" for="exportSubscribers"> {{ __('Export') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="showSubscriber" v-model="addForm.permissions['view-subscriber']" />
+                                                            <label class="form-check-label" for="showSubscriber"> {{ __('Show') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="createSubscriber" v-model="addForm.permissions['create-subscriber']" />
+                                                            <label class="form-check-label" for="createSubscriber"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="updateSubscriber" v-model="addForm.permissions['update-subscriber']" />
+                                                            <label class="form-check-label" for="updateSubscriber"> {{ __('Update') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="deleteSubscriber" v-model="addForm.permissions['delete-subscriber']" />
+                                                            <label class="form-check-label" for="deleteSubscriber"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Subscribers permission -->
+
+                                            <!-- Volunteers permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Volunteers management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="viewAnyVolunteer" v-model="addForm.permissions['viewAny-volunteer']" />
+                                                            <label class="form-check-label" for="viewAnyVolunteer"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="exportVolunteers" v-model="addForm.permissions['export-volunteer']" />
+                                                            <label class="form-check-label" for="exportVolunteers"> {{ __('Export') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="showVolunteer" v-model="addForm.permissions['view-volunteer']" />
+                                                            <label class="form-check-label" for="showVolunteer"> {{ __('Show') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="createVolunteer" v-model="addForm.permissions['create-volunteer']" />
+                                                            <label class="form-check-label" for="createVolunteer"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="updateVolunteer" v-model="addForm.permissions['update-volunteer']" />
+                                                            <label class="form-check-label" for="updateVolunteer"> {{ __('Update') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="deleteVolunteer" v-model="addForm.permissions['delete-volunteer']" />
+                                                            <label class="form-check-label" for="deleteVolunteer"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Volunteers permission -->
+
                                             <!-- Courses permission -->
                                             <tr>
                                                 <td class="text-nowrap fw-semibold">{{ __('Courses management') }}</td>
@@ -653,6 +721,74 @@ const editRole = (role) => {
                                                 </td>
                                             </tr>
                                             <!-- Members permission -->
+
+                                            <!-- Subscribers permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Subscribers management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editSubscribers" v-model="editForm.permissions['viewAny-subscriber']" />
+                                                            <label class="form-check-label" for="editSubscribers"> {{ __('Subscribers') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editexportSubscribers" v-model="editForm.permissions['export-subscriber']" />
+                                                            <label class="form-check-label" for="editexportSubscribers"> {{ __('Export') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editshowSubscriber" v-model="editForm.permissions['view-subscriber']" />
+                                                            <label class="form-check-label" for="editshowSubscriber"> {{ __('Show') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreateSubscriber" v-model="editForm.permissions['create-subscriber']" />
+                                                            <label class="form-check-label" for="editcreateSubscriber"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editupdateSubscriber" v-model="editForm.permissions['update-subscriber']" />
+                                                            <label class="form-check-label" for="editupdateSubscriber"> {{ __('Update') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteSubscriber" v-model="editForm.permissions['delete-subscriber']" />
+                                                            <label class="form-check-label" for="editdeleteSubscriber"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Subscribers permission -->
+
+                                            <!-- Volunteers permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Volunteers management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editVolunteers" v-model="editForm.permissions['viewAny-volunteer']" />
+                                                            <label class="form-check-label" for="editVolunteers"> {{ __('Volunteers') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editexportVolunteers" v-model="editForm.permissions['export-volunteer']" />
+                                                            <label class="form-check-label" for="editexportVolunteers"> {{ __('Export') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editshowVolunteer" v-model="editForm.permissions['view-volunteer']" />
+                                                            <label class="form-check-label" for="editshowVolunteer"> {{ __('Show') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreateVolunteer" v-model="editForm.permissions['create-volunteer']" />
+                                                            <label class="form-check-label" for="editcreateVolunteer"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editupdateVolunteer" v-model="editForm.permissions['update-volunteer']" />
+                                                            <label class="form-check-label" for="editupdateVolunteer"> {{ __('Update') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteVolunteer" v-model="editForm.permissions['delete-volunteer']" />
+                                                            <label class="form-check-label" for="editdeleteVolunteer"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Volunteers permission -->
 
                                             <!-- Courses permission -->
                                             <tr>

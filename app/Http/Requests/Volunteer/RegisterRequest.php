@@ -50,12 +50,12 @@ class RegisterRequest extends FormRequest
             'education_level'  => ['required', 'string', 'max:255'],
             'experiences'      => ['required', 'string', 'max:255'],
             'branch_id'        => ['required', 'numeric', 'exists:branches,id'],
-            'hearabout'     => ['required', 'numeric', Rule::in(array_keys(config('sju.sources')))],
-            'mobile' => ['required', 'numeric'],
-            'mobile_key' => ['required', 'numeric', Rule::in(array_values(config('sju.countries')))],
-            'email' => ['required', 'email', 'unique:volunteers'],
-            'password' => ['required', 'min:6', 'confirmed'],
-            'agreement' => ['accepted']
+            'hearabout'        => ['required', 'numeric', Rule::in(array_keys(config('sju.sources')))],
+            'mobile'           => ['required', 'numeric'],
+            'mobile_key'       => ['required', 'numeric', Rule::in(array_values(config('sju.countries')))],
+            'email'            => ['required', 'email', 'unique:volunteers'],
+            'password'         => ['required', 'min:6', 'confirmed'],
+            'agreement'        => ['accepted']
         ];
     }
 

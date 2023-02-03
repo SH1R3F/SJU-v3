@@ -40,7 +40,7 @@ return new class extends Migration
             $table->string('education_level')->nullable();
             $table->string('experiences')->nullable();
             $table->unsignedBigInteger('branch_id');
-            $table->unsignedInteger('hearabout');
+            $table->unsignedInteger('hearabout')->default(1);
             $table->unsignedBigInteger('mobile')->index();
             $table->unsignedInteger('mobile_key')->index();
             $table->string('email')->unique();

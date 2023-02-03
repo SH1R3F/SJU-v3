@@ -81,7 +81,7 @@ class CertificateService
             // Text value
             $text = $variable['field'];
             if ($variable['field'] === '{free_text}') $text = $variable['text'];
-            if ($variable['field'] === '{اسم_المتدرب}') $text = "$setMaleOrFemaleTitle " . ($template->mode == 'ar' ? $user->full_name_ar : $user->full_name_en);
+            if ($variable['field'] === '{اسم_المتدرب}') $text = "$setMaleOrFemaleTitle " . $user->fullNameAr;
 
             // Text positioning
             $position_y     = 'top: ' . $variable['height'] . 'mm; ';

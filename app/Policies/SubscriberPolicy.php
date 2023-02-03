@@ -37,6 +37,17 @@ class SubscriberPolicy
     }
 
     /**
+     * Determine whether the admin can export any models.
+     *
+     * @param  \App\Models\Admin  $admin
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function export(Admin $admin)
+    {
+        return $admin->hasPermissionTo('export-subscriber');
+    }
+
+    /**
      * Determine whether the admin can view the model.
      *
      * @param  \App\Models\Admin  $admin

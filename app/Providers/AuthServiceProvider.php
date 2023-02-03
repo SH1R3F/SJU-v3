@@ -42,6 +42,7 @@ class AuthServiceProvider extends ServiceProvider
         Admin::class => AdminPolicy::class,
         Member::class => MemberPolicy::class,
         Subscriber::class => SubscriberPolicy::class,
+        Volunteer::class => VolunteerPolicy::class,
         Invoice::class => InvoicePolicy::class,
         Course::class => CoursePolicy::class,
         Template::class => TemplatePolicy::class,

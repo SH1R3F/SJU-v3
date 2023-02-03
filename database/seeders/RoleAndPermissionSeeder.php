@@ -65,10 +65,21 @@ class RoleAndPermissionSeeder extends Seeder
          * Subscribers management permissions
          */
         Permission::updateOrCreate(['name' => 'viewAny-subscriber'], ['name' => 'viewAny-subscriber', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'export-subscriber'], ['name' => 'export-subscriber', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'view-subscriber'], ['name' => 'view-subscriber', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'create-subscriber'], ['name' => 'create-subscriber', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'update-subscriber'], ['name' => 'update-subscriber', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'delete-subscriber'], ['name' => 'delete-subscriber', 'guard_name' => 'admin']);
+
+        /**
+         * Volunteers management permissions
+         */
+        Permission::updateOrCreate(['name' => 'viewAny-volunteer'], ['name' => 'viewAny-volunteer', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'export-volunteer'], ['name' => 'export-volunteer', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'view-volunteer'], ['name' => 'view-volunteer', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-volunteer'], ['name' => 'create-volunteer', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-volunteer'], ['name' => 'update-volunteer', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-volunteer'], ['name' => 'delete-volunteer', 'guard_name' => 'admin']);
 
         /**
          * Technical support management permissions

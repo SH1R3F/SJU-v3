@@ -7,6 +7,7 @@ import { debounce } from '../../../helpers';
 const props = defineProps({
     subscribers: Object,
     filters: Object,
+    status: String,
 });
 
 /**
@@ -22,7 +23,7 @@ const appended = ref({
     mobile: mobile.value,
 });
 
-const filterReq = debounce(() => Inertia.get(route('admin.subscribers.index'), appended.value, { preserveState: true, replace: true }), 500);
+const filterReq = debounce(() => Inertia.get(route('admin.subscribers.index', props.status), appended.value, { preserveState: true, replace: true }), 500);
 watch(
     () => [name.value, mobile.value, perPage.value],
     ([nameVal, mobile, pp]) => {
@@ -71,8 +72,8 @@ watch(
                         <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column gap-1 mb-3 mb-md-0">
                             <div class="dt-buttons">
                                 <a
-                                    v-if="false"
-                                    :href="route('admin.subscribers.export', { page: 'accepted', ...queryParams() })"
+                                    v-if="subscribers.can_export"
+                                    :href="route('admin.subscribers.export', { status: status, ...queryParams() })"
                                     class="dt-button buttons-collection btn btn-label-secondary me-1"
                                     type="button"
                                 >
@@ -140,7 +141,7 @@ watch(
                             <td>
                                 <div class="d-flex align-items-center">
                                     <Link
-                                        v-if="false"
+                                        v-if="subscriber.toggleable"
                                         :href="route('admin.subscribers.toggle', subscriber.id)"
                                         method="post"
                                         as="span"
@@ -151,7 +152,7 @@ watch(
                                         :data-bs-original-title="subscriber.status == 1 ? __('Enabled') : __('Disabled')"
                                         :class="{ 'text-success': subscriber.status == 1, 'text-body': subscriber.status != 1 }"
                                     >
-                                        <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': subscriber.status == 1, 'ti-toggle-left': subscriber.status != -1 }"></i>
+                                        <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': subscriber.status == 1, 'ti-toggle-left': subscriber.status != 1 }"></i>
                                     </Link>
                                     <Link v-if="subscriber.viewable" :href="route('admin.subscribers.show', subscriber.id)" class="text-body"><i class="ti ti-eye ti-sm me-2"></i></Link>
                                     <Link v-if="subscriber.editable" :href="route('admin.subscribers.edit', subscriber.id)" class="text-body"><i class="ti ti-edit ti-sm me-2"></i></Link>

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Volunteer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Branch extends Model
 {
@@ -24,5 +25,13 @@ class Branch extends Model
     public function members(): HasMany
     {
         return $this->hasMany(Member::class);
+    }
+
+    /**
+     * Relation the the volunteers the branch has to
+     */
+    public function volunteers(): HasMany
+    {
+        return $this->hasMany(Volunteer::class);
     }
 }

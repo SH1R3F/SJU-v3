@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
+use App\Exports\SubscribersExport;
 use App\Events\SubscriberRegistered;
 use App\Http\Controllers\Controller;
 use App\Services\CertificateService;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\StoreSubscriber;
 use App\Http\Resources\SubscriberResource;
 
@@ -36,10 +38,32 @@ class SubscriberController extends Controller
 
         return inertia('Admin/Subscribers/Index', [
             'subscribers' => SubscriberResource::collection($subscribers)->additional([
+                'can_export' => request()->user()->can('export', Subscriber::class),
                 'can_create' => request()->user()->can('create', Subscriber::class)
             ]),
-            'filters' => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'branch', 'year'])
+            'status' => $status,
+            'filters' => request()->only(['perPage', 'name', 'mobile'])
         ]);
+    }
+
+    /**
+     * Export a listing of the resource.
+     *
+     * @param string  $status
+     * @return \Illuminate\Http\Response
+     */
+    public function export($status = 'active')
+    {
+        $this->authorize('export', Volunteer::class);
+
+        $subscribers = Subscriber::withCount('courses')
+            ->when($status == 'active', fn ($query) => $query->where('status', 1))
+            ->when($status == 'inactive', fn ($query) => $query->where('status', '!=', 1))
+            ->filter(request())
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return Excel::download(new SubscribersExport($subscribers), 'Subscribers.xlsx');
     }
 
     /**
@@ -93,7 +117,7 @@ class SubscriberController extends Controller
     /**
      * Get the certificate for an attended course.
      *
-     * @param  \App\Models\Course\Subscriber  $subscriber
+     * @param  \App\Models\Subscriber  $subscriber
      * @param  \App\Models\Course\Course  $course
      * @param  \App\Services\CertificateService  $service
      * @return \Illuminate\Http\Response
@@ -140,12 +164,34 @@ class SubscriberController extends Controller
     {
         $data = $request->validated();
         $data['city'] = $data['city'] ?? 0;
-        if (!$data['password']) unset($data['password']);
+        if (!$data['password']) {
+            unset($data['password']);
+        } else {
+            $data['password'] = bcrypt($data['password']);
+        }
 
         // Update
         $subscriber->update($data);
 
         return redirect()->route('admin.subscribers.index')->with('message', __('Subscriber updated successfully'));
+    }
+
+    /**
+     * Toggle active status for a resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Subscriber  $subscriber
+     * @return \Illuminate\Http\Response
+     */
+    public function toggle(Request $request, Subscriber $subscriber)
+    {
+        $this->authorize('update', $subscriber);
+        $data = ['status' => $state = $subscriber->status == 1 ? 0 : 1];
+        if ($state) {
+            $data['email_verified_at'] = now();
+        }
+        $subscriber->update($data);
+        return redirect()->back()->with('message', __($state ? 'Subscriber enabled successfully' : 'Subscriber disabled successfully'));
     }
 
     /**

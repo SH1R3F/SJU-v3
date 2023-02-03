@@ -81,6 +81,14 @@ class Subscriber extends Authenticatable implements MustVerifyEmail
     /**
      * Fullname attribute
      */
+    public function getFullNameArAttribute()
+    {
+        return "{$this->fname} {$this->sname} {$this->tname} {$this->lname}";
+    }
+
+    /**
+     * Fullname attribute
+     */
     public function getFullNameAttribute()
     {
         return "{$this->fname} {$this->sname} {$this->tname} {$this->lname}";

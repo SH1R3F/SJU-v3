@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Branch;
+use Illuminate\Http\Request;
 use App\Models\Course\Course;
 use App\Models\Course\Certificate;
 use App\Notifications\VerifyEmail;
@@ -81,9 +83,9 @@ class Volunteer extends Authenticatable implements MustVerifyEmail
             // Filter by national id
             ->when($request->national_id, fn ($builder, $national_id) => $builder->where('national_id', 'LIKE', "%$national_id%"))
             // Filter by city
-            ->when($request->city, fn ($builder, $city) => $builder->where('city', "%$city%"))
+            ->when($request->branch, fn ($builder, $branch) => $builder->where('branch_id', $branch))
             // Filter by fields
-            ->when($request->fields, fn ($builder, $fields) => $builder->where('fields', 'LIKE', "%$fields%"));
+            ->when($request->field, fn ($builder, $field) => $builder->where('fields', 'LIKE', "%$field%"));
     }
 
     /**
@@ -164,5 +166,13 @@ class Volunteer extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => $this->freshTimestamp(),
             'status' => self::STATUS_ACTIVE,
         ])->save();
+    }
+
+    /**
+     * Relation the the branch the member belongs to
+     */
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 }

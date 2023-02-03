@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\VolunteerController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\Course\CourseController;
 use App\Http\Controllers\Admin\Course\QuestionController;
@@ -74,7 +75,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('members/admin-acceptance', [MemberController::class, 'acceptance'])->name('members.admin-acceptance');
         Route::get('members/refused', [MemberController::class, 'refused'])->name('members.refused');
         Route::get('members/export/{page}', [MemberController::class, 'export'])->name('members.export');
-        Route::post('members/{member}/toggle', [MemberController::class, 'toggle'])->name('members.toggle'); // To be changed
+        Route::post('members/{member}/toggle', [MemberController::class, 'toggle'])->name('members.toggle');
         Route::post('members/{member}/accept', [MemberController::class, 'accept'])->name('members.accept');
         Route::post('members/{member}/unaccept', [MemberController::class, 'unaccept'])->name('members.unaccept');
         Route::post('members/{member}/approve', [MemberController::class, 'approve'])->name('members.approve');
@@ -96,9 +97,20 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         /**
          * Subscribers management
          */
+        Route::post('subscribers/{subscriber}/toggle', [SubscriberController::class, 'toggle'])->name('subscribers.toggle');
+        Route::get('subscribers/{status?}/export', [SubscriberController::class, 'export'])->where('status', 'active|inactive')->name('subscribers.export');
         Route::get('subscribers/{status?}', [SubscriberController::class, 'index'])->where('status', 'active|inactive')->name('subscribers.index');
         Route::get('subscribers/{subscriber}/certificate/{course}', [SubscriberController::class, 'certificate'])->name('subscribers.certificate');
         Route::resource('subscribers', SubscriberController::class)->except('index');
+
+        /**
+         * Volunteers management
+         */
+        Route::post('volunteers/{volunteer}/toggle', [VolunteerController::class, 'toggle'])->name('volunteers.toggle');
+        Route::get('volunteers/{status?}/export', [VolunteerController::class, 'export'])->where('status', 'active|inactive')->name('volunteers.export');
+        Route::get('volunteers/{status?}', [VolunteerController::class, 'index'])->where('status', 'active|inactive')->name('volunteers.index');
+        Route::get('volunteers/{volunteer}/certificate/{course}', [VolunteerController::class, 'certificate'])->name('volunteers.certificate');
+        Route::resource('volunteers', VolunteerController::class)->except('index');
 
 
         /**

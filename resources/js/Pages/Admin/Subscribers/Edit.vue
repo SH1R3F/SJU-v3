@@ -22,7 +22,7 @@ const form = useForm({
     mobile: props.subscriber.mobile || '',
     mobile_key: props.subscriber.mobile_key || '',
     email: props.subscriber.email || '',
-    password: props.subscriber.password || '',
+    password: '',
 });
 </script>
 

@@ -97,7 +97,7 @@
             <!-- Subscribers -->
             <li v-if="$page.props.authUser?.can_view?.subscribers" class="menu-item" :class="{ 'active open': $page.component.startsWith('Admin/Subscribers') }">
                 <a href="javascript:;" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons ti ti-certificate"></i>
+                    <i class="menu-icon tf-icons ti ti-users"></i>
                     <div>{{ __('Subscribers') }}</div>
                 </a>
                 <ul class="menu-sub">
@@ -109,6 +109,26 @@
                     <li class="menu-item" :class="{ active: $page.url.includes('admin/subscribers/inactive') }">
                         <Link :href="route('admin.subscribers.index', 'inactive')" class="menu-link">
                             <div>{{ __('Inactive subscribers') }}</div>
+                        </Link>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Volunteers -->
+            <li v-if="$page.props.authUser?.can_view?.volunteers" class="menu-item" :class="{ 'active open': $page.component.startsWith('Admin/Volunteers') }">
+                <a href="javascript:;" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-users"></i>
+                    <div>{{ __('Volunteers') }}</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item" :class="{ active: $page.url.includes('admin/volunteers/active') || $page.url == '/admin/volunteers' }">
+                        <Link :href="route('admin.volunteers.index', 'active')" class="menu-link">
+                            <div>{{ __('Active volunteers') }}</div>
+                        </Link>
+                    </li>
+                    <li class="menu-item" :class="{ active: $page.url.includes('admin/volunteers/inactive') }">
+                        <Link :href="route('admin.volunteers.index', 'inactive')" class="menu-link">
+                            <div>{{ __('Inactive volunteers') }}</div>
                         </Link>
                     </li>
                 </ul>
