@@ -5,20 +5,22 @@ namespace App\Models;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
 use App\Models\Course\Certificate;
+use App\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\DB;
 use App\Models\Course\Questionnaire;
 use App\Models\TechnicalSupportTicket;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Subscriber extends Authenticatable
+class Subscriber extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
     protected $guard = 'subscriber';
 
-    public const HOME = '/subscribers';
+    public const HOME = '/subscribers/courses';
 
     public const STATUS_INACTIVE = -1;
     public const STATUS_DISABLED = 0;
@@ -123,5 +125,15 @@ class Subscriber extends Authenticatable
     public function certificates()
     {
         return $this->morphMany(Certificate::class, 'certificatable');
+    }
+
+    /**
+     * Send the email verification notification.
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmail);
     }
 }

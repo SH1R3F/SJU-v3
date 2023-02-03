@@ -27,6 +27,7 @@ Route::group(['prefix' => 'subscribers', 'as' => 'subscriber.'], function () {
         Route::get('/register', [SubscriberAuthController::class, 'showRegisterForm'])->name('register');
         Route::post('/register', [SubscriberAuthController::class, 'register']);
 
+
         /**
          * Forgot password routes
          * TO BE ADDED
@@ -42,26 +43,38 @@ Route::group(['prefix' => 'subscribers', 'as' => 'subscriber.'], function () {
         Route::post('auth/logout', [SubscriberAuthController::class, 'logout'])->name('logout');
 
         /**
+         * Verification routes
+         */
+        Route::prefix('email')->group(function () {
+            Route::post('/verification-notification', [SubscriberAuthController::class, 'send'])->middleware('throttle:6,1')->name('verification.send');
+            Route::get('/verify-email/{id}/{hash}', [SubscriberAuthController::class, 'verifyEmail'])->name('verification.verify');
+            Route::get('/verify-email', [SubscriberAuthController::class, 'notice'])->name('verification.notice');
+        });
+
+
+        /**
          * Subscriber homepage
          * Displays notifications
          */
         Route::redirect('/', '/subscribers/courses')->name('home');
 
-        /**
-         * My Courses
-         * Displays current registered courses and upcoming courses
-         */
-        Route::get('/courses', [SubscriberController::class, 'courses'])->name('courses');
+        Route::middleware('verified')->group(function () {
+            /**
+             * My Courses
+             * Displays current registered courses and upcoming courses
+             */
+            Route::get('/courses', [SubscriberController::class, 'courses'])->name('courses');
 
-        /**
-         * Profile page
-         */
-        Route::prefix('profile')->group(function () {
-            Route::get('/', [SubscriberController::class, 'info'])->name('profile.info');
-            Route::post('/', [SubscriberController::class, 'postInfo']);
+            /**
+             * Profile page
+             */
+            Route::prefix('profile')->group(function () {
+                Route::get('/', [SubscriberController::class, 'info'])->name('profile.info');
+                Route::post('/', [SubscriberController::class, 'postInfo']);
 
-            Route::get('/password', [SubscriberController::class, 'password'])->name('profile.password');
-            Route::post('/password', [SubscriberController::class, 'postPassword']);
+                Route::get('/password', [SubscriberController::class, 'password'])->name('profile.password');
+                Route::post('/password', [SubscriberController::class, 'postPassword']);
+            });
         });
     });
 });

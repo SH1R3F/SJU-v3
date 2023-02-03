@@ -6,9 +6,11 @@ use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use App\Events\SubscriberRegistered;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Subscriber\LoginRequest;
 use App\Http\Requests\Subscriber\RegisterRequest;
+use App\Http\Requests\Subscriber\EmailVerificationRequest;
 
 class SubscriberAuthController extends Controller
 {
@@ -82,5 +84,37 @@ class SubscriberAuthController extends Controller
         Auth::guard('subscriber')->login($subscriber);
         $request->session()->regenerate();
         return redirect()->to(Subscriber::HOME);
+    }
+
+    /**
+     * Send a new email verification notification.
+     */
+    public function send(Request $request)
+    {
+        if ($request->user()->hasVerifiedEmail()) {
+            return redirect()->intended(Subscriber::HOME);
+        }
+
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('message', __('Email verification has been sent'));
+    }
+
+    /**
+     * Mark the authenticated subscriber's email address as verified.
+     */
+    public function verifyEmail(EmailVerificationRequest $request)
+    {
+        return $request->verify();
+    }
+
+    /**
+     * Display the email verification prompt.
+     */
+    public function notice(Request $request)
+    {
+        return $request->user()->hasVerifiedEmail()
+            ? redirect()->intended(Subscriber::HOME)
+            : inertia('Subscribers/Auth/Verify');
     }
 }

@@ -630,6 +630,11 @@
     "You can register as a new subscriber through the following link": "يمكنك التسجيل كمتدرب جديد من خلال الرابط التالي",
     "male": "ذكر",
     "female": "أنثى",
+    "Email has been verified successfully": "تم تفعيل البريد الالكتروني بنجاح",
+    "Email activation": "تفعيل البريد الإلكتروني",
+    "Didn't receive the activation code? Look in the junk mailbox or you can request activation again": "لم يصلك كود التفعيل؟ إبحث في صندوق الرسائل الغير مهمة أو يمكنك طلب التفعيل مرة أخرى",
+    "Resend activation mail": "إعادة إرسال تفعيل البريد",
+    "Email verification has been sent": "تم إرسال بريد التفعيل",
 
     "------------- Nationalities -----------": "",
     "Saudi Arabian": "سعودي",

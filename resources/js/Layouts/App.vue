@@ -11,6 +11,7 @@ import Footer from './Footer.vue';
         <!-- Flash messages -->
         <component is="script" defer v-if="$page.props.flash.message"> toastr.success('{{ $page.props.flash.message }}') </component>
         <component is="script" defer v-if="$page.props.flash.error"> toastr.error('{{ $page.props.flash.error }}') </component>
+        <component is="script" defer v-if="route()?.params?.verified == 1"> toastr.success('{{ __('Email has been verified successfully') }}') </component>
     </Head>
 
     <!-- Mini bar -->
