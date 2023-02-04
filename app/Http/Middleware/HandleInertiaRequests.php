@@ -23,6 +23,7 @@ use App\Http\Resources\MemberResource;
 use App\Models\TechnicalSupportTicket;
 use App\Http\Resources\VolunteerResource;
 use App\Http\Resources\SubscriberResource;
+use App\Models\SiteOption;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -107,6 +108,7 @@ class HandleInertiaRequests extends Middleware
     private function adminPermissions(Admin $admin)
     {
         return [
+            'options' => $admin->can('manage', SiteOption::class),
             'roles' => $admin->can('viewAny', Role::class),
             'admins' => $admin->can('viewAny', Admin::class),
             'acceptedMembers' => $admin->can('viewAny', Member::class),

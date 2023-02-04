@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\VolunteerController;
+use App\Http\Controllers\Admin\SiteOptionController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\Course\CourseController;
 use App\Http\Controllers\Admin\Course\QuestionController;
@@ -48,6 +49,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/', function () {
             return inertia('Admin/Dashboard');
         })->name('dashboard');
+
+        /* Site options */
+        Route::get('site-options', [SiteOptionController::class, 'index'])->name('site.options');
+        Route::post('site-options', [SiteOptionController::class, 'update']);
 
         /* Roles Management */
         Route::resource('roles', RoleController::class)->except(['create', 'edit', 'show']);

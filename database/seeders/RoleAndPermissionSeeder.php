@@ -24,6 +24,8 @@ class RoleAndPermissionSeeder extends Seeder
         /**
          * Permissions Seeding
          */
+        // Site options
+        Permission::updateOrCreate(['name' => 'manage-site-options'], ['name' => 'manage-site-options', 'guard_name' => 'admin']);
         // Roles permissions
         Permission::updateOrCreate(['name' => 'viewAny-role'], ['name' => 'viewAny-role', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'create-role'], ['name' => 'create-role', 'guard_name' => 'admin']);

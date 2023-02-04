@@ -10,6 +10,7 @@ use App\Models\Media;
 use App\Models\Member;
 use App\Models\Article;
 use App\Models\Invoice;
+use App\Models\SiteOption;
 use App\Models\Subscriber;
 use App\Policies\PagePolicy;
 use App\Policies\RolePolicy;
@@ -22,6 +23,7 @@ use App\Models\Course\Template;
 use App\Policies\ArticlePolicy;
 use App\Policies\InvoicePolicy;
 use App\Policies\TemplatePolicy;
+use App\Policies\SiteOptionPolicy;
 use App\Policies\SubscriberPolicy;
 use Spatie\Permission\Models\Role;
 use App\Models\Course\Questionnaire;
@@ -38,6 +40,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
+        SiteOption::class => SiteOptionPolicy::class,
         Role::class => RolePolicy::class,
         Admin::class => AdminPolicy::class,
         Member::class => MemberPolicy::class,

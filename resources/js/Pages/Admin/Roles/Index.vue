@@ -132,6 +132,17 @@ const editRole = (role) => {
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Site options') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="manageOptions" v-model="addForm.permissions['manage-site-options']" />
+                                                            <label class="form-check-label" for="manageOptions"> {{ __('Manage') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td class="text-nowrap fw-semibold">{{ __('Roles management') }}</td>
                                                 <td>
                                                     <div class="d-flex">
@@ -584,6 +595,17 @@ const editRole = (role) => {
                                                 <td class="text-nowrap fw-semibold" colspan="2">
                                                     {{ __('Access') }}
                                                     <i class="ti ti-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"></i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Site options') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="manageOptions" v-model="editForm.permissions['manage-site-options']" />
+                                                            <label class="form-check-label" for="manageOptions"> {{ __('Manage') }} </label>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>

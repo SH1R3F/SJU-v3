@@ -2,12 +2,12 @@
 <template>
     <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
         <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <Link :href="route('admin.dashboard')" class="app-brand-link">
                 <span class="app-brand-logo demo">
                     <img src="/img/logo.png" style="height: 100%" />
                 </span>
                 <span class="app-brand-text demo menu-text fs-5 fw-bold">{{ __('SJU') }}</span>
-            </a>
+            </Link>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
                 <i class="ti menu-toggle-icon d-none d-xl-block ti-sm align-middle"></i>
@@ -23,6 +23,13 @@
                 <Link :href="route('admin.dashboard')" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-smart-home"></i>
                     <div>{{ __('Dashboard') }}</div>
+                </Link>
+            </li>
+            <!-- Dashboard -->
+            <li v-if="$page.props.authUser?.can_view?.options" class="menu-item" :class="{ active: $page.component == 'Admin/SiteOptions/Index' }">
+                <Link :href="route('admin.site.options')" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-tool"></i>
+                    <div>{{ __('Site options') }}</div>
                 </Link>
             </li>
             <!-- Roles and moderators -->
