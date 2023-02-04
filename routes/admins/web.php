@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\Course\QuestionController;
 use App\Http\Controllers\Admin\Course\TemplateController;
 use App\Http\Controllers\Admin\TechnicalSupportController;
 use App\Http\Controllers\Admin\Course\QuestionnaireController;
+use App\Http\Controllers\Admin\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/', function () {
             return inertia('Admin/Dashboard');
         })->name('dashboard');
+
+        /* My profile routes */
+        Route::get('my-profile', [ProfileController::class, 'index'])->name('my-profile');
+        Route::put('my-profile', [ProfileController::class, 'update']);
 
         /* Site options */
         Route::get('site-options', [SiteOptionController::class, 'index'])->name('site.options');

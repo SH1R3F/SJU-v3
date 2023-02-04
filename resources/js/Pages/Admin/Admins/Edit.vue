@@ -182,7 +182,7 @@ const form = useForm({
                             <!-- Password -->
 
                             <div>
-                                <button type="submit" class="btn btn-primary me-2">{{ __('Create') }}</button>
+                                <button type="submit" class="btn btn-primary me-2">{{ __('Update') }}</button>
                                 <Link :href="route('admin.admins.index')" as="button" type="reset" class="btn btn-label-secondary me-2">{{ __('Cancel') }}</Link>
                             </div>
                         </form>

@@ -115,16 +115,10 @@
                             <div class="dropdown-divider"></div>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="pages-profile-user.html">
+                            <Link class="dropdown-item" :href="route('admin.my-profile')">
                                 <i class="ti ti-user-check me-2 ti-sm"></i>
-                                <span class="align-middle">My Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="pages-account-settings-account.html">
-                                <i class="ti ti-settings me-2 ti-sm"></i>
-                                <span class="align-middle">Settings</span>
-                            </a>
+                                <span class="align-middle">{{ __('My profile') }}</span>
+                            </Link>
                         </li>
                         <li>
                             <div class="dropdown-divider"></div>

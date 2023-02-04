@@ -11,12 +11,13 @@ use Spatie\Permission\Models\Role;
 use App\Http\Requests\AdminRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RoleResource;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\AdminResource;
 use App\Http\Resources\BranchResource;
 use App\Http\Requests\NotifyAdminsRequest;
-use App\Notifications\PushNotificationToUsers;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\PushNotificationToUsers;
 
 class AdminController extends Controller
 {
