@@ -6,6 +6,16 @@
     "Oops! 😖 The requested URL was not found on this server": "أُووبس! 😖 لم يتم العثور على عنوان URL المطلوب على هذا الخادم",
     "Back to home": "العودة إلى الرئيسية",
 
+    "--------------- Dashboard -------------": "",
+    "Control the roles and powers of controlling those who manage the site.": "التحكم في الأدوار وصلاحيات التحكم من هم بإدارة الموقع.",
+    "Adding, modifying or deleting accounts for managing the site.": "إضافة او تعديل او حذف الحسابات الخاصة بادارة الموقع.",
+    "Managing the members involved in the Saudi Journalists Association.": "إدارة الأعضاء المشتركين في هيئة الصحفيين السعوديين.",
+    "Managing the subscribers involved in the Saudi Journalists Association.": "إدارة المشتركين في هيئة الصحفيين السعوديين.",
+    "Managing the volunteers involved in the Saudi Journalists Association.": "إدارة المتطوعين في هيئة الصحفيين السعوديين.",
+    "Events and training courses participating in the Saudi Journalists Association": "الفعاليات والدورات التدريبية المشاركة على هيئة الصحفيين السعوديين",
+    "Articles and news section of the Association": "المقالات والقسم الإخباري الخاص بالهيئة",
+    "Technical support and problems solutions": "الدعم الفني وحل المشكلات",
+
     "--------------- Aside -------------": "",
     "Dashboard": "لوحة التحكم",
     "Roles & moderators": "الأدوار والمدراء",
