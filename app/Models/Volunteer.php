@@ -90,6 +90,14 @@ class Volunteer extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Fullname attribute
+     */
+    public function getFullNameAttribute()
+    {
+        return app()->getLocale() == 'ar' ? "{$this->fname_ar} {$this->sname_ar} {$this->tname_ar} {$this->lname_ar}" : "{$this->fname_en} {$this->sname_en} {$this->tname_en} {$this->lname_en}";
+    }
+
+    /**
      * Fullname (Arabic) attribute
      */
     public function getFullNameArAttribute()

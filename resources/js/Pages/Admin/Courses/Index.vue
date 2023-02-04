@@ -88,12 +88,12 @@ watch(
                     <div class="col-md-10 mb-1">
                         <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column gap-1 mb-3 mb-md-0">
                             <div class="dt-buttons">
-                                <Link v-if="courses.can_export" :href="route('admin.courses.export')" type="button" class="dt-button add-new btn btn-label-secondary me-1">
+                                <a v-if="courses.can_export" :href="route('admin.courses.export')" type="button" class="dt-button add-new btn btn-label-secondary me-1">
                                     <span>
                                         <i class="ti ti-screen-share me-0 me-sm-1 ti-xs"></i>
                                         <span class="d-none d-sm-inline-block">{{ __('Export') }}</span>
                                     </span>
-                                </Link>
+                                </a>
                                 <Link v-if="courses.can_create" :href="route('admin.courses.create')" type="button" class="dt-button add-new btn btn-primary me-1">
                                     <span>
                                         <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>

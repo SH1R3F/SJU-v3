@@ -144,6 +144,14 @@ class Member extends Authenticatable
     /**
      * Arabic fullname attribute
      */
+    public function getFullNameAttribute()
+    {
+        return app()->getLocale() == 'ar' ? "{$this->fname_ar} {$this->sname_ar} {$this->tname_ar} {$this->lname_ar}" : "{$this->fname_en} {$this->sname_en} {$this->tname_en} {$this->lname_en}";
+    }
+
+    /**
+     * Arabic fullname attribute
+     */
     public function getFullNameArAttribute()
     {
         return "{$this->fname_ar} {$this->sname_ar} {$this->tname_ar} {$this->lname_ar}";

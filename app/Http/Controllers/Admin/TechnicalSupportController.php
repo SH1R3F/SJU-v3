@@ -8,6 +8,8 @@ use App\Models\Volunteer;
 use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SupportTicketsExport;
 use App\Models\TechnicalSupportTicket;
 use App\Http\Resources\TechnicalSupportTicketResource;
 
@@ -84,6 +86,39 @@ class TechnicalSupportController extends Controller
             'tickets' => TechnicalSupportTicketResource::collection($tickets),
             'filters'  => request()->only(['perPage', 'title', 'name', 'status', 'mobile', 'email'])
         ]);
+    }
+
+    /**
+     * Export tickets.
+     *
+     * @param string  $type
+     * @return \Illuminate\Http\Response
+     */
+    public function export($type = 'members')
+    {
+        switch ($type) {
+            case 'members':
+                $this->authorize('viewMembers', TechnicalSupportTicket::class);
+                $class = Member::class;
+                break;
+            case 'subscribers':
+                $this->authorize('viewSubscribers', TechnicalSupportTicket::class);
+                $class = Subscriber::class;
+                break;
+            case 'volunteers':
+                $this->authorize('viewVolunteers', TechnicalSupportTicket::class);
+                $class = Volunteer::class;
+                break;
+        }
+
+        $tickets = TechnicalSupportTicket::with('supportable')
+            ->whereHas('supportable', fn ($query) => $query->whereNotNull('id'))
+            ->where('supportable_type', $class)
+            ->filter(request())
+            ->orderBy('updated_at', 'DESC')
+            ->get();
+
+        return Excel::download(new SupportTicketsExport($tickets), 'Technical support tickets.xlsx');
     }
 
     /**

@@ -134,6 +134,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         /**
          * Technical Support Management
          */
+        Route::get('technical-support/export/{type}', [TechnicalSupportController::class, 'export'])->name('tickets.export');
         Route::get('technical-support/volunteers-tickets', [TechnicalSupportController::class, 'volunteers'])->name('tickets.volunteers');
         Route::get('technical-support/subscribers-tickets', [TechnicalSupportController::class, 'subscribers'])->name('tickets.subscribers');
         // Route::get('technical-support/members-tickets', [TechnicalSupportController::class, 'members'])->name('tickets.members');

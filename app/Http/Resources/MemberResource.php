@@ -35,7 +35,7 @@ class MemberResource extends JsonResource
             'sname_en' => $this->sname_en,
             'tname_en' => $this->tname_en,
             'lname_en' => $this->lname_en,
-            'fullName' => app()->getLocale() == 'ar' ? $this->full_name_ar : $this->full_name_en,
+            'fullName' => $this->full_name,
             'fullNameAr' => $this->full_name_ar,
             'fullNameEn' => $this->full_name_en,
             'gender' => $this->gender,

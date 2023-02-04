@@ -24,7 +24,7 @@ class VolunteerResource extends JsonResource
             parent::toArray($request),
 
             [
-                'fullName' => app()->getLocale() == 'ar' ? $this->full_name_ar : $this->full_name_en,
+                'fullName' => $this->full_name,
                 'fullName_ar' => $this->full_name_ar,
                 'fullName_en' => $this->full_name_en,
                 'phone_number' => $this->prepareMobileForSms(),
