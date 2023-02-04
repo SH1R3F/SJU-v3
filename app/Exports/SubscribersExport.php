@@ -12,6 +12,7 @@ class SubscribersExport implements FromCollection, WithHeadings, WithMapping, Wi
 {
 
     private $subscribers;
+    private $row = 0;
 
     public function __construct($subscribers)
     {
@@ -34,7 +35,7 @@ class SubscribersExport implements FromCollection, WithHeadings, WithMapping, Wi
     public function map($subscriber): array
     {
         return [
-            $subscriber->id,
+            ++$this->row,
             $subscriber->fullNameAr,
             $subscriber->email,
             "+{$subscriber->mobile_key}{$subscriber->mobile}",

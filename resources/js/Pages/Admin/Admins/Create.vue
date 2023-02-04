@@ -1,7 +1,7 @@
 <script setup>
 import { useForm } from '@inertiajs/inertia-vue3';
 
-defineProps({
+const props = defineProps({
     roles: Object,
     branches: Object,
 });
@@ -127,7 +127,7 @@ const form = useForm({
                                 <div class="mb-3 col-12 col-sm-6">
                                     <label for="role" class="form-label">{{ __('Role') }}</label>
                                     <div class="position-relative">
-                                        <select v-model="form.role" id="role" class="select2 form-select select2-hidden-accessible" data-allow-clear="true" tabindex="-1" aria-hidden="true">
+                                        <select v-model="form.role" id="role" class="select2 form-select" data-allow-clear="true" tabindex="-1" aria-hidden="true">
                                             <option v-for="role in roles.data" :key="role.id" :value="role.name">{{ __(role.name) }}</option>
                                         </select>
                                     </div>
@@ -136,7 +136,7 @@ const form = useForm({
                                 <div class="mb-3 col-12 col-sm-6">
                                     <label for="branch" class="form-label">{{ __('Branch') }}</label>
                                     <div class="position-relative">
-                                        <select v-model="form.branch_id" id="branch" class="select2 form-select select2-hidden-accessible" data-allow-clear="true" tabindex="-1" aria-hidden="true">
+                                        <select v-model="form.branch_id" id="branch" class="select2 form-select" data-allow-clear="true" tabindex="-1" aria-hidden="true">
                                             <option v-for="branch in branches.data" :key="branch.id" :value="branch.id">{{ __(branch.name) }}</option>
                                         </select>
                                     </div>

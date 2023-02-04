@@ -125,7 +125,7 @@ class MemberController extends Controller
                 $status = [Member::STATUS_REFUSED];
                 break;
         }
-        return Excel::download(new MembersExport($service->getMembers(request(), $status)), 'Members.xlsx');
+        return Excel::download(new MembersExport($service->getMembers(request(), $status, true)), 'Members.xlsx');
     }
 
     /**

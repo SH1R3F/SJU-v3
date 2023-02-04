@@ -13,6 +13,7 @@ class MembersExport implements FromCollection, WithHeadings, WithMapping, WithEv
 {
 
     private $members;
+    private $row = 0;
 
     public function __construct($members)
     {
@@ -37,7 +38,7 @@ class MembersExport implements FromCollection, WithHeadings, WithMapping, WithEv
     public function map($member): array
     {
         return [
-            $member->id,
+            ++$this->row,
             $member->fullNameAr,
             $member->national_id,
             $member->membership_number,

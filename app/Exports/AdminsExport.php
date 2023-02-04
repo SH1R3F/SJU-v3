@@ -12,6 +12,8 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 class AdminsExport implements FromCollection, WithHeadings, WithMapping, WithEvents
 {
 
+    private $row = 0;
+
     public function headings(): array
     {
         return [
@@ -28,7 +30,7 @@ class AdminsExport implements FromCollection, WithHeadings, WithMapping, WithEve
     public function map($admin): array
     {
         return [
-            $admin->id,
+            ++$this->row,
             $admin->fullName,
             $admin->username,
             $admin->email,

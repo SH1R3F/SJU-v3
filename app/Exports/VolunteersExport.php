@@ -12,6 +12,7 @@ class VolunteersExport implements FromCollection, WithHeadings, WithMapping, Wit
 {
 
     private $volunteers;
+    private $row = 0;
 
     public function __construct($volunteers)
     {
@@ -35,7 +36,7 @@ class VolunteersExport implements FromCollection, WithHeadings, WithMapping, Wit
     public function map($volunteer): array
     {
         return [
-            $volunteer->id,
+            ++$this->row,
             $volunteer->fullNameAr,
             $volunteer->national_id,
             $volunteer->email,
