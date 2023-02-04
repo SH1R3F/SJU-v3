@@ -67,7 +67,7 @@ class HandleInertiaRequests extends Middleware
         if ($request->is('admin*') && Auth::guard('admin')->check()) {
             $admin = Auth::guard('admin')->user();
             $auth = (new AdminResource($admin))->additional(['can_view' => $this->adminPermissions($admin)]);
-            $notifications = $admin->unreadNotifications;
+            $notifications = $admin->unreadNotifications()->orderBy('created_at', 'DESC')->get();
         }
         if (Auth::guard('member')->check()) {
             $user = new MemberResource(Auth::guard('member')->user()->load('subscription'));

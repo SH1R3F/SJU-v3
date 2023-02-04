@@ -50,7 +50,7 @@
                                 <Link
                                     as="span"
                                     method="post"
-                                    :href="route('admin.read-all-notifications')"
+                                    :href="route('read-all-notifications')"
                                     class="dropdown-notifications-all text-body"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
@@ -69,7 +69,7 @@
                                             <small class="text-muted">{{ arabic_date(notification.created_at) }}</small>
                                         </div>
                                         <div class="flex-shrink-0 dropdown-notifications-actions">
-                                            <Link method="post" as="span" :href="route('admin.read-notification', notification.id)" class="dropdown-notifications-archive"
+                                            <Link method="post" as="span" :href="route('read-notification', notification.id)" class="dropdown-notifications-archive"
                                                 ><span class="ti ti-x"></span
                                             ></Link>
                                         </div>

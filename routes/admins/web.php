@@ -59,14 +59,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('admins/notify', [AdminController::class, 'showNotifyForm'])->name('admins.notify');
         Route::post('admins/notify', [AdminController::class, 'notify']);
 
-        Route::post('admins/notifications/read-all', function (Request $request) {
-            $request->user()->unreadNotifications->markAsRead();
-        })->name('read-all-notifications');
-
-        Route::post('admins/notifications/{id}/read', function (Request $request, $id) {
-            $request->user()->unreadNotifications->where('id', $id)->markAsRead();
-        })->name('read-notification');
-
         // Manage admin resource
         Route::get('admins/export', [AdminController::class, 'export'])->name('admins.export');
         Route::post('admins/{admin}/toggle', [AdminController::class, 'toggle'])->name('admins.toggle');

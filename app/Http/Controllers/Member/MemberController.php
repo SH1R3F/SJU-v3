@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Member;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\CourseResource;
@@ -18,7 +19,10 @@ class MemberController extends Controller
      */
     public function index()
     {
-        return inertia('Members/Index');
+        $member = Auth::guard('member')->user();
+        $notifications = $member->unreadNotifications()->orderBy('created_at', 'DESC')->get();
+        $old_notifications = DB::table('old_notifications')->where('member_id', $member->id)->orderBy('id', 'DESC')->get();
+        return inertia('Members/Index', compact('notifications', 'old_notifications'));
     }
 
     /**

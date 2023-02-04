@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\CourseController;
@@ -16,6 +17,14 @@ use App\Http\Controllers\TechnicalSupportController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::post('admins/notifications/read-all', function (Request $request) {
+    $request->user()->unreadNotifications->markAsRead();
+})->middleware('auth:member,subscriber,volunteer,admin')->name('read-all-notifications');
+
+Route::post('admins/notifications/{id}/read', function (Request $request, $id) {
+    $request->user()->unreadNotifications->where('id', $id)->markAsRead();
+})->middleware('auth:member,subscriber,volunteer,admin')->name('read-notification');
 
 /**
  * Language and notifications routes
