@@ -18,11 +18,15 @@ use App\Http\Controllers\TechnicalSupportController;
 |
 */
 
-Route::post('admins/notifications/read-all', function (Request $request) {
+Route::get('/email', function () {
+    return view('emails.verify', ['user' => App\Models\Member::first(), 'url' => 'https://asdasdasd']);
+});
+
+Route::post('notifications/read-all', function (Request $request) {
     $request->user()->unreadNotifications->markAsRead();
 })->middleware('auth:member,subscriber,volunteer,admin')->name('read-all-notifications');
 
-Route::post('admins/notifications/{id}/read', function (Request $request, $id) {
+Route::post('notifications/{id}/read', function (Request $request, $id) {
     $request->user()->unreadNotifications->where('id', $id)->markAsRead();
 })->middleware('auth:member,subscriber,volunteer,admin')->name('read-notification');
 

@@ -33,7 +33,15 @@ defineProps({
                                     <td>{{ userAuth.subscription.type }}</td>
                                     <td>{{ userAuth.subscription.start_date }}</td>
                                     <td>{{ userAuth.subscription.end_date }}</td>
-                                    <td>{{ userAuth.membership_status }}</td>
+                                    <td>
+                                        <template v-if="userAuth.status == -2">
+                                            <span class="text-link" @click="toastAlert(userAuth.refusal_reason)">{{ userAuth.membership_status }}</span>
+                                            <Link :href="route('member.subscription.resend')" method="post" as="button" class="btn btn-sm btn-success mx-1">{{ __('Resend') }}</Link>
+                                        </template>
+                                        <template v-else>
+                                            {{ userAuth.membership_status }}
+                                        </template>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

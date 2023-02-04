@@ -5,7 +5,6 @@ const props = defineProps({
     notifications: Object,
     old_notifications: Object,
 });
-console.log(props);
 </script>
 
 <template>

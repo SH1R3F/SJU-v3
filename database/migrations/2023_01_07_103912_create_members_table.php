@@ -74,6 +74,8 @@ return new class extends Migration
             $table->tinyInteger('status')->default(Member::STATUS_UNAPPROVED);
             $table->string('refusal_reason')->nullable(); // In case of refusal
 
+            $table->boolean('finish_all')->default(0);
+
             $table->rememberToken();
             $table->timestamps();
 

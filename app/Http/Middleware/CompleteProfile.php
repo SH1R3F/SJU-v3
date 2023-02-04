@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Notifications\MemberCompletionNotification;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,11 @@ class CompleteProfile
 
         if (Auth::guard('member')->check() && !Auth::guard('member')->user()->complete()) {
             return redirect()->route('member.complete-profile');
+        }
+
+        if (Auth::guard('member')->check() && !Auth::guard('member')->user()->finish_all) {
+            Auth::guard('member')->user()->update(['finish_all' => 1]);
+            Auth::guard('member')->user()->notify(new MemberCompletionNotification);
         }
 
         return $next($request);

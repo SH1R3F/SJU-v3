@@ -3,12 +3,13 @@
 namespace App\Providers;
 
 use App\Events\MemberRegistered;
+use App\Events\VolunteerRegistered;
 use App\Events\SubscriberRegistered;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
+use App\Listeners\NewMemberNotification;
 use App\Listeners\NewVolunteerNotification;
 use App\Listeners\NewSubscriberNotification;
-use App\Listeners\SendMemberEmailVerificationNotification;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -23,7 +24,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        MemberRegistered::class => [],
+        MemberRegistered::class => [
+            NewMemberNotification::class
+        ],
         SubscriberRegistered::class => [
             NewSubscriberNotification::class
         ],

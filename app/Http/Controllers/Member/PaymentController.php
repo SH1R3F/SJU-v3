@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Services\MemberService;
 use App\Services\InvoiceService;
 use App\Http\Controllers\Controller;
+use App\Notifications\MembershipPaid;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
@@ -64,6 +65,7 @@ class PaymentController extends Controller
             'end_date' => Carbon::now()->endOfYear(),
             'status' => Subscription::SUBSCRIPTION_ACTIVE
         ]);
+        $member->notify(new MembershipPaid);
 
         // Give membership number
         $service->membershipNumber($member);

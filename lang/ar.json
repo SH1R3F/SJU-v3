@@ -1,4 +1,8 @@
 {
+    "------------ Email templates ----------": "",
+    "We are please to welcome you to Saudi journalists' association": "يسعدنا أن نرحب بكم في هيئة الصحفيين السعوديين",
+    "Hey": "مرحباً",
+
     "--------------- Aside -------------": "",
     "Dashboard": "لوحة التحكم",
     "Roles & moderators": "الأدوار والمدراء",
@@ -36,6 +40,8 @@
     "Letter template after completing the information and sending the request": "قالب الرسالة بعد استكمال المعلومات وارسال الطلب",
     "Send an SMS upon approval of the request": "إرسال رسالة نصية قصيرة عند الموافقة على الطلب",
     "Letter template upon application approval": "قالب الرسالة عند الموافقة على الطلب",
+    "Send an SMS upon refusal of the request": "إرسال رسالة نصية قصيرة عند رفض الطلب",
+    "Letter template upon application refusal": "قالب الرسالة عند رفض الطلب",
     "Send SMS after payment and membership activation": "ارسال SMS بعد الدفع وتفعيل العضوية",
     "Message template after payment and membership activation": "قالب الرسالة بعد الدفع وتفعيل العضوية",
     "Yes": "نعم",
@@ -657,6 +663,8 @@
     "Payment request expired. Please try again or contact us.": "إنتهت صلاحية الطلب، برجاء المحاولة مرة أخرى أو تواصل معنا",
     "Transaction declined. Payment was not completed": "العملية مرفوضة لم تتم عملية الدفع",
     "Membership card": "بطاقة العضوية",
+    "Resend": "إعادة إرسال",
+    "Subscription requested successfully": "تم إعادة طلب العضوية بنجاح",
 
     "------------- Subscribers -----------": "",
     "Register a new subscriber": "تسجيل متدرب جديد",

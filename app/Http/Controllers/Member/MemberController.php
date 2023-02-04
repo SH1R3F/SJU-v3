@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\CourseResource;
+use App\Notifications\MembershipResend;
 
 class MemberController extends Controller
 {
@@ -44,6 +45,22 @@ class MemberController extends Controller
     public function subscription()
     {
         return inertia('Members/Subscription');
+    }
+
+    /**
+     * resend subscription request after refusal.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function resend()
+    {
+        $member = Auth::guard('member')->user();
+        if ($member->status !== Member::STATUS_REFUSED) return;
+
+        $member->update(['status' => Member::STATUS_UNAPPROVED]);
+        $member->notify(new MembershipResend);
+
+        return redirect()->back()->with('message', __('Subscription requested successfully'));
     }
 
     /**

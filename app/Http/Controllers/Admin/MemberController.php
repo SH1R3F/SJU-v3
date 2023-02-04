@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Inertia\Inertia;
 use App\Models\Branch;
 use App\Models\Member;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 use App\Exports\MembersExport;
 use App\Services\MemberService;
@@ -14,7 +15,10 @@ use App\Http\Requests\MemberRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\MemberResource;
 use Illuminate\Support\Facades\Storage;
+use App\Notifications\MembershipRefused;
+use App\Notifications\MembershipAccepted;
 use App\Http\Requests\NotifyMembersRequest;
+use App\Notifications\MembershipUnaccepted;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\PushNotificationToUsers;
 
@@ -297,6 +301,8 @@ class MemberController extends Controller
             'status' => Member::STATUS_ACCEPTED
         ]);
 
+        $member->notify(new MembershipAccepted);
+
         return redirect()->back()->with('message', __('Member updated successfully'));
     }
 
@@ -313,6 +319,8 @@ class MemberController extends Controller
         $member->update([
             'status' => Member::STATUS_APPROVED
         ]);
+
+        $member->notify(new MembershipUnaccepted);
 
         return redirect()->back()->with('message', __('Member updated successfully'));
     }
@@ -352,7 +360,7 @@ class MemberController extends Controller
     }
 
     /**
-     * Branch refuse member.
+     * Refuse member.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Member  $member
@@ -367,6 +375,9 @@ class MemberController extends Controller
             'status' => Member::STATUS_REFUSED,
             'refusal_reason' => $request->reason == 'unsatisfy' ? 'unsatisfy' : $request->message,
         ]);
+        // $member->subscription()->update(['status' => Subscription::SUBSCRIPTION_INACTIVE]);
+
+        $member->notify(new MembershipRefused);
 
         // Force redirect
         return Inertia::location(redirect()->back()->with('message', __('Member updated successfully'))->getTargetUrl());

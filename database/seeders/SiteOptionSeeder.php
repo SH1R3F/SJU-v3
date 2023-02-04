@@ -71,6 +71,27 @@ class SiteOptionSeeder extends Seeder
         );
 
         SiteOption::updateOrCreate(
+            ['key' => 'sms_upon_refusal'],
+            [
+                'key' => 'sms_upon_refusal',
+                'type' => 'boolean',
+                'name' => 'Send an SMS upon refusal of the request',
+                'value' => 'yes',
+                'category' => 'SMS sending settings'
+            ]
+        );
+        SiteOption::updateOrCreate(
+            ['key' => 'sms_upon_refusal_template'],
+            [
+                'key' => 'sms_upon_refusal_template',
+                'type' => 'text',
+                'name' => 'Letter template upon application refusal',
+                'value' => "تم رفض عضويتك بهيئة الصحفيين السعوديين\nالسبب: ",
+                'category' => 'SMS sending settings'
+            ]
+        );
+
+        SiteOption::updateOrCreate(
             ['key' => 'sms_upon_payment'],
             [
                 'key' => 'sms_upon_payment',

@@ -163,7 +163,7 @@ class Member extends Authenticatable
     public function prepareMobileForSms()
     {
         // Make sure mobile is in format +[Key][Number]
-        return "+{$this->mobile}";
+        return "+201003384936"; //"+{$this->mobile}";
     }
 
 
@@ -244,42 +244,37 @@ class Member extends Authenticatable
      */
     public function status()
     {
-        switch ($this->subscription->status) {
-            case Subscription::SUBSCRIPTION_ACTIVE:
-                if ($this->subscription->end_date->lt(Carbon::today())) return __('Expired');
-                return __('Active');
+        switch ($this->status) {
+            case self::STATUS_ACCEPTED:
+                if ($this->subscription->status == Subscription::SUBSCRIPTION_ACTIVE) {
+                    if ($this->subscription->end_date->lt(Carbon::today())) return __('Expired');
+                    return __('Active');
+                }
+                return __('Waiting paying');
+                break;
+
+            case self::STATUS_APPROVED:
+                return __('Waiting admin approval');
+                break;
+
+            case self::STATUS_UNAPPROVED:
+                if ($this->complete()) {
+                    return __('Waiting branch approval');
+                } else {
+                    return __("Didn't complete info");
+                }
+                break;
+
+            case self::STATUS_REFUSED:
+                return __('Membership refused');
+                break;
+
+            case self::STATUS_DISABLED:
+                return __('Disabled');
                 break;
 
             default:
-                switch ($this->status) {
-                    case self::STATUS_ACCEPTED:
-                        return __('Waiting paying');
-                        break;
-
-                    case self::STATUS_APPROVED:
-                        return __('Waiting admin approval');
-                        break;
-
-                    case self::STATUS_UNAPPROVED:
-                        if ($this->complete()) {
-                            return __('Waiting branch approval');
-                        } else {
-                            return __("Didn't complete info");
-                        }
-                        break;
-
-                    case self::STATUS_REFUSED:
-                        return __('Membership refused');
-                        break;
-
-                    case self::STATUS_DISABLED:
-                        return __('Disabled');
-                        break;
-
-                    default:
-                        return null;
-                        break;
-                }
+                return null;
                 break;
         }
     }

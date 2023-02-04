@@ -114,6 +114,7 @@ Route::group(['prefix' => 'members', 'as' => 'member.'], function () {
              * Member subscription
              * Displays current subscription information
              */
+            Route::post('/subscription', [MemberController::class, 'resend'])->name('subscription.resend');
             Route::get('/subscription', [MemberController::class, 'subscription'])->name('subscription');
 
             /**
