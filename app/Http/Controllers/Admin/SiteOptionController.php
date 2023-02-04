@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Facades\Sms;
 use App\Models\SiteOption;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class SiteOptionController extends Controller
 {
@@ -14,7 +16,12 @@ class SiteOptionController extends Controller
 
         $categories = SiteOption::all()->groupBy('category');
 
-        return inertia('Admin/SiteOptions/Index', compact('categories'));
+        $service = [
+            'provider' => config('sms.default'),
+            'balance'  => Cache::remember('sms-balance', 60 * 60, fn () => Sms::balance())
+        ];
+
+        return inertia('Admin/SiteOptions/Index', compact('categories', 'service'));
     }
 
     public function update(Request $request)

@@ -59,6 +59,9 @@
     "Message template after payment and membership activation": "قالب الرسالة بعد الدفع وتفعيل العضوية",
     "Yes": "نعم",
     "No": "لا",
+    "SMS settings": "اعدادات رسائل الجوال",
+    "Service provider": "مقدم الخدمة",
+    "Available balance": "الرصيد المتاح",
 
     "--------------- Roles management -------------": "",
     "Roles List": "قائمة الأدوار",

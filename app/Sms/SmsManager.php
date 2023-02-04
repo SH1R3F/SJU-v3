@@ -4,6 +4,7 @@ namespace App\Sms;
 
 use App\Sms\TwilioSmser;
 use App\Sms\VonageSmser;
+use App\Sms\TaqnyatSmser;
 use Illuminate\Support\Manager;
 
 class SmsManager extends Manager
@@ -16,7 +17,7 @@ class SmsManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->config->get('sms.default', 'twilio');
+        return $this->config->get('sms.default', 'taqnyat');
     }
 
 
@@ -39,5 +40,15 @@ class SmsManager extends Manager
     public function createVonageDriver()
     {
         return new VonageSmser($this->config->get('sms.smsers.vonage') ?? []);
+    }
+
+    /**
+     * Create an instance of the Taqnyat sms Driver.
+     *
+     * @return \App\Sms\TaqnyatSmser
+     */
+    public function createTaqnyatDriver()
+    {
+        return new TaqnyatSmser($this->config->get('sms.smsers.taqnyat') ?? []);
     }
 }

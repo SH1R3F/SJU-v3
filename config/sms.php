@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('SMS_PROVIDER', 'twilio'),
+    'default' => env('SMS_PROVIDER', 'taqnyat'),
 
     /*
     |--------------------------------------------------------------------------
@@ -38,6 +38,10 @@ return [
             'api_secret' => env('VONAGE_API_SECRET', null),
             'from' => env('VONAGE_FROM', null),
         ],
+        'taqnyat' => [
+            'bearer' => env('TAQNYAT_BEARER', null),
+            'sender' => env('TAQNYAT_SENDER', null)
+        ]
     ],
 
 ];

@@ -42,4 +42,22 @@ class VonageSmser implements SmsInterface
 
         if ($json['messages'][0]['status'] != 0) throw new RuntimeException($json['messages'][0]['error-text']);
     }
+
+
+    /**
+     * Get the available balance in my account 
+     */
+    public function balance()
+    {
+        $response = Http::asForm()->get("https://rest.nexmo.com/account/get-balance", [
+            'api_key' => $this->api_key,
+            'api_secret' => $this->api_secret
+        ]);
+
+        $json = $response->json();
+
+        if (!$json) throw new RuntimeException("Couldn't connect to vonage API");
+
+        return $json['value'] . ' USD';
+    }
 }

@@ -40,4 +40,21 @@ class TwilioSmser implements SmsInterface
             throw new RuntimeException($json['message']);
         }
     }
+
+
+    /**
+     * Get the available balance in my account 
+     */
+    public function balance()
+    {
+        $response = Http::asForm()->withBasicAuth($this->account_sid, $this->auth_token)->get("https://api.twilio.com/2010-04-01/Accounts/{$this->account_sid}/Balance.json");
+
+        $json = $response->json();
+
+        if (isset($json['code'], $json['status']) && $json['status'] != 200) {
+            throw new RuntimeException($json['message']);
+        }
+
+        return $json['balance'] . ' ' .  $json['currency'];
+    }
 }
