@@ -153,6 +153,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         /**
          * Courses management
          */
+        Route::get('courses/export', [CourseController::class, 'export'])->name('courses.export');
         Route::post('courses/{course}/{type}/{id}/attendance/toggle', [CourseController::class, 'toggleAttendance'])->name('courses.attendance.toggle');
         Route::delete('courses/{course}/{type}/{id}/attendance/delete', [CourseController::class, 'deleteAttendance'])->name('courses.attendance.delete');
         Route::post('courses/{course}/toggle', [CourseController::class, 'toggle'])->name('courses.toggle');

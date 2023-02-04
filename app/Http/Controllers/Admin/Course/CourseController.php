@@ -7,11 +7,13 @@ use App\Models\Course\Place;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
 use App\Models\Course\Gender;
+use App\Exports\CoursesExport;
 use App\Models\Course\Category;
 use App\Models\Course\Template;
 use App\Services\CourseService;
 use App\Http\Controllers\Controller;
 use App\Models\Course\Questionnaire;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\CourseResource;
 use App\Http\Requests\Course\CourseRequest;
 
@@ -45,10 +47,32 @@ class CourseController extends Controller
         return inertia('Admin/Courses/Index', [
             'courses' => CourseResource::collection($courses)
                 ->additional([
+                    'can_export' => request()->user()->can('viewAny', Course::class),
                     'can_create' => request()->user()->can('create', Course::class),
                 ]),
             'filters' => request()->only(['perPage', 'title', 'course_number', 'year', 'month', 'region'])
         ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function export()
+    {
+        $courses = Course::query()
+            ->filter(request())
+            ->addSelect([
+                'course_type' => Type::select('name')->whereColumn('courses_types.id', 'courses.course_type_id')->take(1),
+                'course_place' => Place::select('name')->whereColumn('courses_places.id', 'courses.course_place_id')->take(1),
+                'course_gender' => Gender::select('name')->whereColumn('courses_genders.id', 'courses.course_gender_id')->take(1),
+                'course_category' => Category::select('name')->whereColumn('courses_categories.id', 'courses.course_category_id')->take(1),
+            ])
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return Excel::download(new CoursesExport($courses), 'Courses.xlsx');
     }
 
     /**
