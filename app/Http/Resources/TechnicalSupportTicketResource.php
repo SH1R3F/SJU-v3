@@ -3,6 +3,10 @@
 namespace App\Http\Resources;
 
 use App\Models\Member;
+use App\Models\Volunteer;
+use App\Models\Subscriber;
+use App\Http\Resources\VolunteerResource;
+use App\Http\Resources\SubscriberResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\TechnicalSupportMessageResource;
 
@@ -26,6 +30,10 @@ class TechnicalSupportTicketResource extends JsonResource
                 'supportable' => $this->when($this->relationLoaded('supportable'), function () {
                     if ($this->supportable instanceof Member) {
                         return new MemberResource($this->supportable);
+                    } else if ($this->supportable instanceof Subscriber) {
+                        return new SubscriberResource($this->supportable);
+                    } else if ($this->supportable instanceof Volunteer) {
+                        return new VolunteerResource($this->supportable);
                     }
 
                     return $this->supportable;

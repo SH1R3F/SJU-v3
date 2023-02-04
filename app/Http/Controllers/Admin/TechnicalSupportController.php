@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use Inertia\Inertia;
+use App\Models\Member;
+use App\Models\Volunteer;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\TechnicalSupportTicket;
@@ -22,6 +25,8 @@ class TechnicalSupportController extends Controller
         $this->authorize('viewMembers', TechnicalSupportTicket::class);
 
         $tickets = TechnicalSupportTicket::with('supportable')
+            ->whereHas('supportable', fn ($query) => $query->whereNotNull('id'))
+            ->where('supportable_type', Member::class)
             ->filter($request)
             ->orderBy('updated_at', 'DESC')
             ->paginate($request->perPage ?: 10)
@@ -42,6 +47,19 @@ class TechnicalSupportController extends Controller
     public function subscribers(Request $request)
     {
         $this->authorize('viewSubscribers', TechnicalSupportTicket::class);
+
+        $tickets = TechnicalSupportTicket::with('supportable')
+            ->where('supportable_type', Subscriber::class)
+            ->whereHas('supportable', fn ($query) => $query->whereNotNull('id'))
+            ->filter($request)
+            ->orderBy('updated_at', 'DESC')
+            ->paginate($request->perPage ?: 10)
+            ->withQueryString();
+
+        return inertia('Admin/TechnicalSupport/Subscribers', [
+            'tickets' => TechnicalSupportTicketResource::collection($tickets),
+            'filters'  => request()->only(['perPage', 'title', 'name', 'status', 'mobile', 'email'])
+        ]);
     }
 
     /**
@@ -53,6 +71,19 @@ class TechnicalSupportController extends Controller
     public function volunteers(Request $request)
     {
         $this->authorize('viewVolunteers', TechnicalSupportTicket::class);
+
+        $tickets = TechnicalSupportTicket::with('supportable')
+            ->whereHas('supportable', fn ($query) => $query->whereNotNull('id'))
+            ->where('supportable_type', Volunteer::class)
+            ->filter($request)
+            ->orderBy('updated_at', 'DESC')
+            ->paginate($request->perPage ?: 10)
+            ->withQueryString();
+
+        return inertia('Admin/TechnicalSupport/Volunteers', [
+            'tickets' => TechnicalSupportTicketResource::collection($tickets),
+            'filters'  => request()->only(['perPage', 'title', 'name', 'status', 'mobile', 'email'])
+        ]);
     }
 
     /**

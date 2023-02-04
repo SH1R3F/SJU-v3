@@ -50,7 +50,7 @@ watch(
         <!-- Invoices List Table -->
         <div class="card">
             <div class="card-header border-bottom">
-                <h5 class="card-title mb-3">{{ __('Members tickets') }}</h5>
+                <h5 class="card-title mb-3">{{ __('Volunteers tickets') }}</h5>
                 <div class="d-flex justify-content-between align-items-center row pb-2 gap-3 gap-md-0">
                     <div class="col-md-12 mb-2">
                         <input type="text" class="form-control" :placeholder="__('Ticket title')" v-model="title" />
@@ -111,7 +111,7 @@ watch(
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <Link :href="route('admin.members.show', ticket.supportable.id)" class="text-body text-truncate">
+                                        <Link :href="route('admin.volunteers.show', ticket.supportable.id)" class="text-body text-truncate">
                                             <span class="fw-semibold">{{ ticket.supportable.fullName }}</span>
                                         </Link>
                                         <small class="text-truncate text-muted">{{ ticket.supportable.email }}</small>
