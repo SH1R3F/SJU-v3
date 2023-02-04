@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\InvoiceController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\VolunteerController;
 use App\Http\Controllers\Admin\SiteOptionController;
@@ -18,7 +20,6 @@ use App\Http\Controllers\Admin\Course\QuestionController;
 use App\Http\Controllers\Admin\Course\TemplateController;
 use App\Http\Controllers\Admin\TechnicalSupportController;
 use App\Http\Controllers\Admin\Course\QuestionnaireController;
-use App\Http\Controllers\Admin\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -161,6 +162,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
          * News section
          */
         Route::prefix('news')->group(function () {
+
+            /**
+             * Categories management
+             */
+            Route::resource('categories', CategoryController::class)->except(['show']);
 
             /**
              * Pages section

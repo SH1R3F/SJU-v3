@@ -396,6 +396,11 @@
     "Question updated successfully": "تم تعديل السؤال بنجاح",
 
     "------------- News section -----------": "",
+    "Categories": "التصنيفات",
+    "Create category": "إنشاء تصنيف",
+    "Category created successfully": "تم إنشاء التصنيف بنجاح",
+    "Category updated successfully": "تم تعديل التصنيف بنجاح",
+    "Category deleted successfully": "تم حذف التصنيف بنجاح",
     "News section": "القسم الإخباري",
     "Articles": "المقالات",
     "Pages": "الصفحات",

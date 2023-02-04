@@ -118,6 +118,15 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::updateOrCreate(['name' => 'delete-questionnaire'], ['name' => 'delete-questionnaire', 'guard_name' => 'admin']);
 
         /**
+         * Category management permissions
+         */
+        Permission::updateOrCreate(['name' => 'viewAny-category'], ['name' => 'viewAny-category', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'view-category'], ['name' => 'view-category', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-category'], ['name' => 'create-category', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-category'], ['name' => 'update-category', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-category'], ['name' => 'delete-category', 'guard_name' => 'admin']);
+
+        /**
          * Page management permissions
          */
         Permission::updateOrCreate(['name' => 'viewAny-page'], ['name' => 'viewAny-page', 'guard_name' => 'admin']);

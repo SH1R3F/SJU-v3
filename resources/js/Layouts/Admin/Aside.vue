@@ -175,12 +175,21 @@
             </li>
 
             <!-- News section -->
-            <li v-if="$page.props.authUser?.can_view?.pages || $page.props.authUser?.can_view?.articles" class="menu-item" :class="{ 'active open': $page.component.startsWith('Admin/News') }">
+            <li
+                v-if="$page.props.authUser?.can_view?.categories || $page.props.authUser?.can_view?.pages || $page.props.authUser?.can_view?.articles"
+                class="menu-item"
+                :class="{ 'active open': $page.component.startsWith('Admin/News') }"
+            >
                 <a href="javascript:;" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-news"></i>
                     <div>{{ __('News section') }}</div>
                 </a>
                 <ul class="menu-sub">
+                    <li v-if="$page.props.authUser?.can_view?.categories" class="menu-item" :class="{ active: $page.component.startsWith('Admin/News/Categories') }">
+                        <Link :href="route('admin.categories.index')" class="menu-link">
+                            <div>{{ __('Categories') }}</div>
+                        </Link>
+                    </li>
                     <li v-if="$page.props.authUser?.can_view?.pages" class="menu-item" :class="{ active: $page.component.startsWith('Admin/News/Pages') }">
                         <Link :href="route('admin.pages.index')" class="menu-link">
                             <div>{{ __('Pages') }}</div>

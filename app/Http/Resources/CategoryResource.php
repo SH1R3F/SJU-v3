@@ -22,8 +22,22 @@ class CategoryResource extends JsonResource
             parent::toArray($request),
 
             [
-                'title' => app()->getLocale() == 'ar' ? $this->title_ar : $this->title_en
+                'title' => app()->getLocale() == 'ar' ? $this->title_ar : $this->title_en,
+
+                // Authorization
+                $this->merge($this->withAuthorization($request))
             ]
         );
+    }
+
+
+    private function withAuthorization($request)
+    {
+        if (!str_contains(request()->route()->getActionName(), '@index')) return [];
+
+        return [
+            'editable'   => $request->user()->can('update', $this->resource),
+            'deleteable' => $request->user()->can('delete', $this->resource),
+        ];
     }
 }

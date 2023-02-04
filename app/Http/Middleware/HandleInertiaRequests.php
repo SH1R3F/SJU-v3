@@ -9,7 +9,9 @@ use App\Models\Member;
 use App\Models\Article;
 use App\Models\Invoice;
 use Inertia\Middleware;
+use App\Models\Category;
 use App\Models\Volunteer;
+use App\Models\SiteOption;
 use App\Models\Subscriber;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -23,7 +25,6 @@ use App\Http\Resources\MemberResource;
 use App\Models\TechnicalSupportTicket;
 use App\Http\Resources\VolunteerResource;
 use App\Http\Resources\SubscriberResource;
-use App\Models\SiteOption;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -126,6 +127,7 @@ class HandleInertiaRequests extends Middleware
             'courses' =>  $admin->can('viewAny', Course::class),
             'templates' =>  $admin->can('viewAny', Template::class),
             'questionnaires' =>  $admin->can('viewAny', Questionnaire::class),
+            'categories' =>  $admin->can('viewAny', Category::class),
             'pages' =>  $admin->can('viewAny', Page::class),
             'articles' =>  $admin->can('viewAny', Article::class),
             'studio' =>  $admin->can('viewAny', Media::class),

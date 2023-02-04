@@ -10,6 +10,7 @@ use App\Models\Media;
 use App\Models\Member;
 use App\Models\Article;
 use App\Models\Invoice;
+use App\Models\Category;
 use App\Models\SiteOption;
 use App\Models\Subscriber;
 use App\Policies\PagePolicy;
@@ -22,6 +23,7 @@ use App\Policies\MemberPolicy;
 use App\Models\Course\Template;
 use App\Policies\ArticlePolicy;
 use App\Policies\InvoicePolicy;
+use App\Policies\CategoryPolicy;
 use App\Policies\TemplatePolicy;
 use App\Policies\SiteOptionPolicy;
 use App\Policies\SubscriberPolicy;
@@ -50,6 +52,7 @@ class AuthServiceProvider extends ServiceProvider
         Course::class => CoursePolicy::class,
         Template::class => TemplatePolicy::class,
         Questionnaire::class => QuestionnairePolicy::class,
+        Category::class => CategoryPolicy::class,
         Page::class => PagePolicy::class,
         Article::class => ArticlePolicy::class,
         Media::class => MediaPolicy::class,
