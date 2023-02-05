@@ -84,7 +84,14 @@ class Volunteer extends Authenticatable implements MustVerifyEmail
             // Filter by national id
             ->when($request->national_id, fn ($builder, $national_id) => $builder->where('national_id', 'LIKE', "%$national_id%"))
             // Filter by city
-            ->when($request->branch, fn ($builder, $branch) => $builder->where('branch_id', $branch))
+            ->when($request->branch, function ($builder, $branch) {
+                // Operator precedence
+                return $builder->where(function ($query) use ($branch) {
+                    return $query
+                        ->where('branch_id', $branch)
+                        ->orWhere('city', $branch);
+                });
+            })
             // Filter by fields
             ->when($request->field, fn ($builder, $field) => $builder->where('fields', 'LIKE', "%$field%"));
     }

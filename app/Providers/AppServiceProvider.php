@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Sms\SmsManager;
 use App\Channels\SmsChannel;
 use App\Payment\PaymentManager;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Notification;
 
@@ -34,6 +35,10 @@ class AppServiceProvider extends ServiceProvider
         // Set a new notification channel
         Notification::extend('sms', function () {
             return new SmsChannel;
+        });
+        Schema::defaultStringLength(191);
+        $this->app->bind('path.public', function () {
+            return base_path() . '/../public_html/v2.sju.org.sa';
         });
     }
 }

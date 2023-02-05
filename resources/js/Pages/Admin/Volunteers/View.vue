@@ -62,10 +62,6 @@ const props = defineProps({
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Email') }} </span>
                                     <span>{{ volunteer.email }}</span>
                                 </li>
-                                <li class="mb-2 pt-1">
-                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Branch') }} </span>
-                                    <span>{{ volunteer.branch?.name }}</span>
-                                </li>
                             </ul>
                         </div>
                         <div class="d-grid w-100 mt-4">

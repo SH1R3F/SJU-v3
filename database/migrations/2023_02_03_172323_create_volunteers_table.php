@@ -39,7 +39,7 @@ return new class extends Migration
             $table->text('fields')->nullable();
             $table->string('education_level')->nullable();
             $table->string('experiences')->nullable();
-            $table->unsignedBigInteger('branch_id');
+            $table->unsignedBigInteger('branch_id')->nullable();
             $table->unsignedInteger('hearabout')->default(1);
             $table->unsignedBigInteger('mobile')->index();
             $table->unsignedInteger('mobile_key')->index();
