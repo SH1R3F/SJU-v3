@@ -8,6 +8,8 @@ import Footer from './Footer.vue';
 <template>
     <Head>
         <title>{{ __('Home') }}</title>
+        <!-- Flash messages -->
+        <component is="script" defer v-if="route()?.params?.verified == 1"> toastr.success('{{ __('Email has been verified successfully') }}') </component>
     </Head>
 
     <!-- Mini bar -->
@@ -36,9 +38,6 @@ export default {
         }
         if (this.$page.props.flash.error) {
             toastr.success(this.$page.props.flash.error);
-        }
-        if (route()?.params?.verified == 1) {
-            toastr.success(__('Email has been verified successfully'));
         }
     },
 };
