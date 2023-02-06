@@ -190,8 +190,6 @@ watch(
                                         as="span"
                                         preserve-scroll
                                         class="cursor-pointer"
-                                        data-bs-placement="top"
-                                        data-bs-toggle="tooltip"
                                         :title="volunteer.status == 1 ? __('Enabled') : __('Disabled')"
                                         :class="{ 'text-success': volunteer.status == 1, 'text-body': volunteer.status != 1 }"
                                     >
