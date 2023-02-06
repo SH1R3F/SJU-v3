@@ -49,7 +49,7 @@ const props = defineProps({
                                         data-bs-toggle="tooltip"
                                         data-bs-placement="top"
                                         :aria-label="__('Edit')"
-                                        :data-bs-original-title="__('Edit')"
+                                        :title="__('Edit')"
                                     >
                                         <i class="ti ti-edit mx-2 ti-sm"></i>
                                     </Link>
@@ -61,7 +61,7 @@ const props = defineProps({
                                         class="text-body"
                                         data-bs-placement="top"
                                         :aria-label="__('Delete')"
-                                        :data-bs-original-title="__('Delete')"
+                                        :title="__('Delete')"
                                     >
                                         <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
                                     </Link>

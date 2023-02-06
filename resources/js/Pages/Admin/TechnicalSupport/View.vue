@@ -80,7 +80,7 @@ export default {
                                         data-bs-toggle="tooltip"
                                         data-bs-placement="top"
                                         :aria-label="ticket.status ? __('Open ticket') : __('Close ticket')"
-                                        :data-bs-original-title="ticket.status ? __('Open ticket') : __('Close ticket')"
+                                        :title="ticket.status ? __('Open ticket') : __('Close ticket')"
                                         class="ti cursor-pointer d-sm-block d-none me-3"
                                         :class="{ 'ti-toggle-left': ticket.status, 'ti-toggle-right': !ticket.status }"
                                     ></Link>

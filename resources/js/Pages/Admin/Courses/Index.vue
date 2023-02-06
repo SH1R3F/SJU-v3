@@ -151,7 +151,7 @@ watch(
                                         data-bs-toggle="tooltip"
                                         data-bs-placement="top"
                                         :aria-label="__('Show')"
-                                        :data-bs-original-title="__('Show')"
+                                        :title="__('Show')"
                                     >
                                         <i class="ti ti-eye mx-2 ti-sm"></i>
                                     </Link>
@@ -162,7 +162,7 @@ watch(
                                         data-bs-toggle="tooltip"
                                         data-bs-placement="top"
                                         :aria-label="__('Edit')"
-                                        :data-bs-original-title="__('Edit')"
+                                        :title="__('Edit')"
                                     >
                                         <i class="ti ti-edit mx-2 ti-sm"></i>
                                     </Link>
@@ -175,7 +175,7 @@ watch(
                                         class="cursor-pointer"
                                         data-bs-placement="top"
                                         data-bs-toggle="tooltip"
-                                        :data-bs-original-title="course.status == 2 ? __('Disabled') : ''"
+                                        :title="course.status == 2 ? __('Disabled') : ''"
                                         :class="{ 'text-success': course.status == 1, 'text-body': course.status == 2 }"
                                     >
                                         <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': course.status == 1, 'ti-toggle-left': course.status == 2 }"></i>
@@ -189,7 +189,7 @@ watch(
                                         class="text-body"
                                         data-bs-placement="top"
                                         :aria-label="__('Delete')"
-                                        :data-bs-original-title="__('Delete')"
+                                        :title="__('Delete')"
                                     >
                                         <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
                                     </Link>

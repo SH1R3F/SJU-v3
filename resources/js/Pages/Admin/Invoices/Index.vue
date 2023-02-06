@@ -126,7 +126,7 @@ watch(
                                         class="text-body"
                                         data-bs-placement="top"
                                         :aria-label="__('Show')"
-                                        :data-bs-original-title="__('Show')"
+                                        :title="__('Show')"
                                     >
                                         <i class="ti ti-eye mx-2 ti-sm"></i>
                                     </Link>

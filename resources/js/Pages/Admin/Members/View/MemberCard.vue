@@ -17,19 +17,13 @@ defineProps({
                 </div>
             </div>
             <div class="d-flex justify-content-center flex-wrap mt-3 pt-3 pb-4 border-bottom" v-if="false">
-                <a
-                    href="javascript:;"
-                    data-bs-placement="top"
-                    data-bs-toggle="tooltip"
-                    :data-bs-original-title="member.status == -1 ? __('Enable') : __('Disable')"
-                    class="btn btn-label-warning btn-sm me-2"
-                >
+                <a href="javascript:;" data-bs-placement="top" data-bs-toggle="tooltip" :title="member.status == -1 ? __('Enable') : __('Disable')" class="btn btn-label-warning btn-sm me-2">
                     <i class="ti ti-sm" :class="{ 'ti-toggle-right': member.active != -1, 'ti-toggle-left': member.active == -1 }"></i>
                 </a>
-                <a href="javascript:;" data-bs-placement="top" data-bs-toggle="tooltip" :data-bs-original-title="__('Edit')" class="btn btn-label-primary btn-sm me-2">
+                <a href="javascript:;" data-bs-placement="top" data-bs-toggle="tooltip" :title="__('Edit')" class="btn btn-label-primary btn-sm me-2">
                     <i class="ti ti-edit ti-sm"></i>
                 </a>
-                <a href="javascript:;" data-bs-placement="top" data-bs-toggle="tooltip" :data-bs-original-title="__('Delete')" class="btn btn-label-danger btn-sm">
+                <a href="javascript:;" data-bs-placement="top" data-bs-toggle="tooltip" :title="__('Delete')" class="btn btn-label-danger btn-sm">
                     <i class="ti ti-trash ti-sm"></i>
                 </a>
             </div>

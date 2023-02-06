@@ -239,7 +239,7 @@ const form = useForm({
                                         method="post"
                                         data-bs-placement="top"
                                         data-bs-toggle="tooltip"
-                                        :data-bs-original-title="__('Approve')"
+                                        :title="__('Approve')"
                                         preserve-scroll
                                         as="span"
                                         class="text-body cursor-pointer"

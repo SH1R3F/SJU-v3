@@ -244,7 +244,7 @@ watch(
                                         class="cursor-pointer"
                                         data-bs-placement="top"
                                         data-bs-toggle="tooltip"
-                                        :data-bs-original-title="member.status == -1 ? __('Disabled') : __('Enabled')"
+                                        :title="member.status == -1 ? __('Disabled') : __('Enabled')"
                                         :class="{ 'text-success': member.status != -1, 'text-body': member.status == -1 }"
                                     >
                                         <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': member.active != -1, 'ti-toggle-left': member.active == -1 }"></i>
@@ -261,7 +261,7 @@ watch(
                                         method="post"
                                         data-bs-placement="top"
                                         data-bs-toggle="tooltip"
-                                        :data-bs-original-title="__('Disapprove')"
+                                        :title="__('Disapprove')"
                                         preserve-scroll
                                         as="span"
                                         class="text-body cursor-pointer"

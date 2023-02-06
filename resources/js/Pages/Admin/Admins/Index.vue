@@ -203,7 +203,7 @@ watch(branch, (val) => {
                                         class="cursor-pointer"
                                         data-bs-placement="top"
                                         data-bs-toggle="tooltip"
-                                        :data-bs-original-title="admin.active ? __('Enabled') : __('Disabled')"
+                                        :title="admin.active ? __('Enabled') : __('Disabled')"
                                         :class="{ 'text-success': admin.active, 'text-body': !admin.active }"
                                     >
                                         <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': admin.active, 'ti-toggle-left': !admin.active }"></i>

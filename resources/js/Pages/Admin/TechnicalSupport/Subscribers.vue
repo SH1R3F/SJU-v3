@@ -154,7 +154,7 @@ watch(
                                         data-bs-toggle="tooltip"
                                         data-bs-placement="top"
                                         :aria-label="__('Show')"
-                                        :data-bs-original-title="__('Show')"
+                                        :title="__('Show')"
                                     >
                                         <i class="ti ti-eye mx-2 ti-sm"></i>
                                     </Link>
@@ -167,7 +167,7 @@ watch(
                                         class="text-body"
                                         data-bs-placement="top"
                                         :aria-label="__('Delete')"
-                                        :data-bs-original-title="__('Delete')"
+                                        :title="__('Delete')"
                                     >
                                         <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
                                     </Link>

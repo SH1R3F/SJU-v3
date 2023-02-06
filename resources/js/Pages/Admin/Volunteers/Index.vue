@@ -192,7 +192,7 @@ watch(
                                         class="cursor-pointer"
                                         data-bs-placement="top"
                                         data-bs-toggle="tooltip"
-                                        :data-bs-original-title="volunteer.status == 1 ? __('Enabled') : __('Disabled')"
+                                        :title="volunteer.status == 1 ? __('Enabled') : __('Disabled')"
                                         :class="{ 'text-success': volunteer.status == 1, 'text-body': volunteer.status != 1 }"
                                     >
                                         <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': volunteer.status == 1, 'ti-toggle-left': volunteer.status != 1 }"></i>

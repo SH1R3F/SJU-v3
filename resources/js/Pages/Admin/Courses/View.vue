@@ -150,7 +150,7 @@ const unpassed = computed(() => {
                                             class="cursor-pointer"
                                             data-bs-placement="top"
                                             data-bs-toggle="tooltip"
-                                            :data-bs-original-title="member.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
+                                            :title="member.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
                                             :class="{ 'text-success': member.pivot?.attendance, 'text-body': !member.pivot?.attendance }"
                                         >
                                             <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': member.pivot?.attendance, 'ti-toggle-left': !member.pivot?.attendance }"></i>
@@ -165,7 +165,7 @@ const unpassed = computed(() => {
                                             class="text-body"
                                             data-bs-placement="top"
                                             :aria-label="__('Delete')"
-                                            :data-bs-original-title="__('Delete')"
+                                            :title="__('Delete')"
                                         >
                                             <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
                                         </Link>
@@ -189,7 +189,7 @@ const unpassed = computed(() => {
                                             class="cursor-pointer"
                                             data-bs-placement="top"
                                             data-bs-toggle="tooltip"
-                                            :data-bs-original-title="subscriber.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
+                                            :title="subscriber.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
                                             :class="{ 'text-success': subscriber.pivot?.attendance, 'text-body': !subscriber.pivot?.attendance }"
                                         >
                                             <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': subscriber.pivot?.attendance, 'ti-toggle-left': !subscriber.pivot?.attendance }"></i>
@@ -204,7 +204,7 @@ const unpassed = computed(() => {
                                             class="text-body"
                                             data-bs-placement="top"
                                             :aria-label="__('Delete')"
-                                            :data-bs-original-title="__('Delete')"
+                                            :title="__('Delete')"
                                         >
                                             <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
                                         </Link>
@@ -228,7 +228,7 @@ const unpassed = computed(() => {
                                             class="cursor-pointer"
                                             data-bs-placement="top"
                                             data-bs-toggle="tooltip"
-                                            :data-bs-original-title="volunteer.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
+                                            :title="volunteer.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
                                             :class="{ 'text-success': volunteer.pivot?.attendance, 'text-body': !volunteer.pivot?.attendance }"
                                         >
                                             <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': volunteer.pivot?.attendance, 'ti-toggle-left': !volunteer.pivot?.attendance }"></i>
@@ -243,7 +243,7 @@ const unpassed = computed(() => {
                                             class="text-body"
                                             data-bs-placement="top"
                                             :aria-label="__('Delete')"
-                                            :data-bs-original-title="__('Delete')"
+                                            :title="__('Delete')"
                                         >
                                             <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
                                         </Link>

@@ -242,7 +242,7 @@ watch(
                                         method="post"
                                         data-bs-placement="top"
                                         data-bs-toggle="tooltip"
-                                        :data-bs-original-title="__('Accept')"
+                                        :title="__('Accept')"
                                         preserve-scroll
                                         as="span"
                                         class="text-body cursor-pointer"
@@ -261,7 +261,7 @@ watch(
                                         method="post"
                                         data-bs-placement="top"
                                         data-bs-toggle="tooltip"
-                                        :data-bs-original-title="__('Disapprove')"
+                                        :title="__('Disapprove')"
                                         preserve-scroll
                                         as="span"
                                         class="text-body cursor-pointer"
