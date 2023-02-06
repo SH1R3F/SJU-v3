@@ -29,8 +29,8 @@ class ArticleResource extends JsonResource
                 'summary' => app()->getLocale() == 'ar' ? $this->summary_ar : $this->summary_en,
                 'content' => app()->getLocale() == 'ar' ? $this->content_ar : $this->content_en,
                 'article_category' => $this->article_category,
-                'image' => $this->when($this->image, Storage::url($this->image), null),
-                'images' => collect($this->images)->map(fn ($img) => Storage::url($img)),
+                'image' => $this->when($this->image && Storage::exist($this->image), Storage::url($this->image), null),
+                'images' => collect($this->images)->filter(fn ($img) => Storage::exist($img))->map(fn ($img) => Storage::url($img)),
                 'category' => new CategoryResource($this->whenLoaded('category')),
 
                 // Authorization

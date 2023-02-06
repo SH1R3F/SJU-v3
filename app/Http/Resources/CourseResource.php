@@ -30,8 +30,8 @@ class CourseResource extends JsonResource
                 'course_gender' => $this->course_gender,
                 'course_place' => $this->course_place,
                 'state' => __($this->state($this->status)),
-                'image' => $this->when($this->image, Storage::url($this->image), null),
-                'images' => collect($this->images)->map(fn ($img) => Storage::url($img)),
+                'image' => $this->when($this->image && Storage::exist($this->image), Storage::url($this->image), null),
+                'images' => collect($this->images)->filter(fn ($img) => Storage::exist($img))->map(fn ($img) => Storage::url($img)),
 
                 // Corusables
                 'members' => MemberResource::collection($this->whenLoaded('members')),
