@@ -29,7 +29,7 @@ class VolunteerResource extends JsonResource
                 'fullName_en' => $this->full_name_en,
                 'phone_number' => $this->prepareMobileForSms(),
                 'state' => $this->status == 1 ? __('Active') : __('Inactive'),
-                'profile_photo' => $this->when($this->profile_photo && Storage::exists($this->profile_photo), Storage::url($this->profile_photo), $this->profile_photo),
+                'profile_photo' => $this->when($this->profile_photo && Storage::exists($this->profile_photo), Storage::url($this->profile_photo), null),
 
                 'courses' => CourseResource::collection($this->whenLoaded('courses')),
                 'courses_count' => $this->courses_count,
