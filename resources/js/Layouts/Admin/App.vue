@@ -6,7 +6,6 @@ import Footer from './Footer.vue';
 <template>
     <Head>
         <title>{{ __('Dashboard') }}</title>
-        <!-- Flash messages -->
     </Head>
 
     <!-- Layout wrapper -->
@@ -48,12 +47,10 @@ import Footer from './Footer.vue';
     <!-- / Layout wrapper -->
 </template>
 
+<!-- Flash messages -->
 <script defer>
 export default {
-    // <component is="script" defer v-if="$page.props.flash.message"> toastr.success('{{ $page.props.flash.message }}') </component>
-    // <component is="script" defer> console.log($page.props.flash) </component>
     updated() {
-        console.log(this.$page);
         if (this.$page.props.flash.message) {
             toastr.success(this.$page.props.flash.message);
         }

@@ -31,3 +31,19 @@ import Footer from './Footer.vue';
     <Footer />
     <!-- Footer -->
 </template>
+<!-- Flash messages -->
+<script defer>
+export default {
+    updated() {
+        if (this.$page.props.flash.message) {
+            toastr.success(this.$page.props.flash.message);
+        }
+        if (this.$page.props.flash.error) {
+            toastr.success(this.$page.props.flash.error);
+        }
+        if (route()?.params?.verified == 1) {
+            toastr.success(__('Email has been verified successfully'));
+        }
+    },
+};
+</script>
