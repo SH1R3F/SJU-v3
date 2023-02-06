@@ -7,11 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\Course\Course;
 use App\Models\Course\Certificate;
 use App\Notifications\VerifyEmail;
+use Illuminate\Support\Facades\DB;
 use App\Models\Course\Questionnaire;
 use App\Models\TechnicalSupportTicket;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Notifications\ResetVolunteerPassword;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
