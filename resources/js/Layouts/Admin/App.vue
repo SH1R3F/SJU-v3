@@ -54,8 +54,8 @@ export default {
     // <component is="script" defer> console.log($page.props.flash) </component>
     mounted() {
         console.log(this.$page);
-        if ($page.props.flash.message) {
-            toastr.success($page.props.flash.message);
+        if (this.$page.props.flash.message) {
+            toastr.success(this.$page.props.flash.message);
         }
     },
 };
