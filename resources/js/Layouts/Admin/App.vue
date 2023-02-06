@@ -8,6 +8,7 @@ import Footer from './Footer.vue';
         <title>{{ __('Dashboard') }}</title>
         <!-- Flash messages -->
         <component is="script" defer v-if="$page.props.flash.message"> toastr.success('{{ $page.props.flash.message }}') </component>
+        <component is="script" defer> console.log($page.props.flash) </component>
     </Head>
 
     <!-- Layout wrapper -->
