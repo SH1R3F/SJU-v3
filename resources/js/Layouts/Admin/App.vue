@@ -52,7 +52,7 @@ import Footer from './Footer.vue';
 export default {
     // <component is="script" defer v-if="$page.props.flash.message"> toastr.success('{{ $page.props.flash.message }}') </component>
     // <component is="script" defer> console.log($page.props.flash) </component>
-    mounted() {
+    updated() {
         console.log(this.$page);
         if (this.$page.props.flash.message) {
             toastr.success(this.$page.props.flash.message);
