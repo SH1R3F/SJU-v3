@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('status')->default(1);
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('admin_id')->references('id')->on('admins')->cascadeOnUpdate()->nullOnDelete();
         });

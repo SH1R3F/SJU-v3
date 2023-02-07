@@ -37,7 +37,7 @@ return new class extends Migration
             $table->unsignedInteger('percentage');
             $table->tinyInteger('cost')->default(0);
             $table->unsignedInteger('price')->nullable();
-            $table->string('currency')->nullable();
+            $table->string('currency')->nullable()->default('SAR');
             $table->tinyInteger('payment_method')->nullable();
             $table->string('image')->nullable();
             $table->json('images')->nullable();

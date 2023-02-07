@@ -30,7 +30,7 @@ defineProps({
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{ userAuth.subscription.type }}</td>
+                                    <td>{{ userAuth.subscription?.type }}</td>
                                     <td>{{ userAuth.subscription.start_date }}</td>
                                     <td>{{ userAuth.subscription.end_date }}</td>
                                     <td>
@@ -55,7 +55,7 @@ defineProps({
                                         <strong>{{ __('Complete the payment process') }}</strong>
                                     </h3>
                                     <p class="mb-0 opacity-7">
-                                        <strong class="font-weight-extra-bold">{{ userAuth.subscription.type }}</strong>
+                                        <strong class="font-weight-extra-bold">{{ userAuth.subscription?.type }}</strong>
                                     </p>
                                 </div>
                             </div>

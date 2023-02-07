@@ -16,13 +16,13 @@ const form = useForm({
 </script>
 
 <template>
-    <Head :title="__('edit page')"> </Head>
+    <Head :title="__('Edit page')"> </Head>
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
             <div class="col-12 order-0 order-md-1">
                 <div class="card mb-4">
-                    <h5 class="card-header">{{ __('edit page') }}</h5>
+                    <h5 class="card-header">{{ __('Edit page') }}</h5>
                     <div class="card-body">
                         <form @submit.prevent="form.put(route('admin.pages.update', page.id))">
                             <!-- Page title -->

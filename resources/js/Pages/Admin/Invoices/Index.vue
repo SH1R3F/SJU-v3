@@ -115,7 +115,7 @@ watch(
                                     }"
                                     text-capitalized=""
                                 >
-                                    {{ invoice.member.subscription.type }}
+                                    {{ invoice.member.subscription?.type }}
                                 </span>
                             </td>
                             <td>

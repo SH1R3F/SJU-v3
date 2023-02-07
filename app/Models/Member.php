@@ -218,7 +218,7 @@ class Member extends Authenticatable
             !is_null($this->national_id_photo) &&
             !is_null($this->statement_photo) &&
             !($this->newspaper_type == 2 && is_null($this->license_photo)) &&
-            !($this->subscription->type == 3 && is_null($this->contract_photo)) &&
+            !($this->subscription?->type == 3 && is_null($this->contract_photo)) &&
             $this->exp_flds_lngs_complete();
     }
 
@@ -241,9 +241,9 @@ class Member extends Authenticatable
      */
     public function canPay()
     {
-        return is_null($this->subscription->end_date) ||
-            $this->subscription->end_date->lt(Carbon::today()) ||
-            $this->subscription->status !== Subscription::SUBSCRIPTION_ACTIVE;
+        return is_null($this->subscription?->end_date) ||
+            $this->subscription?->end_date->lt(Carbon::today()) ||
+            $this->subscription?->status !== Subscription::SUBSCRIPTION_ACTIVE;
     }
 
     /**
@@ -253,8 +253,8 @@ class Member extends Authenticatable
     {
         switch ($this->status) {
             case self::STATUS_ACCEPTED:
-                if ($this->subscription->status == Subscription::SUBSCRIPTION_ACTIVE) {
-                    if ($this->subscription->end_date->lt(Carbon::today())) return __('Expired');
+                if ($this->subscription?->status == Subscription::SUBSCRIPTION_ACTIVE) {
+                    if ($this->subscription?->end_date->lt(Carbon::today())) return __('Expired');
                     return __('Active');
                 }
                 return __('Waiting paying');

@@ -6,10 +6,11 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Article extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = ['title_ar', 'title_en', 'image', 'images', 'summary_ar', 'summary_en', 'content_ar', 'content_en', 'admin_id', 'status', 'category_id', 'news_date'];
 

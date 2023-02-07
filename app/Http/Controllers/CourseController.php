@@ -178,7 +178,7 @@ class CourseController extends Controller
 
         if (!$this->auth->questionnaires()->where('questionnaire_id', $course->questionnaire->id)->count()) {
             // What question should we show?
-            $answers = Session::get("3answers_{$course->questionnaire->id}", []);
+            $answers = Session::get("answers_{$course->questionnaire->id}", []);
 
             $questions = $course->questionnaire->questions()->orderBy('order')->orderBy('id', 'DESC')->get();
             foreach ($questions as $question) {
@@ -207,7 +207,7 @@ class CourseController extends Controller
      */
     public function question(Request $request, Question $question)
     {
-        $answers = Session::get("3answers_{$question->questionnaire->id}", []);
+        $answers = Session::get("answers_{$question->questionnaire->id}", []);
 
         // Validate question
         $data = $request->validate([
@@ -223,7 +223,7 @@ class CourseController extends Controller
 
         // Push to answers
         array_push($answers, $answer);
-        Session::put("3answers_{$question->questionnaire->id}", $answers);
+        Session::put("answers_{$question->questionnaire->id}", $answers);
 
         return redirect()->back()->with('message', __('Answer saved'));
     }

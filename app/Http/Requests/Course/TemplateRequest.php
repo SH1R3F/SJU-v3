@@ -34,10 +34,10 @@ class TemplateRequest extends FormRequest
             'variables' => ['nullable'],
             'with_title' => ['sometimes', 'boolean'],
             'male_title' => [
-                Rule::when(request()->isMethod('POST'), 'nullable', 'required_with:with_title'), 'string', 'max:255'
+                Rule::when(request()->isMethod('POST'), 'nullable', 'nullable|required_if:with_title,1'), 'string', 'max:255'
             ],
             'female_title' => [
-                Rule::when(request()->isMethod('POST'), 'nullable', 'required_with:with_title'), 'string', 'max:255'
+                Rule::when(request()->isMethod('POST'), 'nullable', 'nullable|required_if:with_title,1'), 'string', 'max:255'
             ],
             'qr_position' => [
                 Rule::when(request()->isMethod('POST'), 'nullable', 'required'), 'in:none,top:1mm;right:1mm,top:1mm;right:50%,top:1mm;left:1mm,bottom:1mm;right:1mm,bottom:1mm;right:50%,bottom:1mm;left:1mm'

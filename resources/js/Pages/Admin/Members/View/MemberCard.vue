@@ -12,7 +12,7 @@ defineProps({
                     <div class="user-info text-center">
                         <h4 class="mb-2">{{ member.fullNameAr }}</h4>
                         <h4 class="mb-2">{{ member.fullNameEn }}</h4>
-                        <span class="badge bg-label-secondary mt-1">{{ member.subscription.type }}</span>
+                        <span class="badge bg-label-secondary mt-1">{{ member.subscription?.type }}</span>
                     </div>
                 </div>
             </div>

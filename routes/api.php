@@ -24,4 +24,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // include __DIR__ . '/seeds/members.php';
 // include __DIR__ . '/seeds/support_tickets.php';
 // include __DIR__ . '/seeds/support_messages.php';
-include __DIR__ . '/seeds/news.php';
+// include __DIR__ . '/seeds/news.php';
+// include __DIR__ . '/seeds/pages.php';
+// include __DIR__ . '/seeds/templates.php';
+// include __DIR__ . '/seeds/polls.php';
+// include __DIR__ . '/seeds/questions.php';
+// include __DIR__ . '/seeds/mem_ques.php';
+// include __DIR__ . '/seeds/sub_ques.php';
+// include __DIR__ . '/seeds/cert.php';
+include __DIR__ . '/seeds/notifications.php';

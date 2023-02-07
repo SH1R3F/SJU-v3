@@ -225,7 +225,7 @@ watch(
                                 {{ member.phone_number }}
                             </td>
                             <td>
-                                {{ member.subscription.type }}
+                                {{ member.subscription?.type }}
                             </td>
                             <td>
                                 {{ member.branch.name }}

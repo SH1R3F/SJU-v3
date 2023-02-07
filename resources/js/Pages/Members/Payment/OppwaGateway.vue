@@ -35,7 +35,7 @@ defineProps({
 
                                     <td>
                                         <strong class="text-success">
-                                            <span class="amount" style="font-size: 20px">{{ userAuth.subscription.type }}</span>
+                                            <span class="amount" style="font-size: 20px">{{ userAuth.subscription?.type }}</span>
                                         </strong>
                                     </td>
                                 </tr>

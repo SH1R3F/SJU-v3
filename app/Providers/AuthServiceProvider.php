@@ -25,6 +25,7 @@ use App\Policies\ArticlePolicy;
 use App\Policies\InvoicePolicy;
 use App\Policies\CategoryPolicy;
 use App\Policies\TemplatePolicy;
+use App\Policies\VolunteerPolicy;
 use App\Policies\SiteOptionPolicy;
 use App\Policies\SubscriberPolicy;
 use Spatie\Permission\Models\Role;

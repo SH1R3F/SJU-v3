@@ -90,7 +90,7 @@ const props = defineProps({
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="text-nowrap">{{ invoice.subscription.type }}</td>
+                                    <td class="text-nowrap">{{ invoice.subscription?.type }}</td>
                                     <td>{{ types[invoice.subscription.num].price }} {{ __('SAR') }}</td>
                                 </tr>
                                 <tr v-if="invoice.member.delivery_option == 2">

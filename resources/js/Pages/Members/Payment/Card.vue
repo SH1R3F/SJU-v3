@@ -35,7 +35,7 @@ const form = useForm({
 
                                         <td>
                                             <strong class="text-success">
-                                                <span class="amount" style="font-size: 20px">{{ userAuth.subscription.type }}</span>
+                                                <span class="amount" style="font-size: 20px">{{ userAuth.subscription?.type }}</span>
                                             </strong>
                                         </td>
                                     </tr>
@@ -126,7 +126,7 @@ const form = useForm({
                             <h5>{{ __('Amount details:') }}</h5>
 
                             <ol>
-                                <li>{{ __(':amount riyals for :type membership', { amount: memberships[userAuth.subscription.num].price, type: userAuth.subscription.type }) }}</li>
+                                <li>{{ __(':amount riyals for :type membership', { amount: memberships[userAuth.subscription.num].price, type: userAuth.subscription?.type }) }}</li>
                                 <li v-if="userAuth.delivery_option == 2">{{ __(':amount riyals for the card delivery fee', { amount: memberships['delivery_fees'] }) }}</li>
                             </ol>
 
