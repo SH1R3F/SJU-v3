@@ -72,7 +72,8 @@ class Subscriber extends Authenticatable implements MustVerifyEmail
                 // Operator precedence
                 return $builder->where(function ($query) use ($name) {
                     return $query
-                        ->where(DB::raw("CONCAT(fname, ' ', sname, ' ', tname, ' ', lname)"), 'LIKE', "%$name%");
+                        ->where(DB::raw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar)"), 'LIKE', "%$name%")
+                        ->orWhere(DB::raw("CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en)"), 'LIKE', "%$name%");
                 });
             })
             // Filter by mobile
@@ -82,17 +83,25 @@ class Subscriber extends Authenticatable implements MustVerifyEmail
     /**
      * Fullname attribute
      */
-    public function getFullNameArAttribute()
+    public function getFullNameAttribute()
     {
-        return "{$this->fname} {$this->sname} {$this->tname} {$this->lname}";
+        return app()->getLocale() == 'ar' ? "{$this->fname_ar} {$this->sname_ar} {$this->tname_ar} {$this->lname_ar}" : "{$this->fname_en} {$this->sname_en} {$this->tname_en} {$this->lname_en}";
     }
 
     /**
      * Fullname attribute
      */
-    public function getFullNameAttribute()
+    public function getFullNameArAttribute()
     {
-        return "{$this->fname} {$this->sname} {$this->tname} {$this->lname}";
+        return "{$this->fname_ar} {$this->sname_ar} {$this->tname_ar} {$this->lname_ar}";
+    }
+
+    /**
+     * Fullname attribute
+     */
+    public function getFullNameEnAttribute()
+    {
+        return "{$this->fname_en} {$this->sname_en} {$this->tname_en} {$this->lname_en}";
     }
 
     /**

@@ -213,7 +213,6 @@ class Member extends Authenticatable
      */
     public function complete()
     {
-        // Writing this way for better readability and easier maintainability
         return !is_null($this->newspaper_type) &&
             !is_null($this->profile_photo) &&
             !is_null($this->national_id_photo) &&

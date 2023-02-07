@@ -15,6 +15,7 @@ class BranchSeeder extends Seeder
      */
     public function run()
     {
+        Branch::unguard();
         Branch::create(['name' => 'مكة المكرمة']);
         Branch::create(['name' => 'المدينة المنورة']);
         Branch::create(['name' => 'الأحساء']);
@@ -31,6 +32,6 @@ class BranchSeeder extends Seeder
         Branch::create(['name' => 'جازان']);
         Branch::create(['name' => 'نجران']);
         Branch::create(['name' => 'تبوك']);
-        Branch::create(['name' => 'الطائف']);
+        Branch::create(['id' => 18, 'name' => 'الطائف']);
     }
 }
