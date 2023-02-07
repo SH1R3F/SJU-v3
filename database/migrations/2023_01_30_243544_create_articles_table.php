@@ -31,7 +31,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('admin_id')->references('id')->on('admins')->cascadeOnUpdate()->nullOnDelete();
+            // $table->foreign('admin_id')->references('id')->on('admins')->cascadeOnUpdate()->nullOnDelete();
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnUpdate()->nullOnDelete();
         });
     }

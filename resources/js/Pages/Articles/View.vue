@@ -27,7 +27,7 @@ const props = defineProps({
                 <h3>{{ article.title }}</h3>
 
                 <div class="options">
-                    <span class="date">{{ article.news_date }}</span>
+                    <span class="date">{{ arabic_date(article.news_date) }}</span>
 
                     <div class="buttons">
                         <a :href="route('articles.show', article.id)" target="_blank">
