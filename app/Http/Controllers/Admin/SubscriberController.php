@@ -220,7 +220,7 @@ class SubscriberController extends Controller
     {
         $this->authorize('viewAny', Subscriber::class);
 
-        $subscribers = Subscriber::orderBy('id')->get(['id', 'fname', 'sname', 'tname', 'lname']);
+        $subscribers = Subscriber::orderBy('id')->get(['id', 'fname_ar', 'sname_ar', 'tname_ar', 'lname_ar']);
 
         return inertia('Admin/Subscribers/Notifications/Create', [
             'subscribers' => SubscriberResource::collection($subscribers)

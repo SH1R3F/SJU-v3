@@ -25,10 +25,10 @@ class StoreSubscriber extends FormRequest
     public function rules()
     {
         return [
-            'fname' => ['required', 'string', 'max:255'],
-            'sname' => ['required', 'string', 'max:255'],
-            'tname' => ['required', 'string', 'max:255'],
-            'lname' => ['required', 'string', 'max:255'],
+            'fname_ar' => ['required', 'string', 'max:255'],
+            'sname_ar' => ['required', 'string', 'max:255'],
+            'tname_ar' => ['required', 'string', 'max:255'],
+            'lname_ar' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string', 'in:male,female'],
             'country' => ['required', 'string', Rule::in(array_keys(config('sju.countries')))],
             'city' => ['nullable', 'required_if:country,المملكة العربية السعودية', 'numeric', Rule::in(array_keys(config('sju.cities')))],

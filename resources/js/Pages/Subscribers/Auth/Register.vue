@@ -10,10 +10,10 @@ defineProps({
 });
 
 const form = useForm({
-    fname: '',
-    sname: '',
-    tname: '',
-    lname: '',
+    fname_ar: '',
+    sname_ar: '',
+    tname_ar: '',
+    lname_ar: '',
     gender: '',
     country: '',
     city: '',
@@ -50,27 +50,27 @@ const onlyArabic = (e) => {
                     <!-- Full name fields -->
                     <div class="form-row">
                         <div class="form-group col-sm-6 col-md-3">
-                            <label for="fname">{{ __('First name') }}</label>
-                            <input type="text" class="form-control" id="fname" name="fname" @input="onlyArabic" v-model="form.fname" :placeholder="__('First name')" />
-                            <p class="text text-danger text-sm" v-if="form.errors.fname">{{ form.errors.fname }}</p>
+                            <label for="fname_ar">{{ __('First name') }}</label>
+                            <input type="text" class="form-control" id="fname_ar" name="fname_ar" @input="onlyArabic" v-model="form.fname_ar" :placeholder="__('First name')" />
+                            <p class="text text-danger text-sm" v-if="form.errors.fname_ar">{{ form.errors.fname_ar }}</p>
                         </div>
 
                         <div class="form-group col-sm-6 col-md-3">
-                            <label for="sname">{{ __('Second name') }}</label>
-                            <input type="text" class="form-control" id="sname" name="sname" @input="onlyArabic" v-model="form.sname" :placeholder="__('Second name')" />
-                            <p class="text text-danger text-sm" v-if="form.errors.sname">{{ form.errors.sname }}</p>
+                            <label for="sname_ar">{{ __('Second name') }}</label>
+                            <input type="text" class="form-control" id="sname_ar" name="sname_ar" @input="onlyArabic" v-model="form.sname_ar" :placeholder="__('Second name')" />
+                            <p class="text text-danger text-sm" v-if="form.errors.sname_ar">{{ form.errors.sname_ar }}</p>
                         </div>
 
                         <div class="form-group col-sm-6 col-md-3">
-                            <label for="tname">{{ __('Third name') }}</label>
-                            <input type="text" class="form-control" id="tname" name="tname" @input="onlyArabic" v-model="form.tname" :placeholder="__('Third name')" />
-                            <p class="text text-danger text-sm" v-if="form.errors.tname">{{ form.errors.tname }}</p>
+                            <label for="tname_ar">{{ __('Third name') }}</label>
+                            <input type="text" class="form-control" id="tname_ar" name="tname_ar" @input="onlyArabic" v-model="form.tname_ar" :placeholder="__('Third name')" />
+                            <p class="text text-danger text-sm" v-if="form.errors.tname_ar">{{ form.errors.tname_ar }}</p>
                         </div>
 
                         <div class="form-group col-sm-6 col-md-3">
-                            <label for="lname">{{ __('Last name') }}</label>
-                            <input type="text" class="form-control" id="lname" name="lname" @input="onlyArabic" v-model="form.lname" :placeholder="__('Last name')" />
-                            <p class="text text-danger text-sm" v-if="form.errors.lname">{{ form.errors.lname }}</p>
+                            <label for="lname_ar">{{ __('Last name') }}</label>
+                            <input type="text" class="form-control" id="lname_ar" name="lname_ar" @input="onlyArabic" v-model="form.lname_ar" :placeholder="__('Last name')" />
+                            <p class="text text-danger text-sm" v-if="form.errors.lname_ar">{{ form.errors.lname_ar }}</p>
                         </div>
                     </div>
                     <!-- Full name fields -->
