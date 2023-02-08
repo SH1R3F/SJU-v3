@@ -37,3 +37,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // include __DIR__ . '/seeds/notifications.php';
 // include __DIR__ . '/seeds/subs.php';
 // include __DIR__ . '/seeds/bills.php';
+// include __DIR__ . '/seeds/media.php';

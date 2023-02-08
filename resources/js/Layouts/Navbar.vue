@@ -24,19 +24,19 @@
                         <Link :href="route('articles.index')" class="nav-link">{{ __('News') }}</Link>
                     </li>
                     <li class="nav-item mx-2">
-                        <Link :href="route('pages.show', 'About-authority')" class="nav-link">{{ __('About us') }}</Link>
+                        <Link :href="route('pages.show', 'about-us')" class="nav-link">{{ __('About us') }}</Link>
                     </li>
                     <li class="nav-item mx-2">
-                        <Link href="/honor-code" class="nav-link">{{ __('Honor code') }}</Link>
+                        <Link :href="route('pages.show', 'honor-code')" class="nav-link">{{ __('Honor code') }}</Link>
                     </li>
                     <li class="nav-item mx-2">
-                        <Link href="/membership" class="nav-link">{{ __('Membership') }}</Link>
+                        <Link :href="route('pages.show', 'membership')" class="nav-link">{{ __('Membership') }}</Link>
                     </li>
                     <li class="nav-item mx-2">
-                        <Link href="/regulations" class="nav-link">{{ __('Regulations') }}</Link>
+                        <Link :href="route('pages.show', 'regulations')" class="nav-link">{{ __('Regulations') }}</Link>
                     </li>
                     <li class="nav-item mx-2">
-                        <Link href="/press" class="nav-link">{{ __('Press in KSA') }}</Link>
+                        <Link :href="route('pages.show', 'press')" class="nav-link">{{ __('Press in KSA') }}</Link>
                     </li>
                     <li class="nav-item mx-2">
                         <Link href="#" class="nav-link">{{ __('Radio & TV') }}</Link>
