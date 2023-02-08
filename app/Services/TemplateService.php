@@ -118,7 +118,7 @@ class TemplateService
 
             $font_size      = $variable['fontsize'] . 'px';
             $font_color     = $variable['fontcolor'];
-            $font_type      = $variable['fontfamily'] . ';';
+            $font_type      = $variable['fontfamily'];
 
             if ($text) {
                 $html .= <<<EOD
