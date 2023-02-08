@@ -60,7 +60,7 @@ defineProps({
                 </ul>
             </div>
             <div class="d-grid w-100 mt-4">
-                <a v-if="member.can_pay" :href="route('admin.members.card', member.id)" target="_blank" class="btn btn-success mb-2">{{ __('Membership card') }}</a>
+                <a v-if="!member.can_pay" :href="route('admin.members.card', member.id)" target="_blank" class="btn btn-success mb-2">{{ __('Membership card') }}</a>
                 <a :href="route('admin.members.form', member.id)" target="_blank" class="btn btn-primary">{{ __('Membership form') }}</a>
             </div>
         </div>
