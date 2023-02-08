@@ -32,42 +32,70 @@ return [
     'use_active_forms'         => false,
     'custom_font_dir'  => base_path('resources/fonts/'),
     'custom_font_data' => [
-        'almarai' => [
-            'R'  => 'Almarai-Regular.ttf',
-            'B'  => 'Almarai-Bold.ttf',
-            'L'  => 'Almarai-Light.ttf',
+        /* Arabic fonts */
+        "xbriyaz" => [
+            'R' => "XB Riyaz.ttf",
+            'B' => "XB RiyazBd.ttf",
+            'I' => "XB RiyazIt.ttf",
+            'BI' => "XB RiyazBdIt.ttf",
             'useOTL' => 0xFF,
             'useKashida' => 75,
         ],
-        'tajawal' => [
-            'R'  => 'Tajawal-Regular.ttf',
-            'B'  => 'Tajawal-Bold.ttf',
+        "lateef" => [/* Sindhi, Pashto and Urdu */
+            'R' => "LateefRegOT.ttf",
             'useOTL' => 0xFF,
             'useKashida' => 75,
         ],
-        'amiri' => [
-            'R'  => 'Amiri-Regular.ttf',
-            'B'  => 'Amiri-Bold.ttf',
+        "droidkufi" => [/* Sindhi, Pashto and Urdu */
+            'R' => "DroidKufi-Bold.ttf",
             'useOTL' => 0xFF,
             'useKashida' => 75,
         ],
-        'dejavusans' => [
-            'R'  => 'DejaVuSans.ttf',
-            'B'  => 'DejaVuSans-Bold.ttf',
+        "almarai" => [
+            'R' => "Almarai-Regular.ttf",
+            'B' => "Almarai-Bold.ttf",
             'useOTL' => 0xFF,
             'useKashida' => 75,
         ],
-        'gess' => [
-            'R'  => 'Gess-regular.ttf',
-            'B'  => 'Gess-bold.otf',
+        "cairo" => [
+            'R' => "Cairo-Regular.ttf",
+            'B' => "Cairo-Bold.ttf",
             'useOTL' => 0xFF,
             'useKashida' => 75,
         ],
-        'cairo' => [
-            'R'  => 'Cairo-Regular.ttf',
-            'B'  => 'Cairo-Bold.otf',
+        "gess" => [
+            'R' => "GE_SS_TWO_MEDIUM.ttf",
+            'B' => "GE_SS_TWO_MEDIUM.ttf",
             'useOTL' => 0xFF,
             'useKashida' => 75,
+        ],
+        "tajawal" => [
+            'R' => "Tajawal-Regular.ttf",
+            'B' => "Tajawal-Bold.ttf",
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
+        "amiri" => [
+            'R' => "Amiri-Regular.ttf",
+            'B' => "Amiri-Bold.ttf",
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
+        "kfgqpcuthmantahanaskh" => [/* KFGQPC Uthman Taha Naskh - Koranic */
+            'R' => "Uthman.otf",
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
+        /* CJK fonts */
+        "sun-exta" => [
+            'R' => "Sun-ExtA.ttf",
+            'sip-ext' => 'sun-extb', /* SIP=Plane2 Unicode (extension B) */
+        ],
+        "sun-extb" => [
+            'R' => "Sun-ExtB.ttf",
+        ],
+        "unbatang" => [/* Korean */
+            'R' => "UnBatang_0613.ttf",
         ],
     ],
     'unAGlyphs' => true,
