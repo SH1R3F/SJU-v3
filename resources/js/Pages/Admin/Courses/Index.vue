@@ -124,7 +124,7 @@ watch(
                                 <div class="d-flex justify-content-start align-items-center">
                                     <div class="avatar-wrapper">
                                         <div class="avatar avatar-sm me-3">
-                                            <img :src="course.image || '/img/course.png'" class="rounded-circle" />
+                                            <img :src="course.image || '/img/course.png'" onerror="this.src = '/img/course.png';" class="rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">

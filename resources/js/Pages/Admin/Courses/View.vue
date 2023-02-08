@@ -40,7 +40,7 @@ const unpassed = computed(() => {
                     <div class="card-body">
                         <div class="user-avatar-section">
                             <div class="d-flex align-items-center flex-column">
-                                <img class="img-fluid rounded mb-3 pt-1 mt-4" :src="course.image || '/img/course.png'" height="200" width="200" alt="Course" />
+                                <img class="img-fluid rounded mb-3 pt-1 mt-4" :src="course.image || '/img/course.png'" onerror="this.src = '/img/course.png';" height="200" width="200" alt="Course" />
                                 <div class="user-info text-center">
                                     <h4 class="mb-2">{{ course.title_ar }}</h4>
                                     <h4 class="mb-2">{{ course.title_en }}</h4>
