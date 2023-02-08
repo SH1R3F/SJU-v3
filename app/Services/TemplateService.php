@@ -66,7 +66,6 @@ class TemplateService
         $mpdf = new Mpdf([
             'mode'          => $template->mode,
             'format'        => $template->layout,
-            'default_font' => 'almarai',
         ]);
 
         $mpdf->SetDirectionality($template->mode == 'ar' ? 'rtl' : 'ltr');

@@ -38,8 +38,26 @@ return [
             'L'  => 'Almarai-Light.ttf',
             'useOTL' => 0xFF,
             'useKashida' => 75,
-        ]
+        ],
+        'tajawal' => [
+            'R'  => 'Tajawal-Regular.ttf',
+            'B'  => 'Tajawal-Bold.ttf',
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
+        'amiri' => [
+            'R'  => 'Amiri-Regular.ttf',
+            'B'  => 'Amiri-Bold.ttf',
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
+        'dejavusans' => [
+            'R'  => 'DejaVuSans.ttf',
+            'B'  => 'DejaVuSans-Bold.ttf',
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
     ],
     'unAGlyphs' => true,
-    // 'default_font' => 'almarai',
+    'default_font' => 'almarai',
 ];
