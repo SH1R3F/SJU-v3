@@ -57,6 +57,18 @@ return [
             'useOTL' => 0xFF,
             'useKashida' => 75,
         ],
+        'gess' => [
+            'R'  => 'Gess-regular.ttf',
+            'B'  => 'Gess-bold.otf',
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
+        'cairo' => [
+            'R'  => 'Cairo-Regular.ttf',
+            'B'  => 'Cairo-Bold.otf',
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
     ],
     'unAGlyphs' => true,
     // 'default_font' => 'amiri',

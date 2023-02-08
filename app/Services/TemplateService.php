@@ -122,7 +122,7 @@ class TemplateService
 
             if ($text) {
                 $html .= <<<EOD
-                <div style="position: absolute; $position_y $position_fixed $position_x"><span style="font-family: '$font_type'; font-weight: bold; font-size: $font_size; color: $font_color;">$text $font_type</span></div>
+                <div style="position: absolute; $position_y $position_fixed $position_x"><span style="font-family: '$font_type', cairo; font-weight: bold; font-size: $font_size; color: $font_color;">$text</span></div>
                 EOD;
             }
         }
