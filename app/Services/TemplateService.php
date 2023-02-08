@@ -66,6 +66,7 @@ class TemplateService
         $mpdf = new Mpdf([
             'mode'          => $template->mode,
             'format'        => $template->layout,
+            'default'
         ]);
 
         $mpdf->SetDirectionality($template->mode == 'ar' ? 'rtl' : 'ltr');
@@ -119,7 +120,7 @@ class TemplateService
             $font_color     = $variable['fontcolor'];
             $font_type      = $variable['fontfamily'] . ';';
 
-            $html .= $text ? "<div style='position: absolute; $position_y $position_fixed $position_x'><span style='font-weight: bold; font-size: $font_size; font-family: $font_type; color: $font_color;'>$text</span></div>" : '';
+            $html .= $text ? "<div style='position: absolute; $position_y $position_fixed $position_x'><span style='font-family: \'$font_type\', sans-serif; font-weight: bold; font-size: $font_size; color: $font_color;'>$text</span></div>" : '';
         }
         return $html;
     }
