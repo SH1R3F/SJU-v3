@@ -242,7 +242,7 @@ class Member extends Authenticatable
     public function canPay()
     {
         return is_null($this->subscription?->end_date) ||
-            $this->subscription?->end_date->lt(Carbon::today()) ||
+            (!is_null($this->subscription?->end_date) && $this->subscription?->end_date->lt(Carbon::today())) ||
             $this->subscription?->status !== Subscription::SUBSCRIPTION_ACTIVE;
     }
 

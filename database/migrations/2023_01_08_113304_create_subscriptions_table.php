@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('member_id');
             $table->tinyInteger('type')->comment('Membership type');
             $table->date('start_date')->nullable();
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->tinyInteger('status')->default(Subscription::SUBSCRIPTION_NEW);
             $table->timestamps();
 
