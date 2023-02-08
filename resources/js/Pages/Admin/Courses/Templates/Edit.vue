@@ -11,7 +11,7 @@ const form = useForm({
     mode: props.template.mode,
     layout: props.template.layout,
     variables: props.template.variables,
-    with_title: props.template.with_title || true,
+    with_title: props.template.with_title,
     male_title: props.template.male_title || '',
     female_title: props.template.female_title || '',
     qr_position: props.template.qr_position || 'none',
