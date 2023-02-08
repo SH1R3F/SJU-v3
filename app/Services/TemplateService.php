@@ -120,7 +120,11 @@ class TemplateService
             $font_color     = $variable['fontcolor'];
             $font_type      = $variable['fontfamily'] . ';';
 
-            $html .= $text ? "<div style='position: absolute; $position_y $position_fixed $position_x'><span style='font-family: $font_type; font-weight: bold; font-size: $font_size; color: $font_color;'>$text</span></div>" : '';
+            if ($text) {
+                $html .= <<<EOD
+                <div style="position: absolute; $position_y $position_fixed $position_x"><span style="font-family: '$font_type'; font-weight: bold; font-size: $font_size; color: $font_color;">$text</span></div>
+                EOD;
+            }
         }
         return $html;
     }
@@ -132,7 +136,7 @@ class TemplateService
      */
     private function QRCode(Template $template)
     {
-        if ($template->qr_position == 'none') return '';
+        if ($template->qr_position == "none") return '';
 
         $margin_top = empty($template->qr_margin_top) ? 0 : $template->qr_margin_top;
         $margin_right = empty($template->qr_margin_right) ? 0 : $template->qr_margin_right;
