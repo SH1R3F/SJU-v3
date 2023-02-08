@@ -31,9 +31,9 @@ class TaqnyatSmser implements SmsInterface
         ]);
 
         $json = $response->json();
-
-        if ($json['statusCode'] != 200) {
-            throw new RuntimeException($json['message']);
+        if ($json['statusCode'] != 201) {
+            logger('Registration message failed sending _____________');
+            logger($json);
         }
     }
 
@@ -47,7 +47,8 @@ class TaqnyatSmser implements SmsInterface
         $json = $response->json();
 
         if ($json['statusCode'] != 200) {
-            throw new RuntimeException($json['message']);
+            logger('Failed getting current balance! _____________');
+            logger($json);
         }
 
         return $json['balance'] . ' ' . $json['currency'];

@@ -107,9 +107,9 @@ watch(
                 <table class="datatables-users table border-top">
                     <thead>
                         <tr>
-                            <th class="cell-fit">{{ __('Course') }}</th>
-                            <th>{{ __('Course date') }}</th>
-                            <th>{{ __('Type') }}</th>
+                            <th>{{ __('Course') }}</th>
+                            <th style="white-space: nowrap">{{ __('Course date') }}</th>
+                            <th style="white-space: nowrap">{{ __('Type') }}</th>
                             <th>{{ __('Category') }}</th>
                             <th>{{ __('Gender') }}</th>
                             <th>{{ __('Location') }}</th>
@@ -128,15 +128,21 @@ watch(
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <Link :href="route('admin.courses.show', course.id)" class="text-body text-truncate">
+                                        <Link
+                                            :href="route('admin.courses.show', course.id)"
+                                            style="max-width: 250px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis"
+                                            class="text-body text-truncate"
+                                        >
                                             <span class="fw-semibold">{{ course.title }}</span>
                                         </Link>
                                         <small class="text-truncate text-muted">{{ course.course_number }}</small>
                                     </div>
                                 </div>
                             </td>
-                            <td>{{ course.date_from }}</td>
-                            <td>{{ course.course_type }}</td>
+                            <td style="white-space: nowrap">
+                                {{ course.date_from }}
+                            </td>
+                            <td style="white-space: nowrap">{{ course.course_type }}</td>
                             <td>{{ course.course_category }}</td>
                             <td>{{ course.course_gender }}</td>
                             <td>{{ course.course_place }}</td>
@@ -176,9 +182,9 @@ watch(
                                         data-bs-placement="top"
                                         data-bs-toggle="tooltip"
                                         :title="course.status == 2 ? __('Disabled') : ''"
-                                        :class="{ 'text-success': course.status == 1, 'text-body': course.status == 2 }"
+                                        :class="{ 'text-success': course.status == 1, 'text-body': course.status != 1 }"
                                     >
-                                        <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': course.status == 1, 'ti-toggle-left': course.status == 2 }"></i>
+                                        <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': course.status == 1, 'ti-toggle-left': course.status != 1 }"></i>
                                     </Link>
                                     <Link
                                         v-if="course.deleteable"
