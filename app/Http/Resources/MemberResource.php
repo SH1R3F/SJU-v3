@@ -68,7 +68,7 @@ class MemberResource extends JsonResource
 
             'newspaper_type' => $this->newspaper_type,
 
-            'profile_photo' => $this->when(!empty($this->profile_photo), Storage::exists($this->profile_photo) ? Storage::url($this->profile_photo) : null, $this->profile_photo),
+            'profile_photo' => $this->when($this->profile_photo, Storage::exists($this->profile_photo ?? '') ? Storage::url($this->profile_photo) : null, $this->profile_photo),
             'national_id_photo' => $this->when($this->national_id_photo, Storage::url($this->national_id_photo), $this->national_id_photo),
             'statement_photo' => $this->when($this->statement_photo, Storage::url($this->statement_photo), $this->statement_photo),
             'license_photo' => $this->when($this->license_photo, Storage::url($this->license_photo), $this->license_photo),
