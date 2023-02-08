@@ -55,5 +55,10 @@ export default {
             toastr.success(this.$page.props.flash.message);
         }
     },
+    updated() {
+        if (this.$page.props.flash.message) {
+            toastr.success(this.$page.props.flash.message);
+        }
+    },
 };
 </script>
