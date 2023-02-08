@@ -149,7 +149,6 @@ const unpassed = computed(() => {
                                             preserve-scroll
                                             class="cursor-pointer"
                                             data-bs-placement="top"
-                                            data-bs-toggle="tooltip"
                                             :title="member.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
                                             :class="{ 'text-success': member.pivot?.attendance, 'text-body': !member.pivot?.attendance }"
                                         >
@@ -161,7 +160,6 @@ const unpassed = computed(() => {
                                             :href="route('admin.courses.attendance.delete', { course: course.id, type: 'member', id: member.id })"
                                             method="DELETE"
                                             as="span"
-                                            data-bs-toggle="tooltip"
                                             class="text-body"
                                             data-bs-placement="top"
                                             :aria-label="__('Delete')"
@@ -188,7 +186,6 @@ const unpassed = computed(() => {
                                             preserve-scroll
                                             class="cursor-pointer"
                                             data-bs-placement="top"
-                                            data-bs-toggle="tooltip"
                                             :title="subscriber.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
                                             :class="{ 'text-success': subscriber.pivot?.attendance, 'text-body': !subscriber.pivot?.attendance }"
                                         >
@@ -200,7 +197,6 @@ const unpassed = computed(() => {
                                             :href="route('admin.courses.attendance.delete', { course: course.id, type: 'subscriber', id: subscriber.id })"
                                             method="DELETE"
                                             as="span"
-                                            data-bs-toggle="tooltip"
                                             class="text-body"
                                             data-bs-placement="top"
                                             :aria-label="__('Delete')"
@@ -227,7 +223,6 @@ const unpassed = computed(() => {
                                             preserve-scroll
                                             class="cursor-pointer"
                                             data-bs-placement="top"
-                                            data-bs-toggle="tooltip"
                                             :title="volunteer.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
                                             :class="{ 'text-success': volunteer.pivot?.attendance, 'text-body': !volunteer.pivot?.attendance }"
                                         >
@@ -239,7 +234,6 @@ const unpassed = computed(() => {
                                             :href="route('admin.courses.attendance.delete', { course: course.id, type: 'volunteer', id: volunteer.id })"
                                             method="DELETE"
                                             as="span"
-                                            data-bs-toggle="tooltip"
                                             class="text-body"
                                             data-bs-placement="top"
                                             :aria-label="__('Delete')"

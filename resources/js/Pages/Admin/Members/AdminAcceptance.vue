@@ -241,7 +241,6 @@ watch(
                                         :href="route('admin.members.accept', member.id)"
                                         method="post"
                                         data-bs-placement="top"
-                                        data-bs-toggle="tooltip"
                                         :title="__('Accept')"
                                         preserve-scroll
                                         as="span"
@@ -260,7 +259,6 @@ watch(
                                         :href="route('admin.members.disapprove', member.id)"
                                         method="post"
                                         data-bs-placement="top"
-                                        data-bs-toggle="tooltip"
                                         :title="__('Disapprove')"
                                         preserve-scroll
                                         as="span"

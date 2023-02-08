@@ -46,7 +46,6 @@ const props = defineProps({
                                     <Link
                                         :href="route('admin.questions.edit', { questionnaire: questionnaire.id, question: question.id })"
                                         class="text-body"
-                                        data-bs-toggle="tooltip"
                                         data-bs-placement="top"
                                         :aria-label="__('Edit')"
                                         :title="__('Edit')"
@@ -57,7 +56,6 @@ const props = defineProps({
                                         :href="route('admin.questions.destroy', { questionnaire: questionnaire.id, question: question.id })"
                                         method="DELETE"
                                         as="span"
-                                        data-bs-toggle="tooltip"
                                         class="text-body"
                                         data-bs-placement="top"
                                         :aria-label="__('Delete')"

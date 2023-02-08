@@ -150,26 +150,10 @@ watch(
                             <td>{{ course.state }}</td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <Link
-                                        v-if="course.viewable"
-                                        :href="route('admin.courses.show', course.id)"
-                                        class="text-body"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        :aria-label="__('Show')"
-                                        :title="__('Show')"
-                                    >
+                                    <Link v-if="course.viewable" :href="route('admin.courses.show', course.id)" class="text-body" data-bs-placement="top" :aria-label="__('Show')" :title="__('Show')">
                                         <i class="ti ti-eye mx-2 ti-sm"></i>
                                     </Link>
-                                    <Link
-                                        v-if="course.editable"
-                                        :href="route('admin.courses.edit', course.id)"
-                                        class="text-body"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        :aria-label="__('Edit')"
-                                        :title="__('Edit')"
-                                    >
+                                    <Link v-if="course.editable" :href="route('admin.courses.edit', course.id)" class="text-body" data-bs-placement="top" :aria-label="__('Edit')" :title="__('Edit')">
                                         <i class="ti ti-edit mx-2 ti-sm"></i>
                                     </Link>
                                     <Link
@@ -180,7 +164,6 @@ watch(
                                         preserve-scroll
                                         class="cursor-pointer"
                                         data-bs-placement="top"
-                                        data-bs-toggle="tooltip"
                                         :title="course.status == 2 ? __('Disabled') : ''"
                                         :class="{ 'text-success': course.status == 1, 'text-body': course.status != 1 }"
                                     >
@@ -191,7 +174,6 @@ watch(
                                         :href="route('admin.courses.destroy', course.id)"
                                         method="DELETE"
                                         as="span"
-                                        data-bs-toggle="tooltip"
                                         class="text-body"
                                         data-bs-placement="top"
                                         :aria-label="__('Delete')"

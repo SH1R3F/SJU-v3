@@ -243,7 +243,6 @@ watch(
                                         preserve-scroll
                                         class="cursor-pointer"
                                         data-bs-placement="top"
-                                        data-bs-toggle="tooltip"
                                         :title="member.status == -1 ? __('Disabled') : __('Enabled')"
                                         :class="{ 'text-success': member.status != -1, 'text-body': member.status == -1 }"
                                     >
@@ -260,7 +259,6 @@ watch(
                                         :href="route('admin.members.unaccept', member.id)"
                                         method="post"
                                         data-bs-placement="top"
-                                        data-bs-toggle="tooltip"
                                         :title="__('Disapprove')"
                                         preserve-scroll
                                         as="span"

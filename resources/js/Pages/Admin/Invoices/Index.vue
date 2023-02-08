@@ -120,14 +120,7 @@ watch(
                             </td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <Link
-                                        :href="route('admin.invoices.show', invoice.id)"
-                                        data-bs-toggle="tooltip"
-                                        class="text-body"
-                                        data-bs-placement="top"
-                                        :aria-label="__('Show')"
-                                        :title="__('Show')"
-                                    >
+                                    <Link :href="route('admin.invoices.show', invoice.id)" class="text-body" data-bs-placement="top" :aria-label="__('Show')" :title="__('Show')">
                                         <i class="ti ti-eye mx-2 ti-sm"></i>
                                     </Link>
                                 </div>

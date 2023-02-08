@@ -77,7 +77,6 @@ export default {
                                         as="i"
                                         :href="route('admin.tickets.toggle', ticket.id)"
                                         method="post"
-                                        data-bs-toggle="tooltip"
                                         data-bs-placement="top"
                                         :aria-label="ticket.status ? __('Open ticket') : __('Close ticket')"
                                         :title="ticket.status ? __('Open ticket') : __('Close ticket')"

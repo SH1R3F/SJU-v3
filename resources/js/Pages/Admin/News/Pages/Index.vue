@@ -94,15 +94,7 @@ watch(
                             <td class="cell-fit">{{ page.slug }}</td>
                             <td class="cell-fit">
                                 <div class="d-flex align-items-center">
-                                    <Link
-                                        v-if="page.editable"
-                                        :href="route('admin.pages.edit', page.id)"
-                                        class="text-body"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        :aria-label="__('Edit')"
-                                        :title="__('Edit')"
-                                    >
+                                    <Link v-if="page.editable" :href="route('admin.pages.edit', page.id)" class="text-body" data-bs-placement="top" :aria-label="__('Edit')" :title="__('Edit')">
                                         <i class="ti ti-edit mx-2 ti-sm"></i>
                                     </Link>
                                     <Link
@@ -110,7 +102,6 @@ watch(
                                         :href="route('admin.pages.destroy', page.id)"
                                         method="DELETE"
                                         as="span"
-                                        data-bs-toggle="tooltip"
                                         class="text-body"
                                         data-bs-placement="top"
                                         :aria-label="__('Delete')"

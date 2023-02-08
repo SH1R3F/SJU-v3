@@ -202,7 +202,6 @@ watch(branch, (val) => {
                                         preserve-scroll
                                         class="cursor-pointer"
                                         data-bs-placement="top"
-                                        data-bs-toggle="tooltip"
                                         :title="admin.active ? __('Enabled') : __('Disabled')"
                                         :class="{ 'text-success': admin.active, 'text-body': !admin.active }"
                                     >

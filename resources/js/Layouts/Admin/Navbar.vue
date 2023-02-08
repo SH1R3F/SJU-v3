@@ -52,7 +52,6 @@
                                     method="post"
                                     :href="route('read-all-notifications')"
                                     class="dropdown-notifications-all text-body"
-                                    data-bs-toggle="tooltip"
                                     data-bs-placement="top"
                                     :title="__('Mark all as read')"
                                 >

@@ -38,15 +38,7 @@ const editRole = (role) => {
                         <div class="d-flex justify-content-between">
                             <h6 class="fw-normal mb-2">{{ __('Total :count users', { count: role.users_count }) }}</h6>
                             <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
-                                <li
-                                    v-for="admin in role.admins"
-                                    :key="admin.id"
-                                    data-bs-toggle="tooltip"
-                                    data-popup="tooltip-custom"
-                                    data-bs-placement="top"
-                                    :title="admin.fullName"
-                                    class="avatar avatar-sm pull-up"
-                                >
+                                <li v-for="admin in role.admins" :key="admin.id" data-popup="tooltip-custom" data-bs-placement="top" :title="admin.fullName" class="avatar avatar-sm pull-up">
                                     <img class="rounded-circle" src="/img/admin.png" alt="Avatar" />
                                 </li>
                             </ul>
@@ -128,7 +120,7 @@ const editRole = (role) => {
                                             <tr>
                                                 <td class="text-nowrap fw-semibold" colspan="2">
                                                     {{ __('Access') }}
-                                                    <i class="ti ti-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"></i>
+                                                    <i class="ti ti-info-circle" data-bs-placement="top"></i>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -594,7 +586,7 @@ const editRole = (role) => {
                                             <tr>
                                                 <td class="text-nowrap fw-semibold" colspan="2">
                                                     {{ __('Access') }}
-                                                    <i class="ti ti-info-circle" data-bs-toggle="tooltip" data-bs-placement="top"></i>
+                                                    <i class="ti ti-info-circle" data-bs-placement="top"></i>
                                                 </td>
                                             </tr>
                                             <tr>

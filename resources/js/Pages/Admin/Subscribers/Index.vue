@@ -148,7 +148,6 @@ watch(
                                         preserve-scroll
                                         class="cursor-pointer"
                                         data-bs-placement="top"
-                                        data-bs-toggle="tooltip"
                                         :title="subscriber.status == 1 ? __('Enabled') : __('Disabled')"
                                         :class="{ 'text-success': subscriber.status == 1, 'text-body': subscriber.status != 1 }"
                                     >

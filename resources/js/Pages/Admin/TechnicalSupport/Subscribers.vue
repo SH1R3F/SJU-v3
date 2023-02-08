@@ -147,15 +147,7 @@ watch(
                             <td>{{ ticket.updated_at }}</td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <Link
-                                        v-if="ticket.viewable"
-                                        :href="route('admin.tickets.show', ticket.id)"
-                                        class="text-body"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="top"
-                                        :aria-label="__('Show')"
-                                        :title="__('Show')"
-                                    >
+                                    <Link v-if="ticket.viewable" :href="route('admin.tickets.show', ticket.id)" class="text-body" data-bs-placement="top" :aria-label="__('Show')" :title="__('Show')">
                                         <i class="ti ti-eye mx-2 ti-sm"></i>
                                     </Link>
                                     <Link
@@ -163,7 +155,6 @@ watch(
                                         :href="route('admin.tickets.destroy', ticket.id)"
                                         method="DELETE"
                                         as="span"
-                                        data-bs-toggle="tooltip"
                                         class="text-body"
                                         data-bs-placement="top"
                                         :aria-label="__('Delete')"

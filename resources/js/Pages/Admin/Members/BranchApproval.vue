@@ -238,7 +238,6 @@ const form = useForm({
                                         :href="route('admin.members.approve', member.id)"
                                         method="post"
                                         data-bs-placement="top"
-                                        data-bs-toggle="tooltip"
                                         :title="__('Approve')"
                                         preserve-scroll
                                         as="span"
