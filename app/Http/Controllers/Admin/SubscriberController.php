@@ -131,7 +131,7 @@ class SubscriberController extends Controller
         $this->authorize('view', $subscriber);
 
 
-        if (!$subscriber->courses()->where('course_id', $course->id)->count()) return;
+        if (!$subscriber->courses()->where('course_id', $course->id)->count()) return redirect()->back()->with('message', __("Subscriber didn't register this course"));
         if (!$subscriber->courses()->where('course_id', $course->id)->first()->pivot?->attendance) return redirect()->back()->with('message', __("Subscriber didn't attend this course"));
 
         // Does this course have a template?

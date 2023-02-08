@@ -140,7 +140,7 @@ class VolunteerController extends Controller
     {
         $this->authorize('view', $volunteer);
 
-        if (!$volunteer->courses()->where('course_id', $course->id)->count()) return;
+        if (!$volunteer->courses()->where('course_id', $course->id)->count()) return redirect()->back()->with('message', __("Volunteer didn't register this course"));
         if (!$volunteer->courses()->where('course_id', $course->id)->first()->pivot?->attendance) return redirect()->back()->with('message', __("Volunteer didn't attend this course"));
 
         // Does this course have a template?
