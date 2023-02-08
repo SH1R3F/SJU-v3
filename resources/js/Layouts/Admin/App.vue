@@ -50,7 +50,7 @@ import Footer from './Footer.vue';
 <!-- Flash messages -->
 <script defer>
 export default {
-    updated() {
+    created() {
         if (this.$page.props.flash.message) {
             toastr.success(this.$page.props.flash.message);
         }
