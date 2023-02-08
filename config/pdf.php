@@ -59,5 +59,5 @@ return [
         ],
     ],
     'unAGlyphs' => true,
-    'default_font' => 'almarai',
+    // 'default_font' => 'amiri',
 ];
