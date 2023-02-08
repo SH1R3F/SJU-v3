@@ -16,7 +16,14 @@ console.log(props.subscriber);
                     <div class="card-body">
                         <div class="user-avatar-section">
                             <div class="d-flex align-items-center flex-column">
-                                <img class="img-fluid rounded mb-3 pt-1 mt-4" :src="subscriber.profile_photo || '/img/user-dark.png'" height="200" width="200" alt="User avatar" />
+                                <img
+                                    class="img-fluid rounded mb-3 pt-1 mt-4"
+                                    :src="subscriber.profile_photo || '/img/user-dark.png'"
+                                    onerror="this.src = '/img/user-dark.png';"
+                                    height="200"
+                                    width="200"
+                                    alt="User avatar"
+                                />
                                 <div class="user-info text-center">
                                     <h4 class="mb-2">{{ subscriber.fullName }}</h4>
                                     <span class="badge bg-label-secondary mt-1">{{ __(subscriber.gender) }}</span>

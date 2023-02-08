@@ -153,12 +153,7 @@ watch(
                                 <div class="d-flex justify-content-start align-items-center user-name">
                                     <div class="avatar-wrapper">
                                         <div class="avatar avatar-sm me-3">
-                                            <img
-                                                :src="volunteer.profile_photo || '/img/user-dark.png'"
-                                                alt="Avatar"
-                                                onerror="this.onerror=null; this.src='/img/user-dark.png'"
-                                                class="rounded-circle"
-                                            />
+                                            <img :src="volunteer.profile_photo || '/img/user-dark.png'" alt="Avatar" onerror="this.src = '/img/user-dark.png';" class="rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
