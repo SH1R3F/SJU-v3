@@ -15,8 +15,14 @@ defineProps({
                 </div>
             </div>
             <ul class="ps-3 g-2 my-3">
-                <li class="mb-2">تاريخ الدفع {{ member.invoice.created_at }}</li>
-                <li class="mb-2">رقم الفاتورة #{{ member.invoice.invoice_number }}</li>
+                <li class="mb-2">
+                    <b>تاريخ الدفع:</b>
+                    {{ member.invoice.created_at }}
+                </li>
+                <li class="mb-2">
+                    <b>رقم الفاتورة:</b>
+                    #{{ member.invoice.invoice_number }}
+                </li>
             </ul>
             <div class="d-grid w-100 mt-4">
                 <Link :href="route('admin.invoices.show', member.invoice.id)" class="btn btn-primary">{{ __('Go to invoice') }}</Link>
