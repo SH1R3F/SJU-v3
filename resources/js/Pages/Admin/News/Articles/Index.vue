@@ -87,11 +87,15 @@ watch(
                                 <div class="d-flex justify-content-start align-items-center">
                                     <div class="avatar-wrapper">
                                         <div class="avatar avatar-sm me-3">
-                                            <img :src="article.image || '/img/article.png'" class="rounded-circle" />
+                                            <img :src="article.image || '/img/article.png'" onerror="this.src = '/img/article.png';" class="rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <Link :href="route('admin.articles.edit', article.id)" class="text-body text-truncate">
+                                        <Link
+                                            :href="route('admin.articles.edit', article.id)"
+                                            class="text-body text-truncate"
+                                            style="max-width: 750px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis"
+                                        >
                                             <span class="fw-semibold">{{ article.title }}</span>
                                         </Link>
                                     </div>

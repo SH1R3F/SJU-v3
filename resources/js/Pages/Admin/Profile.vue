@@ -22,7 +22,7 @@ const form = useForm({
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
             <!-- User Sidebar -->
-            <div class="col-xl-3 col-lg-5 col-md-5 order-1 order-md-0">
+            <div class="col-xl-3 col-lg-5 col-md-5">
                 <!-- User Card -->
                 <div class="card mb-4">
                     <div class="card-body">
@@ -63,7 +63,7 @@ const form = useForm({
             <!--/ User Sidebar -->
 
             <!-- User Content -->
-            <div class="col-xl-9 col-lg-7 col-md-7 order-0 order-md-1">
+            <div class="col-xl-9 col-lg-7 col-md-7">
                 <!-- User information -->
                 <div class="card mb-4">
                     <h5 class="card-header">{{ __('My profile') }}</h5>

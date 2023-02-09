@@ -220,7 +220,7 @@ watch(
                             <td>
                                 {{ member.branch.name }}
                             </td>
-                            <td style="max-width: 150px">
+                            <td style="max-width: 350px; overflow: hidden !important; text-overflow: ellipsis">
                                 {{ member.refusal_reason }}
                             </td>
                             <td>

@@ -14,7 +14,7 @@ const props = defineProps({
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
             <!-- Member Sidebar -->
-            <div class="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
+            <div class="col-xl-4 col-lg-5 col-md-5">
                 <!-- Member Card -->
                 <member-card :member="member" />
                 <!-- /Member Card -->
@@ -25,7 +25,7 @@ const props = defineProps({
             <!--/ Member Sidebar -->
 
             <!-- Member Content -->
-            <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
+            <div class="col-xl-8 col-lg-7 col-md-7">
                 <!-- Member Pills -->
                 <Pills :member="member" />
                 <!--/ Member Pills -->

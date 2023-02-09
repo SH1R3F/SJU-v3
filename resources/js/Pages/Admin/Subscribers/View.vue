@@ -2,7 +2,6 @@
 const props = defineProps({
     subscriber: Object,
 });
-console.log(props.subscriber);
 </script>
 
 <template>
@@ -11,7 +10,7 @@ console.log(props.subscriber);
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
             <!-- Subscriber sidebar -->
-            <div class="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
+            <div class="col-xl-4 col-lg-5 col-md-5">
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="user-avatar-section">
@@ -60,7 +59,7 @@ console.log(props.subscriber);
             <!--/ Subscriber sidebar -->
 
             <!-- Subscriber Content -->
-            <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
+            <div class="col-xl-8 col-lg-7 col-md-7">
                 <!-- Subscriber Pills -->
                 <ul class="nav nav-pills flex-column flex-md-row mb-1">
                     <li class="nav-item w-100">

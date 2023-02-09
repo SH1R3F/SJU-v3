@@ -86,7 +86,11 @@ watch(
                     </thead>
                     <tbody>
                         <tr v-for="template in templates.data">
-                            <td>{{ template.name }}</td>
+                            <td>
+                                <span style="display: inline-block; width: 400px; max-width: 100%; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">
+                                    {{ template.name }}
+                                </span>
+                            </td>
                             <td>{{ template.mode }}</td>
                             <td>{{ template.layout }}</td>
                             <td>

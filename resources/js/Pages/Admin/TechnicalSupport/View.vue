@@ -60,6 +60,7 @@ export default {
                                     <div class="flex-shrink-0 avatar">
                                         <img
                                             :src="ticket.supportable.profile_photo || '/img/user-dark.png'"
+                                            onerror="this.src = '/img/user-dark.png';"
                                             alt="Avatar"
                                             class="rounded-circle"
                                             data-bs-toggle="sidebar"
@@ -69,7 +70,20 @@ export default {
                                         <i class="ti ti-x ti-sm cursor-pointer close-sidebar" data-bs-toggle="sidebar" data-overlay data-target="#app-chat-sidebar-left"></i>
                                     </div>
                                     <div class="chat-contact-info flex-grow-1 ms-2">
-                                        <h6 class="m-0">{{ ticket.supportable.fullName }}</h6>
+                                        <Link
+                                            :href="
+                                                route(
+                                                    ticket.supportable_type.includes('Member')
+                                                        ? 'admin.members.show'
+                                                        : ticket.supportable_type.includes('Subscriber')
+                                                        ? 'admin.subscribers.show'
+                                                        : 'admin.volunteers.show',
+                                                    ticket.supportable.id
+                                                )
+                                            "
+                                            class="m-0"
+                                            >{{ ticket.supportable.fullName }}</Link
+                                        >
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">

@@ -119,7 +119,7 @@ watch(
                                 <div class="d-flex justify-content-start align-items-center">
                                     <div class="avatar-wrapper">
                                         <div class="avatar avatar-sm me-3">
-                                            <img :src="ticket.supportable.profile_photo || '/img/user-dark.png'" class="rounded-circle" />
+                                            <img :src="ticket.supportable.profile_photo || '/img/user-dark.png'" onerror="this.src = '/img/user-dark.png';" class="rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">

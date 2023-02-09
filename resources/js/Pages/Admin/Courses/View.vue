@@ -6,7 +6,7 @@ const props = defineProps({
 });
 
 const all = computed(() => {
-    return props.course.members?.length || 0 + props.course.subscribers?.length || 0 + props.course.volunteers?.length || 0;
+    return props.course.members?.length || 0 + props.course.subscribers?.length || 0;
 });
 const passed = computed(() => {
     return (
@@ -15,10 +15,6 @@ const passed = computed(() => {
         }, 0) ||
         0 +
             props.course.subscribers?.reduce((total, current) => {
-                return current.pivot?.attendance;
-            }, 0) ||
-        0 +
-            props.course.volunteers?.reduce((total, current) => {
                 return current.pivot?.attendance;
             }, 0) ||
         0
@@ -35,7 +31,7 @@ const unpassed = computed(() => {
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
             <!-- Course Sidebar -->
-            <div class="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
+            <div class="col-xl-4 col-lg-5 col-md-5">
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="user-avatar-section">
@@ -90,7 +86,7 @@ const unpassed = computed(() => {
                             <ul class="list-unstyled">
                                 <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Total attendance') }}</span>
-                                    <span>{{ course.members?.length || 0 + course.subscribers?.length || 0 + course.volunteers?.length || 0 }} {{ __('Users') }}</span>
+                                    <span>{{ course.members?.length || 0 + course.subscribers?.length || 0 }} {{ __('Users') }}</span>
                                 </li>
                                 <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Passed number') }}</span>
@@ -116,7 +112,7 @@ const unpassed = computed(() => {
             <!--/ Course Sidebar -->
 
             <!-- Course Content -->
-            <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
+            <div class="col-xl-8 col-lg-7 col-md-7">
                 <!-- Coursables table -->
                 <div class="card mb-4 p-4">
                     <div class="table-responsive mb-3">
@@ -136,11 +132,17 @@ const unpassed = computed(() => {
                                 <tr v-for="(member, i) in course.members" :key="member.id">
                                     <td>{{ i + 1 }}</td>
                                     <td>
-                                        <Link :href="route('admin.members.show', member.id)">{{ member.fullName }}</Link>
+                                        <Link
+                                            :href="route('admin.members.show', member.id)"
+                                            style="display: inline-block; max-width: 150px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis"
+                                            >{{ member.fullName }}</Link
+                                        >
                                     </td>
                                     <td>{{ __('Member') }}</td>
-                                    <td>966{{ member.mobile }}</td>
-                                    <td>{{ member.email }}</td>
+                                    <td>{{ member.mobile }}</td>
+                                    <td>
+                                        <span style="display: inline-block; max-width: 180px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">{{ member.email }}</span>
+                                    </td>
                                     <td>
                                         <Link
                                             :href="route('admin.courses.attendance.toggle', { course: course.id, type: 'member', id: member.id })"
@@ -173,11 +175,17 @@ const unpassed = computed(() => {
                                 <tr v-for="(subscriber, i) in course.subscribers" :key="subscriber.id">
                                     <td>{{ i + 1 }}</td>
                                     <td>
-                                        <Link :href="route('admin.subscribers.show', subscriber.id)">{{ subscriber.fullName }}</Link>
+                                        <Link
+                                            :href="route('admin.subscribers.show', subscriber.id)"
+                                            style="display: inline-block; max-width: 150px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis"
+                                            >{{ subscriber.fullName }}</Link
+                                        >
                                     </td>
                                     <td>{{ __('Subscriber') }}</td>
                                     <td>{{ subscriber.phone_number }}</td>
-                                    <td>{{ subscriber.email }}</td>
+                                    <td>
+                                        <span style="display: inline-block; max-width: 180px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">{{ subscriber.email }}</span>
+                                    </td>
                                     <td>
                                         <Link
                                             :href="route('admin.courses.attendance.toggle', { course: course.id, type: 'subscriber', id: subscriber.id })"
@@ -206,44 +214,6 @@ const unpassed = computed(() => {
                                         </Link>
                                     </td>
                                 </tr>
-
-                                <tr v-for="(volunteer, i) in course.volunteers" :key="volunteer.id">
-                                    <td>{{ i + 1 }}</td>
-                                    <td>
-                                        <Link :href="route('admin.volunteers.show', volunteer.id)">{{ volunteer.fullName }}</Link>
-                                    </td>
-                                    <td>{{ __('Volunteer') }}</td>
-                                    <td>{{ volunteer.phone_number }}</td>
-                                    <td>{{ volunteer.email }}</td>
-                                    <td>
-                                        <Link
-                                            :href="route('admin.courses.attendance.toggle', { course: course.id, type: 'volunteer', id: volunteer.id })"
-                                            method="post"
-                                            as="span"
-                                            preserve-scroll
-                                            class="cursor-pointer"
-                                            data-bs-placement="top"
-                                            :title="volunteer.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
-                                            :class="{ 'text-success': volunteer.pivot?.attendance, 'text-body': !volunteer.pivot?.attendance }"
-                                        >
-                                            <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': volunteer.pivot?.attendance, 'ti-toggle-left': !volunteer.pivot?.attendance }"></i>
-                                        </Link>
-                                    </td>
-                                    <td>
-                                        <Link
-                                            :href="route('admin.courses.attendance.delete', { course: course.id, type: 'volunteer', id: volunteer.id })"
-                                            method="DELETE"
-                                            as="span"
-                                            class="text-body"
-                                            data-bs-placement="top"
-                                            :aria-label="__('Delete')"
-                                            :title="__('Delete')"
-                                        >
-                                            <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
-                                        </Link>
-                                    </td>
-                                </tr>
-
                                 <tr v-if="!all">
                                     <td colspan="7" class="text-muted text-center p-3">
                                         {{ __('No one registered for this course') }}
