@@ -559,7 +559,7 @@ const editRole = (role) => {
                             @submit.prevent="
                                 editForm.put(route('admin.roles.update', editForm.id), {
                                     onSuccess: () => {
-                                        this.$refs.editFormClose.click();
+                                        $refs.editFormClose.click();
                                     },
                                 })
                             "
