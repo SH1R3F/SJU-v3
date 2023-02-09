@@ -12,6 +12,7 @@ const props = defineProps({
 
 const form = useForm({
     country: props.userAuth?.country,
+    city: props.userAuth?.city,
     qualification: props.userAuth?.qualification,
     mobile: props.userAuth?.mobile,
     mobile_key: props.userAuth?.mobile_key,

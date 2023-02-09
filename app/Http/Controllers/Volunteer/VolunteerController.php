@@ -58,6 +58,7 @@ class VolunteerController extends Controller
     {
         $data = $request->validate([
             'country' => ['required', 'string', Rule::in(array_keys(config('sju.countries')))],
+            'city' => ['nullable', 'required_if:country,المملكة العربية السعودية', 'numeric', Rule::in(array_keys(config('sju.cities')))],
             'qualification' => ['required', 'numeric', Rule::in(array_keys(config('sju.qualifications')))],
             'mobile' => ['required', 'numeric'],
             'mobile_key' => ['required', 'numeric', Rule::in(array_values(config('sju.countries')))],
