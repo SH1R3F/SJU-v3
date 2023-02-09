@@ -9,9 +9,9 @@ import Footer from './Footer.vue';
     <Head>
         <title>{{ __('Home') }}</title>
         <!-- Flash messages -->
-        <component is="script" defer v-if="route()?.params?.verified == 1"> toastr.success('{{ __('Email has been verified successfully') }}') </component>
-        <component is="script" defer v-if="$page.props.flash.message"> toastr.success($page.props.flash.message); </component>
-        <component is="script" defer v-if="$page.props.flash.error"> toastr.error($page.props.flash.error); </component>
+        <component is="script" defer v-if="route()?.params?.verified == 1"> this.toastr.success('{{ __('Email has been verified successfully') }}') </component>
+        <component is="script" defer v-if="$page.props.flash.message"> this.toastr.success($page.props.flash.message); </component>
+        <component is="script" defer v-if="$page.props.flash.error"> this.toastr.error($page.props.flash.error); </component>
     </Head>
 
     <!-- Mini bar -->
@@ -32,3 +32,23 @@ import Footer from './Footer.vue';
     <!-- Footer -->
 </template>
 <!-- Flash messages -->
+<script defer>
+export default {
+    created() {
+        if (this.$page.props.flash.message) {
+            toastr.success(this.$page.props.flash.message);
+        }
+        if (this.$page.props.flash.error) {
+            toastr.error(this.$page.props.flash.error);
+        }
+    },
+    updated() {
+        if (this.$page.props.flash.message) {
+            toastr.success(this.$page.props.flash.message);
+        }
+        if (this.$page.props.flash.error) {
+            toastr.error(this.$page.props.flash.error);
+        }
+    },
+};
+</script>
