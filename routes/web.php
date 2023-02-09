@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\CourseController;
@@ -18,16 +19,12 @@ use App\Http\Controllers\TechnicalSupportController;
 |
 */
 
-Route::get('/email', function () {
-    return view('emails.verify', ['user' => App\Models\Member::first(), 'url' => 'https://asdasdasd']);
-});
-
 Route::post('notifications/read-all', function (Request $request) {
-    $request->user()->unreadNotifications->markAsRead();
+    Auth::guard('admin')->user()->unreadNotifications->markAsRead();
 })->middleware('auth:member,subscriber,volunteer,admin')->name('read-all-notifications');
 
 Route::post('notifications/{id}/read', function (Request $request, $id) {
-    $request->user()->unreadNotifications->where('id', $id)->markAsRead();
+    Auth::guard('admin')->user()->unreadNotifications->where('id', $id)->markAsRead();
 })->middleware('auth:member,subscriber,volunteer,admin')->name('read-notification');
 
 /**

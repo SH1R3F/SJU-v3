@@ -21,7 +21,7 @@ class MemberService
     {
         return Member::with('subscription', 'branch')
             ->whereIn('status', $statuses)
-            ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', $request->user()->branch_id))
+            ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
             ->filter($request)
             ->orderBy('updated_at', 'DESC') // Might be dynamic too?
             ->when($export, fn ($query) => $query->get(), fn ($query) => $query->paginate($request->perPage ?: 10)->withQueryString());
@@ -38,9 +38,9 @@ class MemberService
         $members = $this->getMembers($request, $statuses);
 
         return MemberResource::collection($members)->additional([
-            'fulltime'  => Member::whereIn('status', $statuses)->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', $request->user()->branch_id))->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
-            'parttime'  => Member::whereIn('status', $statuses)->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', $request->user()->branch_id))->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
-            'affiliate' => Member::whereIn('status', $statuses)->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', $request->user()->branch_id))->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
+            'fulltime'  => Member::whereIn('status', $statuses)->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
+            'parttime'  => Member::whereIn('status', $statuses)->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
+            'affiliate' => Member::whereIn('status', $statuses)->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
             'can_create' => request()->user()->can('create', Member::class),
             'can_export' => request()->user()->can('export', Member::class),
             'can_notify' => request()->user()->can('notify', Member::class),

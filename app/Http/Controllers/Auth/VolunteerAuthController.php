@@ -99,11 +99,11 @@ class VolunteerAuthController extends Controller
      */
     public function send(Request $request)
     {
-        if ($request->user()->hasVerifiedEmail()) {
+        if (Auth::guard('volunteer')->user()->hasVerifiedEmail()) {
             return redirect()->intended(Volunteer::HOME);
         }
 
-        $request->user()->sendEmailVerificationNotification();
+        Auth::guard('volunteer')->user()->sendEmailVerificationNotification();
 
         return back()->with('message', __('Email verification has been sent'));
     }
@@ -121,7 +121,7 @@ class VolunteerAuthController extends Controller
      */
     public function notice(Request $request)
     {
-        return $request->user()->hasVerifiedEmail()
+        return Auth::guard('volunteer')->user()->hasVerifiedEmail()
             ? redirect()->intended(Volunteer::HOME)
             : inertia('Volunteers/Auth/Verify');
     }

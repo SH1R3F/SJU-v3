@@ -91,11 +91,11 @@ class SubscriberAuthController extends Controller
      */
     public function send(Request $request)
     {
-        if ($request->user()->hasVerifiedEmail()) {
+        if (Auth::guard('subscriber')->user()->hasVerifiedEmail()) {
             return redirect()->intended(Subscriber::HOME);
         }
 
-        $request->user()->sendEmailVerificationNotification();
+        Auth::guard('subscriber')->user()->sendEmailVerificationNotification();
 
         return back()->with('message', __('Email verification has been sent'));
     }
@@ -113,7 +113,7 @@ class SubscriberAuthController extends Controller
      */
     public function notice(Request $request)
     {
-        return $request->user()->hasVerifiedEmail()
+        return Auth::guard('subscriber')->user()->hasVerifiedEmail()
             ? redirect()->intended(Subscriber::HOME)
             : inertia('Subscribers/Auth/Verify');
     }
