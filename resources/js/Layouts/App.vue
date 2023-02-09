@@ -18,7 +18,8 @@ updateGlobalOptions({
     hideProgressBar: true,
     closeButton: false,
 });
-
+console.log(props.flash);
+console.log(props.flash.message);
 if (props.flash.message) {
     toast.success(props.flash.message);
 }
