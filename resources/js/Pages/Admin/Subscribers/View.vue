@@ -87,7 +87,12 @@ console.log(props.subscriber);
                                     </td>
                                     <td>{{ course.pivot.attendance ? __('Passed') : __("Didn't pass") }}</td>
                                     <td>
-                                        <a :href="route('admin.subscribers.certificate', { subscriber: subscriber.id, course: course.id })" target="_blank" class="btn btn-sm btn-success">
+                                        <a
+                                            v-if="course.pivot.attendance"
+                                            :href="route('admin.subscribers.certificate', { subscriber: subscriber.id, course: course.id })"
+                                            target="_blank"
+                                            class="btn btn-sm btn-success"
+                                        >
                                             {{ __('Certificate') }}
                                         </a>
                                     </td>

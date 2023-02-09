@@ -20,6 +20,8 @@ return new class extends Migration
             $table->boolean('attendance')->default(0);
 
             $table->foreign('course_id')->references('id')->on('courses')->cascadeOnDelete()->cascadeOnUpdate();
+
+            $table->unique(['course_id', 'coursable_id', 'coursable_type']);
         });
     }
 

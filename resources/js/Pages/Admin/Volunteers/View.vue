@@ -107,7 +107,12 @@ const props = defineProps({
                                     </td>
                                     <td>{{ course.pivot.attendance ? __('Passed') : __("Didn't pass") }}</td>
                                     <td>
-                                        <a :href="route('admin.volunteers.certificate', { volunteer: volunteer.id, course: course.id })" target="_blank" class="btn btn-sm btn-success">
+                                        <a
+                                            v-if="course.pivot.attendance"
+                                            :href="route('admin.volunteers.certificate', { volunteer: volunteer.id, course: course.id })"
+                                            target="_blank"
+                                            class="btn btn-sm btn-success"
+                                        >
                                             {{ __('Certificate') }}
                                         </a>
                                     </td>
