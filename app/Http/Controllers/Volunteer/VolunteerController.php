@@ -43,8 +43,9 @@ class VolunteerController extends Controller
     public function info()
     {
         $countries = config('sju.countries', []);
+        $cities = config('sju.cities', []);
         $qualifications = config('sju.qualifications', []);
-        return inertia('Volunteers/Profile/Info', compact('countries', 'qualifications'));
+        return inertia('Volunteers/Profile/Info', compact('countries', 'qualifications', 'cities'));
     }
 
     /**

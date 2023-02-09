@@ -44,8 +44,9 @@ class SubscriberController extends Controller
     public function info()
     {
         $countries = config('sju.countries', []);
+        $cities = config('sju.cities', []);
         $qualifications = config('sju.qualifications', []);
-        return inertia('Subscribers/Profile/Info', compact('countries', 'qualifications'));
+        return inertia('Subscribers/Profile/Info', compact('countries', 'qualifications', 'cities'));
     }
 
     /**

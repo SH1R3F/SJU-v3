@@ -7,6 +7,7 @@ const props = defineProps({
     userAuth: Object,
     countries: Object,
     qualifications: Object,
+    cities: Object,
 });
 
 const form = useForm({
