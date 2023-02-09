@@ -7,6 +7,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TechnicalSupportController;
+use App\Models\Course\Certificate;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,9 +58,16 @@ Route::middleware('auth:member,subscriber,volunteer')->group(function () {
     Route::post('/technical-support/{ticket}/toggle', [TechnicalSupportController::class, 'toggle'])->name('support.toggle');
 });
 
-Route::get('certval', function () {
-    return 'Here you verify certificates';
-})->name('verify-certificate');
+Route::get('certval', fn () => inertia('Courses/Validate'))->name('verify-certificate');
+
+Route::post('certval', function (Request $request) {
+    $request->validate(['code' => 'required']);
+    if (Certificate::where('code', $request->code)->count()) {
+        return redirect()->back()->with('message', __('Certificate with this code found successfully!'));
+    } else {
+        return redirect()->back()->with('error', __("We don't have certificate with this code"));
+    }
+});
 
 /**
  * Courses routes

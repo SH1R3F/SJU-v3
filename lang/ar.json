@@ -540,6 +540,11 @@
     "Fill questionnaire": "ملئ الإستبيان",
     "Answer saved": "تم حفظ الإجابة",
     "This course doesn't have a certificate": "هذه الفعالية بدون شهادة",
+    "Validate certificate": "التحقق من الشهادة",
+    "Please enter the code on the certificate": "فضلا قم بادخال الرمز الموجود في الشهادة",
+    "Verify": "تحقق",
+    "Certificate with this code found successfully!": "الشهادة حقيقية أصدرناها بنجاح!",
+    "We don't have certificate with this code": "لم نصدر شهادة تحمل هذا الرمز",
 
     "---------------- News --------------": "",
     "Related news": "أخبار ذات صلة",
