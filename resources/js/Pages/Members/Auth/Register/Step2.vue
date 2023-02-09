@@ -81,7 +81,7 @@ const settimermm = () => {
                                     <button
                                         class="btn btn-success"
                                         @click.prevent="
-                                            this.$inertia.post(
+                                            this.inertia.post(
                                                 route('member.register.verify.send'),
                                                 { mobile: form.mobile },
                                                 {
