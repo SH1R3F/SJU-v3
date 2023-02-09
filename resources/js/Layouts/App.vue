@@ -3,19 +3,28 @@ import Minibar from './Minibar.vue';
 import Header from './Header.vue';
 import Navbar from './Navbar.vue';
 import Footer from './Footer.vue';
+import { toast, updateGlobalOptions } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const props = defineProps({
     flash: Object,
+    locale: String,
 });
-console.log(props);
+
+updateGlobalOptions({
+    rtl: props.locale == 'ar',
+    position: toast.POSITION.TOP_LEFT,
+    theme: 'colored',
+    hideProgressBar: true,
+    closeButton: false,
+});
+
 if (props.flash.message) {
-    toastr.success(props.flash.message);
-    toastr.success(props.flash.message);
+    toast.success(props.flash.message);
 }
 if (props.flash.error) {
-    toastr.error(props.flash.error);
+    toast.error(props.flash.error);
 }
-window.toastr.success('test');
 </script>
 
 <template>
