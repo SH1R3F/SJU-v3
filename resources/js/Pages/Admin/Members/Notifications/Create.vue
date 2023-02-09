@@ -2,10 +2,6 @@
 import { useForm } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue';
 
-const props = defineProps({
-    members: Object,
-});
-
 const form = useForm({
     message: '',
     via: {},
@@ -71,9 +67,7 @@ const sendNotification = () => {
                         <div class="mb-3 col-12">
                             <label class="form-label">{{ __('Send to') }}</label>
                             <div class="input-group" v-show="form.to_type === 'select'">
-                                <select id="select2Multiple" class="select2 form-select" ref="somethin" multiple>
-                                    <!-- <option v-for="member in members.data" :key="member.id" :value="member.id">{{ member.fullName }}</option> -->
-                                </select>
+                                <select id="select2Multiple" class="select2 form-select" ref="somethin" multiple></select>
                             </div>
                             <span class="fs-6 text-danger" v-if="form.errors.recipients">{{ form.errors.recipients }}</span>
                             <div class="d-flex gap-3 flex-wrap">

@@ -428,7 +428,7 @@ class MemberController extends Controller
     }
 
     /**
-     * Show the form to send a notification to admins.
+     * list the members by chuncks for the select options.
      *
      * @return \Illuminate\Http\Response
      */

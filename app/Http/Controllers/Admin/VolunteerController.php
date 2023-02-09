@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Course\Course;
 use App\Exports\VolunteersExport;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use App\Events\VolunteerRegistered;
 use App\Http\Controllers\Controller;
 use App\Services\CertificateService;
@@ -235,11 +236,27 @@ class VolunteerController extends Controller
     {
         $this->authorize('viewAny', Volunteer::class);
 
-        $volunteers = Volunteer::orderBy('id')->get(['id', 'fname_ar', 'sname_ar', 'tname_ar', 'lname_ar', 'fname_en', 'sname_en', 'tname_en', 'lname_en']);
+        return inertia('Admin/Volunteers/Notifications/Create');
+    }
 
-        return inertia('Admin/Volunteers/Notifications/Create', [
-            'volunteers' => VolunteerResource::collection($volunteers)
-        ]);
+    /**
+     * list the volunteers by chuncks for the select options.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function chuncks()
+    {
+        $this->authorize('viewAny', Volunteer::class);
+        $volunteers = Volunteer::filter(request())
+            ->when(
+                app()->getLocale() == 'ar',
+                fn ($q) => $q->select('id', DB::raw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar) AS text")),
+                fn ($q) => $q->select('id', DB::raw("CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en) AS text"))
+            )
+            ->orderBy('id')
+            ->paginate(20);
+
+        return $volunteers;
     }
 
     /**

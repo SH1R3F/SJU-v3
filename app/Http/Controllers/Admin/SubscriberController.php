@@ -6,6 +6,7 @@ use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
 use App\Exports\SubscribersExport;
+use Illuminate\Support\Facades\DB;
 use App\Events\SubscriberRegistered;
 use App\Http\Controllers\Controller;
 use App\Services\CertificateService;
@@ -220,11 +221,28 @@ class SubscriberController extends Controller
     {
         $this->authorize('viewAny', Subscriber::class);
 
-        $subscribers = Subscriber::orderBy('id')->get(['id', 'fname_ar', 'sname_ar', 'tname_ar', 'lname_ar']);
+        return inertia('Admin/Subscribers/Notifications/Create');
+    }
 
-        return inertia('Admin/Subscribers/Notifications/Create', [
-            'subscribers' => SubscriberResource::collection($subscribers)
-        ]);
+    /**
+     * list the subscribers by chuncks for the select options.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function chuncks()
+    {
+        $this->authorize('viewAny', Subscriber::class);
+
+        $subscribers = Subscriber::filter(request())
+            ->when(
+                app()->getLocale() == 'ar',
+                fn ($q) => $q->select('id', DB::raw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar) AS text")),
+                fn ($q) => $q->select('id', DB::raw("CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en) AS text"))
+            )
+            ->orderBy('id')
+            ->paginate(20);
+
+        return $subscribers;
     }
 
     /**

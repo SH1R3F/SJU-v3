@@ -107,6 +107,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
         // Send notification to subscribers
         Route::get('subscribers/notify', [SubscriberController::class, 'showNotifyForm'])->name('subscribers.notify');
+        Route::get('subscribers/notify/chuncks', [SubscriberController::class, 'chuncks'])->name('subscribers.notify.chuncks');
         Route::post('subscribers/notify', [SubscriberController::class, 'notify']);
 
         /**
@@ -120,6 +121,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
         // Send notification to volunteers
         Route::get('volunteers/notify', [VolunteerController::class, 'showNotifyForm'])->name('volunteers.notify');
+        Route::get('volunteers/notify/chuncks', [VolunteerController::class, 'chuncks'])->name('volunteers.notify.chuncks');
         Route::post('volunteers/notify', [VolunteerController::class, 'notify']);
 
         /**
