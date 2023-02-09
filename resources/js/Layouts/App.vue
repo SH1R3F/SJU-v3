@@ -5,6 +5,7 @@ import Navbar from './Navbar.vue';
 import Footer from './Footer.vue';
 import { toast, updateGlobalOptions } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import { onUpdated } from 'vue';
 
 const props = defineProps({
     flash: Object,
@@ -26,6 +27,17 @@ if (props.flash.message) {
 if (props.flash.error) {
     toast.error(props.flash.error);
 }
+
+onUpdated(function () {
+    console.log(props.flash);
+    console.log(props.flash.message);
+    if (props.flash.message) {
+        toast.success(props.flash.message);
+    }
+    if (props.flash.error) {
+        toast.error(props.flash.error);
+    }
+});
 </script>
 
 <template>
