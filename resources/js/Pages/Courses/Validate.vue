@@ -17,7 +17,8 @@ const form = useForm({
                     <div class="form-row">
                         <div class="form-group col">
                             <label class="font-weight-bold text-dark text-2">{{ __('Please enter the code on the certificate') }}</label>
-                            <input type="text" name="certcode" id="certcode" class="form-control form-control-lg" style="direction: ltr" required="" />
+                            <input type="text" name="certcode" id="certcode" class="form-control form-control-lg" v-model="form.code" style="direction: ltr" required="" />
+                            <p class="text text-danger" v-if="form.errors.code">{{ form.errors.code }}</p>
                         </div>
                     </div>
 
