@@ -39,23 +39,23 @@ const form = useForm({
                                 <!-- Full name fields -->
                                 <div class="form-row">
                                     <div class="form-group col-sm-6 col-md-3">
-                                        <label for="fname">{{ __('First name') }}</label>
-                                        <h4>{{ userAuth.fname }}</h4>
+                                        <label for="fname_ar">{{ __('First name') }}</label>
+                                        <h4>{{ userAuth.fname_ar }}</h4>
                                     </div>
 
                                     <div class="form-group col-sm-6 col-md-3">
-                                        <label for="sname">{{ __('Second name') }}</label>
-                                        <h4>{{ userAuth.sname }}</h4>
+                                        <label for="sname_ar">{{ __('Second name') }}</label>
+                                        <h4>{{ userAuth.sname_ar }}</h4>
                                     </div>
 
                                     <div class="form-group col-sm-6 col-md-3">
-                                        <label for="tname">{{ __('Third name') }}</label>
-                                        <h4>{{ userAuth.tname }}</h4>
+                                        <label for="tname_ar">{{ __('Third name') }}</label>
+                                        <h4>{{ userAuth.tname_ar }}</h4>
                                     </div>
 
                                     <div class="form-group col-sm-6 col-md-3">
-                                        <label for="lname">{{ __('Last name') }}</label>
-                                        <h4>{{ userAuth.lname }}</h4>
+                                        <label for="lname_ar">{{ __('Last name') }}</label>
+                                        <h4>{{ userAuth.lname_ar }}</h4>
                                     </div>
                                 </div>
                                 <!-- Full name fields -->
