@@ -4,7 +4,6 @@ import Header from './Header.vue';
 import Navbar from './Navbar.vue';
 import Footer from './Footer.vue';
 
-console.log($page);
 console.log(this.$page);
 </script>
 
