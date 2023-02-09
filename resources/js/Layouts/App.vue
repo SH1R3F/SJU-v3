@@ -7,13 +7,15 @@ import Footer from './Footer.vue';
 const props = defineProps({
     flash: Object,
 });
+console.log(props);
 if (props.flash.message) {
-    this.toastr.success(this.$page.props.flash.message);
+    toastr.success(props.flash.message);
+    toastr.success(props.flash.message);
 }
 if (props.flash.error) {
-    this.toastr.error(this.$page.props.flash.error);
+    toastr.error(props.flash.error);
 }
-console.log(props);
+window.toastr.success('test');
 </script>
 
 <template>
