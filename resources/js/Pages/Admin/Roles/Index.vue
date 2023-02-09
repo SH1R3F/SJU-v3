@@ -101,7 +101,7 @@ const editRole = (role) => {
                                 addForm.post(route('admin.roles.store'), {
                                     onSuccess: () => {
                                         addForm.reset();
-                                        this.$refs.addFormClose.click();
+                                        $refs.addFormClose.click();
                                     },
                                 })
                             "
