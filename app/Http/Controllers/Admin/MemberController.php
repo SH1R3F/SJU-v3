@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Exports\MembersExport;
 use App\Services\MemberService;
 use App\Events\MemberRegistered;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MemberRequest;
 use Maatwebsite\Excel\Facades\Excel;
@@ -423,11 +424,27 @@ class MemberController extends Controller
     public function showNotifyForm()
     {
         $this->authorize('notify', Member::class);
-        $members = Member::orderBy('id')->get(['id', 'fname_ar', 'sname_ar', 'tname_ar', 'lname_ar', 'fname_en', 'sname_en', 'tname_en', 'lname_en']);
+        return inertia('Admin/Members/Notifications/Create');
+    }
 
-        return inertia('Admin/Members/Notifications/Create', [
-            'members' => MemberResource::collection($members)
-        ]);
+    /**
+     * Show the form to send a notification to admins.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function chuncks()
+    {
+        $this->authorize('notify', Member::class);
+        $members = Member::filter(request())
+            ->when(
+                app()->getLocale() == 'ar',
+                fn ($q) => $q->select('id', DB::raw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar) AS text")),
+                fn ($q) => $q->select('id', DB::raw("CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en) AS text"))
+            )
+            ->orderBy('id')
+            ->paginate(20);
+
+        return $members;
     }
 
     /**

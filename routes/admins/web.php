@@ -77,6 +77,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
         // Send notification to members
         Route::get('members/notify', [MemberController::class, 'showNotifyForm'])->name('members.notify');
+        Route::get('members/notify/chuncks', [MemberController::class, 'chuncks'])->name('members.notify.chuncks');
         Route::post('members/notify', [MemberController::class, 'notify']);
 
         /**

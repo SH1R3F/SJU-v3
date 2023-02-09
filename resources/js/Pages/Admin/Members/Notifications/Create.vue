@@ -72,7 +72,7 @@ const sendNotification = () => {
                             <label class="form-label">{{ __('Send to') }}</label>
                             <div class="input-group" v-show="form.to_type === 'select'">
                                 <select id="select2Multiple" class="select2 form-select" ref="somethin" multiple>
-                                    <option v-for="member in members.data" :key="member.id" :value="member.id">{{ member.fullName }}</option>
+                                    <!-- <option v-for="member in members.data" :key="member.id" :value="member.id">{{ member.fullName }}</option> -->
                                 </select>
                             </div>
                             <span class="fs-6 text-danger" v-if="form.errors.recipients">{{ form.errors.recipients }}</span>
@@ -122,7 +122,28 @@ const sendNotification = () => {
 export default {
     mounted() {
         $(document).ready(function () {
-            $('.select2').select2();
+            $('.select2').select2({
+                ajax: {
+                    url: route('admin.members.notify.chuncks'),
+                    dataType: 'json',
+                    data: function (params) {
+                        var query = {
+                            name: params.term,
+                            page: params.page || 1,
+                        };
+                        return query;
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: Object.values(data.data),
+                            pagination: {
+                                more: data.next_page_url,
+                            },
+                        };
+                    },
+                    delay: 250,
+                },
+            });
             $('.select2').on('select2:select select2:unselect', function (e) {
                 $(this).attr('data-result', $('.select2').val().join(','));
             });
