@@ -4,7 +4,10 @@ import Header from './Header.vue';
 import Navbar from './Navbar.vue';
 import Footer from './Footer.vue';
 
-console.log(this.$page);
+const props = defineProps({
+    flash: Object,
+});
+console.log(props);
 </script>
 
 <template>
