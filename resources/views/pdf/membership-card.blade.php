@@ -25,7 +25,7 @@
             left: 14.50mm;
             width: 45.16mm;
             height: 45.08mm;
-            background-size: cover;
+            background-size: 100% 100%;
         }
 
         .info {

@@ -20,7 +20,7 @@
             left: 72px;
             width: 101px;
             height: 120px;
-            background-size: cover;
+            background-size: 100% 100%;
         }
 
         .num {
