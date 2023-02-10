@@ -51,6 +51,25 @@ class Admin extends Authenticatable
             ->when($request->branch, fn ($builder, $branch) => $builder->whereHas('branch', fn ($query) => $query->where('id', $branch)));
     }
 
+    public function scopeOrder($query, Request $request)
+    {
+        return $query->when($request->order, function ($builder, $order) use ($request) {
+            $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
+            switch ($order) {
+                case 'role':
+                    return $builder->whereHas('roles', fn ($builder) => $builder->orderBy('name', $direction));
+                    break;
+                case 'name':
+                    return $builder->orderByRaw("CONCAT(fname, ' ', lname) $direction");
+                    break;
+                default:
+                    $order = in_array($order, $this->fillable) ? $order : 'id';
+                    return $builder->orderBy($order, $direction);
+                    break;
+            }
+        });
+    }
+
     /**
      * fullname attribute
      */

@@ -308,6 +308,7 @@ return [
         'education_level' => 'المرحلة الدراسية',
         'experiences' => 'الخبرات',
         'mobile_key' => 'مفتاح الدولة',
+        'role' => 'الدور',
     ],
 
 ];

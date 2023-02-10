@@ -28,6 +28,14 @@ watch(role, (val) => {
 watch(branch, (val) => {
     Inertia.get(route('admin.admins.index'), { branch: val, role: role.value, perPage: perPage.value, search: search.value }, { preserveState: true, replace: true });
 });
+
+const sortBy = (column) => {
+    Inertia.get(
+        route('admin.admins.index'),
+        { order: column, dir: props.filters.dir == 'desc' ? 'asc' : 'desc', branch: branch.value, role: role.value, perPage: perPage.value, search: search.value },
+        { preserveState: true, replace: true }
+    );
+};
 </script>
 
 <template>
@@ -158,11 +166,11 @@ watch(branch, (val) => {
                 <table class="datatables-users table border-top">
                     <thead>
                         <tr>
-                            <th>{{ __('User') }}</th>
-                            <th>{{ __('Username') }}</th>
-                            <th>{{ __('Mobile') }}</th>
-                            <th>{{ __('Role') }}</th>
-                            <th>{{ __('Branch') }}</th>
+                            <th @click.prevent="sortBy('name')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'name' }">{{ __('User') }}</th>
+                            <th @click.prevent="sortBy('username')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'username' }">{{ __('Username') }}</th>
+                            <th @click.prevent="sortBy('mobile')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'mobile' }">{{ __('Mobile') }}</th>
+                            <th @click.prevent="sortBy('role')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'role' }">{{ __('Role') }}</th>
+                            <th @click.prevent="sortBy('branch_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'branch_id' }">{{ __('Branch') }}</th>
                             <th>{{ __('Actions') }}</th>
                         </tr>
                     </thead>

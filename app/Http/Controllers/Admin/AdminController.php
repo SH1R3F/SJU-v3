@@ -36,7 +36,8 @@ class AdminController extends Controller
     {
         $admins = Admin::with('branch', 'roles')
             ->filter(request())
-            ->orderBy('id')
+            ->order(request())
+            // ->orderBy('id')
             ->paginate(request()->perPage ?: 10)
             ->withQueryString();
 
@@ -52,7 +53,7 @@ class AdminController extends Controller
                     'can_create' => request()->user()->can('create', Admin::class),
                     'can_notify' => request()->user()->can('notify', Admin::class),
                 ]),
-            'filters' => request()->only(['perPage', 'search', 'role', 'branch'])
+            'filters' => request()->only(['perPage', 'search', 'role', 'branch', 'order', 'dir'])
         ]);
     }
 
