@@ -57,7 +57,11 @@ class Admin extends Authenticatable
             $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
             switch ($order) {
                 case 'role':
-                    return $builder->whereHas('roles', fn ($builder) => $builder->orderBy('name', $direction));
+                    return $builder->orderBy(function ($q) {
+                        return $q->from('model_has_roles')
+                            ->whereRaw("`model_has_roles`.model_id = `admins`.id")
+                            ->select('role_id');
+                    }, $direction);
                     break;
                 case 'name':
                     return $builder->orderByRaw("CONCAT(fname, ' ', lname) $direction");
