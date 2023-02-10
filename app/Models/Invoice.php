@@ -79,7 +79,7 @@ class Invoice extends Model
                     }, $direction);
                     break;
                 default:
-                    $order = in_array($order, $this->fillable) ? $order : 'id';
+                    $order = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $order : 'id';
                     return $builder->orderBy($order, $direction);
                     break;
             }

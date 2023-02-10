@@ -40,7 +40,7 @@ class CourseController extends Controller
                 'course_gender' => Gender::select('name')->whereColumn('courses_genders.id', 'courses.course_gender_id')->take(1),
                 'course_category' => Category::select('name')->whereColumn('courses_categories.id', 'courses.course_category_id')->take(1),
             ])
-            ->orderBy('id', 'DESC')
+            ->order(request())
             ->paginate(request()->perPage ?: 10)
             ->withQueryString();
 
@@ -50,7 +50,7 @@ class CourseController extends Controller
                     'can_export' => request()->user()->can('viewAny', Course::class),
                     'can_create' => request()->user()->can('create', Course::class),
                 ]),
-            'filters' => request()->only(['perPage', 'title', 'course_number', 'year', 'month', 'region'])
+            'filters' => request()->only(['perPage', 'title', 'course_number', 'year', 'month', 'region', 'order', 'dir'])
         ]);
     }
 
@@ -69,7 +69,7 @@ class CourseController extends Controller
                 'course_gender' => Gender::select('name')->whereColumn('courses_genders.id', 'courses.course_gender_id')->take(1),
                 'course_category' => Category::select('name')->whereColumn('courses_categories.id', 'courses.course_category_id')->take(1),
             ])
-            ->orderBy('id', 'DESC')
+            ->order(request())
             ->get();
 
         return Excel::download(new CoursesExport($courses), 'Courses.xlsx');

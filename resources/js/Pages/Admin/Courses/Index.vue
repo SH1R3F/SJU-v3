@@ -26,6 +26,8 @@ const appended = ref({
     year: year.value,
     month: month.value,
     region: region.value,
+    order: props.filters.order,
+    dir: props.filters.dir,
 });
 
 const filterReq = debounce(() => Inertia.get(route('admin.courses.index'), appended.value, { preserveState: true, replace: true }), 500);
@@ -41,6 +43,12 @@ watch(
         filterReq();
     }
 );
+
+const sortBy = (column) => {
+    appended.value.order = column;
+    appended.value.dir = props.filters.dir == 'desc' ? 'asc' : 'desc';
+    Inertia.get(route('admin.courses.index'), appended.value, { preserveState: true, replace: true });
+};
 </script>
 
 <template>
@@ -107,14 +115,18 @@ watch(
                 <table class="datatables-users table border-top">
                     <thead>
                         <tr>
-                            <th>{{ __('Course') }}</th>
-                            <th style="white-space: nowrap">{{ __('Course date') }}</th>
-                            <th style="white-space: nowrap">{{ __('Type') }}</th>
-                            <th>{{ __('Category') }}</th>
-                            <th>{{ __('Gender') }}</th>
-                            <th>{{ __('Location') }}</th>
-                            <th>{{ __('Region') }}</th>
-                            <th>{{ __('Status') }}</th>
+                            <th @click.prevent="sortBy('title')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'title' }">{{ __('Course') }}</th>
+                            <th @click.prevent="sortBy('date_from')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'date_from' }" style="white-space: nowrap">
+                                {{ __('Course date') }}
+                            </th>
+                            <th @click.prevent="sortBy('course_type_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'course_type_id' }" style="white-space: nowrap">
+                                {{ __('Type') }}
+                            </th>
+                            <th @click.prevent="sortBy('course_category_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'course_category_id' }">{{ __('Category') }}</th>
+                            <th @click.prevent="sortBy('course_gender_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'course_gender_id' }">{{ __('Gender') }}</th>
+                            <th @click.prevent="sortBy('course_place_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'course_place_id' }">{{ __('Location') }}</th>
+                            <th @click.prevent="sortBy('region')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'region' }">{{ __('Region') }}</th>
+                            <th @click.prevent="sortBy('status')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'status' }">{{ __('Status') }}</th>
                             <th class="cell-fit">{{ __('Actions') }}</th>
                         </tr>
                     </thead>
