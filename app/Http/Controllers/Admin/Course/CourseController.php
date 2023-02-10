@@ -52,7 +52,8 @@ class CourseController extends Controller
                     'can_export' => request()->user()->can('viewAny', Course::class),
                     'can_create' => request()->user()->can('create', Course::class),
                 ]),
-            'filters' => request()->only(['perPage', 'title', 'course_number', 'year', 'month', 'region', 'order', 'dir'])
+            'branches' => Branch::orderBy('id')->get(['id', 'name']),
+            'filters' => request()->only(['perPage', 'title', 'course_number', 'year', 'month', 'branch', 'order', 'dir'])
         ]);
     }
 

@@ -64,7 +64,7 @@ class Course extends Model
             return $query->where('title_ar', 'LIKE', '%' . $title . '%')
                 ->orWhere('title_en', 'LIKE', '%' . $title . '%');
         }))
-            ->when($request->region, fn ($builder, $region) => $builder->where('region', "LIKE", "%$region%"))
+            ->when($request->branch, fn ($builder, $branch) => $builder->where('course_branch_id', "LIKE", "%$branch%"))
             ->when($request->course_number, fn ($builder, $course_number) => $builder->where('course_number', "LIKE", "%$course_number%"))
             ->when($request->year, fn ($builder, $year) => $builder->whereYear('date_from', $year))
             ->when($request->month, fn ($builder, $month) => $builder->whereMonth('date_from', $month));

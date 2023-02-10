@@ -7,6 +7,8 @@ import { debounce } from '../../../helpers';
 const props = defineProps({
     courses: Object,
     filters: Object,
+    branches: Object,
+    authUser: Object,
 });
 
 /**
@@ -17,7 +19,7 @@ const title = ref(props.filters.title || '');
 const course_number = ref(props.filters.course_number || '');
 const year = ref(props.filters.year || '');
 const month = ref(props.filters.month || '');
-const region = ref(props.filters.region || '');
+const branch = ref(props.filters.branch || '');
 
 const appended = ref({
     perPage: perPage.value,
@@ -25,20 +27,20 @@ const appended = ref({
     course_number: course_number.value,
     year: year.value,
     month: month.value,
-    region: region.value,
+    branch: branch.value,
     order: props.filters.order,
     dir: props.filters.dir,
 });
 
 const filterReq = debounce(() => Inertia.get(route('admin.courses.index'), appended.value, { preserveState: true, replace: true }), 500);
 watch(
-    () => [title.value, course_number.value, year.value, month.value, region.value, perPage.value],
-    ([title, course_number, year, month, region, perPage]) => {
+    () => [title.value, course_number.value, year.value, month.value, branch.value, perPage.value],
+    ([title, course_number, year, month, branch, perPage]) => {
         appended.value.title = title;
         appended.value.course_number = course_number;
         appended.value.year = year;
         appended.value.month = month;
-        appended.value.region = region;
+        appended.value.branch = branch;
         appended.value.perPage = perPage;
         filterReq();
     }
@@ -60,11 +62,14 @@ const sortBy = (column) => {
             <div class="card-header border-bottom">
                 <h5 class="card-title mb-3">{{ __('Courses') }}</h5>
                 <div class="d-flex justify-content-between align-items-center row pb-2 gap-3 gap-md-0">
-                    <div class="col-md-6 mb-2">
+                    <div class="col-md-6 mb-2" :class="{ 'col-md-12': authUser.data.branch_id }">
                         <input type="text" class="form-control" :placeholder="__('Course title')" v-model="title" />
                     </div>
-                    <div class="col-md-6 mb-2">
-                        <input type="text" class="form-control" :placeholder="__('Region')" v-model="region" />
+                    <div class="col-md-6 mb-2" v-if="!authUser.data.branch_id">
+                        <select class="form-control" v-model="branch">
+                            <option value="">{{ __('Branch') }}</option>
+                            <option v-for="branch in branches" :value="branch.id">{{ branch.name }}</option>
+                        </select>
                     </div>
                     <div class="col-md-4 mb-2">
                         <input type="text" class="form-control" :placeholder="__('Course number')" v-model="course_number" />
