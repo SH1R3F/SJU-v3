@@ -30,13 +30,13 @@ class TechnicalSupportController extends Controller
             ->whereHas('supportable', fn ($query) => $query->whereNotNull('id'))
             ->where('supportable_type', Member::class)
             ->filter($request)
-            ->orderBy('updated_at', 'DESC')
+            ->order($request)
             ->paginate($request->perPage ?: 10)
             ->withQueryString();
 
         return inertia('Admin/TechnicalSupport/Members', [
             'tickets' => TechnicalSupportTicketResource::collection($tickets),
-            'filters'  => request()->only(['perPage', 'title', 'name', 'status', 'mobile', 'email'])
+            'filters'  => request()->only(['perPage', 'title', 'name', 'status', 'mobile', 'email', 'order', 'dir'])
         ]);
     }
 
@@ -54,13 +54,13 @@ class TechnicalSupportController extends Controller
             ->where('supportable_type', Subscriber::class)
             ->whereHas('supportable', fn ($query) => $query->whereNotNull('id'))
             ->filter($request)
-            ->orderBy('updated_at', 'DESC')
+            ->order($request)
             ->paginate($request->perPage ?: 10)
             ->withQueryString();
 
         return inertia('Admin/TechnicalSupport/Subscribers', [
             'tickets' => TechnicalSupportTicketResource::collection($tickets),
-            'filters'  => request()->only(['perPage', 'title', 'name', 'status', 'mobile', 'email'])
+            'filters'  => request()->only(['perPage', 'title', 'name', 'status', 'mobile', 'email', 'order', 'dir'])
         ]);
     }
 
@@ -78,13 +78,13 @@ class TechnicalSupportController extends Controller
             ->whereHas('supportable', fn ($query) => $query->whereNotNull('id'))
             ->where('supportable_type', Volunteer::class)
             ->filter($request)
-            ->orderBy('updated_at', 'DESC')
+            ->order($request)
             ->paginate($request->perPage ?: 10)
             ->withQueryString();
 
         return inertia('Admin/TechnicalSupport/Volunteers', [
             'tickets' => TechnicalSupportTicketResource::collection($tickets),
-            'filters'  => request()->only(['perPage', 'title', 'name', 'status', 'mobile', 'email'])
+            'filters'  => request()->only(['perPage', 'title', 'name', 'status', 'mobile', 'email', 'order', 'dir'])
         ]);
     }
 
@@ -115,7 +115,7 @@ class TechnicalSupportController extends Controller
             ->whereHas('supportable', fn ($query) => $query->whereNotNull('id'))
             ->where('supportable_type', $class)
             ->filter(request())
-            ->orderBy('updated_at', 'DESC')
+            ->order(request())
             ->get();
 
         return Excel::download(new SupportTicketsExport($tickets), 'Technical support tickets.xlsx');
