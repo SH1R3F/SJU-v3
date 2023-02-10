@@ -31,6 +31,8 @@ const appended = ref({
     type: type.value,
     branch: branch.value,
     year: year.value,
+    order: props.filters.order,
+    dir: props.filters.dir,
 });
 
 const filterReq = debounce(() => Inertia.get(route('admin.members.index'), appended.value, { preserveState: true, replace: true }), 500);
@@ -48,6 +50,12 @@ watch(
         filterReq();
     }
 );
+
+const sortBy = (column) => {
+    appended.value.order = column;
+    appended.value.dir = props.filters.dir == 'desc' ? 'asc' : 'desc';
+    Inertia.get(route('admin.members.index'), appended.value, { preserveState: true, replace: true });
+};
 </script>
 
 <template>
@@ -192,12 +200,12 @@ watch(
                 <table class="datatables-users table border-top">
                     <thead>
                         <tr>
-                            <th>{{ __('User') }}</th>
-                            <th>{{ __('Membership number') }}</th>
-                            <th>{{ __('Mobile') }}</th>
-                            <th>{{ __('Membership type') }}</th>
-                            <th>{{ __('Branch') }}</th>
-                            <th>{{ __('Membership Status') }}</th>
+                            <th @click.prevent="sortBy('name')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'name' }">{{ __('User') }}</th>
+                            <th @click.prevent="sortBy('membership_number')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'membership_number' }">{{ __('Membership number') }}</th>
+                            <th @click.prevent="sortBy('mobile')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'mobile' }">{{ __('Mobile') }}</th>
+                            <th @click.prevent="sortBy('type')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'type' }">{{ __('Membership type') }}</th>
+                            <th @click.prevent="sortBy('branch_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'branch_id' }">{{ __('Branch') }}</th>
+                            <th @click.prevent="sortBy('status')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'status' }">{{ __('Membership Status') }}</th>
                             <th>{{ __('Actions') }}</th>
                         </tr>
                     </thead>

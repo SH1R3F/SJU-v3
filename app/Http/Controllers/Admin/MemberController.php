@@ -42,7 +42,7 @@ class MemberController extends Controller
         return inertia('Admin/Members/Accepted', [
             'members'  => $service->getMembersResource(request(), [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED]),
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
-            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'branch', 'year'])
+            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'branch', 'year', 'order', 'dir'])
         ]);
     }
 
@@ -58,7 +58,7 @@ class MemberController extends Controller
 
         return inertia('Admin/Members/AdminAcceptance', [
             'members'  => $service->getMembersResource(request(), [Member::STATUS_APPROVED]),
-            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'branch', 'year']),
+            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'branch', 'year', 'order', 'dir']),
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
         ]);
     }
@@ -75,7 +75,7 @@ class MemberController extends Controller
 
         return inertia('Admin/Members/BranchApproval', [
             'members'  => $service->getMembersResource(request(), [Member::STATUS_UNAPPROVED]),
-            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'year']),
+            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'year', 'order', 'dir']),
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
         ]);
     }
@@ -92,7 +92,7 @@ class MemberController extends Controller
 
         return inertia('Admin/Members/Refused', [
             'members'  => $service->getMembersResource(request(), [Member::STATUS_REFUSED]),
-            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'year']),
+            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'year', 'order', 'dir']),
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
         ]);
     }

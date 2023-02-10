@@ -37,7 +37,6 @@ class AdminController extends Controller
         $admins = Admin::with('branch', 'roles')
             ->filter(request())
             ->order(request())
-            // ->orderBy('id')
             ->paginate(request()->perPage ?: 10)
             ->withQueryString();
 

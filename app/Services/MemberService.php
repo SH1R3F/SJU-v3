@@ -23,7 +23,7 @@ class MemberService
             ->whereIn('status', $statuses)
             ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
             ->filter($request)
-            ->orderBy('updated_at', 'DESC') // Might be dynamic too?
+            ->order($request)
             ->when($export, fn ($query) => $query->get(), fn ($query) => $query->paginate($request->perPage ?: 10)->withQueryString());
     }
 

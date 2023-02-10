@@ -17,16 +17,32 @@ const role = ref(props.filters.role || '');
 const branch = ref(props.filters.branch || '');
 
 watch(perPage, (val) => {
-    Inertia.get(route('admin.admins.index'), { perPage: val, search: search.value, role: role.value, branch: branch.value }, { preserveState: true, replace: true });
+    Inertia.get(
+        route('admin.admins.index'),
+        { perPage: val, search: search.value, role: role.value, branch: branch.value, order: props.filters.order, dir: props.filters.dir },
+        { preserveState: true, replace: true }
+    );
 });
 watch(search, (val) => {
-    Inertia.get(route('admin.admins.index'), { search: val, perPage: perPage.value, role: role.value, branch: branch.value }, { preserveState: true, replace: true });
+    Inertia.get(
+        route('admin.admins.index'),
+        { search: val, perPage: perPage.value, role: role.value, branch: branch.value, order: props.filters.order, dir: props.filters.dir },
+        { preserveState: true, replace: true }
+    );
 });
 watch(role, (val) => {
-    Inertia.get(route('admin.admins.index'), { role: val, perPage: perPage.value, search: search.value, branch: branch.value }, { preserveState: true, replace: true });
+    Inertia.get(
+        route('admin.admins.index'),
+        { role: val, perPage: perPage.value, search: search.value, branch: branch.value, order: props.filters.order, dir: props.filters.dir },
+        { preserveState: true, replace: true }
+    );
 });
 watch(branch, (val) => {
-    Inertia.get(route('admin.admins.index'), { branch: val, role: role.value, perPage: perPage.value, search: search.value }, { preserveState: true, replace: true });
+    Inertia.get(
+        route('admin.admins.index'),
+        { branch: val, role: role.value, perPage: perPage.value, search: search.value, order: props.filters.order, dir: props.filters.dir },
+        { preserveState: true, replace: true }
+    );
 });
 
 const sortBy = (column) => {

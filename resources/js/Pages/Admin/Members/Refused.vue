@@ -29,9 +29,11 @@ const appended = ref({
     type: type.value,
     branch: branch.value,
     year: year.value,
+    order: props.filters.order,
+    dir: props.filters.dir,
 });
 
-const filterReq = debounce(() => Inertia.get(route('admin.members.index'), appended.value, { preserveState: true, replace: true }), 500);
+const filterReq = debounce(() => Inertia.get(route('admin.members.refused'), appended.value, { preserveState: true, replace: true }), 500);
 watch(
     () => [name.value, national_id.value, mobile.value, type.value, branch.value, year.value, perPage.value],
     ([nameVal, nidVal, mob, t, b, y, pp]) => {
@@ -45,6 +47,12 @@ watch(
         filterReq();
     }
 );
+
+const sortBy = (column) => {
+    appended.value.order = column;
+    appended.value.dir = props.filters.dir == 'desc' ? 'asc' : 'desc';
+    Inertia.get(route('admin.members.refused'), appended.value, { preserveState: true, replace: true });
+};
 </script>
 
 <template>
@@ -186,11 +194,11 @@ watch(
                 <table class="datatables-users table border-top">
                     <thead>
                         <tr>
-                            <th>{{ __('User') }}</th>
-                            <th>{{ __('Mobile') }}</th>
-                            <th>{{ __('Membership type') }}</th>
-                            <th>{{ __('Branch') }}</th>
-                            <th>{{ __('Refusal reason') }}</th>
+                            <th @click.prevent="sortBy('name')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'name' }">{{ __('User') }}</th>
+                            <th @click.prevent="sortBy('mobile')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'mobile' }">{{ __('Mobile') }}</th>
+                            <th @click.prevent="sortBy('membership_number')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'membership_number' }">{{ __('Membership type') }}</th>
+                            <th @click.prevent="sortBy('branch_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'branch_id' }">{{ __('Branch') }}</th>
+                            <th @click.prevent="sortBy('refusal_reason')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'refusal_reason' }">{{ __('Refusal reason') }}</th>
                             <th>{{ __('Actions') }}</th>
                         </tr>
                     </thead>
