@@ -38,7 +38,7 @@ defineProps({
 
                             <div class="col-md-4 mb-3" v-for="video in videos">
                                 <iframe
-                                    class=""
+                                    class="w-100"
                                     width="352"
                                     height="260"
                                     :src="video.path"
@@ -66,7 +66,7 @@ defineProps({
                         <div class="row mt-3">
                             <div class="col-md-4 mb-3" v-for="video in videos">
                                 <iframe
-                                    class=""
+                                    class="w-100"
                                     width="352"
                                     height="260"
                                     :src="video.path"
