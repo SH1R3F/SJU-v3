@@ -36,7 +36,7 @@ class SubscriberController extends Controller
             ->when($status == 'active', fn ($query) => $query->where('status', 1))
             ->when($status == 'inactive', fn ($query) => $query->where('status', '!=', 1))
             ->filter(request())
-            ->orderBy('id', 'DESC')
+            ->order(request())
             ->paginate(request()->perPage ?: 10)
             ->withQueryString();
 
@@ -47,7 +47,7 @@ class SubscriberController extends Controller
                 'can_notify' => request()->user()->can('viewAny', Subscriber::class),
             ]),
             'status' => $status,
-            'filters' => request()->only(['perPage', 'name', 'mobile'])
+            'filters' => request()->only(['perPage', 'name', 'mobile', 'order', 'dir'])
         ]);
     }
 
@@ -65,7 +65,7 @@ class SubscriberController extends Controller
             ->when($status == 'active', fn ($query) => $query->where('status', 1))
             ->when($status == 'inactive', fn ($query) => $query->where('status', '!=', 1))
             ->filter(request())
-            ->orderBy('id', 'DESC')
+            ->order(request())
             ->get();
 
         return Excel::download(new SubscribersExport($subscribers), 'Subscribers.xlsx');
