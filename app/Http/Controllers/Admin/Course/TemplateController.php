@@ -26,7 +26,7 @@ class TemplateController extends Controller
     public function index()
     {
         $templates = Template::filter(request())
-            ->orderBy('id', 'DESC')
+            ->order(request())
             ->paginate(request()->perPage ?: 10)
             ->withQueryString();
 
@@ -35,7 +35,7 @@ class TemplateController extends Controller
                 ->additional([
                     'can_create' => request()->user()->can('create', Template::class),
                 ]),
-            'filters' => request()->only(['perPage', 'search'])
+            'filters' => request()->only(['perPage', 'search', 'order', 'dir'])
         ]);
     }
 

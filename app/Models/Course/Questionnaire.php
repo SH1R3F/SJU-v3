@@ -28,6 +28,19 @@ class Questionnaire extends Model
         return $query->when($request->search, fn ($builder, $search) => $builder->where('name_ar', 'LIKE', "%$search%")->orWhere('name_en', 'LIKE', "%$search%"));
     }
 
+    public function scopeOrder($query, Request $request)
+    {
+        return $query->when($request->order, function ($builder, $order) use ($request) {
+            $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
+            switch ($order) {
+                default:
+                    $order = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $order : 'id';
+                    return $builder->orderBy($order, $direction);
+                    break;
+            }
+        });
+    }
+
     /**
      * Relation to the courses it has
      */

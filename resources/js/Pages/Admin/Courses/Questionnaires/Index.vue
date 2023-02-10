@@ -18,6 +18,8 @@ const search = ref(props.filters.search || '');
 const appended = ref({
     perPage: perPage.value,
     search: search.value,
+    order: props.filters.order,
+    dir: props.filters.dir,
 });
 
 const filterReq = debounce(() => Inertia.get(route('admin.questionnaires.index'), appended.value, { preserveState: true, replace: true }), 500);
@@ -29,6 +31,12 @@ watch(
         filterReq();
     }
 );
+
+const sortBy = (column) => {
+    appended.value.order = column;
+    appended.value.dir = props.filters.dir == 'desc' ? 'asc' : 'desc';
+    Inertia.get(route('admin.questionnaires.index'), appended.value, { preserveState: true, replace: true });
+};
 </script>
 
 <template>
@@ -78,8 +86,8 @@ watch(
                 <table class="datatables-users table border-top">
                     <thead>
                         <tr>
-                            <th class="cell-fit">{{ __('Questionnaire') }}</th>
-                            <th class="cell-fit">{{ __('Status') }}</th>
+                            <th @click.prevent="sortBy('name')" :class="{ 'link-primary': filters.order == 'name' }" class="cursor-pointer cell-fit">{{ __('Questionnaire') }}</th>
+                            <th @click.prevent="sortBy('status')" :class="{ 'link-primary': filters.order == 'status' }" class="cursor-pointer cell-fit">{{ __('Status') }}</th>
                             <th class="cell-fit">{{ __('Actions') }}</th>
                         </tr>
                     </thead>

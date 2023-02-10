@@ -23,7 +23,7 @@ class QuestionnaireController extends Controller
     public function index()
     {
         $questionnaires = Questionnaire::filter(request())
-            ->orderBy('id', 'DESC')
+            ->order(request())
             ->paginate(request()->perPage ?: 10)
             ->withQueryString();
 
@@ -32,7 +32,7 @@ class QuestionnaireController extends Controller
                 ->additional([
                     'can_create' => request()->user()->can('create', Questionnaire::class),
                 ]),
-            'filters' => request()->only(['perPage', 'search'])
+            'filters' => request()->only(['perPage', 'search', 'order', 'dir'])
         ]);
     }
 

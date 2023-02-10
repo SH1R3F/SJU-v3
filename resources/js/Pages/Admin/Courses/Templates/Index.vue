@@ -18,6 +18,8 @@ const search = ref(props.filters.search || '');
 const appended = ref({
     perPage: perPage.value,
     search: search.value,
+    order: props.filters.order,
+    dir: props.filters.dir,
 });
 
 const filterReq = debounce(() => Inertia.get(route('admin.templates.index'), appended.value, { preserveState: true, replace: true }), 500);
@@ -29,6 +31,12 @@ watch(
         filterReq();
     }
 );
+
+const sortBy = (column) => {
+    appended.value.order = column;
+    appended.value.dir = props.filters.dir == 'desc' ? 'asc' : 'desc';
+    Inertia.get(route('admin.templates.index'), appended.value, { preserveState: true, replace: true });
+};
 </script>
 
 <template>
@@ -78,9 +86,9 @@ watch(
                 <table class="datatables-users table border-top">
                     <thead>
                         <tr>
-                            <th class="cell-fit">{{ __('Template') }}</th>
-                            <th class="cell-fit">{{ __('Language') }}</th>
-                            <th class="cell-fit">{{ __('Layout') }}</th>
+                            <th @click.prevent="sortBy('name')" :class="{ 'link-primary': filters.order == 'name' }" class="cursor-pointer cell-fit">{{ __('Template') }}</th>
+                            <th @click.prevent="sortBy('mode')" :class="{ 'link-primary': filters.order == 'mode' }" class="cursor-pointer cell-fit">{{ __('Language') }}</th>
+                            <th @click.prevent="sortBy('layout')" :class="{ 'link-primary': filters.order == 'layout' }" class="cursor-pointer cell-fit">{{ __('Layout') }}</th>
                             <th class="cell-fit">{{ __('Actions') }}</th>
                         </tr>
                     </thead>
