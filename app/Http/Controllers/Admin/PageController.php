@@ -25,7 +25,7 @@ class PageController extends Controller
     {
         $pages = Page::query()
             ->filter(request())
-            ->orderBy('id', 'DESC')
+            ->order(request())
             ->paginate(request()->perPage ?: 10)
             ->withQueryString();
 
@@ -34,7 +34,7 @@ class PageController extends Controller
                 ->additional([
                     'can_create' => request()->user()->can('create', Page::class),
                 ]),
-            'filters' => request()->only(['perPage', 'title', 'name'])
+            'filters' => request()->only(['perPage', 'title', 'name', 'order', 'dir'])
         ]);
     }
 

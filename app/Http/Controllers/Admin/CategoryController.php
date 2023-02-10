@@ -24,7 +24,7 @@ class CategoryController extends Controller
     {
         $categories = Category::query()
             ->filter(request())
-            ->orderBy('id', 'DESC')
+            ->order(request())
             ->paginate(request()->perPage ?: 20)
             ->withQueryString();
 
@@ -33,7 +33,7 @@ class CategoryController extends Controller
                 ->additional([
                     'can_create' => request()->user()->can('create', Category::class),
                 ]),
-            'filters' => request()->only(['perPage', 'title'])
+            'filters' => request()->only(['perPage', 'title', 'order', 'dir'])
         ]);
     }
 

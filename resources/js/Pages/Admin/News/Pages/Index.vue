@@ -20,6 +20,8 @@ const appended = ref({
     perPage: perPage.value,
     name: name.value,
     title: title.value,
+    order: props.filters.order,
+    dir: props.filters.dir,
 });
 
 const filterReq = debounce(() => Inertia.get(route('admin.pages.index'), appended.value, { preserveState: true, replace: true }), 500);
@@ -32,6 +34,12 @@ watch(
         filterReq();
     }
 );
+
+const sortBy = (column) => {
+    appended.value.order = column;
+    appended.value.dir = props.filters.dir == 'desc' ? 'asc' : 'desc';
+    Inertia.get(route('admin.pages.index'), appended.value, { preserveState: true, replace: true });
+};
 </script>
 
 <template>
@@ -83,8 +91,8 @@ watch(
                 <table class="datatables-users table border-top">
                     <thead>
                         <tr>
-                            <th class="cell-fit">{{ __('Title') }}</th>
-                            <th class="cell-fit">{{ __('Name') }}</th>
+                            <th @click.prevent="sortBy('title')" :class="{ 'link-primary': filters.order == 'title' }" class="cursor-pointer cell-fit">{{ __('Title') }}</th>
+                            <th @click.prevent="sortBy('slug')" :class="{ 'link-primary': filters.order == 'slug' }" class="cursor-pointer cell-fit">{{ __('Name') }}</th>
                             <th class="cell-fit">{{ __('Actions') }}</th>
                         </tr>
                     </thead>

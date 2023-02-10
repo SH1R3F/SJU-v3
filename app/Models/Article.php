@@ -36,6 +36,27 @@ class Article extends Model
     }
 
     /**
+     * Sort in admin panel
+     * 
+     * @param \Illuminate\Http\Request  $request
+     */
+    public function scopeOrder($query, Request $request)
+    {
+        return $query->when($request->order, function ($builder, $order) use ($request) {
+            $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
+            switch ($order) {
+                case 'title':
+                    return $builder->orderBy(app()->getLocale() == 'ar' ? 'title_ar' : 'title_en', $direction);
+                    break;
+                default:
+                    $order = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $order : 'id';
+                    return $builder->orderBy($order, $direction);
+                    break;
+            }
+        });
+    }
+
+    /**
      * Relationship to the category
      */
     public function category()

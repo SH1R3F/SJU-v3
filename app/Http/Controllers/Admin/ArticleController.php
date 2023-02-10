@@ -30,7 +30,7 @@ class ArticleController extends Controller
             ->addSelect([
                 'article_category' => Category::select(app()->getLocale() == 'ar' ? 'title_ar' : 'title_en')->whereColumn('categories.id', 'articles.category_id')->take(1),
             ])
-            ->orderBy('id', 'DESC')
+            ->order(request())
             ->paginate(request()->perPage ?: 10)
             ->withQueryString();
 
@@ -39,7 +39,7 @@ class ArticleController extends Controller
                 ->additional([
                     'can_create' => request()->user()->can('create', Article::class),
                 ]),
-            'filters' => request()->only(['perPage', 'title'])
+            'filters' => request()->only(['perPage', 'title', 'order', 'dir'])
         ]);
     }
 
