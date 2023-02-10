@@ -39,7 +39,7 @@ class VolunteerController extends Controller
             ->when($status == 'active', fn ($query) => $query->where('status', 1))
             ->when($status == 'inactive', fn ($query) => $query->where('status', '!=', 1))
             ->filter(request())
-            ->orderBy('id', 'DESC')
+            ->order(request())
             ->paginate(request()->perPage ?: 10)
             ->withQueryString();
 
@@ -51,7 +51,7 @@ class VolunteerController extends Controller
             ]),
             'status' => $status,
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
-            'filters' => request()->only(['perPage', 'name', 'national_id', 'mobile', 'branch', 'field'])
+            'filters' => request()->only(['perPage', 'name', 'national_id', 'mobile', 'branch', 'field', 'order', 'dir'])
         ]);
     }
 
@@ -69,7 +69,7 @@ class VolunteerController extends Controller
             ->when($status == 'active', fn ($query) => $query->where('status', 1))
             ->when($status == 'inactive', fn ($query) => $query->where('status', '!=', 1))
             ->filter(request())
-            ->orderBy('id', 'DESC')
+            ->order(request())
             ->get();
 
         return Excel::download(new VolunteersExport($volunteers), 'Volunteers.xlsx');

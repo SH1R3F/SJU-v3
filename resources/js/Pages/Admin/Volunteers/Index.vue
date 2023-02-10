@@ -28,6 +28,8 @@ const appended = ref({
     mobile: mobile.value,
     branch: branch.value,
     field: field.value,
+    order: props.filters.order,
+    dir: props.filters.dir,
 });
 
 const filterReq = debounce(() => Inertia.get(route('admin.volunteers.index', props.status), appended.value, { preserveState: true, replace: true }), 500);
@@ -43,6 +45,12 @@ watch(
         filterReq();
     }
 );
+
+const sortBy = (column) => {
+    appended.value.order = column;
+    appended.value.dir = props.filters.dir == 'desc' ? 'asc' : 'desc';
+    Inertia.get(route('admin.volunteers.index', props.status), appended.value, { preserveState: true, replace: true });
+};
 </script>
 
 <template>
@@ -139,11 +147,11 @@ watch(
                 <table class="datatables-users table border-top">
                     <thead>
                         <tr>
-                            <th>{{ __('User') }}</th>
-                            <th>{{ __('Email') }}</th>
-                            <th>{{ __('Mobile') }}</th>
-                            <th>{{ __('Courses') }}</th>
-                            <th>{{ __('Status') }}</th>
+                            <th @click.prevent="sortBy('name')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'name' }">{{ __('User') }}</th>
+                            <th @click.prevent="sortBy('email')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'email' }">{{ __('Email') }}</th>
+                            <th @click.prevent="sortBy('mobile')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'mobile' }">{{ __('Mobile') }}</th>
+                            <th @click.prevent="sortBy('courses')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'courses' }">{{ __('Courses') }}</th>
+                            <th @click.prevent="sortBy('status')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'status' }">{{ __('Status') }}</th>
                             <th>{{ __('Actions') }}</th>
                         </tr>
                     </thead>

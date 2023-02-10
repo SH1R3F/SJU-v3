@@ -68,7 +68,7 @@ class StoreVolunteer extends FormRequest
                 )
             ],
             'password' => ['nullable', 'min:6'],
-            'branch_id'        => ['required', 'numeric', 'exists:branches,id'],
+            'branch_id'        => ['nullable', 'numeric', 'exists:branches,id'],
         ];
     }
 }

@@ -65,7 +65,7 @@ class Volunteer extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Filter subscribers in admin panel
+     * Filter volunteers in admin panel
      * @param \Illuminate\Http\Request  $request
      */
     public function scopeFilter($query, Request $request)
@@ -95,6 +95,41 @@ class Volunteer extends Authenticatable implements MustVerifyEmail
             })
             // Filter by fields
             ->when($request->field, fn ($builder, $field) => $builder->where('fields', 'LIKE', "%$field%"));
+    }
+
+    /**
+     * Sort in admin panel
+     * 
+     * @param \Illuminate\Http\Request  $request
+     */
+    public function scopeOrder($query, Request $request)
+    {
+        return $query->when($request->order, function ($builder, $order) use ($request) {
+            $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
+            switch ($order) {
+                case 'name':
+                    return $builder->orderByRaw(
+                        app()->getLocale() == 'ar' ?
+                            "CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar) $direction" :
+                            "CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en) $direction"
+                    );
+                    break;
+                case 'mobile':
+                    return $builder->orderByRaw("CONCAT(mobile_key, mobile) $direction");
+                    break;
+                case 'courses':
+                    return $builder->orderBy(function ($q) {
+                        return $q->from('coursables')
+                            ->whereRaw("`coursables`.coursable_id = `volunteers`.id AND `coursables`.coursable_type = 'App\\\Models\\\Volunteer'")
+                            ->selectRaw('COUNT(id)');
+                    }, $direction);
+                    break;
+                default:
+                    $order = in_array($order, $this->fillable) ? $order : 'id';
+                    return $builder->orderBy($order, $direction);
+                    break;
+            }
+        });
     }
 
     /**
