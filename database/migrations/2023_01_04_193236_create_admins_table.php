@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('lname');
             $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->string('mobile')->unique();
+            $table->string('mobile')->unique()->nullable();
             $table->string('password');
             $table->unsignedBigInteger('branch_id')->nullable();
             $table->rememberToken();

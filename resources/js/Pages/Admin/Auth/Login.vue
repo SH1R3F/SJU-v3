@@ -2,8 +2,8 @@
 import { useForm } from '@inertiajs/inertia-vue3';
 
 const form = useForm({
-    username: 'shiref',
-    password: 'password',
+    username: '',
+    password: '',
     remember: false,
 });
 </script>
