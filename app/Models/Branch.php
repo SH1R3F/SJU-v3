@@ -34,4 +34,6 @@ class Branch extends Model
     {
         return $this->hasMany(Volunteer::class);
     }
+
+    // Courses too
 }

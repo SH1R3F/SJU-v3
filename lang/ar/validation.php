@@ -259,7 +259,7 @@ return [
         'course_type_id' => 'نوع الفعالية',
         'course_gender_id' => 'جنس الفعالية',
         'course_category_id' => 'فئة الفعالية',
-        'course_place_id' => 'موقع الفعالية',
+        'course_branch_id' => 'فرع الفعالية',
         'map_link' => 'رابط الخريطة',
         'lng' => 'خط الطول',
         'lat' => 'خط العرض',

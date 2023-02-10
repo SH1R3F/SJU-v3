@@ -29,7 +29,7 @@ class CoursesExport implements FromCollection, WithHeadings, WithMapping, WithEv
             __('Type'),
             __('Category'),
             __('Gender'),
-            __('Location'),
+            __('Branch'),
             __('Region'),
             __('Status'),
         ];
@@ -45,7 +45,7 @@ class CoursesExport implements FromCollection, WithHeadings, WithMapping, WithEv
             $course->course_type,
             $course->course_category,
             $course->course_gender,
-            $course->course_place,
+            $course->course_branch,
             $course->region,
             __($course->state($course->status)),
         ];

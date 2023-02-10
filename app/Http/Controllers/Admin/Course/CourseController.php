@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Course;
 
+use App\Models\Branch;
 use App\Models\Course\Type;
 use App\Models\Course\Place;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use App\Models\Course\Template;
 use App\Services\CourseService;
 use App\Http\Controllers\Controller;
 use App\Models\Course\Questionnaire;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\CourseResource;
 use App\Http\Requests\Course\CourseRequest;
@@ -32,11 +34,11 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::query()
+        $courses = Course::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('course_branch_id', Auth::guard('admin')->user()->branch_id))
             ->filter(request())
             ->addSelect([
                 'course_type' => Type::select('name')->whereColumn('courses_types.id', 'courses.course_type_id')->take(1),
-                'course_place' => Place::select('name')->whereColumn('courses_places.id', 'courses.course_place_id')->take(1),
+                'course_branch' => Branch::select('name')->whereColumn('branches.id', 'courses.course_branch_id')->take(1),
                 'course_gender' => Gender::select('name')->whereColumn('courses_genders.id', 'courses.course_gender_id')->take(1),
                 'course_category' => Category::select('name')->whereColumn('courses_categories.id', 'courses.course_category_id')->take(1),
             ])
@@ -61,11 +63,13 @@ class CourseController extends Controller
      */
     public function export()
     {
-        $courses = Course::query()
+        $this->authorize('viewAny', Course::class);
+
+        $courses = Course::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('course_branch_id', Auth::guard('admin')->user()->branch_id))
             ->filter(request())
             ->addSelect([
                 'course_type' => Type::select('name')->whereColumn('courses_types.id', 'courses.course_type_id')->take(1),
-                'course_place' => Place::select('name')->whereColumn('courses_places.id', 'courses.course_place_id')->take(1),
+                'course_branch' => Branch::select('name')->whereColumn('branches.id', 'courses.course_branch_id')->take(1),
                 'course_gender' => Gender::select('name')->whereColumn('courses_genders.id', 'courses.course_gender_id')->take(1),
                 'course_category' => Category::select('name')->whereColumn('courses_categories.id', 'courses.course_category_id')->take(1),
             ])
@@ -87,7 +91,7 @@ class CourseController extends Controller
             'types' => Type::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
             'genders' => Gender::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
             'categories' => Category::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
-            'places' => Place::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
+            'branches' => Branch::orderBy('id', 'DESC')->select('id', 'name')->get(),
             'templates' => Template::orderBy('id', 'DESC')->select('id', 'name')->get(),
             'questionnaires' => Questionnaire::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name_ar')->get(),
         ]);
@@ -118,7 +122,7 @@ class CourseController extends Controller
             ->with('members', 'subscribers')
             ->addSelect([
                 'course_type' => Type::select('name')->whereColumn('courses_types.id', 'courses.course_type_id')->take(1),
-                'course_place' => Place::select('name')->whereColumn('courses_places.id', 'courses.course_place_id')->take(1),
+                'course_branch' => Branch::select('name')->whereColumn('branches.id', 'courses.course_branch_id')->take(1),
                 'course_gender' => Gender::select('name')->whereColumn('courses_genders.id', 'courses.course_gender_id')->take(1),
                 'course_category' => Category::select('name')->whereColumn('courses_categories.id', 'courses.course_category_id')->take(1),
             ])
@@ -142,7 +146,7 @@ class CourseController extends Controller
             'types' => Type::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
             'genders' => Gender::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
             'categories' => Category::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
-            'places' => Place::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name')->get(),
+            'branches' => Branch::orderBy('id', 'DESC')->select('id', 'name')->get(),
             'templates' => Template::orderBy('id', 'DESC')->select('id', 'name')->get(),
             'questionnaires' => Questionnaire::where('status', 1)->orderBy('id', 'DESC')->select('id', 'name_ar')->get(),
         ]);

@@ -75,19 +75,28 @@ class MemberService
     {
         switch ($data['to_type']) {
             case 'select':
-                return Member::whereIn('id', $data['recipients'])->get();
+                return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->whereIn('id', $data['recipients'])
+                    ->get();
                 break;
             case 'all':
-                return Member::all();
+                return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->get();
                 break;
             case 'fulltime':
-                return Member::whereHas('subscription', fn ($query) => $query->where('type', 1))->get();
+                return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->whereHas('subscription', fn ($query) => $query->where('type', 1))
+                    ->get();
                 break;
             case 'parttime':
-                return Member::whereHas('subscription', fn ($query) => $query->where('type', 2))->get();
+                return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->whereHas('subscription', fn ($query) => $query->where('type', 2))
+                    ->get();
                 break;
             case 'affiliate':
-                return Member::whereHas('subscription', fn ($query) => $query->where('type', 3))->get();
+                return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->whereHas('subscription', fn ($query) => $query->where('type', 3))
+                    ->get();
                 break;
         }
     }

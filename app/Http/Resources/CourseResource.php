@@ -28,7 +28,7 @@ class CourseResource extends JsonResource
                 'course_type' => $this->course_type,
                 'course_category' => $this->course_category,
                 'course_gender' => $this->course_gender,
-                'course_place' => $this->course_place,
+                'course_branch' => $this->course_branch,
                 'state' => __($this->state($this->status)),
                 'image' => $this->when($this->image, Storage::url($this->image), null),
                 'images' => collect($this->images)->filter(fn ($img) => Storage::exists($img))->map(fn ($img) => Storage::url($img)),

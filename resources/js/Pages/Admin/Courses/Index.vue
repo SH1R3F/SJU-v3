@@ -124,7 +124,7 @@ const sortBy = (column) => {
                             </th>
                             <th @click.prevent="sortBy('course_category_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'course_category_id' }">{{ __('Category') }}</th>
                             <th @click.prevent="sortBy('course_gender_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'course_gender_id' }">{{ __('Gender') }}</th>
-                            <th @click.prevent="sortBy('course_place_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'course_place_id' }">{{ __('Location') }}</th>
+                            <th @click.prevent="sortBy('course_branch_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'course_branch_id' }">{{ __('Branch') }}</th>
                             <th @click.prevent="sortBy('region')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'region' }">{{ __('Region') }}</th>
                             <th @click.prevent="sortBy('status')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'status' }">{{ __('Status') }}</th>
                             <th class="cell-fit">{{ __('Actions') }}</th>
@@ -157,7 +157,7 @@ const sortBy = (column) => {
                             <td style="white-space: nowrap">{{ course.course_type }}</td>
                             <td>{{ course.course_category }}</td>
                             <td>{{ course.course_gender }}</td>
-                            <td>{{ course.course_place }}</td>
+                            <td>{{ course.course_branch }}</td>
                             <td>{{ course.region }}</td>
                             <td>{{ course.state }}</td>
                             <td>

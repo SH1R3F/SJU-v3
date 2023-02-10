@@ -24,7 +24,7 @@ class MemberPolicy
             return true;
         } else if ($admin->hasRole('Branch manager')) {
             // Branch managers can only update/edit the members of their branches
-            if ($model instanceof Member) {
+            if (is_object($model)) {
                 if ($model->branch_id != $admin->branch_id) return false;
             }
         }

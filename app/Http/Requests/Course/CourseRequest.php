@@ -30,7 +30,7 @@ class CourseRequest extends FormRequest
             'course_type_id' => ['nullable', 'numeric', 'exists:courses_types,id'],
             'course_category_id' => ['nullable', 'numeric', 'exists:courses_categories,id'],
             'course_gender_id' => ['nullable', 'numeric', 'exists:courses_genders,id'],
-            'course_place_id' => ['nullable', 'numeric', 'exists:courses_places,id'],
+            'course_branch_id' => ['nullable', 'numeric', 'exists:branches,id'],
             'map_link' => ['nullable', 'url', 'max:255'],
             'lng' => ['nullable'],
             'lat' => ['nullable'],

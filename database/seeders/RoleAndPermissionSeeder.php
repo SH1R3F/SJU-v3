@@ -96,6 +96,7 @@ class RoleAndPermissionSeeder extends Seeder
          * Course management permissions
          */
         Permission::updateOrCreate(['name' => 'viewAny-course'], ['name' => 'viewAny-course', 'guard_name' => 'admin']);
+        // Permission::updateOrCreate(['name' => 'view-course'], ['name' => 'view-course', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'create-course'], ['name' => 'create-course', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'update-course'], ['name' => 'update-course', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'delete-course'], ['name' => 'delete-course', 'guard_name' => 'admin']);

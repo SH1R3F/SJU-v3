@@ -22,8 +22,11 @@ class CoursePolicy
     {
         if ($admin->hasRole('Site admin')) {
             return true;
-        } else if ($admin->hasRole('News editor')) {
-            // Show data depending on a condition?
+        } else if ($admin->hasRole('Branch manager')) {
+            // Branch managers can only update/edit the courses of their branches
+            if (is_object($model)) {
+                if ($model->course_branch_id != $admin->branch_id) return false;
+            }
         }
     }
 
@@ -47,7 +50,7 @@ class CoursePolicy
      */
     public function view(Admin $admin, Course $course)
     {
-        return $admin->hasPermissionTo('view-course');
+        return $admin->hasPermissionTo('viewAny-course');
     }
 
     /**

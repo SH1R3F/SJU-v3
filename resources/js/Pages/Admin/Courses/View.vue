@@ -68,8 +68,8 @@ const unpassed = computed(() => {
                                     <span>{{ course.course_type }}</span>
                                 </li>
                                 <li class="mb-2 pt-1">
-                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Location') }}</span>
-                                    <span class="badge bg-label-secondary">{{ course.course_place }}</span>
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Branch') }}</span>
+                                    <span class="badge bg-label-secondary">{{ course.course_branch }}</span>
                                 </li>
                                 <li class="mb-2 pt-1">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Gender') }} </span>

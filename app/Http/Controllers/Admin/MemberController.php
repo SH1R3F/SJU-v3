@@ -13,6 +13,7 @@ use App\Events\MemberRegistered;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MemberRequest;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\MemberResource;
 use Illuminate\Support\Facades\Storage;
@@ -435,7 +436,7 @@ class MemberController extends Controller
     public function chuncks()
     {
         $this->authorize('notify', Member::class);
-        $members = Member::filter(request())
+        $members = Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
             ->when(
                 app()->getLocale() == 'ar',
                 fn ($q) => $q->select('id', DB::raw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar) AS text")),

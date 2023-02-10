@@ -5,7 +5,7 @@ const props = defineProps({
     types: Object,
     genders: Object,
     categories: Object,
-    places: Object,
+    branches: Object,
     templates: Object,
     questionnaires: Object,
 });
@@ -17,7 +17,7 @@ const form = useForm({
     course_type_id: '',
     course_category_id: '',
     course_gender_id: '',
-    course_place_id: '',
+    course_branch_id: '',
     map_link: '',
     lng: 27.0001404,
     lat: 49.6574203,
@@ -122,7 +122,7 @@ const handleImages = ($event) => {
                             </div>
                             <!-- Type & Category -->
 
-                            <!-- Gender & Location -->
+                            <!-- Gender & Branch -->
                             <div class="row">
                                 <div class="mb-3 col-12 col-sm-6">
                                     <label class="form-label" for="gender_id">{{ __('Gender') }}</label>
@@ -133,15 +133,15 @@ const handleImages = ($event) => {
                                     <p class="fs-6 text-danger" v-if="form.errors.course_gender_id">{{ form.errors.course_gender_id }}</p>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6">
-                                    <label class="form-label" for="place_id">{{ __('Location') }}</label>
-                                    <select class="form-control m-select2-no" id="place_id" v-model="form.course_place_id">
+                                    <label class="form-label" for="branch_id">{{ __('Branch') }}</label>
+                                    <select class="form-control m-select2-no" id="branch_id" v-model="form.course_branch_id">
                                         <option value="">{{ __('Choose') }}</option>
-                                        <option v-for="(place, k) in places" :key="k" :value="place.id">{{ __(place.name) }}</option>
+                                        <option v-for="(branch, k) in branches" :key="k" :value="branch.id">{{ __(branch.name) }}</option>
                                     </select>
-                                    <p class="fs-6 text-danger" v-if="form.errors.course_place_id">{{ form.errors.course_place_id }}</p>
+                                    <p class="fs-6 text-danger" v-if="form.errors.course_branch_id">{{ form.errors.course_branch_id }}</p>
                                 </div>
                             </div>
-                            <!-- Gender & Location -->
+                            <!-- Gender & Branch -->
 
                             <!-- Map link -->
                             <div class="row">

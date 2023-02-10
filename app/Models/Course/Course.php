@@ -2,7 +2,9 @@
 
 namespace App\Models\Course;
 
+use App\Models\Branch;
 use App\Models\Member;
+use App\Models\Volunteer;
 use App\Models\Subscriber;
 use App\Models\Course\Type;
 use App\Models\Course\Place;
@@ -11,7 +13,6 @@ use App\Models\Course\Gender;
 use App\Models\Course\Category;
 use App\Models\Course\Template;
 use App\Models\Course\Questionnaire;
-use App\Models\Volunteer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -123,7 +124,15 @@ class Course extends Model
      */
     public function place()
     {
-        return $this->belongsTo(Place::class, 'course_place_id');
+        return $this->belongsTo(Place::class, 'course_branch_id');
+    }
+
+    /**
+     * Relation to the branch it belongs to
+     */
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class, 'course_branch_id');
     }
 
     /**

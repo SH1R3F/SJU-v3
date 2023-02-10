@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Admin;
-use App\Models\Template;
+use App\Models\Course\Template;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TemplatePolicy
@@ -42,12 +42,12 @@ class TemplatePolicy
      * Determine whether the admin can view the model.
      *
      * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Template  $template
+     * @param  \App\Models\Course\Template  $template
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(Admin $admin, Template $template)
     {
-        return $admin->hasPermissionTo('view-template');
+        return $admin->hasPermissionTo('viewAny-template');
     }
 
     /**
@@ -65,7 +65,7 @@ class TemplatePolicy
      * Determine whether the admin can update the model.
      *
      * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Template  $template
+     * @param  \App\Models\Course\Template  $template
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Admin $admin, Template $template)
@@ -77,7 +77,7 @@ class TemplatePolicy
      * Determine whether the admin can delete the model.
      *
      * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Template  $template
+     * @param  \App\Models\Course\Template  $template
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(Admin $admin, Template $template)
