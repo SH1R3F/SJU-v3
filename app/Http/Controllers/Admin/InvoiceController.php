@@ -25,13 +25,13 @@ class InvoiceController extends Controller
         $invoices = Invoice::with('member', 'member.subscription')
             ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->whereHas('member', fn ($builder) => $builder->where('member_id', Auth::guard('admin')->user()->branch_id)))
             ->filter($request)
-            ->orderBy('updated_at', 'DESC')
+            ->order($request)
             ->paginate($request->perPage ?: 10)
             ->withQueryString();
 
         return inertia('Admin/Invoices/Index', [
             'invoices' => InvoiceResource::collection($invoices),
-            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number'])
+            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'order', 'dir'])
         ]);
     }
 

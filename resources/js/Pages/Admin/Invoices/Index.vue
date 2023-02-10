@@ -22,6 +22,8 @@ const appended = ref({
     name: name.value,
     national_id: national_id.value,
     membership_number: membership_number.value,
+    order: props.filters.order,
+    dir: props.filters.dir,
 });
 
 const filterReq = debounce(() => Inertia.get(route('admin.invoices.index'), appended.value, { preserveState: true, replace: true }), 500);
@@ -35,6 +37,11 @@ watch(
         filterReq();
     }
 );
+const sortBy = (column) => {
+    appended.value.order = column;
+    appended.value.dir = props.filters.dir == 'desc' ? 'asc' : 'desc';
+    Inertia.get(route('admin.invoices.index'), appended.value, { preserveState: true, replace: true });
+};
 </script>
 
 <template>
@@ -77,11 +84,11 @@ watch(
                 <table class="datatables-users table border-top">
                     <thead>
                         <tr>
-                            <th>{{ __('User') }}</th>
-                            <th>{{ __('Membership number') }}</th>
-                            <th>{{ __('Amount') }}</th>
-                            <th class="text-truncate">{{ __('Date') }}</th>
-                            <th>{{ __('Membership type') }}</th>
+                            <th @click.prevent="sortBy('name')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'name' }">{{ __('User') }}</th>
+                            <th @click.prevent="sortBy('membership_number')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'membership_number' }">{{ __('Membership number') }}</th>
+                            <th @click.prevent="sortBy('amount')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'amount' }">{{ __('Amount') }}</th>
+                            <th class="text-truncate cursor-pointer" @click.prevent="sortBy('created_at')" :class="{ 'link-primary': filters.order == 'created_at' }">{{ __('Date') }}</th>
+                            <th @click.prevent="sortBy('type')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'type' }">{{ __('Membership type') }}</th>
                             <th class="cell-fit">{{ __('Actions') }}</th>
                         </tr>
                     </thead>

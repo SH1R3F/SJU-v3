@@ -47,6 +47,45 @@ class Invoice extends Model
             }));
     }
 
+
+    public function scopeOrder($query, Request $request)
+    {
+        return $query->when($request->order, function ($builder, $order) use ($request) {
+            $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
+            switch ($order) {
+                case 'name':
+                    return $builder->orderBy(function ($q) {
+                        return $q->from('members')
+                            ->whereRaw('`members`.id = `invoices`.member_id')
+                            ->selectRaw(
+                                app()->getLocale() == 'ar' ?
+                                    "CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar)" :
+                                    "CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en)"
+                            );
+                    }, $direction);
+                    break;
+                case 'membership_number':
+                    return $builder->orderBy(function ($q) {
+                        return $q->from('members')
+                            ->whereRaw('`members`.id = `invoices`.member_id')
+                            ->selectRaw("REPLACE(membership_number, '-', '')");
+                    }, $direction);
+                    break;
+                case 'type':
+                    return $builder->orderBy(function ($q) {
+                        return $q->from('subscriptions')
+                            ->whereRaw('`subscriptions`.id = `invoices`.subscription_id')
+                            ->select('type');
+                    }, $direction);
+                    break;
+                default:
+                    $order = in_array($order, $this->fillable) ? $order : 'id';
+                    return $builder->orderBy($order, $direction);
+                    break;
+            }
+        });
+    }
+
     /**
      * The relation to the member made this invoice 
      */
