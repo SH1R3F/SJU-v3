@@ -76,18 +76,22 @@ class Course extends Model
      */
     public function scopeOrder($query, Request $request)
     {
-        return $query->when($request->order, function ($builder, $order) use ($request) {
-            $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
-            switch ($order) {
-                case 'title':
-                    return $builder->orderBy(app()->getLocale() == 'ar' ? 'title_ar' : 'title_en', $direction);
-                    break;
-                default:
-                    $order = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $order : 'id';
-                    return $builder->orderBy($order, $direction);
-                    break;
-            }
-        });
+        return $query->when(
+            $request->order,
+            function ($builder, $order) use ($request) {
+                $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
+                switch ($order) {
+                    case 'title':
+                        return $builder->orderBy(app()->getLocale() == 'ar' ? 'title_ar' : 'title_en', $direction);
+                        break;
+                    default:
+                        $order = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $order : 'id';
+                        return $builder->orderBy($order, $direction);
+                        break;
+                }
+            },
+            fn ($builder) => $builder->orderBy('created_at', 'DESC')
+        );
     }
 
     /**

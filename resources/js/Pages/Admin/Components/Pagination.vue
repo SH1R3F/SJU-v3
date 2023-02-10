@@ -17,7 +17,7 @@ const props = defineProps({
         <div class="col-sm-12 col-md-6">
             <div class="d-flex justify-content-center justify-content-md-end align-items-center">
                 <ul class="pagination m-0">
-                    <li v-for="link in meta.links" :key="link.label" class="paginate_button page-item" :class="{ active: link.active, disabled: link.url == null || link.active }">
+                    <li v-for="link in meta.links" :key="link.label" class="paginate_button page-item text-nowrap" :class="{ active: link.active, disabled: link.url == null || link.active }">
                         <Link :href="link.url" class="page-link" v-html="link.label"></Link>
                     </li>
                 </ul>

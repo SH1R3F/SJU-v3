@@ -143,32 +143,36 @@ class Member extends Authenticatable
 
     public function scopeOrder($query, Request $request)
     {
-        return $query->when($request->order, function ($builder, $order) use ($request) {
-            $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
-            switch ($order) {
-                case 'name':
-                    return $builder->orderByRaw(
-                        app()->getLocale() == 'ar' ?
-                            "CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar) $direction" :
-                            "CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en) $direction"
-                    );
-                    break;
-                case 'membership_number':
-                    return $builder->orderByRaw("REPLACE(membership_number, '-', '') $direction");
-                    break;
-                case 'type':
-                    return $builder->orderBy(function ($q) {
-                        return $q->from('subscriptions')
-                            ->whereRaw('`subscriptions`.member_id = `members`.id')
-                            ->select('type');
-                    }, $direction);
-                    break;
-                default:
-                    $order = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $order : 'id';
-                    return $builder->orderBy($order, $direction);
-                    break;
-            }
-        });
+        return $query->when(
+            $request->order,
+            function ($builder, $order) use ($request) {
+                $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
+                switch ($order) {
+                    case 'name':
+                        return $builder->orderByRaw(
+                            app()->getLocale() == 'ar' ?
+                                "CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar) $direction" :
+                                "CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en) $direction"
+                        );
+                        break;
+                    case 'membership_number':
+                        return $builder->orderByRaw("REPLACE(membership_number, '-', '') $direction");
+                        break;
+                    case 'type':
+                        return $builder->orderBy(function ($q) {
+                            return $q->from('subscriptions')
+                                ->whereRaw('`subscriptions`.member_id = `members`.id')
+                                ->select('type');
+                        }, $direction);
+                        break;
+                    default:
+                        $order = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $order : 'id';
+                        return $builder->orderBy($order, $direction);
+                        break;
+                }
+            },
+            fn ($builder) => $builder->orderBy('updated_at', 'DESC')
+        );
     }
 
     /**

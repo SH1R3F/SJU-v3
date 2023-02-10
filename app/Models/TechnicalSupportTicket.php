@@ -59,70 +59,74 @@ class TechnicalSupportTicket extends Model
      */
     public function scopeOrder($query, Request $request)
     {
-        return $query->when($request->order, function ($builder, $order) use ($request) {
-            $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
-            switch ($order) {
-                case 'member':
-                    return $builder->orderBy(function ($q) {
-                        return $q->from('members')
-                            ->whereRaw("`technical_support_tickets`.supportable_id = `members`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Member'")
-                            ->selectRaw(
-                                app()->getLocale() == 'ar' ?
-                                    "CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar)" :
-                                    "CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en)"
-                            );
-                    }, $direction);
-                    break;
-                case 'member_mobile':
-                    return $builder->orderBy(function ($q) {
-                        return $q->from('members')
-                            ->whereRaw("`technical_support_tickets`.supportable_id = `members`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Member'")
-                            ->select('mobile');
-                    }, $direction);
-                    break;
-                case 'subscriber':
-                    return $builder->orderBy(function ($q) {
-                        return $q->from('subscribers')
-                            ->whereRaw("`technical_support_tickets`.supportable_id = `subscribers`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Subscriber'")
-                            ->selectRaw(
-                                app()->getLocale() == 'ar' ?
-                                    "CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar)" :
-                                    "CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en)"
-                            );
-                    }, $direction);
-                    break;
-                case 'subscriber_mobile':
-                    return $builder->orderBy(function ($q) {
-                        return $q->from('subscribers')
-                            ->whereRaw("`technical_support_tickets`.supportable_id = `subscribers`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Subscriber'")
-                            ->selectRaw('CONCAT(mobile_key, mobile)');
-                    }, $direction);
-                    break;
-                case 'volunteer':
-                    return $builder->orderBy(function ($q) {
-                        return $q->from('volunteers')
-                            ->whereRaw("`technical_support_tickets`.supportable_id = `volunteers`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Volunteer'")
-                            ->selectRaw(
-                                app()->getLocale() == 'ar' ?
-                                    "CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar)" :
-                                    "CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en)"
-                            );
-                    }, $direction);
-                    break;
-                case 'volunteer_mobile':
-                    return $builder->orderBy(function ($q) {
-                        return $q->from('volunteers')
-                            ->whereRaw("`technical_support_tickets`.supportable_id = `volunteers`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Volunteer'")
-                            ->selectRaw('CONCAT(mobile_key, mobile)');
-                    }, $direction);
-                    break;
-                default:
-                    $order = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $order : 'updated_at';
-                    $direction = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $direction : 'DESC';
-                    return $builder->orderBy($order, $direction);
-                    break;
-            }
-        });
+        return $query->when(
+            $request->order,
+            function ($builder, $order) use ($request) {
+                $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
+                switch ($order) {
+                    case 'member':
+                        return $builder->orderBy(function ($q) {
+                            return $q->from('members')
+                                ->whereRaw("`technical_support_tickets`.supportable_id = `members`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Member'")
+                                ->selectRaw(
+                                    app()->getLocale() == 'ar' ?
+                                        "CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar)" :
+                                        "CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en)"
+                                );
+                        }, $direction);
+                        break;
+                    case 'member_mobile':
+                        return $builder->orderBy(function ($q) {
+                            return $q->from('members')
+                                ->whereRaw("`technical_support_tickets`.supportable_id = `members`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Member'")
+                                ->select('mobile');
+                        }, $direction);
+                        break;
+                    case 'subscriber':
+                        return $builder->orderBy(function ($q) {
+                            return $q->from('subscribers')
+                                ->whereRaw("`technical_support_tickets`.supportable_id = `subscribers`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Subscriber'")
+                                ->selectRaw(
+                                    app()->getLocale() == 'ar' ?
+                                        "CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar)" :
+                                        "CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en)"
+                                );
+                        }, $direction);
+                        break;
+                    case 'subscriber_mobile':
+                        return $builder->orderBy(function ($q) {
+                            return $q->from('subscribers')
+                                ->whereRaw("`technical_support_tickets`.supportable_id = `subscribers`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Subscriber'")
+                                ->selectRaw('CONCAT(mobile_key, mobile)');
+                        }, $direction);
+                        break;
+                    case 'volunteer':
+                        return $builder->orderBy(function ($q) {
+                            return $q->from('volunteers')
+                                ->whereRaw("`technical_support_tickets`.supportable_id = `volunteers`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Volunteer'")
+                                ->selectRaw(
+                                    app()->getLocale() == 'ar' ?
+                                        "CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar)" :
+                                        "CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en)"
+                                );
+                        }, $direction);
+                        break;
+                    case 'volunteer_mobile':
+                        return $builder->orderBy(function ($q) {
+                            return $q->from('volunteers')
+                                ->whereRaw("`technical_support_tickets`.supportable_id = `volunteers`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Volunteer'")
+                                ->selectRaw('CONCAT(mobile_key, mobile)');
+                        }, $direction);
+                        break;
+                    default:
+                        $order = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $order : 'updated_at';
+                        $direction = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $direction : 'DESC';
+                        return $builder->orderBy($order, $direction);
+                        break;
+                }
+            },
+            fn ($builder) => $builder->orderBy('updated_at', 'DESC')
+        );
     }
 
     /**

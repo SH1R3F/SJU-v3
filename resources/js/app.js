@@ -8,6 +8,8 @@ import UserLayout from './Layouts/App.vue';
 import { QuillEditor } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import '@vueup/vue-quill/dist/vue-quill.bubble.css';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 createInertiaApp({
     resolve: (name) => {
@@ -27,6 +29,18 @@ createInertiaApp({
             .component('Head', Head)
             .component('QuillEditor', QuillEditor)
             .mixin({ methods: { route } })
+            .mixin({
+                methods: {
+                    toastAlert(message) {
+                        toast.info(message, {
+                            rtl: usePage().props.value.locale == 'ar',
+                            position: toast.POSITION.TOP_CENTER,
+                            hideProgressBar: true,
+                            closeButton: false,
+                        });
+                    },
+                },
+            })
             .mixin(require('./mixins'))
             .use(plugin)
             .mount(el);
@@ -40,4 +54,6 @@ createInertiaApp({
         return title ? `${title} - ${name}` : name;
     },
 });
-InertiaProgress.init();
+InertiaProgress.init({
+    color: '#007c42',
+});

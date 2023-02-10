@@ -56,7 +56,6 @@ export default {
                         <div class="chat-history-header border-bottom">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex overflow-hidden align-items-center">
-                                    <i class="ti ti-menu-2 ti-sm cursor-pointer d-lg-none d-block me-2" data-bs-toggle="sidebar" data-overlay data-target="#app-chat-contacts"></i>
                                     <div class="flex-shrink-0 avatar">
                                         <img
                                             :src="ticket.supportable.profile_photo || '/img/user-dark.png'"
@@ -67,7 +66,6 @@ export default {
                                             data-overlay
                                             data-target="#app-chat-sidebar-right"
                                         />
-                                        <i class="ti ti-x ti-sm cursor-pointer close-sidebar" data-bs-toggle="sidebar" data-overlay data-target="#app-chat-sidebar-left"></i>
                                     </div>
                                     <div class="chat-contact-info flex-grow-1 ms-2">
                                         <Link
@@ -94,7 +92,7 @@ export default {
                                         data-bs-placement="top"
                                         :aria-label="ticket.status ? __('Open ticket') : __('Close ticket')"
                                         :title="ticket.status ? __('Open ticket') : __('Close ticket')"
-                                        class="ti cursor-pointer d-sm-block d-none me-3"
+                                        class="ti cursor-pointer d-sm-block me-3"
                                         :class="{ 'ti-toggle-left': ticket.status, 'ti-toggle-right': !ticket.status }"
                                     ></Link>
                                 </div>

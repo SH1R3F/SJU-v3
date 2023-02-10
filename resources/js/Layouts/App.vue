@@ -4,7 +4,6 @@ import Header from './Header.vue';
 import Navbar from './Navbar.vue';
 import Footer from './Footer.vue';
 import { toast, updateGlobalOptions } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
 import { onUpdated } from 'vue';
 
 const props = defineProps({

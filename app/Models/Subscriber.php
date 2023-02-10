@@ -87,32 +87,36 @@ class Subscriber extends Authenticatable implements MustVerifyEmail
      */
     public function scopeOrder($query, Request $request)
     {
-        return $query->when($request->order, function ($builder, $order) use ($request) {
-            $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
-            switch ($order) {
-                case 'name':
-                    return $builder->orderByRaw(
-                        app()->getLocale() == 'ar' ?
-                            "CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar) $direction" :
-                            "CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en) $direction"
-                    );
-                    break;
-                case 'mobile':
-                    return $builder->orderByRaw("CONCAT(mobile_key, mobile) $direction");
-                    break;
-                case 'courses':
-                    return $builder->orderBy(function ($q) {
-                        return $q->from('coursables')
-                            ->whereRaw("`coursables`.coursable_id = `subscribers`.id AND `coursables`.coursable_type = 'App\\\Models\\\Subscriber'")
-                            ->selectRaw('COUNT(id)');
-                    }, $direction);
-                    break;
-                default:
-                    $order = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $order : 'id';
-                    return $builder->orderBy($order, $direction);
-                    break;
-            }
-        });
+        return $query->when(
+            $request->order,
+            function ($builder, $order) use ($request) {
+                $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
+                switch ($order) {
+                    case 'name':
+                        return $builder->orderByRaw(
+                            app()->getLocale() == 'ar' ?
+                                "CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar) $direction" :
+                                "CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en) $direction"
+                        );
+                        break;
+                    case 'mobile':
+                        return $builder->orderByRaw("CONCAT(mobile_key, mobile) $direction");
+                        break;
+                    case 'courses':
+                        return $builder->orderBy(function ($q) {
+                            return $q->from('coursables')
+                                ->whereRaw("`coursables`.coursable_id = `subscribers`.id AND `coursables`.coursable_type = 'App\\\Models\\\Subscriber'")
+                                ->selectRaw('COUNT(id)');
+                        }, $direction);
+                        break;
+                    default:
+                        $order = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $order : 'id';
+                        return $builder->orderBy($order, $direction);
+                        break;
+                }
+            },
+            fn ($builder) => $builder->orderBy('created_at', 'DESC')
+        );
     }
 
     /**

@@ -33,7 +33,7 @@ const props = defineProps({
         <div class="row row-cols-1 row-cols-md-3 g-4 mb-5 mt-1">
             <div class="col" v-for="item in media.data">
                 <div class="card h-100">
-                    <img class="card-img-top" v-if="item.type == 'photo'" :src="item.path" />
+                    <img class="card-img-top h-100" v-if="item.type == 'photo'" :src="item.path" />
 
                     <iframe
                         v-if="item.type == 'video'"

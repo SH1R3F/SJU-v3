@@ -53,25 +53,29 @@ class Admin extends Authenticatable
 
     public function scopeOrder($query, Request $request)
     {
-        return $query->when($request->order, function ($builder, $order) use ($request) {
-            $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
-            switch ($order) {
-                case 'role':
-                    return $builder->orderBy(function ($q) {
-                        return $q->from('model_has_roles')
-                            ->whereRaw("`model_has_roles`.model_id = `admins`.id")
-                            ->select('role_id');
-                    }, $direction);
-                    break;
-                case 'name':
-                    return $builder->orderByRaw("CONCAT(fname, ' ', lname) $direction");
-                    break;
-                default:
-                    $order = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $order : 'id';
-                    return $builder->orderBy($order, $direction);
-                    break;
-            }
-        });
+        return $query->when(
+            $request->order,
+            function ($builder, $order) use ($request) {
+                $direction = $request->dir == 'desc' ? 'DESC' : 'ASC';
+                switch ($order) {
+                    case 'role':
+                        return $builder->orderBy(function ($q) {
+                            return $q->from('model_has_roles')
+                                ->whereRaw("`model_has_roles`.model_id = `admins`.id")
+                                ->select('role_id');
+                        }, $direction);
+                        break;
+                    case 'name':
+                        return $builder->orderByRaw("CONCAT(fname, ' ', lname) $direction");
+                        break;
+                    default:
+                        $order = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $order : 'id';
+                        return $builder->orderBy($order, $direction);
+                        break;
+                }
+            },
+            fn ($builder) => $builder->orderBy('created_at', 'DESC')
+        );
     }
 
     /**

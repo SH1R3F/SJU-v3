@@ -22,9 +22,6 @@ module.exports = {
             queryString = queryString.substring(queryString.indexOf('?') + 1);
             return Object.assign(Object.fromEntries(new URLSearchParams(queryString)), ...args);
         },
-        toastAlert(message) {
-            alert(message); // Might be changed later?
-        },
         arabic_date(date) {
             return new Date(date).toLocaleDateString(`${this?.$page?.props?.locale == 'en' ? 'en-UK' : 'ar-EG'}-u-nu-latn`, { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
         },
