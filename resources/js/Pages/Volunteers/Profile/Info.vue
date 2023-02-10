@@ -8,11 +8,16 @@ const props = defineProps({
     countries: Object,
     qualifications: Object,
     cities: Object,
+    branches: Object,
+    nationalities: Object,
 });
 
 const form = useForm({
     country: props.userAuth?.country,
+    nationality: props.userAuth?.nationality,
+    gender: props.userAuth?.gender,
     city: props.userAuth?.city,
+    branch_id: props.userAuth?.branch_id,
     qualification: props.userAuth?.qualification,
     mobile: props.userAuth?.mobile,
     mobile_key: props.userAuth?.mobile_key,
@@ -40,37 +45,46 @@ const form = useForm({
                                 <div class="form-row">
                                     <div class="form-group col-sm-6 col-md-3">
                                         <label for="fname">{{ __('First name') }}</label>
-                                        <h4>{{ userAuth.fname }}</h4>
+                                        <h4>{{ userAuth.fname_ar }}</h4>
                                     </div>
 
                                     <div class="form-group col-sm-6 col-md-3">
                                         <label for="sname">{{ __('Second name') }}</label>
-                                        <h4>{{ userAuth.sname }}</h4>
+                                        <h4>{{ userAuth.sname_ar }}</h4>
                                     </div>
 
                                     <div class="form-group col-sm-6 col-md-3">
                                         <label for="tname">{{ __('Third name') }}</label>
-                                        <h4>{{ userAuth.tname }}</h4>
+                                        <h4>{{ userAuth.tname_ar }}</h4>
                                     </div>
 
                                     <div class="form-group col-sm-6 col-md-3">
                                         <label for="lname">{{ __('Last name') }}</label>
-                                        <h4>{{ userAuth.lname }}</h4>
+                                        <h4>{{ userAuth.lname_ar }}</h4>
                                     </div>
                                 </div>
                                 <!-- Full name fields -->
 
                                 <!-- Gender -->
                                 <div class="form-group row">
-                                    <label for="userGender" class="col-sm-3 col-form-label">{{ __('Gender') }}</label>
-                                    <div class="col-sm-5">
-                                        <h5>{{ __(userAuth.gender) }}</h5>
+                                    <label class="col-lg-2 control-label pt-2 col-form-label">{{ __('Gender') }}</label>
+                                    <div class="col-lg-6">
+                                        <div class="radio-inline">
+                                            <div class="radio-custom radio-success d-inline mx-3 my-2">
+                                                <input type="radio" id="male" v-model="form.gender" value="male" />
+                                                <label for="male" class="px-2">{{ __('Male') }}</label>
+                                            </div>
+                                            <div class="radio-custom radio-success d-inline mx-3 my-2">
+                                                <input type="radio" id="female" v-model="form.gender" value="female" />
+                                                <label for="female" class="px-2">{{ __('Female') }}</label>
+                                            </div>
+                                        </div>
+                                        <p class="text text-danger text-sm" v-if="form.errors.gender">{{ form.errors.gender }}</p>
                                     </div>
                                 </div>
                                 <!-- Gender -->
 
                                 <!-- Country -->
-
                                 <div class="form-group row">
                                     <label for="country" class="col-sm-3 col-form-label">{{ __('Place of residence') }}</label>
                                     <div class="col-sm-5">
@@ -84,7 +98,6 @@ const form = useForm({
                                 <!-- Country -->
 
                                 <!-- city -->
-
                                 <div class="form-group row" v-if="form.country == 'المملكة العربية السعودية'">
                                     <label for="city" class="col-sm-3 col-form-label">{{ __('City') }}</label>
 
@@ -100,9 +113,13 @@ const form = useForm({
 
                                 <!-- Nationality -->
                                 <div class="form-group row">
-                                    <label for="nat" class="col-sm-3 col-form-label">{{ __('Nationality') }}</label>
-                                    <div class="col-lg-5">
-                                        <h5>{{ userAuth.nationality }}</h5>
+                                    <label for="nationality" class="col-sm-3 col-form-label">{{ __('Nationality') }}</label>
+                                    <div class="col-sm-5">
+                                        <select id="nationality" class="form-control m-select2-no" v-model="form.nationality" :data-placeholder="__('Nationality')">
+                                            <option value="">{{ __('Choose') }}</option>
+                                            <option v-for="(key, nationality) in nationalities" :key="key" :value="nationality">{{ nationality }}</option>
+                                        </select>
+                                        <p class="text text-danger text-sm" v-if="form.errors.nationality">{{ form.errors.nationality }}</p>
                                     </div>
                                 </div>
                                 <!-- Nationality -->
@@ -153,6 +170,19 @@ const form = useForm({
                                     </div>
                                 </div>
                                 <!-- Mobile number -->
+
+                                <!-- Branch -->
+                                <div class="form-group row">
+                                    <label for="branch" class="col-sm-3 col-form-label">{{ __('Branch') }}</label>
+                                    <div class="col-sm-5">
+                                        <select id="branch" class="form-control m-select2-no" v-model="form.branch_id" :data-placeholder="__('Branch')">
+                                            <option value="">{{ __('Choose') }}</option>
+                                            <option v-for="(branch, key) in branches" :key="key" :value="branch.id">{{ branch.name }}</option>
+                                        </select>
+                                        <p class="text text-danger text-sm" v-if="form.errors.branch_id">{{ form.errors.branch_id }}</p>
+                                    </div>
+                                </div>
+                                <!-- Branch -->
 
                                 <div class="text-end">
                                     <input type="submit" class="btn btn-success" :value="__('Save')" />

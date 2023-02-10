@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'register-member' => \App\Http\Middleware\MemberRegistrationSteps::class,
         'profile-is-complete' => \App\Http\Middleware\CompleteProfile::class,
         'can-pay' => \App\Http\Middleware\MemberCanPay::class,
+        'volunteer-has-branch' => \App\Http\Middleware\VolunteerHasBranch::class,
     ];
 }

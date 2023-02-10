@@ -65,7 +65,7 @@ Route::group(['prefix' => 'volunteers', 'as' => 'volunteer.'], function () {
              * My Courses
              * Displays current registered courses and upcoming courses
              */
-            Route::get('/', [VolunteerController::class, 'courses']);
+            Route::get('/', [VolunteerController::class, 'courses'])->middleware('volunteer-has-branch');
             Route::get('/courses', [VolunteerController::class, 'courses'])->name('courses');
 
             /**

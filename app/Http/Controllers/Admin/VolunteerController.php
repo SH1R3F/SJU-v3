@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Events\VolunteerRegistered;
 use App\Http\Controllers\Controller;
 use App\Services\CertificateService;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\StoreVolunteer;
 use Illuminate\Support\Facades\Storage;
@@ -36,8 +37,12 @@ class VolunteerController extends Controller
     public function index($status = 'active')
     {
         $volunteers = Volunteer::withCount('courses')
+            ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
             ->when($status == 'active', fn ($query) => $query->where('status', 1))
             ->when($status == 'inactive', fn ($query) => $query->where('status', '!=', 1))
+            ->addSelect([
+                'branch_name' => Branch::select('name')->whereColumn('branches.id', 'volunteers.branch_id')->take(1),
+            ])
             ->filter(request())
             ->order(request())
             ->paginate(request()->perPage ?: 10)
@@ -66,6 +71,7 @@ class VolunteerController extends Controller
         $this->authorize('export', Volunteer::class);
 
         $volunteers = Volunteer::withCount('courses')
+            ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
             ->when($status == 'active', fn ($query) => $query->where('status', 1))
             ->when($status == 'inactive', fn ($query) => $query->where('status', '!=', 1))
             ->filter(request())
@@ -248,6 +254,7 @@ class VolunteerController extends Controller
     {
         $this->authorize('viewAny', Volunteer::class);
         $volunteers = Volunteer::filter(request())
+            ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
             ->when(
                 app()->getLocale() == 'ar',
                 fn ($q) => $q->select('id', DB::raw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar) AS text")),
@@ -271,16 +278,23 @@ class VolunteerController extends Controller
 
         switch ($request['to_type']) {
             case 'select':
-                $recipients = Volunteer::whereIn('id', $request['recipients'])->get();
+                $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->whereIn('id', $request['recipients'])
+                    ->get();
                 break;
             case 'all':
-                $recipients = Volunteer::all();
+                $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->get();
                 break;
             case 'active':
-                $recipients = Volunteer::where('status', 1)->get();
+                $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->where('status', 1)
+                    ->get();
                 break;
             case 'inactive':
-                $recipients = Volunteer::where('status', '!=', 1)->get();
+                $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->where('status', '!=', 1)
+                    ->get();
                 break;
         }
 

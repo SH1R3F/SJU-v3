@@ -18,6 +18,7 @@ updateGlobalOptions({
     hideProgressBar: true,
     closeButton: false,
 });
+
 if (props.flash.message) {
     toast.success(props.flash.message);
 }
@@ -40,6 +41,7 @@ onUpdated(function () {
         <title>{{ __('Home') }}</title>
         <!-- Flash messages -->
         <component is="script" defer v-if="route()?.params?.verified == 1"> this.toastr.success('{{ __('Email has been verified successfully') }}') </component>
+        <component is="script" defer v-if="route()?.params?.branch == 0"> this.toastr.error('{{ __('Complete your profile and add your branch') }}') </component>
     </Head>
 
     <!-- Mini bar -->

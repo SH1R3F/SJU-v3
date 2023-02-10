@@ -34,13 +34,13 @@ class StoreVolunteer extends FormRequest
             'sname_en'         => ['nullable', 'string', 'max:255'],
             'tname_en'         => ['nullable', 'string', 'max:255'],
             'lname_en'         => ['nullable', 'string', 'max:255'],
-            'gender'           => ['required', 'string', 'in:male,female'],
-            'country'          => ['required', 'string', Rule::in(array_keys(config('sju.countries')))],
+            'gender'           => ['nullable', 'string', 'in:male,female'],
+            'country'          => ['nullable', 'string', Rule::in(array_keys(config('sju.countries')))],
             'city'             => ['nullable', 'required_if:country,المملكة العربية السعودية', 'numeric', Rule::in(array_keys(config('sju.cities')))],
-            'nationality'      => ['required', 'string', Rule::in(array_keys(config('sju.nationalities_ar')))],
-            'qualification'    => ['required', 'numeric', Rule::in(array_keys(config('sju.qualifications')))],
+            'nationality'      => ['nullable', 'string', Rule::in(array_keys(config('sju.nationalities_ar')))],
+            'qualification'    => ['nullable', 'numeric', Rule::in(array_keys(config('sju.qualifications')))],
             'national_id'      => [
-                'required', 'numeric',
+                'nullable', 'numeric',
                 Rule::when(
                     request()->isMethod('POST'),
                     Rule::unique('volunteers'),
@@ -58,7 +58,7 @@ class StoreVolunteer extends FormRequest
             'education_level'  => ['nullable', 'string', 'max:255'],
             'experiences'      => ['nullable', 'string', 'max:255'],
             'mobile'           => ['required', 'numeric'],
-            'mobile_key'       => ['required', 'numeric', Rule::in(array_values(config('sju.countries')))],
+            'mobile_key'       => ['nullable', 'numeric', Rule::in(array_values(config('sju.countries')))],
             'email'            => [
                 'required', 'email',
                 Rule::when(

@@ -151,6 +151,7 @@ const sortBy = (column) => {
                             <th @click.prevent="sortBy('email')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'email' }">{{ __('Email') }}</th>
                             <th @click.prevent="sortBy('mobile')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'mobile' }">{{ __('Mobile') }}</th>
                             <th @click.prevent="sortBy('courses')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'courses' }">{{ __('Courses') }}</th>
+                            <th @click.prevent="sortBy('branch_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'branch_id' }">{{ __('Branch') }}</th>
                             <th @click.prevent="sortBy('status')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'status' }">{{ __('Status') }}</th>
                             <th>{{ __('Actions') }}</th>
                         </tr>
@@ -180,6 +181,9 @@ const sortBy = (column) => {
                             </td>
                             <td>
                                 {{ volunteer.courses_count }}
+                            </td>
+                            <td>
+                                {{ volunteer.branch_name }}
                             </td>
                             <td>
                                 {{ volunteer.state }}

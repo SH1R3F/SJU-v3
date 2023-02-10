@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Volunteer;
 
+use App\Models\Branch;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
 use Illuminate\Validation\Rule;
@@ -45,7 +46,9 @@ class VolunteerController extends Controller
         $countries = config('sju.countries', []);
         $cities = config('sju.cities', []);
         $qualifications = config('sju.qualifications', []);
-        return inertia('Volunteers/Profile/Info', compact('countries', 'qualifications', 'cities'));
+        $nationalities = config('sju.nationalities_ar', []);
+        $branches = Branch::orderBy('id')->get(['id', 'name']);
+        return inertia('Volunteers/Profile/Info', compact('countries', 'qualifications', 'cities', 'nationalities', 'branches'));
     }
 
     /**
@@ -59,7 +62,10 @@ class VolunteerController extends Controller
         $data = $request->validate([
             'country' => ['required', 'string', Rule::in(array_keys(config('sju.countries')))],
             'city' => ['nullable', 'required_if:country,المملكة العربية السعودية', 'numeric', Rule::in(array_keys(config('sju.cities')))],
+            'branch_id' => ['required', 'numeric', 'exists:branches,id'],
+            'nationality' => ['required', 'string', Rule::in(array_keys(config('sju.nationalities_ar')))],
             'qualification' => ['required', 'numeric', Rule::in(array_keys(config('sju.qualifications')))],
+            'gender' => ['required', 'string', 'in:male,female'],
             'mobile' => ['required', 'numeric'],
             'mobile_key' => ['required', 'numeric', Rule::in(array_values(config('sju.countries')))],
         ]);
