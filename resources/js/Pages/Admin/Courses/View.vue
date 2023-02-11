@@ -93,12 +93,12 @@ const unpassed = computed(() => {
                                     <span>{{ course.members?.length || 0 + course.subscribers?.length || 0 + course.volunteers?.length || 0 }} {{ __('Users') }}</span>
                                 </li>
                                 <li class="mb-2">
-                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Non-Passed number') }}</span>
-                                    <span>{{ unpassed }} {{ __('Users') }}</span>
-                                </li>
-                                <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Passed number') }}</span>
                                     <span>{{ passed }} {{ __('Users') }}</span>
+                                </li>
+                                <li class="mb-2">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Non-Passed number') }}</span>
+                                    <span>{{ unpassed }} {{ __('Users') }}</span>
                                 </li>
                                 <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Attendance duration') }}</span>

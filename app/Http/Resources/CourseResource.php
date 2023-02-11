@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Http\Resources\MemberResource;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\VolunteerResource;
 use App\Http\Resources\SubscriberResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -33,9 +34,10 @@ class CourseResource extends JsonResource
                 'image' => $this->when($this->image, Storage::url($this->image), null),
                 'images' => collect($this->images)->filter(fn ($img) => Storage::exists($img))->map(fn ($img) => Storage::url($img)),
 
-                // Corusables
+                // Coursables
                 'members' => MemberResource::collection($this->whenLoaded('members')),
                 'subscribers' => SubscriberResource::collection($this->whenLoaded('subscribers')),
+                'volunteers' => VolunteerResource::collection($this->whenLoaded('volunteers')),
 
                 // Authorization
                 $this->merge($this->withAuthorization($request))
