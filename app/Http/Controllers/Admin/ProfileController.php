@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function index()
     {
         return inertia('Admin/Profile', [
-            'admin' => new AdminResource(Auth::guard('admin')->user()),
+            'admin' => new AdminResource(Auth::guard('admin')->user()->load('branch')),
         ]);
     }
 

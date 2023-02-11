@@ -38,7 +38,14 @@ const editRole = (role) => {
                         <div class="d-flex justify-content-between">
                             <h6 class="fw-normal mb-2">{{ __('Total :count users', { count: role.users_count }) }}</h6>
                             <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
-                                <li v-for="admin in role.admins" :key="admin.id" data-popup="tooltip-custom" data-bs-placement="top" :title="admin.fullName" class="avatar avatar-sm pull-up">
+                                <li
+                                    v-for="admin in role.admins.slice(0, 4)"
+                                    :key="admin.id"
+                                    data-popup="tooltip-custom"
+                                    data-bs-placement="top"
+                                    :title="admin.fullName"
+                                    class="avatar avatar-sm pull-up"
+                                >
                                     <img class="rounded-circle" src="/img/admin.png" alt="Avatar" />
                                 </li>
                             </ul>

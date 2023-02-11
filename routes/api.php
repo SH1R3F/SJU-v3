@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // include __DIR__ . '/seeds/support_tickets.php';
 // include __DIR__ . '/seeds/support_messages.php';
 // include __DIR__ . '/seeds/news.php';
-// include __DIR__ . '/seeds/pages.php';
+include __DIR__ . '/seeds/pages.php';
 // include __DIR__ . '/seeds/templates.php';
 // include __DIR__ . '/seeds/polls.php';
 // include __DIR__ . '/seeds/questions.php';
