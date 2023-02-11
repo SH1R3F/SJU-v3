@@ -437,6 +437,7 @@ class MemberController extends Controller
     {
         $this->authorize('notify', Member::class);
         $members = Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+            ->filter(request())
             ->when(
                 app()->getLocale() == 'ar',
                 fn ($q) => $q->select('id', DB::raw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar) AS text")),
