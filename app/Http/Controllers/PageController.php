@@ -36,9 +36,9 @@ class PageController extends Controller
         return inertia('Home/Index', [
             'courses' => CourseResource::collection($courses),
             'articles' => ArticleResource::collection($articles),
-            'media' => MediaResource::collection(Media::orderBy('type', 'ASC')->paginate(5, ['*'], 'media')),
-            'photos' => MediaResource::collection(Media::where('type', 'photo')->orderBy('id', 'DESC')->paginate(5, ['*'], 'photos')),
-            'videos' => MediaResource::collection(Media::where('type', 'video')->orderBy('id', 'DESC')->paginate(5, ['*'], 'videos')),
+            'media' => MediaResource::collection(Media::orderBy('type', 'ASC')->paginate(9, ['*'], 'media')),
+            'photos' => MediaResource::collection(Media::where('type', 'photo')->orderBy('id', 'DESC')->paginate(9, ['*'], 'photos')),
+            'videos' => MediaResource::collection(Media::where('type', 'video')->orderBy('id', 'DESC')->paginate(9, ['*'], 'videos')),
             'stats' => [
                 'members' => Member::where('status', 2)->count(),
                 'memberships' => Subscription::where('status', 1)->count(),
