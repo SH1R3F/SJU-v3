@@ -38,7 +38,7 @@ class RoleRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'permissions' => $this->permissions ? array_keys(array_filter($this->permissions)) : $this->permissions
+            'permissions' => $this->permissions ? array_keys(array_filter($this->permissions ?? [])) : $this->permissions
         ]);
     }
 }

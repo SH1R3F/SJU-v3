@@ -62,7 +62,7 @@ class RegisterRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'fields' => array_keys(array_filter($this->fields))
+            'fields' => array_keys(array_filter($this->fields ?? []))
         ]);
     }
 }

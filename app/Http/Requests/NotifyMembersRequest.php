@@ -36,7 +36,7 @@ class NotifyMembersRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'via' => $this->via ? array_keys(array_filter($this->via)) : $this->via
+            'via' => $this->via ? array_keys(array_filter($this->via ?? [])) : $this->via
         ]);
     }
 }
