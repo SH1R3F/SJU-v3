@@ -9,24 +9,16 @@ const all = computed(() => {
     return (props.course.members?.length || 0) + (props.course.subscribers?.length || 0) + (props.course.volunteers?.length || 0);
 });
 
-console.log(props.course);
-console.log(props.course.subscribers?.length);
-console.log(
-    props.course.subscribers?.reduce((total, current) => {
-        return current.pivot?.attendance;
-    }, 0) || 0
-);
-
 const passed = computed(() => {
     return (
         (props.course.members?.reduce((total, current) => {
-            return current.pivot?.attendance;
+            return total + current.pivot?.attendance;
         }, 0) || 0) +
         (props.course.subscribers?.reduce((total, current) => {
-            return current.pivot?.attendance;
+            return total + current.pivot?.attendance;
         }, 0) || 0) +
         (props.course.volunteers?.reduce((total, current) => {
-            return current.pivot?.attendance;
+            return total + current.pivot?.attendance;
         }, 0) || 0)
     );
 });
