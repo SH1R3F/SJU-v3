@@ -44,8 +44,10 @@ class PushNotificationToUsers extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-            ->line($this->message);
+        return (new MailMessage)->subject('إشعار من هيئة الصحفيين السعوديين')->view('emails.verify', [
+            'user' => $notifiable,
+            'message' => $this->message
+        ]);
     }
 
 
