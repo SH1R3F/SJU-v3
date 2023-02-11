@@ -11,6 +11,7 @@ import FollowUs from './Components/FollowUs.vue';
 const props = defineProps({
     courses: Object,
     articles: Object,
+    media: Object,
     photos: Object,
     videos: Object,
     locale: String,
@@ -33,7 +34,7 @@ const props = defineProps({
         <!-- Media center -->
 
         <!-- Studio -->
-        <Studio :photos="photos.data" :videos="videos.data" />
+        <Studio :media="media" :photos="photos" :videos="videos" />
         <!-- Studio -->
 
         <!-- Regulations and Events -->
