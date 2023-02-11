@@ -49,7 +49,7 @@
 <body
     style="margin: 0; width: 100%; padding: 0; word-break: break-word; -webkit-font-smoothing: antialiased; background-color: #eceff1;">
     <div style="font-family: 'Cairo', sans-serif; mso-line-height-rule: exactly; display: none;">
-        {{ $message }}</div>
+    </div>
     <div role="article" aria-roledescription="email" aria-label="Welcome to Saudi journalists' association 👋"
         lang="en" style="font-family: 'Cairo', sans-serif; mso-line-height-rule: exactly;">
         <table style="width: 100%; font-family: Cairo, -apple-system, 'Segoe UI', sans-serif;" cellpadding="0"
@@ -83,7 +83,6 @@
                                                 {{ $user->full_name_ar }}</p>
                                             <p class="sm-leading-32"
                                                 style="font-family: 'Cairo', sans-serif; mso-line-height-rule: exactly; margin: 0; margin-bottom: 24px; font-size: 24px; font-weight: 600; color: #263238;">
-                                                {{ $message }}
                                             </p>
                                             <p></p>
                                             <p
