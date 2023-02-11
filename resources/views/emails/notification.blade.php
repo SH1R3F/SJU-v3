@@ -82,7 +82,7 @@
                                                 style="font-family: 'Cairo', sans-serif; mso-line-height-rule: exactly; margin-top: 0; font-size: 24px; font-weight: 700; color: #ff5850;">
                                                 {{ $user->full_name_ar }}</p>
                                             <p class="sm-leading-32"
-                                                style="font-family: 'Cairo', sans-serif; mso-line-height-rule: exactly; margin: 0; margin-bottom: 24px; font-size: 24px; font-weight: 600; color: #263238;">
+                                                style="font-family: 'Cairo', sans-serif; mso-line-height-rule: exactly; margin: 0; margin-bottom: 24px; font-size: 16px; font-weight: 600; color: #263238;">
                                                 {{ $notification_message }}
                                             </p>
                                             <p></p>
