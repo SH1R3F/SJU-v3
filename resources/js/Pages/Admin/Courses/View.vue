@@ -8,6 +8,15 @@ const props = defineProps({
 const all = computed(() => {
     return (props.course.members?.length || 0) + (props.course.subscribers?.length || 0) + (props.course.volunteers?.length || 0);
 });
+
+console.log(props.course);
+console.log(props.course.subscribers?.length);
+console.log(
+    props.course.subscribers?.reduce((total, current) => {
+        return current.pivot?.attendance;
+    }, 0) || 0
+);
+
 const passed = computed(() => {
     return (
         (props.course.members?.reduce((total, current) => {
@@ -87,11 +96,11 @@ const unpassed = computed(() => {
                             <ul class="list-unstyled">
                                 <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Total attendance') }}</span>
-                                    <span>{{ course.members?.length || 0 + course.subscribers?.length || 0 + course.volunteers?.length || 0 }} {{ __('Users') }}</span>
+                                    <span>{{ (course.members?.length || 0) + (course.subscribers?.length || 0) + (course.volunteers?.length || 0) }} {{ __('Users') }}</span>
                                 </li>
                                 <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Passed number') }}</span>
-                                    <span>{{ passed }} {{ __('Users') }}</span>
+                                    <span> {{ passed }} {{ __('Users') }}</span>
                                 </li>
                                 <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Non-Passed number') }}</span>
