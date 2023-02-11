@@ -119,15 +119,14 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        $course = $course
-            ->with('members', 'subscribers')
+        $course = Course::with('members', 'subscribers', 'volunteers')
             ->addSelect([
                 'course_type' => Type::select('name')->whereColumn('courses_types.id', 'courses.course_type_id')->take(1),
                 'course_branch' => Branch::select('name')->whereColumn('branches.id', 'courses.course_branch_id')->take(1),
                 'course_gender' => Gender::select('name')->whereColumn('courses_genders.id', 'courses.course_gender_id')->take(1),
                 'course_category' => Category::select('name')->whereColumn('courses_categories.id', 'courses.course_category_id')->take(1),
             ])
-            ->first();
+            ->find($course->id);
 
         return inertia('Admin/Courses/View', [
             'course' => new CourseResource($course),

@@ -6,7 +6,7 @@ const props = defineProps({
 });
 
 const all = computed(() => {
-    return props.course.members?.length || 0 + props.course.subscribers?.length || 0;
+    return props.course.members?.length || 0 + props.course.subscribers?.length || 0 + props.course.volunteers?.length || 0;
 });
 const passed = computed(() => {
     return (
@@ -15,6 +15,10 @@ const passed = computed(() => {
         }, 0) ||
         0 +
             props.course.subscribers?.reduce((total, current) => {
+                return current.pivot?.attendance;
+            }, 0) ||
+        0 +
+            props.course.volunteers?.reduce((total, current) => {
                 return current.pivot?.attendance;
             }, 0) ||
         0
@@ -86,7 +90,7 @@ const unpassed = computed(() => {
                             <ul class="list-unstyled">
                                 <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Total attendance') }}</span>
-                                    <span>{{ course.members?.length || 0 + course.subscribers?.length || 0 }} {{ __('Users') }}</span>
+                                    <span>{{ course.members?.length || 0 + course.subscribers?.length || 0 + course.volunteers?.length || 0 }} {{ __('Users') }}</span>
                                 </li>
                                 <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Passed number') }}</span>
@@ -181,7 +185,7 @@ const unpassed = computed(() => {
                                             >{{ subscriber.fullName }}</Link
                                         >
                                     </td>
-                                    <td>{{ __('Subscriber') }}</td>
+                                    <td>{{ __('Volunteer') }}</td>
                                     <td>{{ subscriber.phone_number }}</td>
                                     <td>
                                         <span style="display: inline-block; max-width: 180px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">{{ subscriber.email }}</span>
@@ -203,6 +207,49 @@ const unpassed = computed(() => {
                                     <td>
                                         <Link
                                             :href="route('admin.courses.attendance.delete', { course: course.id, type: 'subscriber', id: subscriber.id })"
+                                            method="DELETE"
+                                            as="span"
+                                            class="text-body"
+                                            data-bs-placement="top"
+                                            :aria-label="__('Delete')"
+                                            :title="__('Delete')"
+                                        >
+                                            <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
+                                        </Link>
+                                    </td>
+                                </tr>
+
+                                <tr v-for="(volunteer, i) in course.volunteers" :key="volunteer.id">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>
+                                        <Link
+                                            :href="route('admin.volunteers.show', volunteer.id)"
+                                            style="display: inline-block; max-width: 150px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis"
+                                            >{{ volunteer.fullName }}</Link
+                                        >
+                                    </td>
+                                    <td>{{ __('Subscriber') }}</td>
+                                    <td>{{ volunteer.phone_number }}</td>
+                                    <td>
+                                        <span style="display: inline-block; max-width: 180px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">{{ volunteer.email }}</span>
+                                    </td>
+                                    <td>
+                                        <Link
+                                            :href="route('admin.courses.attendance.toggle', { course: course.id, type: 'volunteer', id: volunteer.id })"
+                                            method="post"
+                                            as="span"
+                                            preserve-scroll
+                                            class="cursor-pointer"
+                                            data-bs-placement="top"
+                                            :title="volunteer.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
+                                            :class="{ 'text-success': volunteer.pivot?.attendance, 'text-body': !volunteer.pivot?.attendance }"
+                                        >
+                                            <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': volunteer.pivot?.attendance, 'ti-toggle-left': !volunteer.pivot?.attendance }"></i>
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <Link
+                                            :href="route('admin.courses.attendance.delete', { course: course.id, type: 'volunteer', id: volunteer.id })"
                                             method="DELETE"
                                             as="span"
                                             class="text-body"
