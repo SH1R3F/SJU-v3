@@ -71,7 +71,20 @@ class CertificateService
     {
         $setMaleOrFemaleTitle = '';
         if ($template->with_title) {
-            $setMaleOrFemaleTitle = $user->gender ? $template->female_title : $template->male_title;
+            switch ($user->gender) {
+                case 'female':
+                    $setMaleOrFemaleTitle = $template->female_title;
+                    break;
+                case 'male':
+                    $setMaleOrFemaleTitle = $template->male_title;
+                    break;
+                case 1:
+                    $setMaleOrFemaleTitle = $template->female_title;
+                    break;
+                default:
+                    $setMaleOrFemaleTitle = $template->male_title;
+                    break;
+            }
         }
 
         $html = '';
