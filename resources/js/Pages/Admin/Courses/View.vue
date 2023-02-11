@@ -6,22 +6,19 @@ const props = defineProps({
 });
 
 const all = computed(() => {
-    return props.course.members?.length || 0 + props.course.subscribers?.length || 0 + props.course.volunteers?.length || 0;
+    return (props.course.members?.length || 0) + (props.course.subscribers?.length || 0) + (props.course.volunteers?.length || 0);
 });
 const passed = computed(() => {
     return (
-        props.course.members?.reduce((total, current) => {
+        (props.course.members?.reduce((total, current) => {
             return current.pivot?.attendance;
-        }, 0) ||
-        0 +
-            props.course.subscribers?.reduce((total, current) => {
-                return current.pivot?.attendance;
-            }, 0) ||
-        0 +
-            props.course.volunteers?.reduce((total, current) => {
-                return current.pivot?.attendance;
-            }, 0) ||
-        0
+        }, 0) || 0) +
+        (props.course.subscribers?.reduce((total, current) => {
+            return current.pivot?.attendance;
+        }, 0) || 0) +
+        (props.course.volunteers?.reduce((total, current) => {
+            return current.pivot?.attendance;
+        }, 0) || 0)
     );
 });
 const unpassed = computed(() => {
@@ -185,7 +182,7 @@ const unpassed = computed(() => {
                                             >{{ subscriber.fullName }}</Link
                                         >
                                     </td>
-                                    <td>{{ __('Volunteer') }}</td>
+                                    <td>{{ __('Subscriber') }}</td>
                                     <td>{{ subscriber.phone_number }}</td>
                                     <td>
                                         <span style="display: inline-block; max-width: 180px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">{{ subscriber.email }}</span>
@@ -228,7 +225,7 @@ const unpassed = computed(() => {
                                             >{{ volunteer.fullName }}</Link
                                         >
                                     </td>
-                                    <td>{{ __('Subscriber') }}</td>
+                                    <td>{{ __('Volunteer') }}</td>
                                     <td>{{ volunteer.phone_number }}</td>
                                     <td>
                                         <span style="display: inline-block; max-width: 180px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">{{ volunteer.email }}</span>
@@ -261,6 +258,7 @@ const unpassed = computed(() => {
                                         </Link>
                                     </td>
                                 </tr>
+
                                 <tr v-if="!all">
                                     <td colspan="7" class="text-muted text-center p-3">
                                         {{ __('No one registered for this course') }}
