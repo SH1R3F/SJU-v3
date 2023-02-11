@@ -40,7 +40,7 @@ class AdminRequest extends FormRequest
                 Rule::when(request()->isMethod('POST'), Rule::unique('admins'), Rule::unique('admins')->ignore($this->admin))
             ],
             'mobile' => [
-                'required',
+                'nullable',
                 'numeric',
                 'digits_between:1,13',
                 Rule::when(request()->isMethod('POST'), Rule::unique('admins'), Rule::unique('admins')->ignore($this->admin))

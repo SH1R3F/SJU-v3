@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Member;
 
+use App\Models\Member;
 use Illuminate\Support\Str;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,14 @@ class LoginRequest extends FormRequest
 
             throw ValidationException::withMessages([
                 'national_id' => trans('auth.failed'),
+            ]);
+        }
+
+        // If disabled
+        if (!Auth::guard('member')->user()->status == Member::STATUS_DISABLED) {
+            Auth::guard('member')->logout();
+            throw ValidationException::withMessages([
+                'national_id' => __('Your account has been disabled. Please contact adminstrators.'),
             ]);
         }
 

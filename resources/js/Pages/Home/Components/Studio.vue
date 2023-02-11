@@ -94,7 +94,7 @@ defineProps({
 
                     <div class="tab-pane fade" :class="{ 'show active': route()?.params?.photos }" id="pills-photos" role="tabpanel" aria-labelledby="pills-photos-tab">
                         <div class="row mt-3">
-                            <div class="col-md-4 mb-3" v-for="photo in photos">
+                            <div class="col-md-4 mb-3" v-for="photo in photos.data">
                                 <div class="post img-popup" :style="`background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7)), url('${photo.path}')`" :src="photo.path">
                                     <div class="category">
                                         <span>{{ __('Photo') }}</span>
@@ -107,7 +107,7 @@ defineProps({
 
                     <div class="tab-pane fade" :class="{ 'show active': route()?.params?.videos }" id="pills-videos" role="tabpanel" aria-labelledby="pills-videos-tab">
                         <div class="row mt-3">
-                            <div class="col-md-4 mb-3" v-for="video in videos">
+                            <div class="col-md-4 mb-3" v-for="video in videos.data">
                                 <iframe
                                     class="w-100"
                                     width="352"

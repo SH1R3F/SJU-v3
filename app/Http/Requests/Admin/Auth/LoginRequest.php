@@ -51,6 +51,15 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+        // If disabled
+        if (!Auth::guard('admin')->user()->active) {
+            Auth::guard('admin')->logout();
+            throw ValidationException::withMessages([
+                'username' => __('Your account has been disabled. Please contact adminstrators.'),
+            ]);
+        }
+
+
         RateLimiter::clear($this->throttleKey());
     }
 

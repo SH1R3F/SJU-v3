@@ -55,10 +55,10 @@ class AdminService
                 return Admin::whereIn('id', $data['recipients'])->get();
                 break;
             case 'all':
-                return Admin::all();
+                return Admin::where('active', 1)->get();
                 break;
             default:
-                return Admin::whereHas('roles', fn ($query) => $query->where('name', $data['to_type']))->get();
+                return Admin::where('active', 1)->whereHas('roles', fn ($query) => $query->where('name', $data['to_type']))->get();
                 break;
         }
     }

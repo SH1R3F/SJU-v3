@@ -81,20 +81,24 @@ class MemberService
                 break;
             case 'all':
                 return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->where('status', '!=', self::STATUS_DISABLED)
                     ->get();
                 break;
             case 'fulltime':
                 return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->where('status', '!=', self::STATUS_DISABLED)
                     ->whereHas('subscription', fn ($query) => $query->where('type', 1))
                     ->get();
                 break;
             case 'parttime':
                 return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->where('status', '!=', self::STATUS_DISABLED)
                     ->whereHas('subscription', fn ($query) => $query->where('type', 2))
                     ->get();
                 break;
             case 'affiliate':
                 return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->where('status', '!=', self::STATUS_DISABLED)
                     ->whereHas('subscription', fn ($query) => $query->where('type', 3))
                     ->get();
                 break;
