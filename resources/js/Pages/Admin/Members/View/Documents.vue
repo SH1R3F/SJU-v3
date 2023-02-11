@@ -98,7 +98,7 @@ const props = defineProps({
                 </div>
                 <!-- /License photo -->
                 <!-- Contract photo -->
-                <div class="card mb-3 py-3">
+                <div class="card mb-3 py-3" v-if="member.subscription?.num == 3">
                     <div class="row g-0">
                         <div class="col-md-8">
                             <div class="card-body">
