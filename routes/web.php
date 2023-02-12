@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Models\Course\Certificate;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TechnicalSupportController;
-use App\Models\Course\Certificate;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,10 @@ Route::post('notifications/read-all', function (Request $request) {
 Route::post('notifications/{id}/read', function (Request $request, $id) {
     Auth::guard('admin')->user()->unreadNotifications->where('id', $id)->markAsRead();
 })->middleware('auth:member,subscriber,volunteer,admin')->name('read-notification');
+
+Route::post('old-notifications/{id}/read', function (Request $request, $id) {
+    DB::table('old_notifications')->where('member_id', Auth::guard('admin')->user()->id)->find($id)->update(['read' => true]);
+})->middleware('auth:member')->name('read-old-notification');
 
 /**
  * Language and notifications routes

@@ -39,7 +39,10 @@ const props = defineProps({
                                 <tr v-for="notification in old_notifications">
                                     <td>{{ notification.title }}</td>
                                     <td>{{ arabic_date(notification.created_at) }}</td>
-                                    <td>{{ notification.status }}</td>
+                                    <td>
+                                        {{ notification.status }}
+                                        <Link :href="route('read-old-notification', notification.id)" method="POST" as="button" class="btn btn-success btn-sm">{{ __('Mark as read') }}</Link>
+                                    </td>
                                 </tr>
                                 <tr v-if="notifications.length + old_notifications.length == 0">
                                     <td colspan="3">{{ __("You don't have any unseen notifications") }}</td>

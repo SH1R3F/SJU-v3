@@ -22,7 +22,7 @@ class MemberController extends Controller
     {
         $member = Auth::guard('member')->user();
         $notifications = $member->unreadNotifications()->orderBy('created_at', 'DESC')->get();
-        $old_notifications = DB::table('old_notifications')->where('member_id', $member->id)->orderBy('id', 'DESC')->get();
+        $old_notifications = DB::table('old_notifications')->where('member_id', $member->id)->where('read', false)->orderBy('id', 'DESC')->get();
         return inertia('Members/Index', compact('notifications', 'old_notifications'));
     }
 
