@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('old_notifications', function (Blueprint $table) {
-            $table->boolean('read')->default(false);
+            $table->boolean('read')->default(false)->after('status');
         });
     }
 
