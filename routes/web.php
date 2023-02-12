@@ -30,7 +30,7 @@ Route::post('notifications/{id}/read', function (Request $request, $id) {
 })->middleware('auth:member,subscriber,volunteer,admin')->name('read-notification');
 
 Route::post('old-notifications/{id}/read', function (Request $request, $id) {
-    DB::table('old_notifications')->where('member_id', Auth::guard('member')->user()->id)->find($id)->update(['read' => true]);
+    // DB::table('old_notifications')->where('member_id', Auth::guard('member')->user()->id)->find($id)->update(['read' => true]);
 })->middleware('auth:member')->name('read-old-notification');
 
 /**
