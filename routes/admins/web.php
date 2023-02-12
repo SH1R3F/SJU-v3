@@ -83,6 +83,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         /**
          * Members management
          */
+        Route::post('members/{member}/set-paid', [MemberController::class, 'setPaid'])->name('members.set-paid');
         Route::get('members/branch-approval', [MemberController::class, 'branch'])->name('members.branch-approval');
         Route::get('members/admin-acceptance', [MemberController::class, 'acceptance'])->name('members.admin-acceptance');
         Route::get('members/refused', [MemberController::class, 'refused'])->name('members.refused');

@@ -93,6 +93,7 @@ class MemberResource extends JsonResource
         // Only for admin panel member's resource
         if (in_array($request->route()->getAction()['as'], ['admin.members.index', 'admin.members.branch-approval', 'admin.members.admin-acceptance', 'admin.members.refused'])) {
             return [
+                'payable'    => $request->user()->can('pay', $this->resource),
                 'acceptable' => $request->user()->can('accept', $this->resource),
                 'toggleable' => $request->user()->can('toggle', $this->resource),
                 'viewable'   => $request->user()->can('view', $this->resource),

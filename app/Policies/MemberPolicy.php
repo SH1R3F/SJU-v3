@@ -20,7 +20,7 @@ class MemberPolicy
      */
     public function before(Admin $admin, $ability, mixed $model)
     {
-        if ($admin->hasRole('Site admin')) {
+        if ($admin->hasRole('Site admin') && $ability != 'pay') {
             return true;
         } else if ($admin->hasRole('Branch manager')) {
             // Branch managers can only update/edit the members of their branches
@@ -129,6 +129,19 @@ class MemberPolicy
     public function update(Admin $admin, Member $member)
     {
         return $admin->hasPermissionTo('update-member');
+    }
+
+    /**
+     * Determine whether the admin can set member as paid.
+     *
+     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function pay(Admin $admin, Member $member)
+    {
+        if (!$member->canPay()) return false;
+        return $admin->hasPermissionTo('pay-member');
     }
 
     /**

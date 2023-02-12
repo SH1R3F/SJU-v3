@@ -244,6 +244,17 @@ const sortBy = (column) => {
                             <td>
                                 <div class="d-flex align-items-center">
                                     <Link
+                                        v-if="member.payable"
+                                        :href="route('admin.members.set-paid', member.id)"
+                                        method="post"
+                                        as="span"
+                                        preserve-scroll
+                                        class="cursor-pointer text-body"
+                                        :title="__('Set paid')"
+                                    >
+                                        <i class="ti ti-sm me-2 ti-currency-dollar"></i>
+                                    </Link>
+                                    <Link
                                         v-if="member.toggleable"
                                         :href="route('admin.members.toggle', member.id)"
                                         method="post"

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use Inertia\Inertia;
 use App\Models\Branch;
 use App\Models\Member;
@@ -10,11 +11,13 @@ use Illuminate\Http\Request;
 use App\Exports\MembersExport;
 use App\Services\MemberService;
 use App\Events\MemberRegistered;
+use App\Services\InvoiceService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MemberRequest;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Notifications\MembershipPaid;
 use App\Http\Resources\MemberResource;
 use Illuminate\Support\Facades\Storage;
 use App\Notifications\MembershipRefused;
@@ -398,6 +401,39 @@ class MemberController extends Controller
         $member->update([
             'status' => $member->status == Member::STATUS_DISABLED ? Member::STATUS_UNAPPROVED : Member::STATUS_DISABLED
         ]);
+
+        return redirect()->back()->with('message', __('Member updated successfully'));
+    }
+
+    /**
+     * Set member as paid.
+     *
+     * @param  \App\Models\Member  $member
+     * @param  \App\Services\MemberService  $service
+     * @return \Illuminate\Http\Response
+     */
+    public function setPaid(Member $member, MemberService $service)
+    {
+        $this->authorize('pay', $member);
+
+        // Update member's subscription
+        $member->subscription()->update([
+            'start_date' => Carbon::today(),
+            'end_date' => Carbon::now()->endOfYear(),
+            'status' => Subscription::SUBSCRIPTION_ACTIVE
+        ]);
+        $member->notify(new MembershipPaid);
+
+        // Create him an invoice
+        $price = config('sju.memberships')[$member->subscription->type]['price'] + ($member->delivery_option == 2 ? config('sju.memberships.delivery_fees') : 0);
+        (new InvoiceService)->create($member, [
+            'amount' => $price,
+            'method' => 'manual',
+            'set_by' => Auth::guard('admin')->user()->id
+        ]);
+
+        // Give membershipt number!
+        $service->membershipNumber($member);
 
         return redirect()->back()->with('message', __('Member updated successfully'));
     }

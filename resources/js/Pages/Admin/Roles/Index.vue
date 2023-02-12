@@ -222,6 +222,10 @@ const editRole = (role) => {
                                                             <input class="form-check-input" type="checkbox" id="invoices" v-model="addForm.permissions['manage-invoice']" />
                                                             <label class="form-check-label" for="invoices"> {{ __('Invoices') }} </label>
                                                         </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="setPaid" v-model="addForm.permissions['pay-member']" />
+                                                            <label class="form-check-label" for="setPaid"> {{ __('Set paid') }} </label>
+                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -687,6 +691,10 @@ const editRole = (role) => {
                                                         <div class="form-check me-2 me-lg-3">
                                                             <input class="form-check-input" type="checkbox" id="editInvoices" v-model="editForm.permissions['manage-invoice']" />
                                                             <label class="form-check-label" for="editInvoices"> {{ __('Invoices') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editSetPaid" v-model="editForm.permissions['pay-member']" />
+                                                            <label class="form-check-label" for="editSetPaid"> {{ __('Set paid') }} </label>
                                                         </div>
                                                     </div>
                                                 </td>
