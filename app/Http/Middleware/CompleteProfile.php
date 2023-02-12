@@ -19,7 +19,7 @@ class CompleteProfile
     public function handle(Request $request, Closure $next)
     {
 
-        if (Auth::guard('member')->check() && !Auth::guard('member')->user()->complete()) {
+        if (Auth::guard('member')->check() && !Auth::guard('member')->user()->complete() && Auth::guard('member')->user()->status <= 0) {
             return redirect()->route('member.complete-profile');
         }
 

@@ -29,14 +29,14 @@ class MediaRequest extends FormRequest
             'upload' => ['required', 'boolean'],
             'file' => [
                 'nullable',
-                'required_if:upload,1',
+                'required_without:link',
                 'file',
                 Rule::when($this->type == 'photo', 'mimes:jpeg,png,jpg,gif,svg', 'mimes:mp4,ogx,oga,ogv,ogg,webm'),
                 'max:20480'
             ],
             'link' => [
                 'nullable',
-                'required_if:upload,0',
+                'required_without:file',
                 'url',
             ],
         ];
