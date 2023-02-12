@@ -63,10 +63,11 @@
                     $page.props.authUser?.can_view?.branchApproval ||
                     $page.props.authUser?.can_view?.adminApproval ||
                     $page.props.authUser?.can_view?.refusedMembers ||
-                    $page.props.authUser?.can_view?.invoices
+                    $page.props.authUser?.can_view?.invoices ||
+                    $page.props.authUser?.can_view?.transactions
                 "
                 class="menu-item"
-                :class="{ 'active open': $page.component.startsWith('Admin/Members') || $page.component.startsWith('Admin/Invoices') }"
+                :class="{ 'active open': $page.component.startsWith('Admin/Members') || $page.component.startsWith('Admin/Invoices') || $page.component.startsWith('Admin/Transactions') }"
             >
                 <a href="javascript:;" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-users"></i>
@@ -96,6 +97,11 @@
                     <li v-if="$page.props.authUser?.can_view?.invoices" class="menu-item" :class="{ active: $page.component.startsWith('Admin/Invoices') }">
                         <Link :href="route('admin.invoices.index')" class="menu-link">
                             <div>{{ __('Invoices') }}</div>
+                        </Link>
+                    </li>
+                    <li v-if="$page.props.authUser?.can_view?.transactions" class="menu-item" :class="{ active: $page.component.startsWith('Admin/Transactions') }">
+                        <Link :href="route('admin.transactions.index')" class="menu-link">
+                            <div>{{ __('Payment attempts') }}</div>
                         </Link>
                     </li>
                 </ul>

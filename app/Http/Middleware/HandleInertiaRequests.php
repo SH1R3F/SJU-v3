@@ -13,6 +13,7 @@ use App\Models\Category;
 use App\Models\Volunteer;
 use App\Models\SiteOption;
 use App\Models\Subscriber;
+use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
@@ -119,6 +120,7 @@ class HandleInertiaRequests extends Middleware
             'subscribers' => $admin->can('viewAny', Subscriber::class),
             'volunteers' => $admin->can('viewAny', Volunteer::class),
             'invoices' =>  $admin->can('viewAny', Invoice::class),
+            'transactions' =>  $admin->can('viewAny', Transaction::class),
             // Technical support
             'support_members' =>  $admin->can('viewMembers', TechnicalSupportTicket::class),
             'support_subscribers' =>  $admin->can('viewSubscribers', TechnicalSupportTicket::class),

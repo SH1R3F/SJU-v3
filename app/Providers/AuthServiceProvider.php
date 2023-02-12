@@ -13,6 +13,7 @@ use App\Models\Invoice;
 use App\Models\Category;
 use App\Models\SiteOption;
 use App\Models\Subscriber;
+use App\Models\Transaction;
 use App\Policies\PagePolicy;
 use App\Policies\RolePolicy;
 use App\Models\Course\Course;
@@ -29,6 +30,7 @@ use App\Policies\VolunteerPolicy;
 use App\Policies\SiteOptionPolicy;
 use App\Policies\SubscriberPolicy;
 use Spatie\Permission\Models\Role;
+use App\Policies\TransactionPolicy;
 use App\Models\Course\Questionnaire;
 use App\Policies\QuestionnairePolicy;
 use App\Models\TechnicalSupportTicket;
@@ -50,6 +52,7 @@ class AuthServiceProvider extends ServiceProvider
         Subscriber::class => SubscriberPolicy::class,
         Volunteer::class => VolunteerPolicy::class,
         Invoice::class => InvoicePolicy::class,
+        Transaction::class => TransactionPolicy::class,
         Course::class => CoursePolicy::class,
         Template::class => TemplatePolicy::class,
         Questionnaire::class => QuestionnairePolicy::class,

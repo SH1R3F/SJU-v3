@@ -223,8 +223,8 @@ const editRole = (role) => {
                                                             <label class="form-check-label" for="invoices"> {{ __('Invoices') }} </label>
                                                         </div>
                                                         <div class="form-check me-2 me-lg-3">
-                                                            <input class="form-check-input" type="checkbox" id="setPaid" v-model="addForm.permissions['pay-member']" />
-                                                            <label class="form-check-label" for="setPaid"> {{ __('Set paid') }} </label>
+                                                            <input class="form-check-input" type="checkbox" id="transactions" v-model="addForm.permissions['manage-transaction']" />
+                                                            <label class="form-check-label" for="transactions"> {{ __('Payment attempts') }} </label>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -251,6 +251,10 @@ const editRole = (role) => {
                                                         <div class="form-check me-2 me-lg-3">
                                                             <input class="form-check-input" type="checkbox" id="deleteMember" v-model="addForm.permissions['delete-member']" />
                                                             <label class="form-check-label" for="deleteMember"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="setPaid" v-model="addForm.permissions['pay-member']" />
+                                                            <label class="form-check-label" for="setPaid"> {{ __('Set paid') }} </label>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -693,8 +697,8 @@ const editRole = (role) => {
                                                             <label class="form-check-label" for="editInvoices"> {{ __('Invoices') }} </label>
                                                         </div>
                                                         <div class="form-check me-2 me-lg-3">
-                                                            <input class="form-check-input" type="checkbox" id="editSetPaid" v-model="editForm.permissions['pay-member']" />
-                                                            <label class="form-check-label" for="editSetPaid"> {{ __('Set paid') }} </label>
+                                                            <input class="form-check-input" type="checkbox" id="editTransactions" v-model="editForm.permissions['manage-transaction']" />
+                                                            <label class="form-check-label" for="editTransactions"> {{ __('Payment attempts') }} </label>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -721,6 +725,10 @@ const editRole = (role) => {
                                                         <div class="form-check me-2 me-lg-3">
                                                             <input class="form-check-input" type="checkbox" id="editdeleteMember" v-model="editForm.permissions['delete-member']" />
                                                             <label class="form-check-label" for="editdeleteMember"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editSetPaid" v-model="editForm.permissions['pay-member']" />
+                                                            <label class="form-check-label" for="editSetPaid"> {{ __('Set paid') }} </label>
                                                         </div>
                                                     </div>
                                                 </td>

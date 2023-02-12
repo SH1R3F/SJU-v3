@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\VolunteerController;
 use App\Http\Controllers\Admin\SiteOptionController;
 use App\Http\Controllers\Admin\SubscriberController;
+use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\Course\CourseController;
 use App\Http\Controllers\Admin\Course\QuestionController;
 use App\Http\Controllers\Admin\Course\TemplateController;
@@ -102,9 +103,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::resource('members', MemberController::class);
 
         /**
-         * Invoices management
+         * Invoices and transactions management
          */
         Route::resource('invoices', InvoiceController::class)->only(['index', 'show']);
+        Route::resource('transactions', TransactionController::class)->only(['index', 'show']);
 
         // Send notification to subscribers
         Route::get('subscribers/notify', [SubscriberController::class, 'showNotifyForm'])->name('subscribers.notify');
