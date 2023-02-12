@@ -87,7 +87,7 @@ const sortBy = (column) => {
                             <th @click.prevent="sortBy('name')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'name' }">{{ __('User') }}</th>
                             <th @click.prevent="sortBy('membership_number')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'membership_number' }">{{ __('Membership number') }}</th>
                             <th @click.prevent="sortBy('type')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'type' }">{{ __('Membership type') }}</th>
-                            <th class="text-truncate cursor-pointer" @click.prevent="sortBy('status')" :class="{ 'link-primary': filters.order == 'status' }">{{ __('Status') }}</th>
+                            <th>{{ __('Status') }}</th>
                             <th class="text-truncate cursor-pointer" @click.prevent="sortBy('created_at')" :class="{ 'link-primary': filters.order == 'created_at' }">{{ __('Date') }}</th>
                             <th class="cell-fit">{{ __('Actions') }}</th>
                         </tr>

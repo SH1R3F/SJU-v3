@@ -27,7 +27,7 @@ class TransactionResource extends JsonResource
             'member' => new MemberResource($this->whenLoaded('member')),
             'cart_ref' => $this->cart_ref,
             'response' => $this->response,
-            'created_at' => $this->created_at?->translatedFormat('l jS F Y H:i'),
+            'created_at' => $this->created_at?->translatedFormat('l jS F Y g:i A'),
         ];
     }
 }
