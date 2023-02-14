@@ -53,7 +53,7 @@ class LoginRequest extends FormRequest
         }
 
         // If disabled
-        if (!Auth::guard('member')->user()->status == Member::STATUS_DISABLED) {
+        if (Auth::guard('member')->user()->status == Member::STATUS_DISABLED) {
             Auth::guard('member')->logout();
             throw ValidationException::withMessages([
                 'national_id' => __('Your account has been disabled. Please contact adminstrators.'),
