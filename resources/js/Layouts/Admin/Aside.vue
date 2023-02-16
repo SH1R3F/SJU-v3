@@ -174,7 +174,7 @@
                     </li>
                     <li v-if="$page.props.authUser?.can_view?.questionnaires" class="menu-item" :class="{ active: $page.component.startsWith('Admin/Courses/Questionnaires') }">
                         <Link :href="route('admin.questionnaires.index')" class="menu-link">
-                            <div>{{ __('Questionnaire') }}</div>
+                            <div>{{ __('Questionnaires') }}</div>
                         </Link>
                     </li>
                 </ul>

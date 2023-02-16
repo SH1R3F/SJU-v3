@@ -20,6 +20,9 @@ class QuestionnairePolicy
      */
     public function before(Admin $admin, $ability, mixed $model)
     {
+        // Default questionnaire cannot be deleted.
+        if ($ability == 'delete' && $model->id == 24) return false;
+
         if ($admin->hasRole('Site admin')) {
             return true;
         } else if ($admin->hasRole('News editor')) {

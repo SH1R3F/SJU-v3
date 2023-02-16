@@ -13,6 +13,7 @@ use App\Models\Course\Category;
 use App\Models\Course\Question;
 use App\Models\Course\Template;
 use App\Services\CourseService;
+use App\Exports\QuestionnaireExport;
 use App\Http\Controllers\Controller;
 use App\Models\Course\Questionnaire;
 use Illuminate\Support\Facades\Auth;
@@ -245,7 +246,6 @@ class CourseController extends Controller
         return redirect()->back()->with('message', __('Course deleted successfully'));
     }
 
-
     /**
      * Display the results of the questionnaire.
      *
@@ -262,5 +262,23 @@ class CourseController extends Controller
         $data = $service->questionnaireResults($course, $questionnaire);
 
         return inertia('Admin/Courses/Results', $data);
+    }
+
+    /**
+     * export the results of the questionnaire.
+     *
+     * @param  \App\Models\Course\Course  $course
+     * @param  \App\Services\CourseService  $service
+     * @return \Illuminate\Http\Response
+     */
+    public function exportQuestionnaire(Course $course, CourseService $service)
+    {
+        $questionnaire = Questionnaire::findOrFail($course->questionnaire_id);
+
+        $this->authorize('view', $questionnaire);
+
+        $data = $service->export($course, $questionnaire);
+
+        return Excel::download(new QuestionnaireExport($data), 'Questionnaire.xlsx');
     }
 }

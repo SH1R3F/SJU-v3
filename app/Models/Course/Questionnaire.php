@@ -41,7 +41,7 @@ class Questionnaire extends Model
                         break;
                 }
             },
-            fn ($builder) => $builder->orderBy('created_at', 'DESC')
+            fn ($builder) => $builder->orderBy('id', 'DESC')
         );
     }
 

@@ -136,8 +136,46 @@ class CourseService
             });
         }
         return [
-            'answers' => $results,
+            'course'    => $course,
+            'answers'   => $results,
             'questions' => $questionnaire->questions()->orderBy('order', 'ASC')->get()
+        ];
+    }
+
+    /**
+     * Prepare questionnaire result for export
+     * 
+     * @param  \App\Models\Course\Course  $course
+     * @param  \App\Models\Course\Questionnaire  $questionnaire
+     */
+    public function export(Course $course, Questionnaire $questionnaire)
+    {
+        $questionnables = $course->questionable_subscribers()->withPivot('answers')->get();
+        $questionnables = $questionnables->merge($course->questionable_members()->withPivot('answers')->get());
+        $questionnables = $questionnables->merge($course->questionable_volunteers()->withPivot('answers')->get());
+
+        $results = [];
+
+        foreach ($questionnables as $questionnable) {
+
+            $row = [
+                'type' => str_contains($questionnable->pivot->questionable_type, 'Member') ? __('Member') : (str_contains($questionnable->pivot->questionable_type, 'Subscriber') ? __('Subscriber') : __('Volunteer')),
+                'name' => $questionnable->full_name,
+            ];
+
+            $answers = collect(json_decode($questionnable->pivot->answers));
+
+            $answers->each(function ($answer) use (&$row) {
+                $question = Question::find($answer->id);
+                if (!$question) return;
+                $row['answers'][$question->id] = $answer->answer == 1 ? 'A+' : ($answer->answer == 2 ? 'A' : ($answer->answer == 3 ? 'B' : ($answer->answer == 4 ? 'C' : $answer->answer)));
+            });
+
+            array_push($results, $row);
+        }
+        return [
+            'answers'   => $results,
+            'questions' => $questionnaire->questions()->orderBy('order', 'ASC')->get()->toArray()
         ];
     }
 }

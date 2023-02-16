@@ -111,7 +111,7 @@ class QuestionnaireController extends Controller
      */
     public function destroy(Questionnaire $questionnaire)
     {
-        // $questionnaire->delete();
+        $questionnaire->delete();
         return redirect()->back()->with('message', __('Questionnaire deleted successfully'));
     }
 }

@@ -1,5 +1,6 @@
 <script setup>
 const props = defineProps({
+    course: Object,
     answers: Object,
     questions: Object,
 });
@@ -8,8 +9,22 @@ const props = defineProps({
 <template>
     <Head :title="__('Questionnaire results')" />
     <div class="container-xxl flex-grow-1 container-p-y">
-        <div>
-            <h3 class="fw-semibold mb-3">{{ __('Questionnaire results') }}</h3>
+        <div class="row me-2 py-3 text-center">
+            <div class="col-md-8 mb-1 text-xl-start">
+                <h3 class="fw-semibold m-0">{{ __('Questionnaire results') }}</h3>
+            </div>
+            <div class="col-md-4 mb-1">
+                <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column gap-1 mb-3 mb-md-0">
+                    <div class="dt-buttons">
+                        <a v-if="true" :href="route('admin.questionnaires.export', course.id)" type="button" class="dt-button add-new btn btn-label-secondary me-1">
+                            <span>
+                                <i class="ti ti-screen-share me-0 me-sm-1 ti-xs"></i>
+                                <span class="d-none d-sm-inline-block">{{ __('Export') }}</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Categories cards -->
@@ -58,7 +73,7 @@ const props = defineProps({
                         </template>
                         <template v-else>
                             <div class="col-12 col-lg-4 mb-4">
-                                <div class="card">
+                                <div class="card h-100">
                                     <h5 class="card-header">{{ question.question }}</h5>
                                     <div class="card-body" v-if="Object.keys(answers).length">
                                         <canvas
