@@ -41,7 +41,7 @@ const form = useForm({
     zoom: props.course.zoom || '',
     youtube: props.course.youtube || '',
     template_id: props.course.template_id || '',
-    questionnaire_id: props.course.questionnaire_id || '',
+    // questionnaire_id: props.course.questionnaire_id || '',
     attendance_mins: props.course.attendance_mins || '',
     status: props.course.status || 1,
     _method: 'PUT',
@@ -422,7 +422,7 @@ const handleImages = ($event) => {
 
                             <!-- Template & Questionnaire -->
                             <div class="row">
-                                <div class="mb-3 col-12 col-sm-6">
+                                <div class="mb-3 col-12">
                                     <label class="form-label" for="template_id">{{ __('Template') }}</label>
                                     <select class="form-control m-select2-no" id="template_id" v-model="form.template_id">
                                         <option value="">{{ __('Choose') }}</option>
@@ -430,14 +430,14 @@ const handleImages = ($event) => {
                                     </select>
                                     <p class="fs-6 text-danger" v-if="form.errors.template_id">{{ form.errors.template_id }}</p>
                                 </div>
-                                <div class="mb-3 col-12 col-sm-6">
+                                <!-- <div class="mb-3 col-12 col-sm-6">
                                     <label class="form-label" for="questionnaire_id">{{ __('Questionnaire') }}</label>
                                     <select class="form-control m-select2-no" id="questionnaire_id" v-model="form.questionnaire_id">
                                         <option value="">{{ __('Choose') }}</option>
                                         <option v-for="(questionnaire, k) in questionnaires" :key="k" :value="questionnaire.id">{{ __(questionnaire.name_ar) }}</option>
                                     </select>
                                     <p class="fs-6 text-danger" v-if="form.errors.questionnaire_id">{{ form.errors.questionnaire_id }}</p>
-                                </div>
+                                </div> -->
                             </div>
                             <!-- Template & Questionnaire -->
 

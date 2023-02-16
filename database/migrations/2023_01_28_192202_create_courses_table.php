@@ -47,7 +47,7 @@ return new class extends Migration
             $table->string('zoom')->nullable();
             $table->string('youtube')->nullable();
             $table->unsignedBigInteger('template_id')->nullable();
-            $table->unsignedBigInteger('questionnaire_id')->nullable();
+            $table->unsignedBigInteger('questionnaire_id')->nullable()->default(24);
             $table->unsignedInteger('attendance_mins')->nullable();
 
             $table->integer('status')->default(Course::STATUS_AVAILABLE);

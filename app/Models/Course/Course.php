@@ -168,4 +168,23 @@ class Course extends Model
     {
         return $this->morphedByMany(Volunteer::class, 'coursable')->withPivot('attendance');
     }
+
+
+    /**
+     * Relation to the questionables
+     */
+    public function questionable_members()
+    {
+        return $this->morphedByMany(Member::class, 'questionable');
+    }
+
+    public function questionable_subscribers()
+    {
+        return $this->morphedByMany(Subscriber::class, 'questionable');
+    }
+
+    public function questionable_volunteers()
+    {
+        return $this->morphedByMany(Volunteer::class, 'questionable');
+    }
 }

@@ -380,6 +380,7 @@
     "Template deleted successfully": "تم حذف القالب بنجاح",
 
     "--------------- Questionnaires management -------------": "",
+    "Questionnaire results": "نتائج الإستبيان",
     "Create questionnaire": "إنشاء إستبيان",
     "Questionnaires": "الإستبيانات",
     "Questionnaire": "الإستبيان",
@@ -400,6 +401,7 @@
     "Edit questionnaire": "تعديل إستبيان",
     "Questionnaire updated successfully": "تم تعديل الاستبيان بنجاح",
     "Question updated successfully": "تم تعديل السؤال بنجاح",
+    "Nobody registered for the questionnaire yet": "لم يسجل أحد الإستبيان حتي الان",
 
     "------------- News section -----------": "",
     "Categories": "التصنيفات",

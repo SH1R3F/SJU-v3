@@ -10,6 +10,7 @@ use App\Models\Course\Course;
 use App\Models\Course\Gender;
 use App\Exports\CoursesExport;
 use App\Models\Course\Category;
+use App\Models\Course\Question;
 use App\Models\Course\Template;
 use App\Services\CourseService;
 use App\Http\Controllers\Controller;
@@ -176,8 +177,7 @@ class CourseController extends Controller
     public function toggle(Course $course)
     {
         $this->authorize('toggle', $course);
-
-        $course->update(['status' => $state = $course->active == 2 ? 1 : 2]);
+        $course->update(['status' => $state = $course->status == 2 ? 1 : 2]);
         return redirect()->back()->with('message', __($state == 2 ? 'Course hidden successfully' : 'Course enabled successfully'));
     }
 
@@ -243,5 +243,24 @@ class CourseController extends Controller
 
         $course->delete();
         return redirect()->back()->with('message', __('Course deleted successfully'));
+    }
+
+
+    /**
+     * Display the results of the questionnaire.
+     *
+     * @param  \App\Models\Course\Course  $course
+     * @param  \App\Services\CourseService  $service
+     * @return \Illuminate\Http\Response
+     */
+    public function results(Course $course, CourseService $service)
+    {
+        $questionnaire = Questionnaire::findOrFail($course->questionnaire_id);
+
+        $this->authorize('view', $questionnaire);
+
+        $data = $service->questionnaireResults($course, $questionnaire);
+
+        return inertia('Admin/Courses/Results', $data);
     }
 }

@@ -94,6 +94,9 @@
     <script defer src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
     <script src="https://maps.google.com/maps/api/js?sensor=false&libraries=places&callback=myMap"></script>
     <script src="{{ asset('/js/libs/locationpicker.jquery.min.js') }}"></script>
+    <script src="{{ asset('/assets/vendor/libs/chartjs/chartjs.js') }}"></script>
+    <script src="{{ asset('/assets/js/charts-chartjs.js') }}" defer></script>
+
 </body>
 
 </html>

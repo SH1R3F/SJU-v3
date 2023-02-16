@@ -33,6 +33,7 @@ class CourseResource extends JsonResource
                 'state' => __($this->state($this->status)),
                 'image' => $this->when($this->image, Storage::url($this->image), null),
                 'images' => collect($this->images)->filter(fn ($img) => Storage::exists($img))->map(fn ($img) => Storage::url($img)),
+                'days' => array_map(fn ($day) => true, array_combine($this->days ?? [], $this->days ?? []) ?? []),
 
                 // Coursables
                 'members' => MemberResource::collection($this->whenLoaded('members')),
@@ -49,10 +50,11 @@ class CourseResource extends JsonResource
     {
         if (str_contains(request()->route()->getActionName(), '@index') && strpos($request->route()->getAction()['as'], 'dmin')) {
             return [
-                'viewable'   => $request->user()->can('view', $this->resource),
-                'editable'   => $request->user()->can('update', $this->resource),
-                'toggleable' => $request->user()->can('toggle', $this->resource),
-                'deleteable' => $request->user()->can('delete', $this->resource),
+                'questionable' => $request->user()->can('view', $this->questionnaire),
+                'viewable'     => $request->user()->can('view', $this->resource),
+                'editable'     => $request->user()->can('update', $this->resource),
+                'toggleable'   => $request->user()->can('toggle', $this->resource),
+                'deleteable'   => $request->user()->can('delete', $this->resource),
             ];
         }
         return [];

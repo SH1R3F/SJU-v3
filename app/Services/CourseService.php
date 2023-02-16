@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Course\Course;
+use App\Models\Course\Question;
+use App\Models\Course\Questionnaire;
 
 class CourseService
 {
@@ -72,5 +74,70 @@ class CourseService
 
         $num = intval(explode('-', $last->course_number)[1]);
         return "SJU-" . str_pad($num + 1, 4, '0', STR_PAD_LEFT);
+    }
+
+    /**
+     * Prepare questionnaire result for display
+     * 
+     * @param  \App\Models\Course\Course  $course
+     * @param  \App\Models\Course\Questionnaire  $questionnaire
+     */
+    public function questionnaireResults(Course $course, Questionnaire $questionnaire)
+    {
+        $questionnables = $course->questionable_subscribers()->withPivot('answers')->get();
+        $questionnables = $questionnables->merge($course->questionable_members()->withPivot('answers')->get());
+        $questionnables = $questionnables->merge($course->questionable_volunteers()->withPivot('answers')->get());
+
+        $results = [];
+
+        foreach ($questionnables as $questionnable) {
+            $answers = collect(json_decode($questionnable->pivot->answers));
+
+            $answers->each(function ($answer) use (&$results, $questionnable) {
+                $question = Question::find($answer->id);
+                if (!$question) return;
+
+                if (isset($results[$question->id])) {
+                    $answerers = $results[$question->id]['answerers'];
+                    if ($question->commentable) {
+                        array_push($answerers, [
+                            'id' => $questionnable->id,
+                            'type' => $questionnable->pivot->questionable_type,
+                            'name' => $questionnable->full_name,
+                            'answer' => $answer->answer,
+                        ]);
+                    }
+
+                    $results[$question->id] = [
+                        'type' => $question->commentable,
+                        'answerers' => $answerers,
+                        'a' => $answer->answer == 1 ? $results[$question->id]['a'] + 1 : $results[$question->id]['a'],
+                        'b' => $answer->answer == 2 ? $results[$question->id]['b'] + 1 : $results[$question->id]['b'],
+                        'c' => $answer->answer == 3 ? $results[$question->id]['c'] + 1 : $results[$question->id]['c'],
+                        'd' => $answer->answer == 4 ? $results[$question->id]['d'] + 1 : $results[$question->id]['d'],
+                    ];
+                } else {
+                    $results[$question->id] = [
+                        'type' => $question->commentable,
+                        'answerers' => $question->commentable ? [
+                            [
+                                'id' => $questionnable->id,
+                                'type' => $questionnable->pivot->questionable_type,
+                                'name' => $questionnable->full_name,
+                                'answer' => $answer->answer,
+                            ]
+                        ] : [],
+                        'a' => $answer->answer == 1 ? 1 : 0,
+                        'b' => $answer->answer == 2 ? 1 : 0,
+                        'c' => $answer->answer == 3 ? 1 : 0,
+                        'd' => $answer->answer == 4 ? 1 : 0,
+                    ];
+                }
+            });
+        }
+        return [
+            'answers' => $results,
+            'questions' => $questionnaire->questions()->orderBy('order', 'ASC')->get()
+        ];
     }
 }

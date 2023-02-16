@@ -153,13 +153,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
          */
         Route::prefix('courses')->group(function () {
             Route::resource('templates', TemplateController::class);
+
             Route::resource('questionnaires', QuestionnaireController::class)->except(['show']);
+            Route::redirect('questionnaires', 'questionnaires/24/questions');
             Route::resource('questionnaires/{questionnaire}/questions', QuestionController::class)->except(['show']);
         });
 
         /**
          * Courses management
          */
+        Route::get('courses/{course}/results', [CourseController::class, 'results'])->name('courses.results');
         Route::get('courses/export', [CourseController::class, 'export'])->name('courses.export');
         Route::post('courses/{course}/{type}/{id}/attendance/toggle', [CourseController::class, 'toggleAttendance'])->name('courses.attendance.toggle');
         Route::delete('courses/{course}/{type}/{id}/attendance/delete', [CourseController::class, 'deleteAttendance'])->name('courses.attendance.delete');

@@ -167,6 +167,16 @@ const sortBy = (column) => {
                             <td>{{ course.state }}</td>
                             <td>
                                 <div class="d-flex align-items-center">
+                                    <Link
+                                        v-if="course.questionable"
+                                        :href="route('admin.courses.results', course.id)"
+                                        class="text-body"
+                                        data-bs-placement="top"
+                                        :aria-label="__('Questionnaire results')"
+                                        :title="__('Questionnaire results')"
+                                    >
+                                        <i class="ti ti-friends mx-2 ti-sm"></i>
+                                    </Link>
                                     <Link v-if="course.viewable" :href="route('admin.courses.show', course.id)" class="text-body" data-bs-placement="top" :aria-label="__('Show')" :title="__('Show')">
                                         <i class="ti ti-eye mx-2 ti-sm"></i>
                                     </Link>

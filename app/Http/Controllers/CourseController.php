@@ -151,7 +151,6 @@ class CourseController extends Controller
         if (!$this->auth->courses()->where('course_id', $course->id)->count()) return redirect()->route('courses.register', $course->id)->with('message', __('Please register first'));
         if (!$this->auth->courses()->where('course_id', $course->id)->first()->pivot?->attendance) return redirect()->route('courses.attend', $course->id)->with('message', __("Didn't attend course"));
 
-
         // Does this course have a questionnaire that I didn't pass?
         if ($course->questionnaire && !$this->auth->questionnaires()->where('questionnaire_id', $course->questionnaire->id)->count()) {
             return redirect()->route('courses.questionnaire', $course->id)->with('message', __("Please fill this questionnaire first"));
@@ -191,7 +190,7 @@ class CourseController extends Controller
             }
 
             // Save to db
-            $this->auth->questionnaires()->attach($course->questionnaire->id, ['answers' => json_encode($answers)]);
+            $this->auth->questionnaires()->attach($course->questionnaire->id, ['answers' => json_encode($answers), 'course_id' => $course->id]);
         }
 
         return redirect()->route('courses.certificate', $course->id);

@@ -4,16 +4,6 @@
 <head>
     <title>{{ __('Membership card') }}</title>
     <style>
-        @page :first {
-            background: url("{{ asset('/img/card-template.png') }}") no-repeat 0 0;
-            background-image-resize: 6;
-        }
-
-        @page {
-            background: url("{{ asset('/img/card-bg.png') }}") no-repeat 0 0;
-            background-image-resize: 6;
-        }
-
         body {
             text-align: center;
             font-family: 'almarai', sans-serif;
@@ -57,6 +47,10 @@
 </head>
 
 <body>
+    <div style="position: absolute; left:0; right: 0; top: 0; bottom: 0;">
+        <img src="{{ asset('/img/card-template.png') }}"style="width: 74mm; height: 120mm; margin: 0;">
+    </div>
+
     <div class="profile-picture" style="background: url('{{ Storage::url($member->profile_photo) }}')"></div>
 
     <div class="info">
@@ -67,6 +61,11 @@
 
     <h6 class="date">{{ $member->subscription->end_date->format('d/m/Y') }}</h6>
     <pagebreak />
+
+    <div style="position: absolute; left:0; right: 0; top: 0; bottom: 0;">
+        <img src="{{ asset('/img/card-bg.png') }}"style="width: 74mm; height: 120mm; margin: 0;">
+    </div>
+
 </body>
 
 </html>
