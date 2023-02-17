@@ -11,6 +11,7 @@ import FollowUs from './Components/FollowUs.vue';
 const props = defineProps({
     courses: Object,
     articles: Object,
+    ads: Object,
     media: Object,
     photos: Object,
     videos: Object,
@@ -22,7 +23,7 @@ const props = defineProps({
 <template>
     <div class="homepage">
         <!-- News Slider -->
-        <Slider :articles="articles" />
+        <Slider :articles="articles" :ads="ads" />
         <!-- News Slider -->
 
         <!-- About the organization -->

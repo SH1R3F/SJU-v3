@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ad;
 use App\Models\Page;
+use App\Models\Media;
 use App\Models\Member;
 use App\Models\Article;
+use App\Models\Subscription;
 use App\Models\Course\Course;
+use App\Http\Resources\AdResource;
 use App\Http\Resources\PageResource;
+use App\Http\Resources\MediaResource;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\ArticleResource;
-use App\Http\Resources\MediaResource;
-use App\Models\Media;
-use App\Models\Subscription;
 
 class PageController extends Controller
 {
@@ -33,9 +35,15 @@ class PageController extends Controller
             ->take(9)
             ->get();
 
+        $ads = Ad::where('status', 1)
+            ->orderBy('id', 'DESC')
+            ->take(9)
+            ->get();
+
         return inertia('Home/Index', [
             'courses' => CourseResource::collection($courses),
             'articles' => ArticleResource::collection($articles),
+            'ads' => AdResource::collection($ads),
             'media' => MediaResource::collection(Media::orderBy('type', 'ASC')->paginate(9, ['*'], 'media')),
             'photos' => MediaResource::collection(Media::where('type', 'photo')->orderBy('id', 'DESC')->paginate(9, ['*'], 'photos')),
             'videos' => MediaResource::collection(Media::where('type', 'video')->orderBy('id', 'DESC')->paginate(9, ['*'], 'videos')),
