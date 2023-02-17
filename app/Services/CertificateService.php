@@ -6,6 +6,7 @@ use App\Models\Course\Certificate;
 use Mpdf\Mpdf;
 use App\Models\Course\Course;
 use App\Models\Course\Template;
+use App\Notifications\SendCertificate;
 
 class CertificateService
 {
@@ -22,6 +23,15 @@ class CertificateService
 
         $code = $this->registerCertificate($user, $course);
 
+        $this->generateCertificate($course, $user, $code);
+    }
+
+    /**
+     * Generate certificate
+     */
+    public function generateCertificate($course, $user, $code, $email = false)
+    {
+        $template = $course->template;
         // Mpdf Work
         $mpdf = new Mpdf([
             'mode'          => $template->mode,
@@ -39,7 +49,12 @@ class CertificateService
 
         try {
             $mpdf->WriteHTML($html);
-            $mpdf->Output("{$course->title_ar}.pdf", 'I');
+            if ($email) {
+                $mpdf->Output($path = storage_path("certificates/$user->id/{$course->title_ar}.pdf"), 'F');
+                return $path;
+            } else {
+                $mpdf->Output("{$course->title_ar}.pdf", 'I');
+            }
         } catch (\Exception $e) {
             logger("___________________________ERROR GENERATING CERTIFICATE__________________________");
             logger($e->getMessage());
@@ -56,11 +71,17 @@ class CertificateService
             return $user->certificates()->where('course_id', $course->id)->first()->code;
         }
 
+        // First time ...
+
         $hash = uniqid();
         $user->certificates()->create([
             'code' => $hash,
             'course_id' => $course->id
         ]);
+
+        // Also send email..
+        $user->notify(new SendCertificate($hash, $course));
+
         return $hash;
     }
 
