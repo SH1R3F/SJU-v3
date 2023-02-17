@@ -38,18 +38,6 @@ class AdPolicy
     }
 
     /**
-     * Determine whether the admin can view the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Ad  $ad
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function view(Admin $admin, Ad $ad)
-    {
-        return $admin->hasPermissionTo('view-ad');
-    }
-
-    /**
      * Determine whether the admin can create models.
      *
      * @param  \App\Models\Admin  $admin

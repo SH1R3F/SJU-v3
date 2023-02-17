@@ -39,18 +39,6 @@ class UrlPolicy
     }
 
     /**
-     * Determine whether the admin can view the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Url  $url
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function view(Admin $admin, Url $url)
-    {
-        return $admin->hasPermissionTo('view-url');
-    }
-
-    /**
      * Determine whether the admin can create models.
      *
      * @param  \App\Models\Admin  $admin

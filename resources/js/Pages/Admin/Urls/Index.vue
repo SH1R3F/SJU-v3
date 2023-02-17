@@ -33,7 +33,7 @@ const props = defineProps({
         <div class="row row-cols-1 row-cols-md-3 g-4 mb-5 mt-1">
             <div class="col" v-for="url in urls.data">
                 <div class="card h-100">
-                    <img class="card-img-top h-100" :src="url.path" />
+                    <img style="object-fit: none" class="card-img-top h-100" :src="url.path" />
                     <div class="card-body text-center">
                         <h5>{{ url.title }}</h5>
                         <p class="text-muted text text-sm">{{ url.group_name }}</p>

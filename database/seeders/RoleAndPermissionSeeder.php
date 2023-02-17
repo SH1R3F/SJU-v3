@@ -148,6 +148,22 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::updateOrCreate(['name' => 'delete-article'], ['name' => 'delete-article', 'guard_name' => 'admin']);
 
         /**
+         * Ads management permissions
+         */
+        Permission::updateOrCreate(['name' => 'viewAny-ad'], ['name' => 'viewAny-ad', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-ad'], ['name' => 'create-ad', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-ad'], ['name' => 'update-ad', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-ad'], ['name' => 'delete-ad', 'guard_name' => 'admin']);
+
+        /**
+         * Urls management permissions
+         */
+        Permission::updateOrCreate(['name' => 'viewAny-url'], ['name' => 'viewAny-url', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-url'], ['name' => 'create-url', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-url'], ['name' => 'update-url', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-url'], ['name' => 'delete-url', 'guard_name' => 'admin']);
+
+        /**
          * Studio management permissions
          */
         Permission::updateOrCreate(['name' => 'viewAny-media'], ['name' => 'viewAny-media', 'guard_name' => 'admin']);

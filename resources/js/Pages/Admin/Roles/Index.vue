@@ -497,6 +497,58 @@ const editRole = (role) => {
                                             </tr>
                                             <!-- Articles permission -->
 
+                                            <!-- Ads permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Ads management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistAd" v-model="addForm.permissions['viewAny-ad']" />
+                                                            <label class="form-check-label" for="addlistAd"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addcreateAd" v-model="addForm.permissions['create-ad']" />
+                                                            <label class="form-check-label" for="addcreateAd"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addupdateAd" v-model="addForm.permissions['update-ad']" />
+                                                            <label class="form-check-label" for="addupdateAd"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="adddeleteAd" v-model="addForm.permissions['delete-ad']" />
+                                                            <label class="form-check-label" for="adddeleteAd"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Ads permission -->
+
+                                            <!-- Urls permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Urls management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistUrl" v-model="addForm.permissions['viewAny-url']" />
+                                                            <label class="form-check-label" for="addlistUrl"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addcreateUrl" v-model="addForm.permissions['create-url']" />
+                                                            <label class="form-check-label" for="addcreateUrl"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addupdateUrl" v-model="addForm.permissions['update-url']" />
+                                                            <label class="form-check-label" for="addupdateUrl"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="adddeleteUrl" v-model="addForm.permissions['delete-url']" />
+                                                            <label class="form-check-label" for="adddeleteUrl"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Urls permission -->
+
                                             <!-- Studio permission -->
                                             <tr>
                                                 <td class="text-nowrap fw-semibold">{{ __('Studio management') }}</td>
@@ -970,6 +1022,58 @@ const editRole = (role) => {
                                                 </td>
                                             </tr>
                                             <!-- Articles permission -->
+
+                                            <!-- Ads permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Ads management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistAd" v-model="editForm.permissions['viewAny-ad']" />
+                                                            <label class="form-check-label" for="editlistAd"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreateAd" v-model="editForm.permissions['create-ad']" />
+                                                            <label class="form-check-label" for="editcreateAd"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editupdateAd" v-model="editForm.permissions['update-ad']" />
+                                                            <label class="form-check-label" for="editupdateAd"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteAd" v-model="editForm.permissions['delete-ad']" />
+                                                            <label class="form-check-label" for="editdeleteAd"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Ads permission -->
+
+                                            <!-- Urls permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Urls management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistUrl" v-model="editForm.permissions['viewAny-url']" />
+                                                            <label class="form-check-label" for="editlistUrl"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreateUrl" v-model="editForm.permissions['create-url']" />
+                                                            <label class="form-check-label" for="editcreateUrl"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editupdateUrl" v-model="editForm.permissions['update-url']" />
+                                                            <label class="form-check-label" for="editupdateUrl"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteUrl" v-model="editForm.permissions['delete-url']" />
+                                                            <label class="form-check-label" for="editdeleteUrl"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Urls permission -->
 
                                             <!-- Studio permission -->
                                             <tr>
