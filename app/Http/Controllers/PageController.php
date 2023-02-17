@@ -9,6 +9,7 @@ use App\Models\Member;
 use App\Models\Article;
 use App\Models\Subscription;
 use App\Models\Course\Course;
+use App\Services\PageService;
 use App\Http\Resources\AdResource;
 use App\Http\Resources\PageResource;
 use App\Http\Resources\MediaResource;
@@ -58,7 +59,7 @@ class PageController extends Controller
     /**
      * Show a page by slug
      */
-    public function page($slug)
+    public function page($slug, PageService $service)
     {
         $page = Page::where('slug_ar', $slug)->orWhere('slug_en', $slug)->firstOrFail();
 

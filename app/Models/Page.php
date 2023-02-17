@@ -68,4 +68,9 @@ class Page extends Model
             fn ($builder) => $builder->orderBy('created_at', 'DESC')
         );
     }
+
+    public function getContentAttribute()
+    {
+        return app()->getLocale() == 'ar' ? $this->content_ar : $this->content_en;
+    }
 }

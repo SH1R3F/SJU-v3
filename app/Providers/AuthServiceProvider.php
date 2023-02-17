@@ -5,6 +5,7 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 
 use App\Models\Ad;
+use App\Models\Url;
 use App\Models\Page;
 use App\Models\Admin;
 use App\Models\Media;
@@ -16,6 +17,7 @@ use App\Models\SiteOption;
 use App\Models\Subscriber;
 use App\Policies\AdPolicy;
 use App\Models\Transaction;
+use App\Policies\UrlPolicy;
 use App\Policies\PagePolicy;
 use App\Policies\RolePolicy;
 use App\Models\Course\Course;
@@ -62,6 +64,7 @@ class AuthServiceProvider extends ServiceProvider
         Page::class => PagePolicy::class,
         Article::class => ArticlePolicy::class,
         Ad::class => AdPolicy::class,
+        Url::class => UrlPolicy::class,
         Media::class => MediaPolicy::class,
         TechnicalSupportTicket::class => TechnicalSupportPolicy::class,
     ];

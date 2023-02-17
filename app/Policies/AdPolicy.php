@@ -41,12 +41,12 @@ class AdPolicy
      * Determine whether the admin can view the model.
      *
      * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Media  $media
+     * @param  \App\Models\Ad  $ad
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(Admin $admin, Media $media)
+    public function view(Admin $admin, Ad $ad)
     {
-        return $admin->hasPermissionTo('viewAny-ad');
+        return $admin->hasPermissionTo('view-ad');
     }
 
     /**
@@ -64,22 +64,22 @@ class AdPolicy
      * Determine whether the admin can update the model.
      *
      * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Media  $media
+     * @param  \App\Models\Ad  $ad
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(Admin $admin, Media $media)
+    public function update(Admin $admin, Ad $ad)
     {
-        return $admin->hasPermissionTo('viewAny-ad');
+        return $admin->hasPermissionTo('update-ad');
     }
 
     /**
      * Determine whether the admin can delete the model.
      *
      * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Media  $media
+     * @param  \App\Models\Ad  $ad
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(Admin $admin, Media $media)
+    public function delete(Admin $admin, Ad $ad)
     {
         return $admin->hasPermissionTo('delete-ad');
     }

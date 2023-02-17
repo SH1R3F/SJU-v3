@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdController;
+use App\Http\Controllers\Admin\UrlController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\AdminController;
@@ -195,6 +196,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
              */
             Route::post('ads/{ad}/toggle', [AdController::class, 'toggle'])->name('ads.toggle');
             Route::resource('ads', AdController::class)->except(['show']);
+
+            /**
+             * Urls section
+             */
+            Route::post('urls/{url}/toggle', [UrlController::class, 'toggle'])->name('urls.toggle');
+            Route::resource('urls', UrlController::class)->except(['show']);
         });
 
         /**

@@ -18,10 +18,9 @@ class AdController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param string $type
      * @return \Illuminate\Http\Response
      */
-    public function index($type = 'photo')
+    public function index()
     {
         $ads = Ad::orderBy('id', 'DESC')->get();
         return inertia('Admin/Ads/Index', [

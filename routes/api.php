@@ -40,3 +40,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // include __DIR__ . '/seeds/media.php';
 // include __DIR__ . '/seeds/courses_users.php';
 // include __DIR__ . '/seeds/courses_members.php';
+// include __DIR__ . '/seeds/urls.php';
