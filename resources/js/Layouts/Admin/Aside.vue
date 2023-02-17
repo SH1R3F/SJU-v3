@@ -182,9 +182,15 @@
 
             <!-- News section -->
             <li
-                v-if="$page.props.authUser?.can_view?.categories || $page.props.authUser?.can_view?.pages || $page.props.authUser?.can_view?.articles"
+                v-if="
+                    $page.props.authUser?.can_view?.categories ||
+                    $page.props.authUser?.can_view?.pages ||
+                    $page.props.authUser?.can_view?.articles ||
+                    $page.props.authUser?.can_view?.ads ||
+                    $page.props.authUser?.can_view?.urls
+                "
                 class="menu-item"
-                :class="{ 'active open': $page.component.startsWith('Admin/News') }"
+                :class="{ 'active open': $page.component.startsWith('Admin/News') || $page.component.startsWith('Admin/Ads') || $page.component.startsWith('Admin/Urls') }"
             >
                 <a href="javascript:;" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-news"></i>
@@ -204,6 +210,16 @@
                     <li v-if="$page.props.authUser?.can_view?.articles" class="menu-item" :class="{ active: $page.component.startsWith('Admin/News/Articles') }">
                         <Link :href="route('admin.articles.index')" class="menu-link">
                             <div>{{ __('Articles') }}</div>
+                        </Link>
+                    </li>
+                    <li v-if="$page.props.authUser?.can_view?.ads" class="menu-item" :class="{ active: $page.component.startsWith('Admin/Ads') }">
+                        <Link :href="route('admin.ads.index')" class="menu-link">
+                            <div>{{ __('Ads') }}</div>
+                        </Link>
+                    </li>
+                    <li v-if="$page.props.authUser?.can_view?.urls" class="menu-item" :class="{ active: $page.component.startsWith('Admin/Urls') }">
+                        <Link :href="route('admin.urls.index')" class="menu-link">
+                            <div>{{ __('Urls') }}</div>
                         </Link>
                     </li>
                 </ul>

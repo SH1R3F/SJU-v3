@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Ad;
+use App\Models\Url;
 use App\Models\Page;
 use App\Models\Admin;
 use App\Models\Media;
@@ -132,6 +134,8 @@ class HandleInertiaRequests extends Middleware
             'categories' =>  $admin->can('viewAny', Category::class),
             'pages' =>  $admin->can('viewAny', Page::class),
             'articles' =>  $admin->can('viewAny', Article::class),
+            'ads' =>  $admin->can('viewAny', Ad::class),
+            'urls' =>  $admin->can('viewAny', Url::class),
             'studio' =>  $admin->can('viewAny', Media::class),
         ];
     }

@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Spatie\Permission\Models\Permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,22 +41,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // include __DIR__ . '/seeds/courses_users.php';
 // include __DIR__ . '/seeds/courses_members.php';
 // include __DIR__ . '/seeds/urls.php';
-
-Route::get('/', function () {
-
-    /**
-     * Ads management permissions
-     */
-    Permission::updateOrCreate(['name' => 'viewAny-ad'], ['name' => 'viewAny-ad', 'guard_name' => 'admin']);
-    Permission::updateOrCreate(['name' => 'create-ad'], ['name' => 'create-ad', 'guard_name' => 'admin']);
-    Permission::updateOrCreate(['name' => 'update-ad'], ['name' => 'update-ad', 'guard_name' => 'admin']);
-    Permission::updateOrCreate(['name' => 'delete-ad'], ['name' => 'delete-ad', 'guard_name' => 'admin']);
-
-    /**
-     * Urls management permissions
-     */
-    Permission::updateOrCreate(['name' => 'viewAny-url'], ['name' => 'viewAny-url', 'guard_name' => 'admin']);
-    Permission::updateOrCreate(['name' => 'create-url'], ['name' => 'create-url', 'guard_name' => 'admin']);
-    Permission::updateOrCreate(['name' => 'update-url'], ['name' => 'update-url', 'guard_name' => 'admin']);
-    Permission::updateOrCreate(['name' => 'delete-url'], ['name' => 'delete-url', 'guard_name' => 'admin']);
-});
