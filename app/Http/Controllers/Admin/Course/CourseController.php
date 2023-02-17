@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin\Course;
 
 use App\Models\Branch;
+use App\Models\Member;
+use App\Models\Volunteer;
+use App\Models\Subscriber;
 use App\Models\Course\Type;
 use App\Models\Course\Place;
 use Illuminate\Http\Request;
@@ -13,6 +16,7 @@ use App\Models\Course\Category;
 use App\Models\Course\Question;
 use App\Models\Course\Template;
 use App\Services\CourseService;
+use Illuminate\Support\Facades\DB;
 use App\Exports\QuestionnaireExport;
 use App\Http\Controllers\Controller;
 use App\Models\Course\Questionnaire;
@@ -20,6 +24,9 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Resources\CourseResource;
 use App\Http\Requests\Course\CourseRequest;
+use App\Http\Requests\NotifyCoursersRequest;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\PushNotificationToUsers;
 
 class CourseController extends Controller
 {
@@ -133,6 +140,106 @@ class CourseController extends Controller
         return inertia('Admin/Courses/View', [
             'course' => new CourseResource($course),
         ]);
+    }
+
+    /**
+     * Send a notification for all kind of users in this course.
+     *
+     * @param  \App\Models\Course\Course  $course
+     * @return \Illuminate\Http\Response
+     */
+    public function showNotificationForm(Course $course)
+    {
+        $this->authorize('view', $course);
+
+        return inertia('Admin/Courses/Notify', [
+            'course' => new CourseResource($course),
+        ]);
+    }
+
+    /**
+     * chuncking users for notification form's dropdown.
+     *
+     * @param  \App\Models\Course\Course  $course
+     * @return \Illuminate\Http\Response
+     */
+    public function chuncks(Course $course)
+    {
+        $this->authorize('view', $course);
+
+        $subscribers = $course->subscribers()->filter(request())
+            ->when(
+                app()->getLocale() == 'ar',
+                fn ($q) => $q->select(DB::raw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar) AS text"), DB::raw("CONCAT('subscriber-', subscribers.id) AS type_id")),
+                fn ($q) => $q->select(DB::raw("CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en) AS text"), DB::raw("CONCAT('subscriber-', subscribers.id) AS type_id"))
+            )
+            ->orderBy('id')
+            ->paginate(10);
+        $members = $course->members()->filter(request())
+            ->when(
+                app()->getLocale() == 'ar',
+                fn ($q) => $q->select(DB::raw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar) AS text"), DB::raw("CONCAT('member-', members.id) AS type_id")),
+                fn ($q) => $q->select(DB::raw("CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en) AS text"), DB::raw("CONCAT('member-', members.id) AS type_id"))
+            )
+            ->orderBy('id')
+            ->paginate(10);
+
+        $volunteers = $course->volunteers()->filter(request())
+            ->when(
+                app()->getLocale() == 'ar',
+                fn ($q) => $q->select('volunteers.id', DB::raw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar) AS text"), DB::raw("CONCAT('volunteer-', volunteers.id) AS type_id")),
+                fn ($q) => $q->select('volunteers.id', DB::raw("CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en) AS text"), DB::raw("CONCAT('volunteer-', volunteers.id) AS type_id"))
+            )
+            ->orderBy('id')
+            ->paginate(10);
+
+        return [
+            'subscribers' => $subscribers,
+            'members'     => $members,
+            'volunteers'  => $volunteers,
+        ];
+    }
+
+    /**
+     * Send a notification for all kind of users in this course.
+     *
+     * @param  \App\Http\Requests\NotifyCoursersRequest  $request
+     * @param  \App\Models\Course\Course  $course
+     * @return \Illuminate\Http\Response
+     */
+    public function notify(NotifyCoursersRequest $request, Course $course)
+    {
+        $this->authorize('view', $course);
+        switch ($request['to_type']) {
+            case 'select':
+                $subs = [];
+                $vols = [];
+                $mems = [];
+                array_map(function ($val) use (&$subs, &$vols, &$mems) {
+                    if (str_contains($val, 'subscriber-')) array_push($subs, explode('-', $val)[1]);
+                    if (str_contains($val, 'member-')) array_push($mems, explode('-', $val)[1]);
+                    if (str_contains($val, 'volunteer-')) array_push($vols, explode('-', $val)[1]);
+                }, $request['recipients']);
+
+                $recipients = Subscriber::whereIn('id', $subs)
+                    ->get()
+                    ->merge(Member::whereIn('id', $mems)->get())
+                    ->merge(Volunteer::whereIn('id', $vols)->get());
+                break;
+            case 'all':
+                $recipients = $course->subscribers->merge($course->members)->merge($course->volunteers);
+                break;
+            case 'passed':
+                $recipients = $course->subscribers()->wherePivot('attendance', 1)->get()->merge($course->members()->wherePivot('attendance', 1)->get())->merge($course->volunteers()->wherePivot('attendance', 1)->get());
+                break;
+            case 'unpassed':
+                $recipients = $course->subscribers()->wherePivot('attendance', 0)->get()->merge($course->members()->wherePivot('attendance', 0)->get())->merge($course->volunteers()->wherePivot('attendance', 0)->get());
+                break;
+        }
+
+        Notification::send($recipients, new PushNotificationToUsers($request->validated()));
+
+        return redirect()->route('admin.courses.show', $course->id)->with('message', __('Notification is being sent'));
     }
 
     /**

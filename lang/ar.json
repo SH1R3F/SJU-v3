@@ -319,6 +319,9 @@
     "Subscriber didn't attend this course": "المشترك لم يحضر الفعالية",
     "Inactive subscribers": "المشتركون الغير مفعلين",
     "Inactive volunteers": "المتدربون الغير مفعلين",
+    "Notify course users": "إشعار مستخدمي الفعالية",
+    "Passed users": "المجتازين",
+    "Unpassed users": "الغير مجتازين",
 
     "--------------- Templates management -------------": "",
     "Templates": "القوالب",

@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps({
     course: Object,
@@ -25,6 +25,7 @@ const passed = computed(() => {
 const unpassed = computed(() => {
     return all.value - passed.value;
 });
+let counter = 0;
 </script>
 
 <template>
@@ -117,6 +118,18 @@ const unpassed = computed(() => {
             <div class="col-xl-8 col-lg-7 col-md-7">
                 <!-- Coursables table -->
                 <div class="card mb-4 p-4">
+                    <div class="row me-2 py-3 text-end">
+                        <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column gap-1 mb-3 mb-md-0">
+                            <div class="dt-buttons">
+                                <Link :href="route('admin.courses.notify', course.id)" type="button" class="dt-button btn btn-light me-1">
+                                    <span>
+                                        <i class="ti ti-bell-ringing me-0 me-sm-1 ti-xs"></i>
+                                        <span class="d-none d-sm-inline-block">{{ __('Notify') }}</span>
+                                    </span>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                     <div class="table-responsive mb-3">
                         <table class="table datatable-project border-top">
                             <thead>
@@ -132,7 +145,7 @@ const unpassed = computed(() => {
                             </thead>
                             <tbody>
                                 <tr v-for="(member, i) in course.members" :key="member.id">
-                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ ++counter }}</td>
                                     <td>
                                         <Link
                                             :href="route('admin.members.show', member.id)"
@@ -175,7 +188,7 @@ const unpassed = computed(() => {
                                 </tr>
 
                                 <tr v-for="(subscriber, i) in course.subscribers" :key="subscriber.id">
-                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ ++counter }}</td>
                                     <td>
                                         <Link
                                             :href="route('admin.subscribers.show', subscriber.id)"
@@ -218,7 +231,7 @@ const unpassed = computed(() => {
                                 </tr>
 
                                 <tr v-for="(volunteer, i) in course.volunteers" :key="volunteer.id">
-                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ ++counter }}</td>
                                     <td>
                                         <Link
                                             :href="route('admin.volunteers.show', volunteer.id)"

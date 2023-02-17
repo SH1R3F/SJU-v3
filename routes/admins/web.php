@@ -163,6 +163,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         });
 
         /**
+         * Courses Notification
+         */
+        Route::get('courses/{course}/notify', [CourseController::class, 'showNotificationForm'])->name('courses.notify');
+        Route::get('courses/{course}/chunck', [CourseController::class, 'chuncks'])->name('courses.notify.chuncks');
+        Route::post('courses/{course}/notify', [CourseController::class, 'notify']);
+
+        /**
          * Courses management
          */
         Route::get('courses/export', [CourseController::class, 'export'])->name('courses.export');
