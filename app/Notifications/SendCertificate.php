@@ -42,11 +42,13 @@ class SendCertificate extends Notification
     public function toMail($notifiable)
     {
         $path = (new CertificateService)->generateCertificate($this->course, $notifiable, $this->code, true);
-        dd($path);
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+            ->subject('شكراً لمشاركتك بالفعالية | هيئة الصحفيين السعوديين')
+            ->view('emails.certificate', ['user' => $notifiable, 'course' => $this->course])
+            ->attach(url($path), [
+                'as' => 'شهادة حضور الفعالية.pdf',
+                'mime' => 'application/pdf',
+            ]);
     }
 
     /**

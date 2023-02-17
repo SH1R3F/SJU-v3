@@ -2,10 +2,11 @@
 
 namespace App\Services;
 
-use App\Models\Course\Certificate;
 use Mpdf\Mpdf;
+use ReflectionClass;
 use App\Models\Course\Course;
 use App\Models\Course\Template;
+use App\Models\Course\Certificate;
 use App\Notifications\SendCertificate;
 
 class CertificateService
@@ -50,7 +51,8 @@ class CertificateService
         try {
             $mpdf->WriteHTML($html);
             if ($email) {
-                $mpdf->Output($path = storage_path("certificates/$user->id/{$course->title_ar}.pdf"), 'F');
+                $reflect = new ReflectionClass($user);
+                $mpdf->Output($path = "storage/certificates/{$reflect->getShortName()}-{$user->id}-{$course->title_ar}.pdf", 'F');
                 return $path;
             } else {
                 $mpdf->Output("{$course->title_ar}.pdf", 'I');
@@ -74,10 +76,10 @@ class CertificateService
         // First time ...
 
         $hash = uniqid();
-        $user->certificates()->create([
-            'code' => $hash,
-            'course_id' => $course->id
-        ]);
+        // $user->certificates()->create([
+        //     'code' => $hash,
+        //     'course_id' => $course->id
+        // ]);
 
         // Also send email..
         $user->notify(new SendCertificate($hash, $course));
