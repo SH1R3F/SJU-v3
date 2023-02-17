@@ -113,10 +113,6 @@ class MemberController extends Controller
         $this->authorize('export', Member::class);
 
         switch ($page) {
-            case 'accepted':
-                $this->authorize('viewAny', Member::class);
-                $status = [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED];
-                break;
             case 'admin-acceptance':
                 $this->authorize('viewAcceptance', Member::class);
                 $status = [Member::STATUS_APPROVED];
@@ -128,6 +124,10 @@ class MemberController extends Controller
             case 'refused':
                 $this->authorize('viewRefused', Member::class);
                 $status = [Member::STATUS_REFUSED];
+                break;
+            default: // Accepted
+                $this->authorize('viewAny', Member::class);
+                $status = [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED];
                 break;
         }
         return Excel::download(new MembersExport($service->getMembers(request(), $status, true)), 'Members.xlsx');
