@@ -66,7 +66,9 @@ class TemplateService
         $mpdf = new Mpdf([
             'mode'          => $template->mode,
             'format'        => $template->layout,
-            'default'
+            'fontDir'       => [config('pdf.custom_font_dir')],
+            'fontdata'      => config('pdf.custom_font_data'),
+            'unAGlyphs'     => true,
         ]);
 
         $mpdf->SetDirectionality($template->mode == 'ar' ? 'rtl' : 'ltr');

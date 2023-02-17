@@ -26,6 +26,9 @@ class CertificateService
         $mpdf = new Mpdf([
             'mode'          => $template->mode,
             'format'        => $template->layout,
+            'fontDir'       => [config('pdf.custom_font_dir')],
+            'fontdata'      => config('pdf.custom_font_data'),
+            'unAGlyphs'     => true,
         ]);
 
         $mpdf->SetDirectionality($template->mode == 'ar' ? 'rtl' : 'ltr');
@@ -36,7 +39,7 @@ class CertificateService
 
         try {
             $mpdf->WriteHTML($html);
-            $mpdf->Output("{$course->title_ar}.pdf", 'D');
+            $mpdf->Output("{$course->title_ar}.pdf", 'I');
         } catch (\Exception $e) {
             logger("___________________________ERROR GENERATING CERTIFICATE__________________________");
             logger($e->getMessage());

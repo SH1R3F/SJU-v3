@@ -193,6 +193,7 @@ class CourseController extends Controller
             // Save to db
             $this->auth->questionnaires()->attach($course->questionnaire->id, ['answers' => json_encode($answers), 'course_id' => $course->id]);
         }
+
         return Inertia::location(route('courses.certificate', $course->id));
     }
 
