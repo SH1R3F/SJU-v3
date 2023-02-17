@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
 use App\Models\Course\Question;
@@ -192,8 +193,7 @@ class CourseController extends Controller
             // Save to db
             $this->auth->questionnaires()->attach($course->questionnaire->id, ['answers' => json_encode($answers), 'course_id' => $course->id]);
         }
-
-        return redirect()->route('courses.certificate', $course->id);
+        return Inertia::location(route('courses.certificate', $course->id));
     }
 
     /**
