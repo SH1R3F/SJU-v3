@@ -45,7 +45,7 @@ class SendCertificate extends Notification
         return (new MailMessage)
             ->subject('شكراً لمشاركتك بالفعالية | هيئة الصحفيين السعوديين')
             ->view('emails.certificate', ['user' => $notifiable, 'course' => $this->course])
-            ->attach(url($path), [
+            ->attach($path, [
                 'as' => 'شهادة حضور الفعالية.pdf',
                 'mime' => 'application/pdf',
             ]);

@@ -76,10 +76,10 @@ class CertificateService
         // First time ...
 
         $hash = uniqid();
-        // $user->certificates()->create([
-        //     'code' => $hash,
-        //     'course_id' => $course->id
-        // ]);
+        $user->certificates()->create([
+            'code' => $hash,
+            'course_id' => $course->id
+        ]);
 
         // Also send email..
         $user->notify(new SendCertificate($hash, $course));
