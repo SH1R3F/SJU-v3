@@ -600,6 +600,36 @@ const editRole = (role) => {
                                                 </td>
                                             </tr>
                                             <!-- Technical support -->
+
+                                            <!-- Invitations permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Invitations management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistInvitation" v-model="addForm.permissions['viewAny-invitation']" />
+                                                            <label class="form-check-label" for="addlistInvitation"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addviewInvitation" v-model="addForm.permissions['view-invitation']" />
+                                                            <label class="form-check-label" for="addviewInvitation"> {{ __('View') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addcreateInvitation" v-model="addForm.permissions['create-invitation']" />
+                                                            <label class="form-check-label" for="addcreateInvitation"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addupdateInvitation" v-model="addForm.permissions['update-invitation']" />
+                                                            <label class="form-check-label" for="addupdateInvitation"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="adddeleteInvitation" v-model="addForm.permissions['delete-invitation']" />
+                                                            <label class="form-check-label" for="adddeleteInvitation"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Invitations permission -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -1126,6 +1156,36 @@ const editRole = (role) => {
                                                 </td>
                                             </tr>
                                             <!-- Technical support -->
+
+                                            <!-- Invitations permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Invitations management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistInvitation" v-model="editForm.permissions['viewAny-invitation']" />
+                                                            <label class="form-check-label" for="editlistInvitation"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editviewInvitation" v-model="editForm.permissions['view-invitation']" />
+                                                            <label class="form-check-label" for="editviewInvitation"> {{ __('View') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreateInvitation" v-model="editForm.permissions['create-invitation']" />
+                                                            <label class="form-check-label" for="editcreateInvitation"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editupdateInvitation" v-model="editForm.permissions['update-invitation']" />
+                                                            <label class="form-check-label" for="editupdateInvitation"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteInvitation" v-model="editForm.permissions['delete-invitation']" />
+                                                            <label class="form-check-label" for="editdeleteInvitation"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Invitations permission -->
                                         </tbody>
                                     </table>
                                 </div>

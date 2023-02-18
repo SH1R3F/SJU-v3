@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\InviteController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TechnicalSupportController;
 
@@ -97,6 +98,13 @@ Route::get('page/{slug}', [PageController::class, 'page'])->name('pages.show');
  */
 Route::get('article/{article}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('articles/{category_id?}', [ArticleController::class, 'articles'])->name('articles.index');
+
+/**
+ * Invitation routes
+ */
+Route::get('invitations/{invitation}', [InviteController::class, 'show'])->name('invitation.show');
+Route::post('invitations/{invitation}', [InviteController::class, 'store'])->name('invitate.store');
+
 
 // Member routes
 require_once 'members/web.php';

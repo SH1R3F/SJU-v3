@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\Course\QuestionController;
 use App\Http\Controllers\Admin\Course\TemplateController;
 use App\Http\Controllers\Admin\TechnicalSupportController;
 use App\Http\Controllers\Admin\Course\QuestionnaireController;
+use App\Http\Controllers\Admin\InvitationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -218,5 +219,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('studio/create', [MediaController::class, 'create'])->name('media.create');
         Route::post('studio/', [MediaController::class, 'store'])->name('media.store');
         Route::delete('studio/{media}', [MediaController::class, 'destroy'])->name('media.destroy');
+
+        /**
+         * Invitations management
+         */
+        Route::post('invitations/{invitation}/toggle', [InvitationController::class, 'toggle'])->name('invitations.toggle');
+        Route::resource('invitations', InvitationController::class);
     });
 });

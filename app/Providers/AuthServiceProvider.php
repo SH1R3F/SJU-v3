@@ -13,6 +13,7 @@ use App\Models\Member;
 use App\Models\Article;
 use App\Models\Invoice;
 use App\Models\Category;
+use App\Models\Invitation;
 use App\Models\SiteOption;
 use App\Models\Subscriber;
 use App\Policies\AdPolicy;
@@ -31,6 +32,7 @@ use App\Policies\InvoicePolicy;
 use App\Policies\CategoryPolicy;
 use App\Policies\TemplatePolicy;
 use App\Policies\VolunteerPolicy;
+use App\Policies\InvitationPolicy;
 use App\Policies\SiteOptionPolicy;
 use App\Policies\SubscriberPolicy;
 use Spatie\Permission\Models\Role;
@@ -67,6 +69,7 @@ class AuthServiceProvider extends ServiceProvider
         Url::class => UrlPolicy::class,
         Media::class => MediaPolicy::class,
         TechnicalSupportTicket::class => TechnicalSupportPolicy::class,
+        Invitation::class => InvitationPolicy::class,
     ];
 
     /**

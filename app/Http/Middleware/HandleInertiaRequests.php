@@ -13,6 +13,7 @@ use App\Models\Invoice;
 use Inertia\Middleware;
 use App\Models\Category;
 use App\Models\Volunteer;
+use App\Models\Invitation;
 use App\Models\SiteOption;
 use App\Models\Subscriber;
 use App\Models\Transaction;
@@ -137,6 +138,7 @@ class HandleInertiaRequests extends Middleware
             'ads' =>  $admin->can('viewAny', Ad::class),
             'urls' =>  $admin->can('viewAny', Url::class),
             'studio' =>  $admin->can('viewAny', Media::class),
+            'invitations' =>  $admin->can('viewAny', Invitation::class),
         ];
     }
 }

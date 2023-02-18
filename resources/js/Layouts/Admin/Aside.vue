@@ -26,12 +26,16 @@
                 </Link>
             </li>
             <!-- Dashboard -->
+
+            <!-- Site options -->
             <li v-if="$page.props.authUser?.can_view?.options" class="menu-item" :class="{ active: $page.component == 'Admin/SiteOptions/Index' }">
                 <Link :href="route('admin.site.options')" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-tool"></i>
                     <div>{{ __('Site options') }}</div>
                 </Link>
             </li>
+            <!-- Site options -->
+
             <!-- Roles and moderators -->
             <li
                 v-if="$page.props.authUser?.can_view?.roles || $page.props.authUser?.can_view?.admins"
@@ -275,6 +279,15 @@
                     </li>
                 </ul>
             </li>
+
+            <!-- Invitations -->
+            <li v-if="$page.props.authUser?.can_view?.options" class="menu-item" :class="{ active: $page.component.startsWith('Admin/Invitations') }">
+                <Link :href="route('admin.invitations.index')" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-mail-opened"></i>
+                    <div>{{ __('Invitations') }}</div>
+                </Link>
+            </li>
+            <!-- Invitations -->
         </ul>
     </aside>
 </template>

@@ -170,6 +170,15 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::updateOrCreate(['name' => 'create-media'], ['name' => 'create-media', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'delete-media'], ['name' => 'delete-media', 'guard_name' => 'admin']);
 
+        /**
+         * Urls management permissions
+         */
+        Permission::updateOrCreate(['name' => 'viewAny-invitation'], ['name' => 'viewAny-invitation', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'view-invitation'], ['name' => 'view-invitation', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-invitation'], ['name' => 'create-invitation', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-invitation'], ['name' => 'update-invitation', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-invitation'], ['name' => 'delete-invitation', 'guard_name' => 'admin']);
+
 
         $admin->syncPermissions(Permission::pluck('name'));
     }
