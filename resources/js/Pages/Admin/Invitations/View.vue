@@ -46,13 +46,12 @@ const props = defineProps({
                     <div class="row me-2 py-3 text-end">
                         <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column gap-1 mb-3 mb-md-0">
                             <div class="dt-buttons">
-                                <Link v-if="false" type="button" class="dt-button btn btn-light me-1">
-                                    <!-- Left for later maybe used -->
+                                <a :href="route('admin.invitations.export', invitation.id)" class="dt-button btn btn-light me-1">
                                     <span>
-                                        <i class="ti ti-bell-ringing me-0 me-sm-1 ti-xs"></i>
-                                        <span class="d-none d-sm-inline-block">{{ __('Button') }}</span>
+                                        <i class="ti ti-screen-share me-0 me-sm-1 ti-xs"></i>
+                                        <span class="d-none d-sm-inline-block">{{ __('Export') }}</span>
                                     </span>
-                                </Link>
+                                </a>
                             </div>
                         </div>
                     </div>

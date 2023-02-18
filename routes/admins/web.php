@@ -223,6 +223,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         /**
          * Invitations management
          */
+        Route::get('invitations/{invitation}/export', [InvitationController::class, 'export'])->name('invitations.export');
         Route::post('invitations/{invitation}/toggle', [InvitationController::class, 'toggle'])->name('invitations.toggle');
         Route::resource('invitations', InvitationController::class);
     });

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Invitation;
 use Illuminate\Http\Request;
+use App\Exports\InvitesExport;
 use Illuminate\Http\UploadedFile;
 use App\Services\InvitationService;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\InvitationRequest;
 use App\Http\Resources\InvitationResource;
@@ -38,6 +40,19 @@ class InvitationController extends Controller
                 ]),
             'filters' => request()->only(['perPage', 'name', 'order', 'dir'])
         ]);
+    }
+
+    /**
+     * Export a listing of the resource.
+     *
+     * @param  \App\Models\Invitation  $invitation
+     * @return \Illuminate\Http\Response
+     */
+    public function export(Invitation $invitation)
+    {
+        $this->authorize('view', $invitation);
+
+        return Excel::download(new InvitesExport($invitation->invites), 'Invitations.xlsx');
     }
 
     /**
