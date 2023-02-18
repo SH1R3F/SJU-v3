@@ -15,7 +15,7 @@ class InvitationService
      */
     public function preview(Invitation $invitation)
     {
-        $img    = \Image::make(public_path("storage/{$invitation->preview}"));
+        $img    = \Image::make(storage_path("app/public/{$invitation->preview}"));
         $arabic = new Arabic('Glyphs');
         $text   = $arabic->utf8Glyphs($invitation->variables['field']);
 
@@ -28,7 +28,7 @@ class InvitationService
                 $font->color($invitation->variables['fontcolor']);
                 $font->align('center');
             })
-            ->save(public_path("storage/{$invitation->preview}"));
+            ->save(storage_path("app/public/{$invitation->preview}"));
     }
 
 
@@ -40,10 +40,11 @@ class InvitationService
     public function create($name, $invitation)
     {
         // Create invitation image
-        $img    = \Image::make(public_path("storage/{$invitation->file}"));
+        $img    = \Image::make(storage_path("app/public/{$invitation->file}"));
         $arabic = new Arabic('Glyphs');
         $text   = $arabic->utf8Glyphs($name);
         $file   = Str::slug($name);
+        $path   = "invitations/results/{$invitation->id}-{$file}.png";
 
         $x_position = $invitation->variables['width_type'] == 'center' ? ($img->width() / 2) : ($img->width() - $invitation->variables['width']);
         $img
@@ -53,8 +54,8 @@ class InvitationService
                 $font->color($invitation->variables['fontcolor']);
                 $font->align('center');
             })
-            ->save(public_path($path = "storage/invitations/results/{$file}.png"));
+            ->save(storage_path("app/public/$path"));
 
-        return str_replace('storage/invitations', 'invitations', $path);
+        return $path;
     }
 }
