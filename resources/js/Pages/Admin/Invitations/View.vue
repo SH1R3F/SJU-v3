@@ -68,7 +68,7 @@ const props = defineProps({
                                 <tr v-for="(invite, i) in invitation.invites" :key="i">
                                     <td>{{ i + 1 }}</td>
                                     <td>
-                                        <Link href="#" style="display: inline-block; max-width: 150px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">{{
+                                        <Link href="#" style="display: inline-block; max-width: 300px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">{{
                                             invite.name
                                         }}</Link>
                                     </td>
