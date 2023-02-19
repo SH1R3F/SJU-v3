@@ -64,7 +64,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request, ArticleService $service)
     {
-        dd($request->validated());
+        dd($request->all());
         // Store it
         $service->create($request->validated());
 
