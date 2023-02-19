@@ -1,5 +1,6 @@
 <script setup>
 import { useForm } from '@inertiajs/inertia-vue3';
+import { ref } from 'vue';
 
 const props = defineProps({
     categories: Object,
@@ -17,7 +18,7 @@ const form = useForm({
     content_en: '',
 });
 
-let images = [];
+let images = ref([]);
 
 const handleImages = ($event) => {
     let files = $event.target.files;
@@ -28,7 +29,7 @@ const handleImages = ($event) => {
         let rawImg;
         reader.onloadend = () => {
             rawImg = reader.result;
-            images.push(rawImg);
+            images.value.push(rawImg);
         };
         reader.readAsDataURL(file);
     });

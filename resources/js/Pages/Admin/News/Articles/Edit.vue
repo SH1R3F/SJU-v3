@@ -19,7 +19,7 @@ const form = useForm({
     _method: 'PUT',
 });
 
-let images = props.article.images || [];
+let images = ref(props.article.images || []);
 const handleImages = ($event) => {
     let files = $event.target.files;
     files.forEach((file) => {
@@ -28,7 +28,7 @@ const handleImages = ($event) => {
         let rawImg;
         reader.onloadend = () => {
             rawImg = reader.result;
-            images.push(rawImg);
+            images.value.push(rawImg);
         };
         reader.readAsDataURL(file);
     });
