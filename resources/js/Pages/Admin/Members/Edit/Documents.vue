@@ -62,7 +62,14 @@ const form = useForm({
                                         </div>
                                     </div>
                                     <div class="col-md-4 text-center">
-                                        <img class="card-img card-img-right" :src="member.profile_photo || `/img/user-dark.png`" onerror="this.src = '/img/user-dark.png';" style="max-width: 200px" />
+                                        <a :href="member.profile_photo" target="_blank">
+                                            <img
+                                                class="card-img card-img-right"
+                                                :src="member.profile_photo || `/img/user-dark.png`"
+                                                onerror="this.src = '/img/user-dark.png';"
+                                                style="max-width: 200px"
+                                            />
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +87,9 @@ const form = useForm({
                                         </div>
                                     </div>
                                     <div class="col-md-4 text-center">
-                                        <img class="card-img card-img-right" :src="member.national_id_photo || `/img/card.png`" onerror="this.src = '/img/card.png';" style="max-width: 200px" />
+                                        <a :href="member.national_id_photo" target="_blank">
+                                            <img class="card-img card-img-right" :src="member.national_id_photo || `/img/card.png`" onerror="this.src = '/img/card.png';" style="max-width: 200px" />
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +107,9 @@ const form = useForm({
                                         </div>
                                     </div>
                                     <div class="col-md-4 text-center">
-                                        <img class="card-img card-img-right" :src="member.statement_photo || `/img/letter.png`" onerror="this.src = '/img/letter.png';" style="max-width: 200px" />
+                                        <a :href="member.statement_photo" target="_blank">
+                                            <img class="card-img card-img-right" :src="member.statement_photo || `/img/letter.png`" onerror="this.src = '/img/letter.png';" style="max-width: 200px" />
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +127,9 @@ const form = useForm({
                                         </div>
                                     </div>
                                     <div class="col-md-4 text-center">
-                                        <img class="card-img card-img-right" :src="member.license_photo || `/img/letter.png`" onerror="this.src = '/img/letter.png';" style="max-width: 200px" />
+                                        <a :href="member.license_photo" target="_blank">
+                                            <img class="card-img card-img-right" :src="member.license_photo || `/img/letter.png`" onerror="this.src = '/img/letter.png';" style="max-width: 200px" />
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +147,9 @@ const form = useForm({
                                         </div>
                                     </div>
                                     <div class="col-md-4 text-center">
-                                        <img class="card-img card-img-right" :src="member.contract_photo || `/img/letter.png`" onerror="this.src = '/img/letter.png';" style="max-width: 200px" />
+                                        <a :href="member.contract_photo" target="_blank">
+                                            <img class="card-img card-img-right" :src="member.contract_photo || `/img/letter.png`" onerror="this.src = '/img/letter.png';" style="max-width: 200px" />
+                                        </a>
                                     </div>
                                 </div>
                             </div>
