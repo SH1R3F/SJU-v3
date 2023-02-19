@@ -33,7 +33,7 @@ const form = useForm({
                     <li class="nav-item">
                         <Link class="nav-link" :class="{ active: $page.component == 'Admin/Members/Edit/Experiences' }" :href="route('admin.members.edit.experiences', member.id)">
                             <i class="ti ti-language ti-xs me-1"></i>
-                            {{ __('Experiences & Fields') }}
+                            {{ __('Documents') }}
                         </Link>
                     </li>
                     <li class="nav-item">
