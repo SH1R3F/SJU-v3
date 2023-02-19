@@ -40,7 +40,7 @@ const handleImages = ($event) => {
                 <div class="card mb-4">
                     <h5 class="card-header">{{ __('Create article') }}</h5>
                     <div class="card-body">
-                        <form @submit.prevent="form.post(route('admin.articles.store'))">
+                        <form @submit.prevent="form.post(route('admin.articles.store'))" enctype="multipart/form-data">
                             <!-- Category -->
                             <div class="row">
                                 <div class="mb-3 col-12">
