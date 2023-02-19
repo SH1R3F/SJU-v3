@@ -29,7 +29,7 @@ class ArticleRequest extends FormRequest
             'title_en' => ['nullable', 'string', 'max:255'],
             'news_date' => ['required', 'date'],
             'images' => ['nullable', 'array'],
-            'image.*' => ['nullable', 'string'],
+            // 'image.*' => ['nullable', 'string'],
             'summary_ar' => ['required', 'string', 'max:255'],
             'summary_en' => ['nullable', 'string', 'max:255'],
             'content_ar' => ['required', 'string'],

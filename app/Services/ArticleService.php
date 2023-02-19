@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Article;
+use Illuminate\Http\UploadedFile;
 
 class ArticleService
 {
@@ -45,6 +46,12 @@ class ArticleService
         foreach ($images as $img) {
             if (str_starts_with($img, 'data:image')) {
                 $path = upload_base64_image($img, "uploads/images/$date");
+                array_push($imgs, $path);
+                continue;
+            }
+
+            if ($img instanceof UploadedFile) {
+                $path = $img->store("uploads/images/$date");
                 array_push($imgs, $path);
                 continue;
             }
