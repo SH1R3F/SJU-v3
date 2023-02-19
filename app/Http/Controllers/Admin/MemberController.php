@@ -26,6 +26,7 @@ use App\Http\Requests\NotifyMembersRequest;
 use App\Notifications\MembershipUnaccepted;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\PushNotificationToUsers;
+use App\Http\Requests\Member\ProfileExperiencesRequest;
 
 class MemberController extends Controller
 {
@@ -267,10 +268,38 @@ class MemberController extends Controller
      */
     public function edit(Member $member)
     {
-        return inertia('Admin/Members/Edit', [
+        return inertia('Admin/Members/Edit/Index', [
             'member' => new MemberResource($member->load('subscription')),
             'nationalities' => config('sju.nationalities'),
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
+        ]);
+    }
+
+    /**
+     * Show the form for editing experiences of the specified resource.
+     *
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function experiences(Member $member)
+    {
+        $this->authorize('update', $member);
+        return inertia('Admin/Members/Edit/Experiences', [
+            'member' => new MemberResource($member)
+        ]);
+    }
+
+    /**
+     * Show the form for editing documents of the specified resource.
+     *
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function documents(Member $member)
+    {
+        $this->authorize('update', $member);
+        return inertia('Admin/Members/Edit/Documents', [
+            'member' => new MemberResource($member->load('subscription')),
         ]);
     }
 
@@ -290,6 +319,56 @@ class MemberController extends Controller
 
         // Response
         return redirect()->route('admin.members.index')->with('message', __('Member updated successfully'));
+    }
+
+    /**
+     * Update the experiences of the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Member\ProfileExperiencesRequest  $request
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function updateExperiences(ProfileExperiencesRequest $request, Member $member)
+    {
+        $this->authorize('update', $member);
+
+        // Update member
+        $member->update($request->validated());
+
+        // Response
+        return redirect()->back()->with('message', __('Member updated successfully'));
+    }
+
+    /**
+     * Update the documents of the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function updateDocuments(Request $request, Member $member)
+    {
+        $this->authorize('update', $member);
+
+        $data = $request->validate([
+            'profile_photo' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif', 'max:2048'],
+            'national_id_photo' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif', 'max:2048'],
+            'statement_photo' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif', 'max:2048'],
+            'contract_photo' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif', 'max:2048'],
+            'license_photo' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif', 'max:2048'],
+        ]);
+
+        if ($request->hasFile('profile_photo')) $data['profile_photo'] = $request->file('profile_photo')->store("members/{$member->national_id}");
+        if ($request->hasFile('national_id_photo')) $data['national_id_photo'] = $request->file('national_id_photo')->store("members/{$member->national_id}");
+        if ($request->hasFile('statement_photo')) $data['statement_photo'] = $request->file('statement_photo')->store("members/{$member->national_id}");
+        if ($request->hasFile('contract_photo')) $data['contract_photo'] = $request->file('contract_photo')->store("members/{$member->national_id}");
+        if ($request->hasFile('license_photo')) $data['license_photo'] = $request->file('license_photo')->store("members/{$member->national_id}");
+
+        // Update member
+        $member->update($data);
+
+        // Response
+        return redirect()->back()->with('message', __('Member updated successfully'));
     }
 
     /**

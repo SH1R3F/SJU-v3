@@ -1,3 +1,4 @@
+<script></script>
 <template>
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">

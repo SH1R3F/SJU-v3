@@ -51,6 +51,27 @@ const changeDate = (e) => {
         <div class="row">
             <!-- Member Content -->
             <div class="col-12 order-0 order-md-1">
+                <!-- Pills -->
+                <ul class="nav nav-pills flex-column flex-md-row mb-4">
+                    <li class="nav-item">
+                        <Link class="nav-link" :class="{ active: $page.component == 'Admin/Members/Edit/Index' }" :href="route('admin.members.edit', member.id)">
+                            <i class="ti ti-check ti-xs me-1"></i>{{ __('Member info') }}
+                        </Link>
+                    </li>
+                    <li class="nav-item">
+                        <Link class="nav-link" :class="{ active: $page.component == 'Admin/Members/Edit/Experiences' }" :href="route('admin.members.edit.experiences', member.id)">
+                            <i class="ti ti-language ti-xs me-1"></i>
+                            {{ __('Experiences & Fields') }}
+                        </Link>
+                    </li>
+                    <li class="nav-item">
+                        <Link class="nav-link" :class="{ active: $page.component == 'Admin/Members/Edit/Documents' }" :href="route('admin.members.edit.documents', member.id)">
+                            <i class="ti ti-files ti-xs me-1"></i>{{ __('Documents') }}
+                        </Link>
+                    </li>
+                </ul>
+                <!-- Pills -->
+
                 <!-- Member information -->
                 <div class="card mb-4">
                     <h5 class="card-header">{{ __('Edit member') }}</h5>

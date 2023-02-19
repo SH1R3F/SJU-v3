@@ -103,6 +103,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('members/{member}/documents', [MemberController::class, 'showDocuments'])->name('members.show.documents');
         Route::get('members/{member}/card', [MemberController::class, 'card'])->name('members.card');
         Route::get('members/{member}/form', [MemberController::class, 'form'])->name('members.form');
+        Route::get('members/{member}/edit/experiences', [MemberController::class, 'experiences'])->name('members.edit.experiences');
+        Route::put('members/{member}/edit/experiences', [MemberController::class, 'updateExperiences'])->name('members.update.experiences');
+        Route::get('members/{member}/edit/documents', [MemberController::class, 'documents'])->name('members.edit.documents');
+        Route::put('members/{member}/edit/documents', [MemberController::class, 'updateDocuments'])->name('members.update.documents');
         Route::resource('members', MemberController::class);
 
         /**
