@@ -61,7 +61,7 @@ class ArticleController extends Controller
      * @param  \App\Http\Requests\ArticleRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ArticleRequest $request, ArticleService $service)
+    public function store(Request $request, ArticleService $service)
     {
         dd($request->validated());
         // Store it
