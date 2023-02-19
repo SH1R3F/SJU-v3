@@ -22,7 +22,7 @@ class OppwaPayment implements PaymentInterface
 
     public function __construct(array $config)
     {
-        $env = app()->env == 'production' ? 'live' : 'test';
+        $env = 'live'; // app()->env == 'production' ? 'live' : 'test';
 
         $this->env  = $env;
         $this->mada = $config[$env]['mada'];
