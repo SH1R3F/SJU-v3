@@ -80,7 +80,7 @@ const form = useForm({
                                         </div>
                                     </div>
                                     <div class="col-md-4 text-center">
-                                        <img class="card-img card-img-right" src="/img/card.png" style="max-width: 200px" />
+                                        <img class="card-img card-img-right" :src="member.national_id_photo || `/img/card.png`" style="max-width: 200px" />
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@ const form = useForm({
                                         </div>
                                     </div>
                                     <div class="col-md-4 text-center">
-                                        <img class="card-img card-img-right" src="/img/letter.png" style="max-width: 200px" />
+                                        <img class="card-img card-img-right" :src="member.statement_photo || `/img/letter.png`" style="max-width: 200px" />
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@ const form = useForm({
                                         </div>
                                     </div>
                                     <div class="col-md-4 text-center">
-                                        <img class="card-img card-img-right" src="/img/letter.png" style="max-width: 200px" />
+                                        <img class="card-img card-img-right" :src="member.license_photo || `/img/letter.png`" style="max-width: 200px" />
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@ const form = useForm({
                                         </div>
                                     </div>
                                     <div class="col-md-4 text-center">
-                                        <img class="card-img card-img-right" src="/img/letter.png" style="max-width: 200px" />
+                                        <img class="card-img card-img-right" :src="member.contract_photo || `/img/letter.png`" style="max-width: 200px" />
                                     </div>
                                 </div>
                             </div>
