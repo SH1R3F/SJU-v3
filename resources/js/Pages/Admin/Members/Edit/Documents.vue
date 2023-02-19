@@ -33,7 +33,7 @@ const form = useForm({
                     <li class="nav-item">
                         <Link class="nav-link" :class="{ active: $page.component == 'Admin/Members/Edit/Experiences' }" :href="route('admin.members.edit.experiences', member.id)">
                             <i class="ti ti-language ti-xs me-1"></i>
-                            {{ __('Documents') }}
+                            {{ __('Experiences & Fields') }}
                         </Link>
                     </li>
                     <li class="nav-item">
@@ -46,7 +46,7 @@ const form = useForm({
 
                 <!-- Member information -->
                 <div class="card mb-4">
-                    <h5 class="card-header">{{ __('Experiences & Fields') }}</h5>
+                    <h5 class="card-header">{{ __('Documents') }}</h5>
                     <div class="card-body">
                         <form @submit.prevent="form.post(route('admin.members.update.documents', member.id))" enctype="multipart/form-data">
                             <!-- Profile picture -->
