@@ -19,14 +19,16 @@ const form = useForm({
     _method: 'PUT',
 });
 
+let images = props.article.images || [];
 const handleImages = ($event) => {
     let files = $event.target.files;
     files.forEach((file) => {
+        form.images.push(file);
         const reader = new FileReader();
         let rawImg;
         reader.onloadend = () => {
             rawImg = reader.result;
-            form.images.push(rawImg);
+            images.push(rawImg);
         };
         reader.readAsDataURL(file);
     });
@@ -95,8 +97,18 @@ const handleImages = ($event) => {
                                         <input class="form-control" type="file" id="file" @change="handleImages" multiple />
                                     </div>
                                     <p class="fs-6 text-danger" v-if="form.errors.images">{{ form.errors.images }}</p>
-                                    <div class="images border p-3" v-if="form.images.length">
-                                        <img v-for="(img, i) in form.images" :key="i" :src="img" class="img-thumbnail d-inline mx-1" style="max-width: 120px" @click="form.images.splice(i, 1)" />
+                                    <div class="images border p-3" v-if="images.length">
+                                        <img
+                                            v-for="(img, i) in images"
+                                            :key="i"
+                                            :src="img"
+                                            class="img-thumbnail d-inline mx-1"
+                                            style="max-width: 120px"
+                                            @click="
+                                                form.images.splice(i, 1);
+                                                images.splice(i, 1);
+                                            "
+                                        />
                                     </div>
                                 </div>
                             </div>
