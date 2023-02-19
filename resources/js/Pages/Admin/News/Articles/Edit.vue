@@ -44,7 +44,7 @@ const handleImages = ($event) => {
                 <div class="card mb-4">
                     <h5 class="card-header">{{ __('Edit article') }}</h5>
                     <div class="card-body">
-                        <form @submit.prevent="form.post(route('admin.articles.update', article.id))">
+                        <form @submit.prevent="form.post(route('admin.articles.update', article.id))" enctype="multipart/form-data">
                             <!-- Category -->
                             <div class="row">
                                 <div class="mb-3 col-12">
@@ -150,7 +150,7 @@ const handleImages = ($event) => {
                             <!-- Content -->
 
                             <div>
-                                <button type="submit" class="btn btn-primary me-2">{{ __('Create') }}</button>
+                                <button type="submit" class="btn btn-primary me-2">{{ __('Update') }}</button>
                                 <Link :href="route('admin.articles.index')" as="button" type="reset" class="btn btn-label-secondary me-2">{{ __('Cancel') }}</Link>
                             </div>
                         </form>
