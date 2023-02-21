@@ -33,7 +33,7 @@ const props = defineProps({
         <div class="row row-cols-1 row-cols-md-3 g-4 mb-5 mt-1">
             <div class="col" v-for="ad in ads.data">
                 <div class="card h-100">
-                    <img class="card-img-top h-100" :src="ad.path" />
+                    <img class="card-img-top h-100" :src="ad.path" style="object-fit: none" />
                     <div class="card-body text-center">
                         <h5>{{ ad.title }}</h5>
                         <div>
