@@ -37,7 +37,8 @@ class AdRequest extends FormRequest
                 'nullable',
                 'url',
             ],
-            'target' => ['nullable', 'in:_self,_blank']
+            'target' => ['nullable', 'in:_self,_blank'],
+            'only_image' => ['boolean']
         ];
     }
 }

@@ -9,5 +9,5 @@ class Ad extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title_ar', 'title_en', 'image', 'link', 'target', 'status'];
+    protected $fillable = ['title_ar', 'title_en', 'image', 'link', 'target', 'status', 'only_image'];
 }

@@ -11,6 +11,7 @@ const form = useForm({
     image: '',
     link: props.ad.link || '',
     target: props.ad.target || '_self',
+    only_image: props.ad.only_image || false,
     _method: 'PUT',
 });
 </script>
@@ -81,6 +82,21 @@ const form = useForm({
                                 </div>
                             </div>
                             <!-- Target -->
+
+                            <!-- Show only image -->
+                            <div class="row">
+                                <div class="mb-3 col-12">
+                                    <div class="d-flex gap-3 flex-wrap">
+                                        <div class="form-check mt-1">
+                                            <input class="form-check-input" type="checkbox" id="only_image" v-model="form.only_image" />
+                                            <label class="form-check-label" for="only_image"> {{ __('Show only image') }} </label>
+                                        </div>
+                                    </div>
+                                    <span class="fs-6 text-danger" v-if="form.errors.only_image">{{ form.errors.only_image }}</span>
+                                </div>
+                            </div>
+                            <!-- Show only image -->
+
                             <div>
                                 <button type="submit" class="btn btn-primary me-2">{{ __('Update') }}</button>
                                 <Link :href="route('admin.ads.index')" as="button" type="reset" class="btn btn-label-secondary me-2">{{ __('Cancel') }}</Link>
