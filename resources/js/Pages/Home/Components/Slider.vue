@@ -11,7 +11,9 @@ const props = defineProps({
             <div class="carousel-inner">
                 <div class="carousel-item slider" v-for="(ad, i) in ads.data" :key="ad.id" :class="{ active: i == 0 }" style="background: transparent">
                     <div class="row">
-                        <img :src="ad.path || '/img/article.png'" :alt="ad.title" style="height: auto; max-height: 90vh; object-fit: fill; width: 100%; object-position: center" />
+                        <a :href="ad.link" :target="ad.target">
+                            <img :src="ad.path || '/img/article.png'" :alt="ad.title" style="height: auto; max-height: 90vh; object-fit: fill; width: 100%; object-position: center" />
+                        </a>
                         <div v-if="!ad.only_image" class="description" style="position: absolute; bottom: 0; left: 0; background: #007c42d6; z-index: 99999; text-align: center">
                             <h3>{{ ad.title }}</h3>
                             <a v-if="ad.link" :href="ad.link" :target="ad.target">{{ __('Details') }}</a>
