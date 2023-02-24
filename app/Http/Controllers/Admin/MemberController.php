@@ -317,6 +317,9 @@ class MemberController extends Controller
         // Update member
         $member->update($data);
 
+        // Create subscription
+        if ($data['type']) $member->subscription()->update(['type' => $data['type']]);
+
         // Response
         return redirect()->route('admin.members.index')->with('message', __('Member updated successfully'));
     }

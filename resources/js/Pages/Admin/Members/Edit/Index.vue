@@ -37,6 +37,7 @@ const form = useForm({
     postcity: props.member.postcity || '',
     email: props.member.email || '',
     branch_id: props.member.branch_id || '',
+    type: props.member.subscription.num,
 });
 
 const changeDate = (e) => {
@@ -378,6 +379,20 @@ const changeDate = (e) => {
                                 </div>
                             </div>
                             <!-- Branch -->
+
+                            <!-- Subscription type -->
+                            <div class="row">
+                                <div class="mb-3 col-12">
+                                    <label for="type" class="form-label">{{ __('Membership type') }}</label>
+                                    <select class="form-control m-select2-no" id="type" v-model="form.type">
+                                        <option value="1">{{ __('Full-time member') }}</option>
+                                        <option value="2">{{ __('Part-time member') }}</option>
+                                        <option value="3">{{ __('Affiliate member') }}</option>
+                                    </select>
+                                    <p class="fs-6 text-danger" v-if="form.errors.type">{{ form.errors.type }}</p>
+                                </div>
+                            </div>
+                            <!-- Subscription type -->
 
                             <div>
                                 <button type="submit" class="btn btn-primary me-2">{{ __('Update') }}</button>
