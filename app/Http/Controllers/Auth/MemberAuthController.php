@@ -99,7 +99,7 @@ class MemberAuthController extends Controller
         session()->put('member', $member);
 
         // Send code to his mobile
-        Sms::send(__('Verification code for :mobile is :code', ['mobile' => $request->mobile, 'code' => $code]), "966{$request->mobile}");
+        Sms::send(__('Verification code for :mobile is :code to register an account on Saudi journalists association', ['mobile' => $request->mobile, 'code' => $code]), "966{$request->mobile}");
     }
 
     /**
