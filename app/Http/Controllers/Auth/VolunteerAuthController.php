@@ -78,7 +78,7 @@ class VolunteerAuthController extends Controller
         $data['password'] = bcrypt($data['password']);
 
         // Save image
-        if ($data['profile_photo'] instanceof UploadedFile) {
+        if (isset($data['profile_photo']) && $data['profile_photo'] instanceof UploadedFile) {
             $data['profile_photo'] = $data['profile_photo']->store("volunteers/photos");
         }
 
