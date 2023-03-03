@@ -9,10 +9,10 @@ defineProps({
 });
 
 const form = useForm({
-    fname: '',
-    sname: '',
-    tname: '',
-    lname: '',
+    fname_ar: '',
+    sname_ar: '',
+    tname_ar: '',
+    lname_ar: '',
     gender: '',
     country: '',
     city: '',
@@ -42,30 +42,30 @@ const form = useForm({
                                 <div class="mb-3 col-12 col-sm-6">
                                     <label class="form-label" for="fname">{{ __('First name') }}</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="fname" v-model="form.fname" :placeholder="__('First name')" />
+                                        <input class="form-control" type="text" id="fname" v-model="form.fname_ar" :placeholder="__('First name')" />
                                     </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.fname">{{ form.errors.fname }}</span>
+                                    <span class="fs-6 text-danger" v-if="form.errors.fname_ar">{{ form.errors.fname_ar }}</span>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6">
                                     <label class="form-label" for="sname">{{ __('Second name') }}</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="sname" v-model="form.sname" :placeholder="__('Second name')" />
+                                        <input class="form-control" type="text" id="sname" v-model="form.sname_ar" :placeholder="__('Second name')" />
                                     </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.sname">{{ form.errors.sname }}</span>
+                                    <span class="fs-6 text-danger" v-if="form.errors.sname_ar">{{ form.errors.sname_ar }}</span>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6">
                                     <label class="form-label" for="tname">{{ __('Third name') }}</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="tname" v-model="form.tname" :placeholder="__('Third name')" />
+                                        <input class="form-control" type="text" id="tname" v-model="form.tname_ar" :placeholder="__('Third name')" />
                                     </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.tname">{{ form.errors.tname }}</span>
+                                    <span class="fs-6 text-danger" v-if="form.errors.tname_ar">{{ form.errors.tname_ar }}</span>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6">
                                     <label class="form-label" for="lname">{{ __('Last name') }}</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="lname" v-model="form.lname" :placeholder="__('Last name')" />
+                                        <input class="form-control" type="text" id="lname" v-model="form.lname_ar" :placeholder="__('Last name')" />
                                     </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.lname">{{ form.errors.lname }}</span>
+                                    <span class="fs-6 text-danger" v-if="form.errors.lname_ar">{{ form.errors.lname_ar }}</span>
                                 </div>
                             </div>
                             <!-- Full name -->
