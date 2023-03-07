@@ -1,5 +1,6 @@
 <script setup>
 import { useForm } from '@inertiajs/inertia-vue3';
+import { ref } from 'vue';
 
 const props = defineProps({
     categories: Object,
