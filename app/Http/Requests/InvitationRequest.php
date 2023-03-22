@@ -30,6 +30,7 @@ class InvitationRequest extends FormRequest
                 Rule::when(request()->isMethod('POST'), ['required', 'image', 'mimes:jpg,png,jpeg', 'max:10000'], 'nullable')
             ],
             'variables' => ['nullable'],
+            'welcome_message' => ['required', 'string', 'max:255'],
         ];
     }
 }

@@ -313,7 +313,8 @@ return [
         'image' => 'الصورة',
         'target' => 'يفتح في',
         'Group' => 'المجموعة',
-        'only_image' => 'الصورة فقط'
+        'only_image' => 'الصورة فقط',
+        'welcome_message' => 'رسالة الترحيب'
     ],
 
 ];
