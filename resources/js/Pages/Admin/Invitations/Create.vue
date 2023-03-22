@@ -11,6 +11,7 @@ const form = useForm({
         fontsize: 40,
         fontcolor: '#deb43b',
     },
+    welcome_message: 'يسرنا دعوتكم حضور ندوة ثقافية',
     file: '',
     preview: '',
 });
@@ -39,6 +40,18 @@ const form = useForm({
                                 </div>
                             </div>
                             <!-- Name -->
+
+                            <!-- Welcome message -->
+                            <div class="row">
+                                <div class="mb-3 col-12">
+                                    <label class="form-label" for="welcome_message">{{ __('Welcome message') }}</label>
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" id="welcome_message" :placeholder="__('Welcome message')" v-model="form.welcome_message" />
+                                    </div>
+                                    <span class="fs-6 text-danger" v-if="form.errors.welcome_message">{{ form.errors.welcome_message }}</span>
+                                </div>
+                            </div>
+                            <!-- Welcome message -->
 
                             <!-- File -->
                             <div class="row">

@@ -23,7 +23,7 @@ const form = useForm({
                 </div>
                 <div class="mx-auto col-12 col-md-6 text-center">
                     <div>
-                        <h3 class="my-3">يسرنا دعوتكم حضور ندوة ثقافية ( {{ invitation.name }} )</h3>
+                        <h3 class="my-3">{{ invitation.welcome_message }} ( {{ invitation.name }} )</h3>
                         <div class="col-sm-12 mx-auto">
                             <form @submit.prevent="form.post(route('invitate.store', invitation.id))">
                                 <div class="form-group">

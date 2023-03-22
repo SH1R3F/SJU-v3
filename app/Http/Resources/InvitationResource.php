@@ -26,6 +26,7 @@ class InvitationResource extends JsonResource
                 'file' => $this->when($this->file, Storage::url($this->file)),
                 'preview' => $this->when($this->preview, Storage::url($this->preview)),
                 'invites' => InviteResource::collection($this->whenLoaded('invites')),
+                'welcome_message' => $this->welcome_message,
 
                 // Authorization
                 $this->mergeWhen(str_contains(request()->route()->getActionName(), '@index'), $this->withAuthorization($request))
