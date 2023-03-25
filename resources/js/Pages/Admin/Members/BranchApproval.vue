@@ -8,6 +8,7 @@ import { useForm } from '@inertiajs/inertia-vue3';
 const props = defineProps({
     members: Object,
     filters: Object,
+    branches: Object,
 });
 
 /**
@@ -20,6 +21,7 @@ const membership_number = ref(props.filters.membership_number || '');
 const mobile = ref(props.filters.mobile || '');
 const type = ref(props.filters.type || '');
 const year = ref(props.filters.year || '');
+const branch = ref(props.filters.branch || '');
 
 const appended = ref({
     perPage: perPage.value,
@@ -29,20 +31,22 @@ const appended = ref({
     mobile: mobile.value,
     type: type.value,
     year: year.value,
+    branch: branch.value,
     order: props.filters.order,
     dir: props.filters.dir,
 });
 
 const filterReq = debounce(() => Inertia.get(route('admin.members.branch-approval'), appended.value, { preserveState: true, replace: true }), 500);
 watch(
-    () => [name.value, national_id.value, membership_number.value, mobile.value, type.value, year.value, perPage.value],
-    ([nameVal, nidVal, memNum, mob, t, y, pp]) => {
+    () => [name.value, national_id.value, membership_number.value, mobile.value, type.value, year.value, branch.value, perPage.value],
+    ([nameVal, nidVal, memNum, mob, t, y, branch, pp]) => {
         appended.value.name = nameVal;
         appended.value.national_id = nidVal;
         appended.value.membership_number = memNum;
         appended.value.mobile = mob;
         appended.value.type = t;
         appended.value.year = y;
+        appended.value.branch = branch;
         appended.value.perPage = pp;
         filterReq();
     }
@@ -134,7 +138,7 @@ const sortBy = (column) => {
                     <div class="col-md-4 mb-2">
                         <input type="text" class="form-control" :placeholder="__('Mobile')" v-model="mobile" />
                     </div>
-                    <div class="col-md-6 mb-2">
+                    <div class="col-md-4 mb-2">
                         <select class="form-select text-capitalize" v-model="type">
                             <option value="">{{ __('Membership type') }}</option>
                             <option value="1">{{ __('Full-time member') }}</option>
@@ -142,8 +146,14 @@ const sortBy = (column) => {
                             <option value="3">{{ __('Affiliate member') }}</option>
                         </select>
                     </div>
-                    <div class="col-md-6 mb-2">
+                    <div class="col-md-4 mb-2">
                         <input type="text" class="form-control" :placeholder="__('Year')" v-model="year" />
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <select class="form-select text-capitalize" v-model="branch">
+                            <option value="">{{ __('Membership branch') }}</option>
+                            <option v-for="branch in branches" :key="branch.id" :value="branch.id">{{ branch.name }}</option>
+                        </select>
                     </div>
                 </div>
             </div>

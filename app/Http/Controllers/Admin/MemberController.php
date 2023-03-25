@@ -80,7 +80,7 @@ class MemberController extends Controller
 
         return inertia('Admin/Members/BranchApproval', [
             'members'  => $service->getMembersResource(request(), [Member::STATUS_UNAPPROVED]),
-            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'year', 'order', 'dir']),
+            'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'year', 'branch', 'order', 'dir']),
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
         ]);
     }

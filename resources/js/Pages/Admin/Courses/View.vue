@@ -121,6 +121,12 @@ let counter = 0;
                     <div class="row me-2 py-3 text-end">
                         <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column gap-1 mb-3 mb-md-0">
                             <div class="dt-buttons">
+                                <Link :href="route('admin.course.export', course.id)" type="button" class="dt-button btn btn-primary me-1">
+                                    <span>
+                                        <i class="ti ti-bell-ringing me-0 me-sm-1 ti-xs"></i>
+                                        <span class="d-none d-sm-inline-block">{{ __('Export') }}</span>
+                                    </span>
+                                </Link>
                                 <Link :href="route('admin.courses.notify', course.id)" type="button" class="dt-button btn btn-light me-1">
                                     <span>
                                         <i class="ti ti-bell-ringing me-0 me-sm-1 ti-xs"></i>

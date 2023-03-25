@@ -16,6 +16,7 @@ use App\Models\Course\Category;
 use App\Models\Course\Question;
 use App\Models\Course\Template;
 use App\Services\CourseService;
+use App\Exports\CoursablesExport;
 use Illuminate\Support\Facades\DB;
 use App\Exports\QuestionnaireExport;
 use App\Http\Controllers\Controller;
@@ -140,6 +141,23 @@ class CourseController extends Controller
         return inertia('Admin/Courses/View', [
             'course' => new CourseResource($course),
         ]);
+    }
+
+    /**
+     * Export users of a specific course.
+     *
+     * @param  \App\Models\Course\Course  $course
+     * @return \Illuminate\Http\Response
+     */
+    public function exportCoursables(Course $course)
+    {
+        $this->authorize('view', $course);
+
+        $course = Course::with('members', 'subscribers', 'volunteers')
+            ->find($course->id);
+
+
+        return Excel::download(new CoursablesExport($course), 'Course.xlsx');
     }
 
     /**
