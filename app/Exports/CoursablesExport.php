@@ -44,7 +44,7 @@ class CoursablesExport implements FromCollection, WithHeadings, WithMapping, Wit
             },
             $user->prepareMobileForSms(),
             $user->email,
-            $user->pivot->attendance,
+            $user->pivot->attendance ? __('Yes') : __('No'),
         ];
     }
 
@@ -66,6 +66,6 @@ class CoursablesExport implements FromCollection, WithHeadings, WithMapping, Wit
      */
     public function collection()
     {
-        return $this->course->members->merge($this->course->subscribers)->merge($this->course->volunteers);
+        return $this->course->members->mergeRecursive($this->course->subscribers)->mergeRecursive($this->course->volunteers);
     }
 }
