@@ -151,7 +151,7 @@ const handleImages = ($event) => {
                             <!-- Content -->
 
                             <div>
-                                <button type="submit" class="btn btn-primary me-2">{{ __('Create') }}</button>
+                                <button type="submit" class="btn btn-primary me-2" :disabled="form.processing">{{ __('Create') }}</button>
                                 <Link :href="route('admin.articles.index')" as="button" type="reset" class="btn btn-label-secondary me-2">{{ __('Cancel') }}</Link>
                             </div>
                         </form>
