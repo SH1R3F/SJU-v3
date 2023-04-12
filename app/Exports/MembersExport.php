@@ -31,7 +31,8 @@ class MembersExport implements FromCollection, WithHeadings, WithMapping, WithEv
             __('Mobile'),
             __('Membership type'),
             __('Branch'),
-            __('Status'),
+            __('Employer'),
+            __('Status')
         ];
     }
 
@@ -46,7 +47,8 @@ class MembersExport implements FromCollection, WithHeadings, WithMapping, WithEv
             $member->mobile,
             $member->subscription->type,
             $member->branch?->name,
-            $member->status(),
+            $member->journalistic_employer,
+            $member->status()
         ];
     }
 
