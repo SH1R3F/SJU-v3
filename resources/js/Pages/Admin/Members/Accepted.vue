@@ -178,7 +178,18 @@ const sortBy = (column) => {
                                 >
                                     <span>
                                         <i class="ti ti-screen-share me-1 ti-xs"></i>
-                                        {{ __('Export') }}
+                                        {{ __('Excel') }}
+                                    </span>
+                                </a>
+                                <a
+                                    v-if="members.can_export"
+                                    :href="route('admin.members.export.pdf', { page: 'accepted', ...queryParams() })"
+                                    class="dt-button buttons-collection btn btn-label-secondary me-1"
+                                    type="button"
+                                >
+                                    <span>
+                                        <i class="ti ti-screen-share me-1 ti-xs"></i>
+                                        {{ __('PDF') }}
                                     </span>
                                 </a>
                                 <Link v-if="members.can_create" :href="route('admin.members.create')" type="button" class="dt-button add-new btn btn-primary me-1">

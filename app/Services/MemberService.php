@@ -6,13 +6,14 @@ use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\MemberResource;
+use Mccarlosen\LaravelMpdf\LaravelMpdf;
 
 class MemberService
 {
 
     /**
      * Fetch members depending on status
-     * 
+     *
      * @param \Illuminate\Http\Request  $request
      * @param array  $statuses
      * @param boolean  $export
@@ -29,7 +30,7 @@ class MemberService
 
     /**
      * Fetch members resource on status
-     * 
+     *
      * @param \Illuminate\Http\Request  $request
      * @param array  $status
      */
@@ -49,7 +50,7 @@ class MemberService
 
     /**
      * Generate membership number for new subscribers
-     * 
+     *
      * @param \App\Models\Member  $member
      * @return void
      */
@@ -103,5 +104,55 @@ class MemberService
                     ->get();
                 break;
         }
+    }
+
+    /**
+     * Export members to PDF
+     */
+    public function exportPdf($status)
+    {
+        $members = Member::with('subscription', 'branch')
+            ->whereIn('status', $status)
+            ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+            ->filter(request())
+            ->order(request());
+
+        $fulltime = $members->clone()->whereHas('subscription', fn ($query) => $query->where('type', 1))->get();
+        $parttime = $members->clone()->whereHas('subscription', fn ($query) => $query->where('type', 2))->get();
+        $affiliate = $members->clone()->whereHas('subscription', fn ($query) => $query->where('type', 3))->get();
+
+        $pdf = (new LaravelMpdf)->getMpdf();
+
+        $counter = 1;
+        foreach ($fulltime->chunk(16) as $k => $chunk) {
+            $chunk->map(function ($member) use (&$counter) {
+                $member->counter = $counter++;
+                return $member;
+            });
+            $pdf->WriteHTML(view('pdf.members', ['members' => $chunk, 'type' => 'متفرغ']));
+            if ($k + 1 != count($fulltime->chunk(16))) $pdf->AddPage();
+        }
+        foreach ($parttime->chunk(16) as $k => $chunk) {
+            $chunk->map(function ($member) use (&$counter) {
+                $member->counter = $counter++;
+                return $member;
+            });
+
+            if ($k == 0) $pdf->AddPage();
+            $pdf->WriteHTML(view('pdf.members', ['members' => $chunk, 'type' => 'غير متفرغ']));
+            if ($k + 1 != count($parttime->chunk(16))) $pdf->AddPage();
+        }
+        foreach ($affiliate->chunk(16) as $k => $chunk) {
+            $chunk->map(function ($member) use (&$counter) {
+                $member->counter = $counter++;
+                return $member;
+            });
+
+            if ($k == 0) $pdf->AddPage();
+            $pdf->WriteHTML(view('pdf.members', ['members' => $chunk, 'type' => 'منتسب']));
+            if ($k + 1 != count($affiliate->chunk(16))) $pdf->AddPage();
+        }
+
+        return $pdf->Output();
     }
 }

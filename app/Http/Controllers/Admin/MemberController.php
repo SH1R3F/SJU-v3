@@ -103,7 +103,7 @@ class MemberController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Export list of resources to Excel.
      *
      * @param string  $page
      * @param \App\Services\MemberService  $service
@@ -132,6 +132,39 @@ class MemberController extends Controller
                 break;
         }
         return Excel::download(new MembersExport($service->getMembers(request(), $status, true)), 'Members.xlsx');
+    }
+
+    /**
+     * Export list of resources to PDF.
+     *
+     * @param string  $page
+     * @param \App\Services\MemberService  $service
+     * @return \Illuminate\Http\Response
+     */
+    public function exportPdf(string $page, MemberService $service)
+    {
+        $this->authorize('export', Member::class);
+
+        switch ($page) {
+            case 'admin-acceptance':
+                $this->authorize('viewAcceptance', Member::class);
+                $status = [Member::STATUS_APPROVED];
+                break;
+            case 'branch-approval':
+                $this->authorize('viewBranch', Member::class);
+                $status = [Member::STATUS_UNAPPROVED];
+                break;
+            case 'refused':
+                $this->authorize('viewRefused', Member::class);
+                $status = [Member::STATUS_REFUSED];
+                break;
+            default: // Accepted
+                $this->authorize('viewAny', Member::class);
+                $status = [Member::STATUS_ACCEPTED, Member::STATUS_DISABLED];
+                break;
+        }
+
+        return $service->exportPdf($status);
     }
 
     /**

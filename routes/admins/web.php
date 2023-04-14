@@ -92,6 +92,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('members/admin-acceptance', [MemberController::class, 'acceptance'])->name('members.admin-acceptance');
         Route::get('members/refused', [MemberController::class, 'refused'])->name('members.refused');
         Route::get('members/export/{page}', [MemberController::class, 'export'])->name('members.export');
+        Route::get('members/export/{page}/pdf', [MemberController::class, 'exportPdf'])->name('members.export.pdf');
         Route::post('members/{member}/toggle', [MemberController::class, 'toggle'])->name('members.toggle');
         Route::post('members/{member}/accept', [MemberController::class, 'accept'])->name('members.accept');
         Route::post('members/{member}/unaccept', [MemberController::class, 'unaccept'])->name('members.unaccept');
