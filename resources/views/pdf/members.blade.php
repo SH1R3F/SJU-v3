@@ -63,7 +63,7 @@
                     </td>
                     <td height="48"
                         style="width: 120px; overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
-                        {{ $member->branch->name }}
+                        {{ $member->branch?->name }}
                     </td>
                     <td height="48" dir="ltr"
                         style="width: 130px; overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
