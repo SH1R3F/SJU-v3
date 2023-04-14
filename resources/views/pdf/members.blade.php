@@ -42,27 +42,32 @@
                 <th height="48" style="padding: 8px 11px;">البريد الإلكتروني</th>
                 <th height="48" style="padding: 8px 11px;">رقم الجوال</th>
                 <th height="48" style="padding: 8px 11px;">المدينة</th>
+                <th height="48" style="padding: 8px 11px;">الجهة</th>
             </tr>
-            @foreach ($members as $k => $row)
+            @foreach ($members as $k => $member)
                 <tr>
                     <td height="48"
                         style="width: 40px; overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #d0f383">
-                        {{ $row->counter }}</td>
+                        {{ $member->counter }}</td>
                     <td height="48"
-                        style="width: 250px; overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
-                        {{ $row->full_name_ar }}
+                        style="width: 240px; overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
+                        {{ $member->full_name_ar }}
                     </td>
                     <td height="48"
-                        style="width: 300px; overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
-                        {{ $row->email }}
+                        style="width: 270px; overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
+                        {{ $member->email }}
                     </td>
                     <td height="48" dir="ltr"
                         style="width: 100px; overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
-                        {{ $row->mobile }}
+                        {{ $member->mobile }}
                     </td>
                     <td height="48"
+                        style="width: 120px; overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
+                        {{ $member->branch->name }}
+                    </td>
+                    <td height="48" dir="ltr"
                         style="width: 130px; overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
-                        {{ $row->branch->name }}
+                        {{ $member->journalistic_employer }}
                     </td>
                 </tr>
             @endforeach
