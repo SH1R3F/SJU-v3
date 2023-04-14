@@ -45,7 +45,7 @@ class MembersExport implements FromCollection, WithHeadings, WithMapping, WithEv
             $member->membership_number,
             $member->email,
             $member->mobile,
-            $member->subscription->type,
+            __(config('sju.memberships')[$member->subscription->type]['name']),
             $member->branch?->name,
             $member->journalistic_employer,
             $member->status()
