@@ -42,7 +42,7 @@ return new class extends Migration
             $table->string('non_journalistic_profession');
             $table->string('non_journalistic_employer');
 
-            $table->integer('workphone');
+            $table->bigInteger('workphone');
             $table->integer('workphone_ext');
             $table->integer('fax')->nullable();
             $table->integer('fax_ext')->nullable();
