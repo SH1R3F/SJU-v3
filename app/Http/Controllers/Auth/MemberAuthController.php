@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Events\MemberRegistered;
+use Carbon\Carbon;
 use App\Facades\Sms;
 use App\Models\Branch;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Events\MemberRegistered;
 use App\Rules\MemberUniqueMobile;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Member\LoginRequest;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\Member\LoginRequest;
 
 class MemberAuthController extends Controller
 {
@@ -248,6 +249,20 @@ class MemberAuthController extends Controller
 
         $member = session()->get('member');
         $member_type = session()->get('member_type');
+
+
+        $validator = Validator::make(
+            ['national_id' => $member->national_id],
+            ['national_id' => ['required', 'numeric', 'digits_between:9,10', 'unique:members']]
+        );
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
 
         // Register the member
         $member->save();

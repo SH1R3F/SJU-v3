@@ -8,6 +8,7 @@ const props = defineProps({
     memberships: Object,
     branches: Object,
     nationalities: Object,
+    errors: Object,
 });
 
 const form = useForm({
@@ -29,6 +30,7 @@ const form = useForm({
                         <div class="col-lg-3">
                             <h4>{{ member.national_id }}</h4>
                             <Link :href="route('member.register')" class="text-success">{{ __('Change') }}</Link>
+                            <p class="text text-danger text-sm" v-if="errors.national_id">{{ errors.national_id }}</p>
                         </div>
 
                         <label class="col-lg-3 control-label text-lg-right pt-2">{{ __('Activated mobile number') }}</label>
