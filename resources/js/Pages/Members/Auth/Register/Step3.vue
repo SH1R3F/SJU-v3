@@ -189,7 +189,7 @@ const form = useForm({
                                     <option value="1">{{ __('Pickup from branch') }}</option>
                                     <option value="2">{{ __('Delivery') }}</option>
                                 </select>
-                                <small id="deliverHelp" class="form-text text-muted">{{ __('In the case of choosing delivery, 32.20 riyals will be added to the invoice value.') }}</small>
+                                <small id="deliverHelp" class="form-text text-muted">{{ __('In the case of choosing delivery, 35.42 riyals will be added to the invoice value.') }}</small>
                                 <div class="text text-danger text-sm" v-if="form.errors.delivery_option">{{ form.errors.delivery_option }}</div>
                             </div>
                         </div>

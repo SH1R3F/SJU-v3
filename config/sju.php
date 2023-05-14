@@ -246,7 +246,7 @@ return [
             'name' => 'Affiliate member',
             'price' => 150,
         ],
-        'delivery_fees' => 32.20
+        'delivery_fees' => 35.42
     ],
 
     /*
