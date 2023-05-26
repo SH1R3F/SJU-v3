@@ -36,6 +36,9 @@ class AppServiceProvider extends ServiceProvider
         Notification::extend('sms', function () {
             return new SmsChannel;
         });
+
+        \URL::forceScheme('https');
+
         // Schema::defaultStringLength(125);
         // $this->app->bind('path.public', function () {
         //     return base_path() . '/../public_html/v2.sju.org.sa';
