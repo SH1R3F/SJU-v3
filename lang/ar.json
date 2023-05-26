@@ -5,7 +5,6 @@
     "Page Not Found": "الصفحة غير موجودة",
     "Oops! 😖 The requested URL was not found on this server": "أُووبس! 😖 لم يتم العثور على عنوان URL المطلوب على هذا الخادم",
     "Back to home": "العودة إلى الرئيسية",
-
     "--------------- Dashboard -------------": "",
     "Control the roles and powers of controlling those who manage the site.": "التحكم في الأدوار وصلاحيات التحكم من هم بإدارة الموقع.",
     "Adding, modifying or deleting accounts for managing the site.": "إضافة او تعديل او حذف الحسابات الخاصة بادارة الموقع.",
@@ -15,7 +14,6 @@
     "Events and training courses participating in the Saudi Journalists Association": "الفعاليات والدورات التدريبية المشاركة على هيئة الصحفيين السعوديين",
     "Articles and news section of the Association": "المقالات والقسم الإخباري الخاص بالهيئة",
     "Technical support and problems solutions": "الدعم الفني وحل المشكلات",
-
     "--------------- Aside -------------": "",
     "Dashboard": "لوحة التحكم",
     "Roles & moderators": "الأدوار والمدراء",
@@ -25,7 +23,6 @@
     "Mark all as read": "قراءة الجميع",
     "Mark as read": "تحديد مقروء",
     "You don't have any unseen notifications": "ليس لديك أي إشعارات جديدة",
-
     "--------------- Admin Login -------------": "",
     "Login": "تسجيل الدخول",
     "Sign in": "تسجيل الدخول",
@@ -44,7 +41,6 @@
     "Branch manager": "مدير فرع",
     "News editor": "محرر أخبار",
     "Your account has been disabled. Please contact adminstrators.": "تم إلفاء تفعيل حسابك، برجاء التواصل مع المسئولين.",
-
     "--------------- Site options -------------": "",
     "Here you can find and modify the options used over the website": "هنا بإمكانك رؤية وتعديل كل الخيارات المستخدمة في الموقع",
     "SMS sending settings": "اعدادات ارسال رسائل SMS",
@@ -63,7 +59,6 @@
     "SMS settings": "اعدادات رسائل الجوال",
     "Service provider": "مقدم الخدمة",
     "Available balance": "الرصيد المتاح",
-
     "--------------- Roles management -------------": "",
     "Roles List": "قائمة الأدوار",
     "A role provided access to predefined menus and features so that depending on the assigned role an administrator can have access to what the user needs.": "يوفر الدور الوصول إلى القوائم والميزات المحددة مسبقًا بحيث يمكن للمسؤول ، بناءً على الدور المعين ، الوصول إلى ما يحتاجه المستخدم.",
@@ -99,6 +94,8 @@
     "Admin accept": "موافقة أدمن",
     "Branch approve": "موافقة فرع",
     "Courses management": "إدارة الفعاليات",
+    "Copy course link": "نسخ رابط الفعالية",
+    "Url copied": "تم نسخ الرابط",
     "Templates management": "إدارة القوالب",
     "Questionnaires management": "إدارة الإستبيانات",
     "List members tickets": "عرض تذاكر الأعضاء",
@@ -107,7 +104,6 @@
     "View ticket": "عرض تذكرة",
     "Delete ticket": "حذف تذكرة",
     "Studio management": "إدارة الاستوديو",
-
     "--------------- Admins management -------------": "",
     "Total Users": "إجمالي المستخدمين",
     "Moderators management": "إدارة المدراء",
@@ -154,7 +150,6 @@
     "Select moderators": "تحديد المدراء",
     "Send": "إرسال",
     "Notification is being sent": "يتم الآن إرسال الإشعار",
-
     "--------------- Members management -------------": "",
     "All members": "كل الأعضاء",
     "Branch approval": "موافقة الفرع",
@@ -195,7 +190,6 @@
     "Set paid": "تحديد مدفوع",
     "Payment attempts": "محاولات الدفع",
     "Payment attempt": "محاولة للدفع",
-
     "--------------- Invoices management -------------": "",
     "Subscriptions invoices": "فواتير الإشتراكات",
     "Invoices": "الفواتير",
@@ -210,7 +204,6 @@
     "Delivery fees": "رسوم التوصيل",
     "Total": "الإجمالي",
     "PAID": "مدفوعة",
-
     "--------------- Subscriber management -------------": "",
     "Subscribers management": "إدارة المشتركين",
     "Active subscribers": "المشتركون المفعلون",
@@ -227,7 +220,6 @@
     "Subscriber disabled successfully": "تم إلغاء تفعيل المشترك بنجاح",
     "Notify subscribers": "إشعار المشتركين",
     "All subscribers": "كل المشتركين",
-
     "--------------- Volunteer management -------------": "",
     "Volunteers management": "إدارة المتطوعين",
     "Active volunteers": "المتطوعون المفعلون",
@@ -242,7 +234,6 @@
     "Volunteer disabled successfully": "تم إلغاء تفعيل المتطوع بنجاح",
     "Notify volunteers": "إشعار المتطوعين",
     "All volunteers": "كل المتطوعين",
-
     "--------------- Courses management -------------": "",
     "Courses": "الفعاليات",
     "Course title": "عنوان الفعالية",
@@ -323,7 +314,6 @@
     "Notify course users": "إشعار مستخدمي الفعالية",
     "Passed users": "المجتازين",
     "Unpassed users": "الغير مجتازين",
-
     "--------------- Templates management -------------": "",
     "Templates": "القوالب",
     "Create template": "إنشاء قالب",
@@ -384,7 +374,6 @@
     "Template created successfully": "تم إنشاء القالب بنجاح",
     "Template updated successfully": "تم تعديل القالب بنجاح",
     "Template deleted successfully": "تم حذف القالب بنجاح",
-
     "--------------- Questionnaires management -------------": "",
     "Questionnaire results": "نتائج الإستبيان",
     "Create questionnaire": "إنشاء إستبيان",
@@ -408,7 +397,6 @@
     "Questionnaire updated successfully": "تم تعديل الاستبيان بنجاح",
     "Question updated successfully": "تم تعديل السؤال بنجاح",
     "Nobody registered for the questionnaire yet": "لم يسجل أحد الإستبيان حتي الان",
-
     "--------------- Invitations management -------------": "",
     "Create invitation": "إنشاء دعوة",
     "Edit invitation": "تعديل دعوة",
@@ -424,7 +412,6 @@
     "Total invited": "إجمالي المدعويين",
     "invitation link": "رابط الدعوة",
     "Welcome message": "رسالة الترحيب",
-
     "------------- News section -----------": "",
     "Categories": "التصنيفات",
     "Create category": "إنشاء تصنيف",
@@ -472,7 +459,6 @@
     "Create url": "إنشاء رابط",
     "Edit url": "تعديل رابط",
     "Group": "المجموعة",
-
     "------------- Studio -----------": "",
     "Photos library": "مكتبة الصور",
     "Videos library": "مكتبة الفيديو",
@@ -481,7 +467,6 @@
     "Upload file": "رفع ملف",
     "Media uploaded successfully": "تم رفع الوسائط بنجاح",
     "Media deleted successfully": "تم حذف الوسائط بنجاح",
-
     "--------------- Technical Support -------------": "",
     "Members tickets": "تذاكر الأعضاء",
     "Subscribers tickets": "تذاكر المشتركين",
@@ -501,11 +486,9 @@
     "Attachment": "مرفق",
     "Problem solved?": "تم حل المشكلة؟",
     "Problem didn't solve?": "لم يتم حل المشكلة؟",
-
     "--------------- Footer -------------": "",
     "made with ❤️ by": "صُنع بكل ❤️ بواسطة",
     "All rights reserved": "جميع الحقوق محفوظة",
-
     "-------------- USERS SITE ------------": "",
     "Home": "الرئيسية",
     "Log into Saudi journalists association": "دخول هيئة الصحفيين السعوديين",
@@ -563,7 +546,6 @@
     "Follow us on social media": "تابعنا علي مواقع التواصل الإجتماعي",
     "SAR": "ريال سعودي",
     "Annualy": "سنوياً",
-
     "------------- Courses -----------": "",
     "Upcoming courses": "الفعاليات القادمة",
     "Recent courses": "الفعاليات المنتهية",
@@ -596,12 +578,10 @@
     "Verify": "تحقق",
     "Certificate with this code found successfully!": "الشهادة حقيقية أصدرناها بنجاح!",
     "We don't have certificate with this code": "لم نصدر شهادة تحمل هذا الرمز",
-
     "---------------- News --------------": "",
     "Related news": "أخبار ذات صلة",
     "News menu": "قائمة الأخبار",
     "No news found...": "لا يوجد أخبار...",
-
     "------------- Members -----------": "",
     "Members login": "دخول الأعضاء",
     "National ID number": "رقم الهوية الوطنية",
@@ -745,7 +725,6 @@
     "Resend": "إعادة إرسال",
     "Subscription requested successfully": "تم إعادة طلب العضوية بنجاح",
     "Leave empty if you don't want to change": "أتركها فارغة إذا كنت لا تريد تغييرها",
-
     "------------- Subscribers -----------": "",
     "Register a new subscriber": "تسجيل متدرب جديد",
     "How did you get to know the authority?": "كيف تعرفت على الهيئة؟",
@@ -763,7 +742,6 @@
     "Didn't receive the activation code? Look in the junk mailbox or you can request activation again": "لم يصلك كود التفعيل؟ إبحث في صندوق الرسائل الغير مهمة أو يمكنك طلب التفعيل مرة أخرى",
     "Resend activation mail": "إعادة إرسال تفعيل البريد",
     "Email verification has been sent": "تم إرسال بريد التفعيل",
-
     "------------- Volunteers -----------": "",
     "Volunteers login": "دخول المتطوعين",
     "Register new volunteer": "تسجيل متطوع جديد",
@@ -792,7 +770,6 @@
     "Educational level": "المرحلة الدراسية",
     "Volunteering experiences": "الخبرات التطوعية",
     "Complete your profile and add your branch": "أكمل ملفك الشخصي واضف الفرع",
-
     "------------- Nationalities -----------": "",
     "Saudi Arabian": "سعودي",
     "Guinean": "غيني",
@@ -1007,7 +984,6 @@
     "Japanese": "ياباني",
     "Yemeni": "يمني",
     "Greek": "يوناني",
-
     "------------- USERS FOOTER -----------": "",
     "Important links": "روابط تهمك",
     "Ministry of Information": "وزارة الإعلام",

@@ -51,6 +51,11 @@ const sortBy = (column) => {
     appended.value.dir = props.filters.dir == 'desc' ? 'asc' : 'desc';
     Inertia.get(route('admin.courses.index'), appended.value, { preserveState: true, replace: true });
 };
+
+const copy = (text, msg) => {
+    navigator.clipboard.writeText(text);
+    toastr.success(msg);
+}
 </script>
 
 <template>
@@ -72,13 +77,16 @@ const sortBy = (column) => {
                         </select>
                     </div>
                     <div class="col-md-4 mb-2">
-                        <input type="text" class="form-control" :placeholder="__('Course number')" v-model="course_number" />
+                        <input type="text" class="form-control" :placeholder="__('Course number')"
+                            v-model="course_number" />
                     </div>
                     <div class="col-md-4 mb-2">
-                        <input type="text" class="form-control" :placeholder="`${__('Course date')} (${__('Year')})`" v-model="year" />
+                        <input type="text" class="form-control" :placeholder="`${__('Course date')} (${__('Year')})`"
+                            v-model="year" />
                     </div>
                     <div class="col-md-4 mb-2">
-                        <input type="text" class="form-control" :placeholder="`${__('Course date')} (${__('Month')})`" v-model="month" />
+                        <input type="text" class="form-control" :placeholder="`${__('Course date')} (${__('Month')})`"
+                            v-model="month" />
                     </div>
                 </div>
             </div>
@@ -99,19 +107,22 @@ const sortBy = (column) => {
                         </div>
                     </div>
                     <div class="col-md-10 mb-1">
-                        <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column gap-1 mb-3 mb-md-0">
+                        <div
+                            class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column gap-1 mb-3 mb-md-0">
                             <div class="dt-buttons">
-                                <a v-if="courses.can_export" :href="route('admin.courses.export')" type="button" class="dt-button add-new btn btn-label-secondary me-1">
+                                <a v-if="courses.can_export" :href="route('admin.courses.export')" type="button"
+                                    class="dt-button add-new btn btn-label-secondary me-1">
                                     <span>
                                         <i class="ti ti-screen-share me-0 me-sm-1 ti-xs"></i>
                                         <span class="d-none d-sm-inline-block">{{ __('Export') }}</span>
                                     </span>
                                 </a>
-                                <Link v-if="courses.can_create" :href="route('admin.courses.create')" type="button" class="dt-button add-new btn btn-primary me-1">
-                                    <span>
-                                        <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
-                                        <span class="d-none d-sm-inline-block">{{ __('Create course') }}</span>
-                                    </span>
+                                <Link v-if="courses.can_create" :href="route('admin.courses.create')" type="button"
+                                    class="dt-button add-new btn btn-primary me-1">
+                                <span>
+                                    <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
+                                    <span class="d-none d-sm-inline-block">{{ __('Create course') }}</span>
+                                </span>
                                 </Link>
                             </div>
                         </div>
@@ -120,18 +131,26 @@ const sortBy = (column) => {
                 <table class="datatables-users table border-top">
                     <thead>
                         <tr>
-                            <th @click.prevent="sortBy('title')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'title' }">{{ __('Course') }}</th>
-                            <th @click.prevent="sortBy('date_from')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'date_from' }" style="white-space: nowrap">
+                            <th @click.prevent="sortBy('title')" class="cursor-pointer"
+                                :class="{ 'link-primary': filters.order == 'title' }">{{ __('Course') }}</th>
+                            <th @click.prevent="sortBy('date_from')" class="cursor-pointer"
+                                :class="{ 'link-primary': filters.order == 'date_from' }" style="white-space: nowrap">
                                 {{ __('Course date') }}
                             </th>
-                            <th @click.prevent="sortBy('course_type_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'course_type_id' }" style="white-space: nowrap">
+                            <th @click.prevent="sortBy('course_type_id')" class="cursor-pointer"
+                                :class="{ 'link-primary': filters.order == 'course_type_id' }" style="white-space: nowrap">
                                 {{ __('Type') }}
                             </th>
-                            <th @click.prevent="sortBy('course_category_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'course_category_id' }">{{ __('Category') }}</th>
-                            <th @click.prevent="sortBy('course_gender_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'course_gender_id' }">{{ __('Gender') }}</th>
-                            <th @click.prevent="sortBy('course_branch_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'course_branch_id' }">{{ __('Branch') }}</th>
-                            <th @click.prevent="sortBy('region')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'region' }">{{ __('Region') }}</th>
-                            <th @click.prevent="sortBy('status')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'status' }">{{ __('Status') }}</th>
+                            <th @click.prevent="sortBy('course_category_id')" class="cursor-pointer"
+                                :class="{ 'link-primary': filters.order == 'course_category_id' }">{{ __('Category') }}</th>
+                            <th @click.prevent="sortBy('course_gender_id')" class="cursor-pointer"
+                                :class="{ 'link-primary': filters.order == 'course_gender_id' }">{{ __('Gender') }}</th>
+                            <th @click.prevent="sortBy('course_branch_id')" class="cursor-pointer"
+                                :class="{ 'link-primary': filters.order == 'course_branch_id' }">{{ __('Branch') }}</th>
+                            <th @click.prevent="sortBy('region')" class="cursor-pointer"
+                                :class="{ 'link-primary': filters.order == 'region' }">{{ __('Region') }}</th>
+                            <th @click.prevent="sortBy('status')" class="cursor-pointer"
+                                :class="{ 'link-primary': filters.order == 'status' }">{{ __('Status') }}</th>
                             <th class="cell-fit">{{ __('Actions') }}</th>
                         </tr>
                     </thead>
@@ -141,16 +160,15 @@ const sortBy = (column) => {
                                 <div class="d-flex justify-content-start align-items-center">
                                     <div class="avatar-wrapper">
                                         <div class="avatar avatar-sm me-3">
-                                            <img :src="course.image || '/img/course.png'" onerror="this.src = '/img/course.png';" class="rounded-circle" />
+                                            <img :src="course.image || '/img/course.png'"
+                                                onerror="this.src = '/img/course.png';" class="rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <Link
-                                            :href="route('admin.courses.show', course.id)"
+                                        <Link :href="route('admin.courses.show', course.id)"
                                             style="max-width: 250px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis"
-                                            class="text-body text-truncate"
-                                        >
-                                            <span class="fw-semibold">{{ course.title }}</span>
+                                            class="text-body text-truncate">
+                                        <span class="fw-semibold">{{ course.title }}</span>
                                         </Link>
                                         <small class="text-truncate text-muted">{{ course.course_number }}</small>
                                     </div>
@@ -167,46 +185,38 @@ const sortBy = (column) => {
                             <td>{{ course.state }}</td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <Link
-                                        v-if="course.questionable"
-                                        :href="route('admin.courses.results', course.id)"
-                                        class="text-body"
-                                        data-bs-placement="top"
-                                        :aria-label="__('Questionnaire results')"
-                                        :title="__('Questionnaire results')"
-                                    >
-                                        <i class="ti ti-friends mx-2 ti-sm"></i>
+                                    <a href="#"
+                                        @click.prevent="copy(route('courses.register', course.id), __('Url copied'))"
+                                        class="text-body" data-bs-placement="top" :aria-label="__('Copy course link')"
+                                        :title="__('Copy course link')">
+                                        <i class="ti ti-copy mx-2 ti-sm"></i>
+                                    </a>
+                                    <Link v-if="course.questionable" :href="route('admin.courses.results', course.id)"
+                                        class="text-body" data-bs-placement="top" :aria-label="__('Questionnaire results')"
+                                        :title="__('Questionnaire results')">
+                                    <i class="ti ti-friends mx-2 ti-sm"></i>
                                     </Link>
-                                    <Link v-if="course.viewable" :href="route('admin.courses.show', course.id)" class="text-body" data-bs-placement="top" :aria-label="__('Show')" :title="__('Show')">
-                                        <i class="ti ti-eye mx-2 ti-sm"></i>
+                                    <Link v-if="course.viewable" :href="route('admin.courses.show', course.id)"
+                                        class="text-body" data-bs-placement="top" :aria-label="__('Show')"
+                                        :title="__('Show')">
+                                    <i class="ti ti-eye mx-2 ti-sm"></i>
                                     </Link>
-                                    <Link v-if="course.editable" :href="route('admin.courses.edit', course.id)" class="text-body" data-bs-placement="top" :aria-label="__('Edit')" :title="__('Edit')">
-                                        <i class="ti ti-edit mx-2 ti-sm"></i>
+                                    <Link v-if="course.editable" :href="route('admin.courses.edit', course.id)"
+                                        class="text-body" data-bs-placement="top" :aria-label="__('Edit')"
+                                        :title="__('Edit')">
+                                    <i class="ti ti-edit mx-2 ti-sm"></i>
                                     </Link>
-                                    <Link
-                                        v-if="course.toggleable"
-                                        :href="route('admin.courses.toggle', course.id)"
-                                        method="post"
-                                        as="span"
-                                        preserve-scroll
-                                        class="cursor-pointer"
-                                        data-bs-placement="top"
-                                        :title="course.status == 2 ? __('Disabled') : ''"
-                                        :class="{ 'text-success': course.status == 1, 'text-body': course.status != 1 }"
-                                    >
-                                        <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': course.status == 1, 'ti-toggle-left': course.status != 1 }"></i>
+                                    <Link v-if="course.toggleable" :href="route('admin.courses.toggle', course.id)"
+                                        method="post" as="span" preserve-scroll class="cursor-pointer"
+                                        data-bs-placement="top" :title="course.status == 2 ? __('Disabled') : ''"
+                                        :class="{ 'text-success': course.status == 1, 'text-body': course.status != 1 }">
+                                    <i class="ti ti-sm me-2"
+                                        :class="{ 'ti-toggle-right': course.status == 1, 'ti-toggle-left': course.status != 1 }"></i>
                                     </Link>
-                                    <Link
-                                        v-if="course.deleteable"
-                                        :href="route('admin.courses.destroy', course.id)"
-                                        method="DELETE"
-                                        as="span"
-                                        class="text-body"
-                                        data-bs-placement="top"
-                                        :aria-label="__('Delete')"
-                                        :title="__('Delete')"
-                                    >
-                                        <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
+                                    <Link v-if="course.deleteable" :href="route('admin.courses.destroy', course.id)"
+                                        method="DELETE" as="span" class="text-body" data-bs-placement="top"
+                                        :aria-label="__('Delete')" :title="__('Delete')">
+                                    <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
                                     </Link>
                                 </div>
                             </td>
