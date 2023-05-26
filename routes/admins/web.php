@@ -15,15 +15,16 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\VolunteerController;
+use App\Http\Controllers\Admin\InvitationController;
 use App\Http\Controllers\Admin\SiteOptionController;
 use App\Http\Controllers\Admin\SubscriberController;
+use App\Http\Controllers\Admin\TrainingBagController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\Course\CourseController;
 use App\Http\Controllers\Admin\Course\QuestionController;
 use App\Http\Controllers\Admin\Course\TemplateController;
 use App\Http\Controllers\Admin\TechnicalSupportController;
 use App\Http\Controllers\Admin\Course\QuestionnaireController;
-use App\Http\Controllers\Admin\InvitationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -232,5 +233,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('invitations/{invitation}/export', [InvitationController::class, 'export'])->name('invitations.export');
         Route::post('invitations/{invitation}/toggle', [InvitationController::class, 'toggle'])->name('invitations.toggle');
         Route::resource('invitations', InvitationController::class);
+
+        /**
+         * Training bags
+         */
+        Route::get('training-bag', [TrainingBagController::class, 'index'])->name('training-bag.index');
+        Route::get('training-bag/create', [TrainingBagController::class, 'create'])->name('training-bag.create');
+        Route::post('training-bag', [TrainingBagController::class, 'store'])->name('training-bag.store');
+        Route::delete('training-bag/{file}', [TrainingBagController::class, 'destroy'])->name('training-bag.destroy');
     });
 });

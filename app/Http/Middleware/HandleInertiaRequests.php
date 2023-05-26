@@ -16,6 +16,7 @@ use App\Models\Volunteer;
 use App\Models\Invitation;
 use App\Models\SiteOption;
 use App\Models\Subscriber;
+use App\Models\TrainingBag;
 use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -133,12 +134,14 @@ class HandleInertiaRequests extends Middleware
             'templates' =>  $admin->can('viewAny', Template::class),
             'questionnaires' =>  $admin->can('viewAny', Questionnaire::class),
             'categories' =>  $admin->can('viewAny', Category::class),
+
             'pages' =>  $admin->can('viewAny', Page::class),
             'articles' =>  $admin->can('viewAny', Article::class),
             'ads' =>  $admin->can('viewAny', Ad::class),
             'urls' =>  $admin->can('viewAny', Url::class),
             'studio' =>  $admin->can('viewAny', Media::class),
             'invitations' =>  $admin->can('viewAny', Invitation::class),
+            'training_bag' =>  $admin->can('viewAny', TrainingBag::class),
         ];
     }
 }
