@@ -81,9 +81,14 @@ defineProps({
                         role="tabpanel" aria-labelledby="pills-videos-tab">
                         <div class="row mt-3">
                             <div class="col-md-4 mb-3" v-for="video in videos.data">
-                                <iframe class="w-100" width="352" height="260" :src="video.path" frameborder="0"
-                                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen sandbox></iframe>
+                                <template v-if="video.path.includes('youtube.com')">
+                                    <iframe class="w-100" width="352" height="260" :src="video.path" frameborder="0"
+                                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen sandbox autplay="off"></iframe>
+                                </template>
+                                <template v-else>
+                                    <video class="w-100" width="352" height="260" :src="video.path" controls></video>
+                                </template>
                             </div>
                             <Pagination v-if="videos.meta" :meta="videos.meta" preserve-scroll />
                         </div>
