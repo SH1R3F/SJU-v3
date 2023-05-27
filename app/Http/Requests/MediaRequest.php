@@ -32,7 +32,7 @@ class MediaRequest extends FormRequest
                 'required_without:link',
                 'file',
                 Rule::when($this->type == 'photo', 'mimes:jpeg,png,jpg,gif,svg', 'mimes:mp4,ogx,oga,ogv,ogg,webm'),
-                'max:20480'
+                'max:200480'
             ],
             'link' => [
                 'nullable',
