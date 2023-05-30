@@ -27,7 +27,7 @@ class TrainingBagRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'file' => [
-                Rule::when(request()->isMethod('POST'), ['required', 'file', 'mimes:pdf,doc,docx,xslx,ppt,pptx', 'max:10000'], 'nullable')
+                Rule::when(request()->isMethod('POST'), ['required', 'file', 'mimes:pdf,doc,docx,xslx,ppt,pptx', 'max:300000'], 'nullable')
             ],
         ];
     }
