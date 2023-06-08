@@ -124,15 +124,15 @@ class MemberService
         $pdf = (new LaravelMpdf)->getMpdf();
 
         $counter = 1;
-        foreach ($fulltime->chunk(16) as $k => $chunk) {
+        foreach ($fulltime->chunk(20) as $k => $chunk) {
             $chunk->map(function ($member) use (&$counter) {
                 $member->counter = $counter++;
                 return $member;
             });
             $pdf->WriteHTML(view('pdf.members', ['members' => $chunk, 'type' => 'متفرغ']));
-            if ($k + 1 != count($fulltime->chunk(16))) $pdf->AddPage();
+            if ($k + 1 != count($fulltime->chunk(20))) $pdf->AddPage();
         }
-        foreach ($parttime->chunk(16) as $k => $chunk) {
+        foreach ($parttime->chunk(20) as $k => $chunk) {
             $chunk->map(function ($member) use (&$counter) {
                 $member->counter = $counter++;
                 return $member;
@@ -140,9 +140,9 @@ class MemberService
 
             if ($k == 0) $pdf->AddPage();
             $pdf->WriteHTML(view('pdf.members', ['members' => $chunk, 'type' => 'غير متفرغ']));
-            if ($k + 1 != count($parttime->chunk(16))) $pdf->AddPage();
+            if ($k + 1 != count($parttime->chunk(20))) $pdf->AddPage();
         }
-        foreach ($affiliate->chunk(16) as $k => $chunk) {
+        foreach ($affiliate->chunk(20) as $k => $chunk) {
             $chunk->map(function ($member) use (&$counter) {
                 $member->counter = $counter++;
                 return $member;
@@ -150,7 +150,7 @@ class MemberService
 
             if ($k == 0) $pdf->AddPage();
             $pdf->WriteHTML(view('pdf.members', ['members' => $chunk, 'type' => 'منتسب']));
-            if ($k + 1 != count($affiliate->chunk(16))) $pdf->AddPage();
+            if ($k + 1 != count($affiliate->chunk(20))) $pdf->AddPage();
         }
 
         return $pdf->Output();
