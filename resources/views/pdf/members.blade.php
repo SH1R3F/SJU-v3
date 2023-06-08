@@ -43,6 +43,7 @@
                 <th height="48" style="padding: 8px 11px;">رقم الجوال</th>
                 <th height="48" style="padding: 8px 11px;">المدينة</th>
                 <th height="48" style="padding: 8px 11px;">الجهة</th>
+                <th height="48" style="padding: 8px 11px;">الحالة</th>
             </tr>
             @foreach ($members as $k => $member)
                 <tr>
@@ -68,6 +69,10 @@
                     <td height="48" dir="ltr"
                         style="width: 130px; overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
                         {{ $member->journalistic_employer }}
+                    </td>
+                    <td height="48" dir="ltr"
+                        style="width: 130px; overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
+                        {{ $member->status() }}
                     </td>
                 </tr>
             @endforeach
