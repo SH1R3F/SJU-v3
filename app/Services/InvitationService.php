@@ -76,7 +76,7 @@ class InvitationService
                 ->save(storage_path("app/public/$path"));
         } else {
             // Generate the QR code
-            $qr = QrCode::size(100)
+            $qr = QrCode::size(70)
                 ->format('png')
                 ->errorCorrection('M')
                 ->generate(route('invitation.attend', $code));
