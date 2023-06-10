@@ -76,12 +76,12 @@ class InvitationService
                 ->save(storage_path("app/public/$path"));
         } else {
             // Generate the QR code
-            $qr = QrCode::size(70)
-                ->format('png')
-                ->errorCorrection('M')
-                ->generate(route('invitation.attend', $code));
+            // $qr = QrCode::size(70)
+            //     ->format('png')
+            //     ->errorCorrection('M')
+            //     ->generate(route('invitation.attend', $code));
 
-            Storage::put($qr_path = "invitations/results/qr-$code.png", $qr);
+            // Storage::put($qr_path = "invitations/results/qr-$code.png", $qr);
 
             $position_x = empty($invitation->qr_position_x) ? 0 : $invitation->qr_position_x;
             $position_y = empty($invitation->qr_position_y) ? 0 : $invitation->qr_position_y;
@@ -93,7 +93,7 @@ class InvitationService
                     $font->color($invitation->variables['fontcolor']);
                     $font->align('center');
                 })
-                ->insert(storage_path("app/public/$qr_path"), $invitation->qr_position, $position_x, $position_y)
+                // ->insert(storage_path("app/public/$qr_path"), $invitation->qr_position, $position_x, $position_y)
                 ->save(storage_path("app/public/$path"));
         }
 
