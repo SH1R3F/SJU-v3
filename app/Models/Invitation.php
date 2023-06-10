@@ -11,7 +11,7 @@ class Invitation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'variables', 'status', 'file', 'preview', 'welcome_message'];
+    protected $fillable = ['name', 'variables', 'status', 'file', 'preview', 'welcome_message', 'qr_position', 'qr_position_x', 'qr_position_y'];
 
     protected $casts = [
         'variables' => 'array',
@@ -33,7 +33,7 @@ class Invitation extends Model
 
     /**
      * Sort in admin panel
-     * 
+     *
      * @param \Illuminate\Http\Request  $request
      */
     public function scopeOrder($query, Request $request)

@@ -5,12 +5,14 @@ namespace App\Services;
 use ArPHP\I18N\Arabic;
 use App\Models\Invitation;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class InvitationService
 {
     /**
      * Update the invitation preview file
-     * 
+     *
      * @param  \App\Models\Invitation  $invitation
      */
     public function preview(Invitation $invitation)
@@ -21,20 +23,47 @@ class InvitationService
 
         $x_position = $invitation->variables['width_type'] == 'center' ? ($img->width() / 2) : ($img->width() - $invitation->variables['width']);
 
-        $img
-            ->text($text, $x_position, $invitation->variables['height'], function ($font) use ($invitation) {
-                $font->file(resource_path("fonts/invitation-font.ttf"));
-                $font->size($invitation->variables['fontsize']);
-                $font->color($invitation->variables['fontcolor']);
-                $font->align('center');
-            })
-            ->save(storage_path("app/public/{$invitation->preview}"));
+
+        // Generate the QR code
+        $qr = QrCode::size(100)
+            ->format('png')
+            ->errorCorrection('M')
+            ->generate('https://twitter.com/HarryKir');
+
+        $name = str_replace('invitations/templates/', '', $invitation->file);
+        $name = explode('.', $name)[0];
+
+        Storage::put($path = "invitations/templates/$name-qr.png", $qr);
+
+
+        if (empty($invitation->qr_position) || $invitation->qr_position == "none") {
+            $img
+                ->text($text, $x_position, $invitation->variables['height'], function ($font) use ($invitation) {
+                    $font->file(resource_path("fonts/invitation-font.ttf"));
+                    $font->size($invitation->variables['fontsize']);
+                    $font->color($invitation->variables['fontcolor']);
+                    $font->align('center');
+                })
+                ->save(storage_path("app/public/{$invitation->preview}"));
+        } else {
+            $position_x = empty($invitation->qr_position_x) ? 0 : $invitation->qr_position_x;
+            $position_y = empty($invitation->qr_position_y) ? 0 : $invitation->qr_position_y;
+            $img
+                ->text($text, $x_position, $invitation->variables['height'], function ($font) use ($invitation) {
+                    $font->file(resource_path("fonts/invitation-font.ttf"));
+                    $font->size($invitation->variables['fontsize']);
+                    $font->color($invitation->variables['fontcolor']);
+                    $font->align('center');
+                })
+                ->insert(storage_path("app/public/$path"), $invitation->qr_position, $position_x, $position_y)
+                ->save(storage_path("app/public/{$invitation->preview}"));
+        }
     }
 
 
     /**
      * Create invitation for a specific name
-     * 
+     *
      * @param string $name
      */
     public function create($name, $invitation)

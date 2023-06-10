@@ -338,6 +338,8 @@
     "QR margin bottom": "هامش الكود لأسفل",
     "QR margin left": "هامش الكود لليسار",
     "QR margin right": "هامش الكود لليمين",
+    "QR horizontal margin": "هامش الكود أفقيا",
+    "QR vertical margin": "هامش الكود رأسيا",
     "Preview": "عرض",
     "Layout options": "خيارات العرض",
     "Layout": "خيارات العرض",

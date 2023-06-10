@@ -31,6 +31,15 @@ class InvitationRequest extends FormRequest
             ],
             'variables' => ['nullable'],
             'welcome_message' => ['required', 'string', 'max:255'],
+            'qr_position' => [
+                Rule::when(request()->isMethod('POST'), 'nullable', 'required'), 'in:none,top-right,top,top-left,bottom-right,bottom,bottom-left'
+            ],
+            'qr_position_x' => [
+                Rule::when(request()->isMethod('POST'), 'nullable', ['nullable', 'required_unless:qr_position,none']), 'numeric'
+            ],
+            'qr_position_y' => [
+                Rule::when(request()->isMethod('POST'), 'nullable', ['nullable', 'required_unless:qr_position,none']), 'numeric'
+            ],
         ];
     }
 }

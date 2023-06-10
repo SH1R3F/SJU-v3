@@ -241,6 +241,8 @@ return [
         'qr_margin_right' => 'هامش الكود لليمين',
         'qr_margin_bottom' => 'هامش الكود للأسفل',
         'qr_margin_left' => 'هامش الكود لليسار',
+        'qr_margin_x' => 'هامش الكود افقيا',
+        'qr_margin_y' => 'هامش الكود رأسيا',
         'qr_position' => 'كود التحقق',
         'question' => 'السؤال',
         'answer1' => 'الإجابة1',
