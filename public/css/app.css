@@ -1,14 +1,1 @@
-* {
-    font-family: 'Cairo', sans-serif;
-}
-
-.ql-toolbar.ql-snow {
-    direction: ltr;
-}
-.article img {
-    max-width: 100%;
-}
-.ql-align-center {
-    text-align: center;
-}
-
+*{font-family:Cairo,sans-serif}.ql-toolbar.ql-snow{direction:ltr}.article img{max-width:100%}.ql-align-center{text-align:center}

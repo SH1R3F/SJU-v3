@@ -27,10 +27,12 @@ const form = useForm({
                         <div class="col-sm-12 mx-auto">
                             <form @submit.prevent="form.post(route('invitate.store', invitation.id))">
                                 <div class="form-group">
-                                    <input type="text" v-model="form.name" class="form-control text-center btn-lg" placeholder="الاسم" autofocus required />
+                                    <input type="text" v-model="form.name" class="form-control text-center btn-lg"
+                                        placeholder="الاسم" autofocus required />
                                     <p class="text text-danger text-sm" v-if="form.errors.name">{{ form.errors.name }}</p>
                                 </div>
-                                <button type="submit" class="btn btn-success btn-block btn-lg" :disabled="form.processing">تحميل</button>
+                                <button type="submit" class="btn btn-success btn-block btn-lg"
+                                    :disabled="form.processing">تحميل</button>
                             </form>
                         </div>
                     </div>

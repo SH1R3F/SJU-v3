@@ -5,10 +5,12 @@ use App\Models\Course\Certificate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InviteController;
 use App\Http\Controllers\ArticleController;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\TechnicalSupportController;
 
 /*
@@ -104,6 +106,7 @@ Route::get('articles/{category_id?}', [ArticleController::class, 'articles'])->n
  */
 Route::get('invitations/{invitation}', [InviteController::class, 'show'])->name('invitation.show');
 Route::post('invitations/{invitation}', [InviteController::class, 'store'])->name('invitate.store');
+Route::get('invitations/{code}', [InviteController::class, 'attend'])->name('invitation.attend');
 
 
 // Member routes

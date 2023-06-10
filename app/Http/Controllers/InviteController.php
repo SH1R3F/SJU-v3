@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use App\Models\Invite;
 use ArPHP\I18N\Arabic;
 use App\Models\Invitation;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Services\InvitationService;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\InvitationResource;
-use App\Services\InvitationService;
 
 class InviteController extends Controller
 {
@@ -42,15 +43,30 @@ class InviteController extends Controller
 
         $request->validate(['name' => 'required', 'string', 'max:255']);
 
-        $path = $service->create($request->name, $invitation);
+        $data = $service->create($request->name, $invitation);
 
         // Insert in DB
         $invitation->invites()->create([
             'name'       => $request->name,
-            'invitation' => $path
+            'invitation' => $data['path'],
+            'code'       => $data['code']
         ]);
 
-        return Inertia::location(Storage::url($path));
+        return Inertia::location(Storage::url($data['path']));
+    }
+
+    /**
+     * Confirm the user has scanned and attended the invitation.
+     *
+     * @param  string  $code
+     * @return \Illuminate\Http\Response
+     */
+    public function attend(string $code)
+    {
+        $invite = Invite::where('code', $code)->firstOrFail();
+        $invite->update(['scanned' => 1]);
+
+        return inertia('InvitateConfirmation');
     }
 
     /**

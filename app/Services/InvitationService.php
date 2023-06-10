@@ -23,19 +23,6 @@ class InvitationService
 
         $x_position = $invitation->variables['width_type'] == 'center' ? ($img->width() / 2) : ($img->width() - $invitation->variables['width']);
 
-
-        // Generate the QR code
-        $qr = QrCode::size(100)
-            ->format('png')
-            ->errorCorrection('M')
-            ->generate('https://twitter.com/HarryKir');
-
-        $name = str_replace('invitations/templates/', '', $invitation->file);
-        $name = explode('.', $name)[0];
-
-        Storage::put($path = "invitations/templates/$name-qr.png", $qr);
-
-
         if (empty($invitation->qr_position) || $invitation->qr_position == "none") {
             $img
                 ->text($text, $x_position, $invitation->variables['height'], function ($font) use ($invitation) {
@@ -55,7 +42,7 @@ class InvitationService
                     $font->color($invitation->variables['fontcolor']);
                     $font->align('center');
                 })
-                ->insert(storage_path("app/public/$path"), $invitation->qr_position, $position_x, $position_y)
+                ->insert(public_path('img/qrcode.jpg'), $invitation->qr_position, $position_x, $position_y)
                 ->save(storage_path("app/public/{$invitation->preview}"));
         }
     }
@@ -74,17 +61,45 @@ class InvitationService
         $text   = $arabic->utf8Glyphs($name);
         $file   = Str::slug($name);
         $path   = "invitations/results/{$invitation->id}-{$file}.png";
+        $code   = Str::random(40);
 
         $x_position = $invitation->variables['width_type'] == 'center' ? ($img->width() / 2) : ($img->width() - $invitation->variables['width']);
-        $img
-            ->text($text, $x_position, $invitation->variables['height'], function ($font) use ($invitation) {
-                $font->file(resource_path("fonts/invitation-font.ttf"));
-                $font->size($invitation->variables['fontsize']);
-                $font->color($invitation->variables['fontcolor']);
-                $font->align('center');
-            })
-            ->save(storage_path("app/public/$path"));
 
-        return $path;
+        if (empty($invitation->qr_position) || $invitation->qr_position == "none") {
+            $img
+                ->text($text, $x_position, $invitation->variables['height'], function ($font) use ($invitation) {
+                    $font->file(resource_path("fonts/invitation-font.ttf"));
+                    $font->size($invitation->variables['fontsize']);
+                    $font->color($invitation->variables['fontcolor']);
+                    $font->align('center');
+                })
+                ->save(storage_path("app/public/$path"));
+        } else {
+            // Generate the QR code
+            $qr = QrCode::size(100)
+                ->format('png')
+                ->errorCorrection('M')
+                ->generate(route('invitation.attend', $code));
+
+            Storage::put($qr_path = "invitations/results/qr-$code.png", $qr);
+
+            $position_x = empty($invitation->qr_position_x) ? 0 : $invitation->qr_position_x;
+            $position_y = empty($invitation->qr_position_y) ? 0 : $invitation->qr_position_y;
+
+            $img
+                ->text($text, $x_position, $invitation->variables['height'], function ($font) use ($invitation) {
+                    $font->file(resource_path("fonts/invitation-font.ttf"));
+                    $font->size($invitation->variables['fontsize']);
+                    $font->color($invitation->variables['fontcolor']);
+                    $font->align('center');
+                })
+                ->insert(storage_path("app/public/$qr_path"), $invitation->qr_position, $position_x, $position_y)
+                ->save(storage_path("app/public/$path"));
+        }
+
+        return [
+            'path' => $path,
+            'code' => $code
+        ];
     }
 }

@@ -23,8 +23,8 @@ class InvitationResource extends JsonResource
             parent::toArray($request),
 
             [
-                'file' => $this->when($this->file, str_replace('http:', 'https:', Storage::url($this->file))),
-                'preview' => $this->when($this->preview, str_replace('http:', 'https:', Storage::url($this->preview))),
+                'file' => $this->when($this->file, Storage::url($this->file)),
+                'preview' => $this->when($this->preview, Storage::url($this->preview)),
                 'invites' => InviteResource::collection($this->whenLoaded('invites')),
                 'welcome_message' => $this->welcome_message,
 
