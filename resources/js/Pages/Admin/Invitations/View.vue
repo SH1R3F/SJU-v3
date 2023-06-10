@@ -65,7 +65,7 @@ const props = defineProps({
                                 <tr>
                                     <th class="cell-fit">#</th>
                                     <th>{{ __('Name') }}</th>
-                                    <th>{{ __('Attendance') }}</th>
+                                    <th>{{ __('Passed') }}</th>
                                     <th class="cell-fit">{{ __('Actions') }}</th>
                                 </tr>
                             </thead>
