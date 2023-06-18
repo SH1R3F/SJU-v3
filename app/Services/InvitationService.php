@@ -42,7 +42,7 @@ class InvitationService
                     $font->color($invitation->variables['fontcolor']);
                     $font->align('center');
                 })
-                ->insert(public_path('img/qrcodee.png'), $invitation->qr_position, $position_x, $position_y)
+                ->insert(public_path('img/qrcodee.jpg'), $invitation->qr_position, $position_x, $position_y)
                 ->save(storage_path("app/public/{$invitation->preview}"));
         }
     }
