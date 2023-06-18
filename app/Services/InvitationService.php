@@ -42,7 +42,7 @@ class InvitationService
                     $font->color($invitation->variables['fontcolor']);
                     $font->align('center');
                 })
-                ->insert(public_path('img/qrcode.png'), $invitation->qr_position, $position_x, $position_y)
+                ->insert(public_path('img/qrcodee.png'), $invitation->qr_position, $position_x, $position_y)
                 ->save(storage_path("app/public/{$invitation->preview}"));
         }
     }
@@ -76,7 +76,7 @@ class InvitationService
                 ->save(storage_path("app/public/$path"));
         } else {
             // Generate the QR code
-            $qr = QrCode::size(70)
+            $qr = QrCode::size(200)
                 ->format('png')
                 ->errorCorrection('M')
                 ->generate(route('invitation.attend', $code));
