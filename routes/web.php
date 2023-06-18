@@ -106,7 +106,7 @@ Route::get('articles/{category_id?}', [ArticleController::class, 'articles'])->n
  */
 Route::get('invitations/{invitation}', [InviteController::class, 'show'])->name('invitation.show');
 Route::post('invitations/{invitation}', [InviteController::class, 'store'])->name('invitate.store');
-Route::get('invitations/{code}', [InviteController::class, 'attend'])->name('invitation.attend');
+Route::get('invitations/{code}/attend', [InviteController::class, 'attend'])->name('invitation.attend');
 
 
 // Member routes
