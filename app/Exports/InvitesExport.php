@@ -24,6 +24,7 @@ class InvitesExport implements FromCollection, WithHeadings, WithMapping, WithEv
         return [
             '#',
             __('Full name'),
+            __('Email'),
             __('Passed'),
         ];
     }
@@ -33,6 +34,7 @@ class InvitesExport implements FromCollection, WithHeadings, WithMapping, WithEv
         return [
             ++$this->row,
             $invitation->name,
+            $invitation->email,
             $invitation->scanned ? __('Passed') : __('Didn\'t pass')
         ];
     }
