@@ -7,6 +7,7 @@ use App\Models\Page;
 use App\Models\Media;
 use App\Models\Member;
 use App\Models\Article;
+use App\Models\TrainingBag;
 use App\Models\Subscription;
 use App\Models\Course\Course;
 use App\Services\PageService;
@@ -15,6 +16,7 @@ use App\Http\Resources\PageResource;
 use App\Http\Resources\MediaResource;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\ArticleResource;
+use App\Http\Resources\TrainingBagResource;
 
 class PageController extends Controller
 {
@@ -65,6 +67,19 @@ class PageController extends Controller
 
         return inertia('Pages/View', [
             'page' => new PageResource($page),
+        ]);
+    }
+
+    /**
+     * Display the training bag page
+     */
+    public function trainingBag()
+    {
+        $bags = TrainingBag::latest()
+            ->paginate(18);
+
+        return inertia('Pages/TrainingBag', [
+            'bags' => TrainingBagResource::collection($bags),
         ]);
     }
 }
