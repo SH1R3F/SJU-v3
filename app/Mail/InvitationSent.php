@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\invite;
+use App\Models\Invite;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -20,7 +20,7 @@ class InvitationSent extends Mailable
      *
      * @return void
      */
-    public function __construct(public invite $invite)
+    public function __construct(public Invite $invite)
     {
         //
     }
