@@ -84,7 +84,7 @@
                                             <p class="sm-leading-32"
                                                 style="font-family: 'Cairo', sans-serif; mso-line-height-rule: exactly; margin: 0; margin-bottom: 24px; font-size: 16px; font-weight: 600; color: #263238;">
                                                 تثمن أسرة هيئة الصحفيين السعوديين دعوتك لحضور
-                                                {{ $invite->invitate->name }}
+                                                {{ $invite->invitate->name }} <br />
                                                 مُرفق دعوتك.
                                             </p>
                                             <p></p>
