@@ -21,6 +21,7 @@ const form = useForm({
     qr_position: props.invitation.qr_position || 'none',
     qr_position_x: props.invitation.qr_position_x || 0,
     qr_position_y: props.invitation.qr_position_y || 0,
+    qr_size: props.invitation.qr_size || 200,
     _method: 'PUT',
 });
 </script>
@@ -198,6 +199,15 @@ const form = useForm({
                                     </div>
                                     <span class="fs-6 text-danger" v-if="form.errors.qr_position_y">{{
                                         form.errors.qr_position_y }}</span>
+                                </div>
+                                <div class="mb-3 col-12 ">
+                                    <label class="form-label" for="qr_size">{{ __('QR size') }}</label>
+                                    <div class="input-group">
+                                        <input class="form-control" type="number" id="qr_size" v-model="form.qr_size"
+                                            :placeholder="__('QR size')" />
+                                    </div>
+                                    <span class="fs-6 text-danger" v-if="form.errors.qr_size">{{
+                                        form.errors.qr_size }}</span>
                                 </div>
                             </div>
                             <!-- Qr margins -->
