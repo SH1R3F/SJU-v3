@@ -22,8 +22,8 @@ class TrainingBagResource extends JsonResource
 
                 // Authorization
                 $this->mergeWhen(str_contains(request()->route()->getActionName(), '@index'), [
-                    'editable'   => $request->user()->can('update', $this->resource),
-                    'deleteable' => $request->user()->can('delete', $this->resource),
+                    'editable'   => $request->user()?->can('update', $this->resource),
+                    'deleteable' => $request->user()?->can('delete', $this->resource),
                 ])
             ]
         );
