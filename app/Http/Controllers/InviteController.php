@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Invite;
-use ArPHP\I18N\Arabic;
 use App\Models\Invitation;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Services\InvitationService;
 use Illuminate\Support\Facades\Storage;
@@ -41,16 +39,25 @@ class InviteController extends Controller
     {
         abort_if(!$invitation->status, 404);
 
-        $request->validate(['name' => 'required', 'string', 'max:255']);
+        $request->validate(['name' => 'required', 'email' => ['required', 'email'], 'string', 'max:255']);
+
+        // If already exists, Send the already generated one
+        $invite = $invitation->invites()->where('email', $request->email)->first();
+        if ($invite) {
+            return Inertia::location(Storage::url($invite->invitation));
+        }
 
         $data = $service->create($request->name, $invitation);
 
         // Insert in DB
         $invitation->invites()->create([
             'name'       => $request->name,
+            'email'      => $request->email,
             'invitation' => $data['path'],
             'code'       => $data['code']
         ]);
+
+        // TODO: Send the invitation by email
 
         return Inertia::location(Storage::url($data['path']));
     }
