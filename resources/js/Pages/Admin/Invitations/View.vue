@@ -65,6 +65,7 @@ const props = defineProps({
                                 <tr>
                                     <th class="cell-fit">#</th>
                                     <th>{{ __('Name') }}</th>
+                                    <th>{{ __('Email') }}</th>
                                     <th>{{ __('Passed') }}</th>
                                     <th class="cell-fit">{{ __('Actions') }}</th>
                                 </tr>
@@ -77,6 +78,13 @@ const props = defineProps({
                                             style="display: inline-block; max-width: 300px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">
                                         {{
                                             invite.name
+                                        }}</Link>
+                                    </td>
+                                    <td>
+                                        <Link href="#"
+                                            style="display: inline-block; max-width: 300px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">
+                                        {{
+                                            invite.email
                                         }}</Link>
                                     </td>
                                     <td>
@@ -96,7 +104,7 @@ const props = defineProps({
                                 </tr>
 
                                 <tr v-if="!invitation.invites.length">
-                                    <td colspan="4" class="text-muted text-center p-3">
+                                    <td colspan="5" class="text-muted text-center p-3">
                                         {{ __('No one is invited yet') }}
                                     </td>
                                 </tr>
