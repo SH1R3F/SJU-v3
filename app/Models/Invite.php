@@ -15,7 +15,7 @@ class Invite extends Model
     /**
      * Relation to the invitation it belongs to
      */
-    public function invitation()
+    public function invitate()
     {
         return $this->belongsTo(Invitation::class);
     }
