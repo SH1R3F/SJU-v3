@@ -37,7 +37,7 @@ class InvitationService
             $qr = QrCode::size($invitation->qr_size ?? 200)
                 ->format('png')
                 ->errorCorrection('M')
-                ->generate(url());
+                ->generate(url(''));
 
             Storage::put($qr_path = str_replace('.jpg', '-qr.jpg', $invitation->preview), $qr);
 
@@ -50,7 +50,7 @@ class InvitationService
                     $font->color($invitation->variables['fontcolor']);
                     $font->align('center');
                 })
-                ->insert(public_path('img/qrcodee.jpg'), $invitation->qr_position, $position_x, $position_y)
+                ->insert(storage_path("app/public/$qr_path"), $invitation->qr_position, $position_x, $position_y)
                 ->save(storage_path("app/public/{$invitation->preview}"));
         }
     }
