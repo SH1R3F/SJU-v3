@@ -40,6 +40,9 @@ class InvitationRequest extends FormRequest
             'qr_position_y' => [
                 Rule::when(request()->isMethod('POST'), 'nullable', ['nullable', 'required_unless:qr_position,none']), 'numeric'
             ],
+            'qr_size' => [
+                Rule::when(request()->isMethod('POST'), 'nullable', ['nullable', 'required_unless:qr_position,none']), 'numeric'
+            ],
         ];
     }
 }
