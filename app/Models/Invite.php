@@ -10,7 +10,7 @@ class Invite extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'invitation', 'code', 'scanned', 'invitation_id'];
+    protected $fillable = ['name', 'email', 'invitation', 'code', 'scanned', 'invitation_id'];
 
     /**
      * Relation to the invitation it belongs to
