@@ -58,12 +58,11 @@ class InviteController extends Controller
     /**
      * Confirm the user has scanned and attended the invitation.
      *
-     * @param  string  $code
+     * @param  \App\Models\Invite  $invite
      * @return \Illuminate\Http\Response
      */
-    public function attend(string $code)
+    public function attend(Invite $invite)
     {
-        $invite = Invite::where('code', $code)->firstOrFail();
         $invite->update(['scanned' => 1]);
 
         return inertia('InvitateConfirmation');
