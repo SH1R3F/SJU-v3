@@ -11,7 +11,7 @@ class Invitation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'variables', 'status', 'file', 'preview', 'welcome_message', 'qr_position', 'qr_position_x', 'qr_position_y'];
+    protected $fillable = ['name', 'variables', 'status', 'file', 'preview', 'welcome_message', 'qr_position', 'qr_position_x', 'qr_position_y', 'qr_size'];
 
     protected $casts = [
         'variables' => 'array',
