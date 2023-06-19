@@ -7,8 +7,10 @@ use App\Models\Invite;
 use App\Models\Invitation;
 use Illuminate\Http\Request;
 use App\Services\InvitationService;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\InvitationResource;
+use App\Mail\InvitationSent;
 
 class InviteController extends Controller
 {
@@ -50,14 +52,14 @@ class InviteController extends Controller
         $data = $service->create($request->name, $invitation);
 
         // Insert in DB
-        $invitation->invites()->create([
+        $invite = $invitation->invites()->create([
             'name'       => $request->name,
             'email'      => $request->email,
             'invitation' => $data['path'],
             'code'       => $data['code']
         ]);
 
-        // TODO: Send the invitation by email
+        Mail::to($request->email)->send(new InvitationSent($invite));
 
         return Inertia::location(Storage::url($data['path']));
     }
