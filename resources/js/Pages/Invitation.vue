@@ -7,6 +7,7 @@ const props = defineProps({
 
 const form = useForm({
     name: '',
+    email: '',
 });
 </script>
 
@@ -30,6 +31,11 @@ const form = useForm({
                                     <input type="text" v-model="form.name" class="form-control text-center btn-lg"
                                         placeholder="الاسم" autofocus required />
                                     <p class="text text-danger text-sm" v-if="form.errors.name">{{ form.errors.name }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" v-model="form.email" class="form-control text-center btn-lg"
+                                        placeholder="البريد الإلكتروني" autofocus required />
+                                    <p class="text text-danger text-sm" v-if="form.errors.email">{{ form.errors.email }}</p>
                                 </div>
                                 <button type="submit" class="btn btn-success btn-block btn-lg"
                                     :disabled="form.processing">تحميل</button>
