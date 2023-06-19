@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Sms\SmsManager;
 use App\Channels\SmsChannel;
 use App\Payment\PaymentManager;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Notification;
@@ -37,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             return new SmsChannel;
         });
 
-        \URL::forceScheme('https');
+        URL::forceScheme('https');
 
         // Schema::defaultStringLength(125);
         // $this->app->bind('path.public', function () {
