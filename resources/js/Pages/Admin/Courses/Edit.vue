@@ -22,7 +22,7 @@ const form = useForm({
     map_link: props.course.map_link || '',
     lng: props.course.lng || 27.0001404,
     lat: props.course.lat || 49.6574203,
-    seats: props.course.seats || '',
+    seats: props.course.seats || 1,
     date_from: props.course.date_from || '',
     date_to: props.course.date_to || '',
     time_from: props.course.time_from || '',

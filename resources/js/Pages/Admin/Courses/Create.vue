@@ -21,7 +21,7 @@ const form = useForm({
     map_link: '',
     lng: 27.0001404,
     lat: 49.6574203,
-    seats: '',
+    seats: 1,
     date_from: '',
     date_to: '',
     time_from: '',
