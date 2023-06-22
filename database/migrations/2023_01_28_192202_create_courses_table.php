@@ -27,14 +27,14 @@ return new class extends Migration
             $table->string('map_link')->nullable();
             $table->string('lng')->nullable();
             $table->string('lat')->nullable();
-            $table->unsignedInteger('seats')->default(0);
+            $table->unsignedInteger('seats')->nullable()->default(0);
             $table->date('date_from')->index();
             $table->date('date_to')->index();
             $table->time('time_from');
             $table->time('time_to');
             $table->json('days')->nullable();
             $table->unsignedInteger('minutes');
-            $table->unsignedInteger('percentage');
+            $table->unsignedInteger('percentage')->nullable();
             $table->tinyInteger('cost')->default(0);
             $table->unsignedInteger('price')->nullable();
             $table->string('currency')->nullable()->default('SAR');
