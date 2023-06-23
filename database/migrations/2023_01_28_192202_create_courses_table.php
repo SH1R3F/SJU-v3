@@ -33,7 +33,7 @@ return new class extends Migration
             $table->time('time_from');
             $table->time('time_to');
             $table->json('days')->nullable();
-            $table->unsignedInteger('minutes');
+            $table->unsignedInteger('minutes')->default(1);
             $table->unsignedInteger('percentage')->nullable();
             $table->tinyInteger('cost')->default(0);
             $table->unsignedInteger('price')->nullable();
