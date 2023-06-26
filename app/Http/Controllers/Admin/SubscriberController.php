@@ -257,16 +257,23 @@ class SubscriberController extends Controller
 
         switch ($request['to_type']) {
             case 'select':
-                $recipients = Subscriber::whereIn('id', $request['recipients'])->whereRaw("email NOT REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")->get();
+                $recipients = Subscriber::whereIn('id', $request['recipients'])
+                    // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
+                    ->get();
                 break;
             case 'all':
-                $recipients = Subscriber::whereRaw("email NOT REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")->get();
+                $recipients = Subscriber::all();
+                // $recipients = Subscriber::whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")->get();
                 break;
             case 'active':
-                $recipients = Subscriber::where('status', 1)->whereRaw("email NOT REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")->get();
+                $recipients = Subscriber::where('status', 1)
+                    // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
+                    ->get();
                 break;
             case 'inactive':
-                $recipients = Subscriber::where('status', '!=', 1)->whereRaw("email NOT REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")->get();
+                $recipients = Subscriber::where('status', '!=', 1)
+                    // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
+                    ->get();
                 break;
         }
 

@@ -78,34 +78,34 @@ class MemberService
             case 'select':
                 return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->whereIn('id', $data['recipients'])
-                    ->whereRaw("email NOT REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
+                    // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
             case 'all':
                 return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->where('status', '!=', Member::STATUS_DISABLED)
-                    ->whereRaw("email NOT REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
+                    // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
             case 'fulltime':
                 return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->where('status', '!=', Member::STATUS_DISABLED)
                     ->whereHas('subscription', fn ($query) => $query->where('type', 1))
-                    ->whereRaw("email NOT REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
+                    // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
             case 'parttime':
                 return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->where('status', '!=', Member::STATUS_DISABLED)
                     ->whereHas('subscription', fn ($query) => $query->where('type', 2))
-                    ->whereRaw("email NOT REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
+                    // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
             case 'affiliate':
                 return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->where('status', '!=', Member::STATUS_DISABLED)
                     ->whereHas('subscription', fn ($query) => $query->where('type', 3))
-                    ->whereRaw("email NOT REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
+                    // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
         }
