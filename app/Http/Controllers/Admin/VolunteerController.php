@@ -280,20 +280,24 @@ class VolunteerController extends Controller
             case 'select':
                 $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->whereIn('id', $request['recipients'])
+                    ->whereRaw("email NOT REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
             case 'all':
                 $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->whereRaw("email NOT REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
             case 'active':
                 $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->where('status', 1)
+                    ->whereRaw("email NOT REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
             case 'inactive':
                 $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->where('status', '!=', 1)
+                    ->whereRaw("email NOT REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
         }
