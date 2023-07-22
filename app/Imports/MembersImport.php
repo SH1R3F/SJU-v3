@@ -28,6 +28,12 @@ class MembersImport implements ToCollection
 
             [$name_ar, $name_en, $gender, $national_id, $mobile, $birthday_h, $birthday_m, $branch, $qualification, $major, $journalistic_profession, $journalistic_employer, $newspaper_type, $email, $type] = $row;
 
+
+            if(empty($national_id ?? '')) {
+                continue;
+            }
+
+
             $member = Member::firstOrCreate(['national_id' => $national_id], [
                 // Name ar
                 ...$this->name($name_ar, 'ar'),
