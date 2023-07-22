@@ -3,6 +3,8 @@ import { Inertia } from '@inertiajs/inertia';
 import { ref, watch } from 'vue';
 import Pagination from '../Components/Pagination.vue';
 import { debounce } from '../../../helpers';
+import { useForm } from '@inertiajs/inertia-vue3';
+import { router } from '@inertiajs/vue3'
 
 const props = defineProps({
     members: Object,
@@ -55,6 +57,18 @@ const sortBy = (column) => {
     appended.value.order = column;
     appended.value.dir = props.filters.dir == 'desc' ? 'asc' : 'desc';
     Inertia.get(route('admin.members.index'), appended.value, { preserveState: true, replace: true });
+};
+
+const form = useForm({
+    members_import: '',
+});
+
+const importMembers = (e) => {
+    form.members_import = e.target.files[0];
+    console.log(form.members_import)
+    router.post(route('admin.members.import'), form, {
+        forceFormData: true,
+    })
 };
 </script>
 
@@ -124,10 +138,12 @@ const sortBy = (column) => {
                         <input type="text" class="form-control" :placeholder="__('Name')" v-model="name" />
                     </div>
                     <div class="col-md-4 mb-2">
-                        <input type="text" class="form-control" :placeholder="__('National ID number')" v-model="national_id" />
+                        <input type="text" class="form-control" :placeholder="__('National ID number')"
+                            v-model="national_id" />
                     </div>
                     <div class="col-md-4 mb-2">
-                        <input type="text" class="form-control" :placeholder="__('Membership number')" v-model="membership_number" />
+                        <input type="text" class="form-control" :placeholder="__('Membership number')"
+                            v-model="membership_number" />
                     </div>
                     <div class="col-md-4 mb-2">
                         <input type="text" class="form-control" :placeholder="__('Mobile')" v-model="mobile" />
@@ -143,7 +159,8 @@ const sortBy = (column) => {
                     <div class="col-md-4 mb-2">
                         <select class="form-select text-capitalize" v-model="branch">
                             <option value="">{{ __('Membership branch') }}</option>
-                            <option v-for="branch in branches" :key="branch.id" :value="branch.id">{{ branch.name }}</option>
+                            <option v-for="branch in branches" :key="branch.id" :value="branch.id">{{ branch.name }}
+                            </option>
                         </select>
                     </div>
                     <div class="col-md-4 mb-2">
@@ -168,41 +185,49 @@ const sortBy = (column) => {
                         </div>
                     </div>
                     <div class="col-md-10 mb-1">
-                        <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column gap-1 mb-3 mb-md-0">
+                        <div
+                            class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column gap-1 mb-3 mb-md-0">
                             <div class="dt-buttons">
-                                <a
-                                    v-if="members.can_export"
+                                <form v-if="members.can_create"
+                                    enctype="multipart/form-data" class="d-inline">
+                                    <label for="membersImport" class="dt-button buttons-collection btn btn-label-secondary me-1">
+                                        <span>
+                                            <i class="ti ti-database-import me-1 ti-xs"></i>
+                                            {{ __('Import') }}
+                                        </span>
+                                        <input type="file" accept=".xlsx" id="membersImport" class="form-control d-none"
+                                            @change="importMembers" />
+                                    </label>
+                                </form>
+                                <a v-if="members.can_export"
                                     :href="route('admin.members.export', { page: 'accepted', ...queryParams() })"
-                                    class="dt-button buttons-collection btn btn-label-secondary me-1"
-                                    type="button"
-                                >
+                                    class="dt-button buttons-collection btn btn-label-secondary me-1" type="button">
                                     <span>
                                         <i class="ti ti-screen-share me-1 ti-xs"></i>
                                         {{ __('Excel') }}
                                     </span>
                                 </a>
-                                <a
-                                    v-if="members.can_export"
+                                <a v-if="members.can_export"
                                     :href="route('admin.members.export.pdf', { page: 'accepted', ...queryParams() })"
-                                    class="dt-button buttons-collection btn btn-label-secondary me-1"
-                                    type="button"
-                                >
+                                    class="dt-button buttons-collection btn btn-label-secondary me-1" type="button">
                                     <span>
                                         <i class="ti ti-screen-share me-1 ti-xs"></i>
                                         {{ __('PDF') }}
                                     </span>
                                 </a>
-                                <Link v-if="members.can_create" :href="route('admin.members.create')" type="button" class="dt-button add-new btn btn-primary me-1">
-                                    <span>
-                                        <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
-                                        <span class="d-none d-sm-inline-block">{{ __('Create member') }}</span>
-                                    </span>
+                                <Link v-if="members.can_create" :href="route('admin.members.create')" type="button"
+                                    class="dt-button add-new btn btn-primary me-1">
+                                <span>
+                                    <i class="ti ti-plus me-0 me-sm-1 ti-xs"></i>
+                                    <span class="d-none d-sm-inline-block">{{ __('Create member') }}</span>
+                                </span>
                                 </Link>
-                                <Link v-if="members.can_notify" :href="route('admin.members.notify')" type="button" class="dt-button btn btn-light me-1">
-                                    <span>
-                                        <i class="ti ti-bell-ringing me-0 me-sm-1 ti-xs"></i>
-                                        <span class="d-none d-sm-inline-block">{{ __('Notify') }}</span>
-                                    </span>
+                                <Link v-if="members.can_notify" :href="route('admin.members.notify')" type="button"
+                                    class="dt-button btn btn-light me-1">
+                                <span>
+                                    <i class="ti ti-bell-ringing me-0 me-sm-1 ti-xs"></i>
+                                    <span class="d-none d-sm-inline-block">{{ __('Notify') }}</span>
+                                </span>
                                 </Link>
                             </div>
                         </div>
@@ -211,12 +236,19 @@ const sortBy = (column) => {
                 <table class="datatables-users table border-top">
                     <thead>
                         <tr>
-                            <th @click.prevent="sortBy('name')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'name' }">{{ __('User') }}</th>
-                            <th @click.prevent="sortBy('membership_number')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'membership_number' }">{{ __('Membership number') }}</th>
-                            <th @click.prevent="sortBy('mobile')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'mobile' }">{{ __('Mobile') }}</th>
-                            <th @click.prevent="sortBy('type')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'type' }">{{ __('Membership type') }}</th>
-                            <th @click.prevent="sortBy('branch_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'branch_id' }">{{ __('Branch') }}</th>
-                            <th @click.prevent="sortBy('status')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'status' }">{{ __('Membership Status') }}</th>
+                            <th @click.prevent="sortBy('name')" class="cursor-pointer"
+                                :class="{ 'link-primary': filters.order == 'name' }">{{ __('User') }}</th>
+                            <th @click.prevent="sortBy('membership_number')" class="cursor-pointer"
+                                :class="{ 'link-primary': filters.order == 'membership_number' }">{{ __('Membership number')
+                                }}</th>
+                            <th @click.prevent="sortBy('mobile')" class="cursor-pointer"
+                                :class="{ 'link-primary': filters.order == 'mobile' }">{{ __('Mobile') }}</th>
+                            <th @click.prevent="sortBy('type')" class="cursor-pointer"
+                                :class="{ 'link-primary': filters.order == 'type' }">{{ __('Membership type') }}</th>
+                            <th @click.prevent="sortBy('branch_id')" class="cursor-pointer"
+                                :class="{ 'link-primary': filters.order == 'branch_id' }">{{ __('Branch') }}</th>
+                            <th @click.prevent="sortBy('status')" class="cursor-pointer"
+                                :class="{ 'link-primary': filters.order == 'status' }">{{ __('Membership Status') }}</th>
                             <th>{{ __('Actions') }}</th>
                         </tr>
                     </thead>
@@ -226,12 +258,15 @@ const sortBy = (column) => {
                                 <div class="d-flex justify-content-start align-items-center user-name">
                                     <div class="avatar-wrapper">
                                         <div class="avatar avatar-sm me-3">
-                                            <img :src="member.profile_photo || '/img/user-dark.png'" onerror="this.src = '/img/user-dark.png';" alt="Avatar" class="rounded-circle" />
+                                            <img :src="member.profile_photo || '/img/user-dark.png'"
+                                                onerror="this.src = '/img/user-dark.png';" alt="Avatar"
+                                                class="rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <Link :href="route('admin.members.show', member.id)" class="text-body text-truncate">
-                                            <span class="fw-semibold">{{ member.fullName }}</span>
+                                        <Link :href="route('admin.members.show', member.id)"
+                                            class="text-body text-truncate">
+                                        <span class="fw-semibold">{{ member.fullName }}</span>
                                         </Link>
                                         <small class="text-muted">{{ member.national_id }}</small>
                                     </div>
@@ -254,47 +289,32 @@ const sortBy = (column) => {
                             </td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <Link
-                                        v-if="member.payable"
-                                        :href="route('admin.members.set-paid', member.id)"
-                                        method="post"
-                                        as="span"
-                                        preserve-scroll
-                                        class="cursor-pointer text-body"
-                                        :title="__('Set paid')"
-                                    >
-                                        <i class="ti ti-sm me-2 ti-currency-dollar"></i>
+                                    <Link v-if="member.payable" :href="route('admin.members.set-paid', member.id)"
+                                        method="post" as="span" preserve-scroll class="cursor-pointer text-body"
+                                        :title="__('Set paid')">
+                                    <i class="ti ti-sm me-2 ti-currency-dollar"></i>
                                     </Link>
-                                    <Link
-                                        v-if="member.toggleable"
-                                        :href="route('admin.members.toggle', member.id)"
-                                        method="post"
-                                        as="span"
-                                        preserve-scroll
-                                        class="cursor-pointer"
+                                    <Link v-if="member.toggleable" :href="route('admin.members.toggle', member.id)"
+                                        method="post" as="span" preserve-scroll class="cursor-pointer"
                                         data-bs-placement="top"
                                         :title="member.status == -1 ? __('Disabled') : __('Enabled')"
-                                        :class="{ 'text-success': member.status != -1, 'text-body': member.status == -1 }"
-                                    >
-                                        <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': member.active != -1, 'ti-toggle-left': member.active == -1 }"></i>
+                                        :class="{ 'text-success': member.status != -1, 'text-body': member.status == -1 }">
+                                    <i class="ti ti-sm me-2"
+                                        :class="{ 'ti-toggle-right': member.active != -1, 'ti-toggle-left': member.active == -1 }"></i>
                                     </Link>
-                                    <Link v-if="member.viewable" :href="route('admin.members.show', member.id)" class="text-body"><i class="ti ti-eye ti-sm me-2"></i></Link>
-                                    <Link v-if="member.editable" :href="route('admin.members.edit', member.id)" class="text-body"><i class="ti ti-edit ti-sm me-2"></i></Link>
-                                    <Link v-if="member.deleteable" :href="route('admin.members.destroy', member.id)" preserve-scroll as="span" method="delete" class="text-body cursor-pointer">
-                                        <i class="ti ti-trash ti-sm me-2"></i>
+                                    <Link v-if="member.viewable" :href="route('admin.members.show', member.id)"
+                                        class="text-body"><i class="ti ti-eye ti-sm me-2"></i></Link>
+                                    <Link v-if="member.editable" :href="route('admin.members.edit', member.id)"
+                                        class="text-body"><i class="ti ti-edit ti-sm me-2"></i></Link>
+                                    <Link v-if="member.deleteable" :href="route('admin.members.destroy', member.id)"
+                                        preserve-scroll as="span" method="delete" class="text-body cursor-pointer">
+                                    <i class="ti ti-trash ti-sm me-2"></i>
                                     </Link>
                                     <!-- Unaccept -->
-                                    <Link
-                                        v-if="member.acceptable"
-                                        :href="route('admin.members.unaccept', member.id)"
-                                        method="post"
-                                        data-bs-placement="top"
-                                        :title="__('Disapprove')"
-                                        preserve-scroll
-                                        as="span"
-                                        class="text-body cursor-pointer"
-                                    >
-                                        <i class="ti ti-x ti-sm me-2"></i>
+                                    <Link v-if="member.acceptable" :href="route('admin.members.unaccept', member.id)"
+                                        method="post" data-bs-placement="top" :title="__('Disapprove')" preserve-scroll
+                                        as="span" class="text-body cursor-pointer">
+                                    <i class="ti ti-x ti-sm me-2"></i>
                                     </Link>
                                 </div>
                             </td>

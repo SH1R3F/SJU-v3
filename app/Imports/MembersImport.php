@@ -1,0 +1,90 @@
+<?php
+
+namespace App\Imports;
+
+use App\Models\Branch;
+use Carbon\Carbon;
+use App\Models\Member;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithMappedCells;
+
+class MembersImport implements ToCollection
+{
+
+    public function collection(Collection $rows)
+    {
+        // Delete first row
+        $rows->shift();
+
+        $branches = Branch::pluck('id', 'name');
+
+        foreach ($rows as $row) {
+            [$name_ar, $name_en, $gender, $national_id, $mobile, $birthday_h, $birthday_m, $branch, $qualification, $major, $journalistic_profession, $journalistic_employer, $newspaper_type, $email] = $row;
+
+            Member::firstOrCreate(['national_id' => $national_id], [
+                // Name ar
+                ...$this->name($name_ar, 'ar'),
+                // Name en
+                ...$this->name($name_en, 'en'),
+                'gender' => $gender == 'ذكر' ? 0 : 1,
+                'birthday_h' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($birthday_h)),
+                'birthday_m' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($birthday_m)),
+                'nationality' => 'SA',
+                'qualification' => $qualification ?? ' ',
+                'major' => $major ?? ' ',
+                'journalistic_profession' => $journalistic_profession ?? ' ',
+                'journalistic_employer' => $journalistic_employer ?? ' ',
+                'newspaper_type' => $newspaper_type == 'صحيفة ورقية' ? 1 : 2,
+                'non_journalistic_profession' => ' ',
+                'non_journalistic_employer' => ' ',
+                'workphone' => 0,
+                'workphone_ext' => 0,
+                'branch_id' => $branches[$branch],
+                'email' => $email,
+                'mobile' => "966$mobile",
+                'mobile_verified_at' => now(),
+                'password' => bcrypt('123456')
+            ]);
+        }
+    }
+
+    private function name(string $name, string $locale): array
+    {
+        $bits = explode(' ', $name);
+
+        if (count($bits) == 1) {
+            return [
+                "fname_$locale" => $bits[0],
+                "sname_$locale" => ' ',
+                "tname_$locale" => ' ',
+                "lname_$locale" => ' ',
+            ];
+        }
+
+        if (count($bits) == 2) {
+            return [
+                "fname_$locale" => $bits[0],
+                "sname_$locale" => $bits[1],
+                "tname_$locale" => ' ',
+                "lname_$locale" => ' ',
+            ];
+        }
+
+        if (count($bits) == 3) {
+            return [
+                "fname_$locale" => $bits[0],
+                "sname_$locale" => $bits[1],
+                "tname_$locale" => $bits[2],
+                "lname_$locale" => ' ',
+            ];
+        }
+
+        return [
+            "fname_$locale" => $bits[0],
+            "sname_$locale" => $bits[1],
+            "tname_$locale" => $bits[2],
+            "lname_$locale" => $bits[3],
+        ];
+    }
+}

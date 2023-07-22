@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             return new SmsChannel;
         });
 
-        URL::forceScheme('https');
+        // URL::forceScheme('https');
 
         // Schema::defaultStringLength(125);
         // $this->app->bind('path.public', function () {

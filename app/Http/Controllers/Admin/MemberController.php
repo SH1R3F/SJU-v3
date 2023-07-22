@@ -9,6 +9,7 @@ use App\Models\Member;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 use App\Exports\MembersExport;
+use App\Imports\MembersImport;
 use App\Services\MemberService;
 use App\Events\MemberRegistered;
 use App\Services\InvoiceService;
@@ -100,6 +101,21 @@ class MemberController extends Controller
             'filters'  => request()->only(['perPage', 'name', 'national_id', 'membership_number', 'mobile', 'type', 'year', 'order', 'dir']),
             'branches' => Branch::orderBy('id')->get(['id', 'name']),
         ]);
+    }
+
+    /**
+     * Import a listing of the resource.
+     */
+    public function import(Request $request)
+    {
+        $this->authorize('create', Member::class);
+
+        if ($request->hasFile('members_import') && $request->file('members_import')->extension() == 'xlsx') {
+            Excel::import(new MembersImport(), $request->file('members_import'));
+        }
+
+        // Response
+        return redirect()->route('admin.members.index')->with('message', __('Members imported successfully'));
     }
 
     /**
