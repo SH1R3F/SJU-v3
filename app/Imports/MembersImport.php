@@ -21,6 +21,10 @@ class MembersImport implements ToCollection
         $branches = Branch::pluck('id', 'name');
 
         foreach ($rows as $row) {
+            if (count($row) != 14) {
+                continue;
+            }
+
             [$name_ar, $name_en, $gender, $national_id, $mobile, $birthday_h, $birthday_m, $branch, $qualification, $major, $journalistic_profession, $journalistic_employer, $newspaper_type, $email, $type] = $row;
 
             $member = Member::firstOrCreate(['national_id' => $national_id], [
