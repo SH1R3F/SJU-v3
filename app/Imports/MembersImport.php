@@ -2,9 +2,10 @@
 
 namespace App\Imports;
 
-use App\Models\Branch;
 use Carbon\Carbon;
+use App\Models\Branch;
 use App\Models\Member;
+use App\Events\MemberRegistered;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithMappedCells;
@@ -20,9 +21,9 @@ class MembersImport implements ToCollection
         $branches = Branch::pluck('id', 'name');
 
         foreach ($rows as $row) {
-            [$name_ar, $name_en, $gender, $national_id, $mobile, $birthday_h, $birthday_m, $branch, $qualification, $major, $journalistic_profession, $journalistic_employer, $newspaper_type, $email] = $row;
+            [$name_ar, $name_en, $gender, $national_id, $mobile, $birthday_h, $birthday_m, $branch, $qualification, $major, $journalistic_profession, $journalistic_employer, $newspaper_type, $email, $type] = $row;
 
-            Member::firstOrCreate(['national_id' => $national_id], [
+            $member = Member::firstOrCreate(['national_id' => $national_id], [
                 // Name ar
                 ...$this->name($name_ar, 'ar'),
                 // Name en
@@ -46,6 +47,11 @@ class MembersImport implements ToCollection
                 'mobile_verified_at' => now(),
                 'password' => bcrypt('123456')
             ]);
+
+            // Create subscription
+            if (!$member->subscription) {
+                $member->subscription()->create(['type' => $type == 'عضو متفرغ' ? 1 : ($type == 'عضو غير متفرغ' ? 2 : 3)]);
+            }
         }
     }
 
