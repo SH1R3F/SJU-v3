@@ -61,7 +61,7 @@ class MembersImport implements ToCollection
 
             // Create subscription
             if (!$member->subscription) {
-                $member->subscription()->create(['type' => $type == 'عضو متفرغ' ? 1 : ($type == 'عضو غير متفرغ' ? 2 : 3)]);
+                $member->subscription()->create(['type' => $type == 'عضو متفرغ' ? 1 : ($type == 'عضو غير متفرغ' ? 2 : 3), 'end_date' => Carbon::now()->endOfYear()]);
             }
         }
     }
