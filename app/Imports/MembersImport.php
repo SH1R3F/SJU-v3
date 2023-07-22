@@ -40,8 +40,8 @@ class MembersImport implements ToCollection
                 // Name en
                 ...$this->name($name_en, 'en'),
                 'gender' => $gender == 'ذكر' ? 0 : 1,
-                'birthday_h' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($birthday_h)),
-                'birthday_m' => Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($birthday_m)),
+                'birthday_h' => is_int($birthday_h) ? Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($birthday_h)) : $birthday_h,
+                'birthday_m' => is_int($birthday_m) ? Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($birthday_m)) : $birthday_m,
                 'nationality' => 'SA',
                 'qualification' => $qualification ?? ' ',
                 'major' => $major ?? ' ',
