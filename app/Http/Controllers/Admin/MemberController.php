@@ -39,9 +39,6 @@ class MemberController extends Controller
 
     /**
      * Display accepted members.
-     *
-     * @param \App\Services\MemberService  $service
-     * @return \Illuminate\Http\Response
      */
     public function index(MemberService $service)
     {
@@ -54,9 +51,6 @@ class MemberController extends Controller
 
     /**
      * Display approved [needing acceptance] members.
-     *
-     * @param \App\Services\MemberService  $service
-     * @return \Illuminate\Http\Response
      */
     public function acceptance(MemberService $service)
     {
@@ -71,9 +65,6 @@ class MemberController extends Controller
 
     /**
      * Display unapproved members.
-     *
-     * @param \App\Services\MemberService  $service
-     * @return \Illuminate\Http\Response
      */
     public function branch(MemberService $service)
     {
@@ -88,9 +79,6 @@ class MemberController extends Controller
 
     /**
      * Display refused members.
-     *
-     * @param \App\Services\MemberService  $service
-     * @return \Illuminate\Http\Response
      */
     public function refused(MemberService $service)
     {
@@ -120,10 +108,6 @@ class MemberController extends Controller
 
     /**
      * Export list of resources to Excel.
-     *
-     * @param string  $page
-     * @param \App\Services\MemberService  $service
-     * @return \Illuminate\Http\Response
      */
     public function export(string $page, MemberService $service)
     {
@@ -152,10 +136,6 @@ class MemberController extends Controller
 
     /**
      * Export list of resources to PDF.
-     *
-     * @param string  $page
-     * @param \App\Services\MemberService  $service
-     * @return \Illuminate\Http\Response
      */
     public function exportPdf(string $page, MemberService $service)
     {
@@ -185,8 +165,6 @@ class MemberController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -198,9 +176,6 @@ class MemberController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\MemberRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(MemberRequest $request)
     {
@@ -220,9 +195,6 @@ class MemberController extends Controller
 
     /**
      * Show the membership card in pdf format.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function card(Member $member)
     {
@@ -237,9 +209,6 @@ class MemberController extends Controller
 
     /**
      * Show the membership form in pdf format.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function form(Member $member)
     {
@@ -252,9 +221,6 @@ class MemberController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function show(Member $member)
     {
@@ -266,9 +232,6 @@ class MemberController extends Controller
 
     /**
      * Display contact info of the member.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function showContact(Member $member)
     {
@@ -281,9 +244,6 @@ class MemberController extends Controller
 
     /**
      * Display Experiences & fields of the member.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function showExperiences(Member $member)
     {
@@ -296,9 +256,6 @@ class MemberController extends Controller
 
     /**
      * Display Documents of the member.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function showDocuments(Member $member)
     {
@@ -311,9 +268,6 @@ class MemberController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function edit(Member $member)
     {
@@ -326,9 +280,6 @@ class MemberController extends Controller
 
     /**
      * Show the form for editing experiences of the specified resource.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function experiences(Member $member)
     {
@@ -340,9 +291,6 @@ class MemberController extends Controller
 
     /**
      * Show the form for editing documents of the specified resource.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function documents(Member $member)
     {
@@ -354,10 +302,6 @@ class MemberController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\MemberRequest  $request
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function update(MemberRequest $request, Member $member)
     {
@@ -375,10 +319,6 @@ class MemberController extends Controller
 
     /**
      * Update the experiences of the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Member\ProfileExperiencesRequest  $request
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function updateExperiences(ProfileExperiencesRequest $request, Member $member)
     {
@@ -393,10 +333,6 @@ class MemberController extends Controller
 
     /**
      * Update the documents of the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function updateDocuments(Request $request, Member $member)
     {
@@ -425,9 +361,6 @@ class MemberController extends Controller
 
     /**
      * Admin accept member.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function accept(Member $member)
     {
@@ -444,9 +377,6 @@ class MemberController extends Controller
 
     /**
      * Admin unaccept member.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function unaccept(Member $member)
     {
@@ -463,9 +393,6 @@ class MemberController extends Controller
 
     /**
      * Branch approve member.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function approve(Member $member)
     {
@@ -480,9 +407,6 @@ class MemberController extends Controller
 
     /**
      * Branch disapprove member.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function disapprove(Member $member)
     {
@@ -497,10 +421,6 @@ class MemberController extends Controller
 
     /**
      * Refuse member.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function refuse(Request $request, Member $member)
     {
@@ -521,9 +441,6 @@ class MemberController extends Controller
 
     /**
      * Disable / Enable members.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function toggle(Member $member)
     {
@@ -538,10 +455,6 @@ class MemberController extends Controller
 
     /**
      * Set member as paid.
-     *
-     * @param  \App\Models\Member  $member
-     * @param  \App\Services\MemberService  $service
-     * @return \Illuminate\Http\Response
      */
     public function setPaid(Member $member, MemberService $service)
     {
@@ -571,9 +484,6 @@ class MemberController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Member  $member
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Member $member)
     {
@@ -586,8 +496,6 @@ class MemberController extends Controller
 
     /**
      * Show the form to send a notification to admins.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function showNotifyForm()
     {
@@ -597,8 +505,6 @@ class MemberController extends Controller
 
     /**
      * list the members by chuncks for the select options.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function chuncks()
     {
@@ -618,10 +524,6 @@ class MemberController extends Controller
 
     /**
      * Send the notification to specified users.
-     *
-     * @param  \App\Http\Requests\NotifyMembersRequest  $request
-     * @param  \App\Services\MemberService  $service
-     * @return \Illuminate\Http\Response
      */
     public function notify(NotifyMembersRequest $request, MemberService $service)
     {
