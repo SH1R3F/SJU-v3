@@ -189,6 +189,22 @@ const form = useForm({
                                             {{ `${course.time_from} ${__('to')} ${course.time_to}` }}
                                         </td>
                                     </tr>
+
+                                    <tr>
+                                        <th style="width: 30%">{{ __('Branch') }}</th>
+
+                                        <td style="font-size: 12px">
+                                            {{ course.branch.name }}
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="width: 30%">{{ __('Category') }}</th>
+
+                                        <td style="font-size: 12px">
+                                            {{ course.category.name }}
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
 

@@ -64,7 +64,7 @@ class CourseController extends Controller
         $registered = $this->auth?->courses()->where('course_id', $course->id)->count();
 
         return inertia('Courses/Register', [
-            'course' => new CourseResource($course->load('branch', 'type')),
+            'course' => new CourseResource($course->load('branch', 'category')),
             'courses' => CourseResource::collection($courses),
             'registered' => !!$registered
         ]);
@@ -103,7 +103,7 @@ class CourseController extends Controller
         $attended = $this->auth?->courses()->where('course_id', $course->id)->first()?->pivot?->attendance;
 
         return inertia('Courses/Attend', [
-            'course' => new CourseResource($course),
+            'course' => new CourseResource($course->load('branch', 'category')),
             'courses' => CourseResource::collection($courses),
             'attended' => !!$attended
         ]);

@@ -31,7 +31,7 @@ class CourseResource extends JsonResource
                 'course_gender' => $this->course_gender,
                 'course_branch' => $this->course_branch,
                 'branch' => new BranchResource($this->whenLoaded('branch')),
-                'type' => $this->whenLoaded('type'),
+                'category' => $this->whenLoaded('category'),
                 'state' => __($this->state($this->status)),
                 'image' => $this->when($this->image, Storage::url($this->image), null),
                 'images' => collect($this->images)->filter(fn ($img) => Storage::exists($img))->map(fn ($img) => Storage::url($img)),

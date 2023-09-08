@@ -199,10 +199,10 @@ const form = useForm({
                                     </tr>
 
                                     <tr>
-                                        <th style="width: 30%">{{ __('Type') }}</th>
+                                        <th style="width: 30%">{{ __('Category') }}</th>
 
                                         <td style="font-size: 12px">
-                                            {{ course.type.name }}
+                                            {{ course.category.name }}
                                         </td>
                                     </tr>
                                 </tbody>
