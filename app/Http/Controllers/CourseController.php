@@ -36,9 +36,6 @@ class CourseController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @param  string  $status
-     * @return \Illuminate\Http\Response
      */
     public function index($status = 'upcoming')
     {
@@ -54,9 +51,6 @@ class CourseController extends Controller
 
     /**
      * Display the form of course registration.
-     *
-     * @param  \App\Models\Course\Course  $course
-     * @return \Illuminate\Http\Response
      */
     public function showRegisterForm(Course $course)
     {
@@ -78,10 +72,6 @@ class CourseController extends Controller
 
     /**
      * Register user to the course.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Course\Course  $course
-     * @return \Illuminate\Http\Response
      */
     public function register(Request $request, Course $course)
     {
@@ -98,9 +88,6 @@ class CourseController extends Controller
 
     /**
      * Display the form of course attendance.
-     *
-     * @param  \App\Models\Course\Course  $course
-     * @return \Illuminate\Http\Response
      */
     public function showAttendForm(Course $course)
     {
@@ -124,10 +111,6 @@ class CourseController extends Controller
 
     /**
      * Attend user to the course.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Course\Course  $course
-     * @return \Illuminate\Http\Response
      */
     public function attend(Request $request, Course $course)
     {
@@ -141,11 +124,6 @@ class CourseController extends Controller
 
     /**
      * Get the certificate for an attended course.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Course\Course  $course
-     * @param  \App\Services\CertificateService  $service
-     * @return \Illuminate\Http\Response
      */
     public function certificate(Request $request, Course $course, CertificateService $service)
     {
@@ -165,10 +143,6 @@ class CourseController extends Controller
 
     /**
      * Get the questionnaire for the course.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Course\Course  $course
-     * @return \Illuminate\Http\Response
      */
     public function questionnaire(Request $request, Course $course)
     {
@@ -199,11 +173,6 @@ class CourseController extends Controller
 
     /**
      * Submit questionnaire question
-     * 
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Course\Question  $question
-     * @return \Illuminate\Http\Response
-
      */
     public function question(Request $request, Question $question)
     {
