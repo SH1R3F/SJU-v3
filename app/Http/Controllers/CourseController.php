@@ -64,7 +64,7 @@ class CourseController extends Controller
         $registered = $this->auth?->courses()->where('course_id', $course->id)->count();
 
         return inertia('Courses/Register', [
-            'course' => new CourseResource($course),
+            'course' => new CourseResource($course->load('branch', 'type')),
             'courses' => CourseResource::collection($courses),
             'registered' => !!$registered
         ]);
