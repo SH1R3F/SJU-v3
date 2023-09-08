@@ -61,6 +61,7 @@ class MemberRequest extends FormRequest
                 'numeric',
                 'in:1,2,3'
             ],
+            'password' => ['nullable']
         ];
     }
 }

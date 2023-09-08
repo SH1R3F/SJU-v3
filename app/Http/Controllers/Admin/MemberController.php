@@ -28,6 +28,7 @@ use App\Notifications\MembershipUnaccepted;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\PushNotificationToUsers;
 use App\Http\Requests\Member\ProfileExperiencesRequest;
+use Illuminate\Support\Facades\Hash;
 
 class MemberController extends Controller
 {
@@ -306,6 +307,12 @@ class MemberController extends Controller
     public function update(MemberRequest $request, Member $member)
     {
         $data = $request->validated();
+
+        if ($data['password']) {
+            $data['password'] = Hash::make($data['password']);
+        } else {
+            unset($data['password']);
+        }
 
         // Update member
         $member->update($data);

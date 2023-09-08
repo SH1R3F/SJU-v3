@@ -38,6 +38,7 @@ const form = useForm({
     email: props.member.email || '',
     branch_id: props.member.branch_id || '',
     type: props.member.subscription.num,
+    password: ''
 });
 
 const changeDate = (e) => {
@@ -366,6 +367,19 @@ const changeDate = (e) => {
                                 </div>
                             </div>
                             <!-- Email -->
+
+                            <!-- Password -->
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    <label class="form-label" for="password">{{ __('Password') }}</label>
+                                    <div class="input-group">
+                                        <input class="form-control" type="password" id="password" v-model="form.password" :placeholder="__('Password')" />
+                                    </div>
+                                    <span class="fs-6 text-danger" v-if="form.errors.password">{{ form.errors.password }}</span>
+                                    <span class="fs-6 text-muted">{{ __("Leave empty if you don't want to change") }}</span>
+                                </div>
+                            </div>
+                            <!-- Password -->
 
                             <!-- Branch -->
                             <div class="row">
