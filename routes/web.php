@@ -94,6 +94,8 @@ Route::post('courses/questions/{question}', [CourseController::class, 'question'
  * Pages Routes
  */
 Route::get('page/training-bag', [PageController::class, 'trainingBag'])->name('pages.training-bag');
+Route::get('page/studio', [PageController::class, 'studio'])->name('pages.studio');
+
 Route::get('page/{slug}', [PageController::class, 'page'])->name('pages.show');
 
 /**

@@ -1,4 +1,5 @@
 <script setup>
+
 const props = defineProps({
     page: Object,
     locale: String,
@@ -20,6 +21,7 @@ const props = defineProps({
                 </nav>
 
                 <h3>{{ page.title }}</h3>
+               
 
                 <div class="options">
                     <div class="buttons m-0">
@@ -136,8 +138,9 @@ const props = defineProps({
                 </div>
             </div>
         </div>
-        <!-- News Header -->
-
+     
+      
+       
         <!-- News Content -->
 
         <div class="page-content">

@@ -9,7 +9,6 @@ const props = defineProps({
 <template>
     <Head :title="__('Training bag')" />
     <div class="sjupage allnews">
-        <!-- News Header -->
         <div class="section page-header">
             <div class="container">
                 <nav aria-label="breadcrumb">
@@ -23,20 +22,15 @@ const props = defineProps({
                 <h3>{{ __('Training bag') }}</h3>
             </div>
         </div>
-        <!-- News Header -->
-
-        <!-- News Content -->
 
         <div class="page-content">
             <div class="container">
                 <template v-if="bags.data.length">
-                    <!-- Tab content -->
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                             <div class="row">
                                 <div class="col-sm-6 col-md-4 mb-4" v-for="bag in bags.data" :key="bag.id">
 
-                                    <!-- Single bag -->
                                     <div class="card text-center h-100">
                                         <div class="card-body">
                                             <Link :href="bag.path" as="h5" style="height: 50px" class="card-title">{{
@@ -49,16 +43,12 @@ const props = defineProps({
                                             <small class="text-muted">{{ arabic_date(bag.created_at) }}</small>
                                         </p>
                                     </div>
-                                    <!-- Single bag -->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Tab content -->
 
-                    <!-- Pagination -->
                     <Pagination :meta="bags.meta" />
-                    <!-- Pagination -->
                 </template>
 
                 <div class="text-start" style="min-height: 400px" v-if="!bags.data.length">
@@ -66,7 +56,6 @@ const props = defineProps({
                 </div>
             </div>
         </div>
-        <!-- News Content -->
     </div>
 </template>
 

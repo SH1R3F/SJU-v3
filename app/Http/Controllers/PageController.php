@@ -67,6 +67,7 @@ class PageController extends Controller
 
         return inertia('Pages/View', [
             'page' => new PageResource($page),
+
         ]);
     }
 
@@ -80,6 +81,32 @@ class PageController extends Controller
 
         return inertia('Pages/TrainingBag', [
             'bags' => TrainingBagResource::collection($bags),
+        ]);
+    }
+      public function studio()
+    {
+        $studio = Media::latest()
+            ->paginate(18);
+
+        return inertia('Pages/Studio', [
+            'studio' => MediaResource::collection($studio),
+            'media' => MediaResource::collection(Media::orderBy('type', 'ASC')->paginate(9, ['*'], 'media')),
+            'photos' => MediaResource::collection(Media::where('type', 'photo')->orderBy('id', 'DESC')->paginate(9, ['*'], 'photos')),
+            'videos' => MediaResource::collection(Media::where('type', 'video')->orderBy('id', 'DESC')->paginate(9, ['*'], 'videos')),
+
+        ]);
+    }
+      public function studioo()
+    {
+        $studio = Media::latest()
+            ->paginate(18);
+
+        return inertia('Pages/Studio', [
+            'studio' => MediaResource::collection($studio),
+            'media' => MediaResource::collection(Media::orderBy('type', 'ASC')->paginate(9, ['*'], 'media')),
+            'photos' => MediaResource::collection(Media::where('type', 'photo')->orderBy('id', 'DESC')->paginate(9, ['*'], 'photos')),
+            'videos' => MediaResource::collection(Media::where('type', 'video')->orderBy('id', 'DESC')->paginate(9, ['*'], 'videos')),
+
         ]);
     }
 }
