@@ -630,6 +630,28 @@ const editRole = (role) => {
                                                 </td>
                                             </tr>
                                             <!-- Invitations permission -->
+
+                                            <!-- Training bags permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Training bag') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistFile" v-model="addForm.permissions['viewAny-file']" />
+                                                            <label class="form-check-label" for="addlistFile"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addcreateFile" v-model="addForm.permissions['create-file']" />
+                                                            <label class="form-check-label" for="addcreateFile"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="adddeleteFile" v-model="addForm.permissions['delete-file']" />
+                                                            <label class="form-check-label" for="adddeleteFile"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Training bags permission -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -1186,6 +1208,28 @@ const editRole = (role) => {
                                                 </td>
                                             </tr>
                                             <!-- Invitations permission -->
+
+                                            <!-- Training bag permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Training bag') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistFile" v-model="editForm.permissions['viewAny-file']" />
+                                                            <label class="form-check-label" for="editlistFile"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreateFile" v-model="editForm.permissions['create-file']" />
+                                                            <label class="form-check-label" for="editcreateFile"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteFile" v-model="editForm.permissions['delete-file']" />
+                                                            <label class="form-check-label" for="editdeleteFile"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Training bag permission -->
                                         </tbody>
                                     </table>
                                 </div>
