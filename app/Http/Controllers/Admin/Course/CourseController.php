@@ -39,8 +39,6 @@ class CourseController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -69,8 +67,6 @@ class CourseController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function export()
     {
@@ -92,8 +88,6 @@ class CourseController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -110,10 +104,6 @@ class CourseController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Course\CourseRequest  $request
-     * @param  \App\Services\CourseService  $service
-     * @return \Illuminate\Http\Response
      */
     public function store(CourseRequest $request, CourseService $service)
     {
@@ -123,9 +113,6 @@ class CourseController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Course\Course  $course
-     * @return \Illuminate\Http\Response
      */
     public function show(Course $course)
     {
@@ -145,9 +132,6 @@ class CourseController extends Controller
 
     /**
      * Export users of a specific course.
-     *
-     * @param  \App\Models\Course\Course  $course
-     * @return \Illuminate\Http\Response
      */
     public function exportCoursables(Course $course)
     {
@@ -162,9 +146,6 @@ class CourseController extends Controller
 
     /**
      * Send a notification for all kind of users in this course.
-     *
-     * @param  \App\Models\Course\Course  $course
-     * @return \Illuminate\Http\Response
      */
     public function showNotificationForm(Course $course)
     {
@@ -177,9 +158,6 @@ class CourseController extends Controller
 
     /**
      * chuncking users for notification form's dropdown.
-     *
-     * @param  \App\Models\Course\Course  $course
-     * @return \Illuminate\Http\Response
      */
     public function chuncks(Course $course)
     {
@@ -220,10 +198,6 @@ class CourseController extends Controller
 
     /**
      * Send a notification for all kind of users in this course.
-     *
-     * @param  \App\Http\Requests\NotifyCoursersRequest  $request
-     * @param  \App\Models\Course\Course  $course
-     * @return \Illuminate\Http\Response
      */
     public function notify(NotifyCoursersRequest $request, Course $course)
     {
@@ -262,9 +236,6 @@ class CourseController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Course\Course  $course
-     * @return \Illuminate\Http\Response
      */
     public function edit(Course $course)
     {
@@ -281,11 +252,6 @@ class CourseController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Course\CourseRequest  $request
-     * @param  \App\Models\Course\Course  $course
-     * @param  \App\Services\CourseService  $service
-     * @return \Illuminate\Http\Response
      */
     public function update(CourseRequest $request, Course $course, CourseService $service)
     {
@@ -296,9 +262,6 @@ class CourseController extends Controller
 
     /**
      * Toggle active status for a resource.
-     *
-     * @param  \App\Models\Course\Course  $course
-     * @return \Illuminate\Http\Response
      */
     public function toggle(Course $course)
     {
@@ -309,11 +272,6 @@ class CourseController extends Controller
 
     /**
      * Toggle attendance status for a resource.
-     *
-     * @param  \App\Models\Course\Course  $course
-     * @param  string  $type
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function toggleAttendance(Course $course, $type, $id)
     {
@@ -335,11 +293,6 @@ class CourseController extends Controller
 
     /**
      * Delete attendance for a resource.
-     *
-     * @param  \App\Models\Course\Course  $course
-     * @param  string  $type
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function deleteAttendance(Course $course, $type, $id)
     {
@@ -359,9 +312,6 @@ class CourseController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Course\Course  $course
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Course $course)
     {
@@ -373,10 +323,6 @@ class CourseController extends Controller
 
     /**
      * Display the results of the questionnaire.
-     *
-     * @param  \App\Models\Course\Course  $course
-     * @param  \App\Services\CourseService  $service
-     * @return \Illuminate\Http\Response
      */
     public function results(Course $course, CourseService $service)
     {
@@ -391,10 +337,6 @@ class CourseController extends Controller
 
     /**
      * export the results of the questionnaire.
-     *
-     * @param  \App\Models\Course\Course  $course
-     * @param  \App\Services\CourseService  $service
-     * @return \Illuminate\Http\Response
      */
     public function exportQuestionnaire(Course $course, CourseService $service)
     {
