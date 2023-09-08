@@ -129,7 +129,7 @@ export default {
 
             const doughnutCharts = document.getElementsByClassName('doughnutChart');
             if (doughnutCharts.length) {
-                doughnutCharts.forEach(function (doughnutChart) {
+                for (let doughnutChart of doughnutCharts) {
                     new Chart(doughnutChart, {
                         type: 'doughnut',
                         data: {
@@ -173,7 +173,7 @@ export default {
                             },
                         },
                     });
-                });
+                }
             }
         });
     },
