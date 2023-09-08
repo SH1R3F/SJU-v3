@@ -28,6 +28,7 @@ use App\Notifications\MembershipUnaccepted;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\PushNotificationToUsers;
 use App\Http\Requests\Member\ProfileExperiencesRequest;
+use App\Notifications\MembershipApproved;
 use Illuminate\Support\Facades\Hash;
 
 class MemberController extends Controller
@@ -408,6 +409,8 @@ class MemberController extends Controller
         $member->update([
             'status' => Member::STATUS_APPROVED
         ]);
+
+        $member->notify(new MembershipApproved);
 
         return redirect()->back()->with('message', __('Member updated successfully'));
     }
