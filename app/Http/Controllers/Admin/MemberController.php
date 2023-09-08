@@ -346,11 +346,11 @@ class MemberController extends Controller
             'license_photo' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif', 'max:2048'],
         ]);
 
-        if ($request->hasFile('profile_photo')) $data['profile_photo'] = $request->file('profile_photo')->store("members/{$member->national_id}");
-        if ($request->hasFile('national_id_photo')) $data['national_id_photo'] = $request->file('national_id_photo')->store("members/{$member->national_id}");
-        if ($request->hasFile('statement_photo')) $data['statement_photo'] = $request->file('statement_photo')->store("members/{$member->national_id}");
-        if ($request->hasFile('contract_photo')) $data['contract_photo'] = $request->file('contract_photo')->store("members/{$member->national_id}");
-        if ($request->hasFile('license_photo')) $data['license_photo'] = $request->file('license_photo')->store("members/{$member->national_id}");
+        if ($request->hasFile('profile_photo')) { $data['profile_photo'] = $request->file('profile_photo')->store("members/{$member->national_id}"); } else { unset($data['profile_photo']); }
+        if ($request->hasFile('national_id_photo')) {$data['national_id_photo'] = $request->file('national_id_photo')->store("members/{$member->national_id}"); } else { unset($data['national_id_photo']); }
+        if ($request->hasFile('statement_photo')) {$data['statement_photo'] = $request->file('statement_photo')->store("members/{$member->national_id}"); } else { unset($data['statement_photo']); }
+        if ($request->hasFile('contract_photo')) {$data['contract_photo'] = $request->file('contract_photo')->store("members/{$member->national_id}"); } else { unset($data['contract_photo']); }
+        if ($request->hasFile('license_photo')) {$data['license_photo'] = $request->file('license_photo')->store("members/{$member->national_id}"); } else { unset($data['license_photo']); }
 
         // Update member
         $member->update($data);
