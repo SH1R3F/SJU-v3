@@ -5,9 +5,25 @@ const props = defineProps({
     course: Object,
 });
 
-const all = computed(() => {
-    return (props.course.members?.length || 0) + (props.course.subscribers?.length || 0) + (props.course.volunteers?.length || 0);
-});
+const users = computed(() => [
+    ...props.course.members.map((member) => {
+        member.userType = 'Member';
+        return member
+    }),
+    ...props.course.subscribers.map((subscriber) => {
+        subscriber.userType = 'Subscriber';
+        return subscriber
+    }),
+    ...props.course.volunteers.map((volunteer) => {
+        volunteer.userType = 'Volunteer';
+        return volunteer
+    }),
+]);
+
+const perPage = 50;
+const page = ref(1);
+const pages = Math.ceil(users.value.length / perPage);
+const pageUsers = computed(() => users.value.slice((page.value - 1) * perPage, ((perPage - 1) * page.value) + 1));
 
 const passed = computed(() => {
     return (
@@ -23,9 +39,16 @@ const passed = computed(() => {
     );
 });
 const unpassed = computed(() => {
-    return all.value - passed.value;
-});
-let counter = 0;
+    return users.value.length - passed.value;
+})
+
+let counter = computed(() => (row) => ((page.value - 1) * perPage) + row);
+
+const paginate = (p) => {
+    page.value = p
+};
+
+const notifiedQuery = computed(() => '?to=' + pageUsers.value.reduce((query, user) => query + user.userType.toLowerCase() + '-' + user.id + ',', '').replace(/(^,)|(,$)/g, "") + '&page=' + page.value)
 </script>
 
 <template>
@@ -39,7 +62,8 @@ let counter = 0;
                     <div class="card-body">
                         <div class="user-avatar-section">
                             <div class="d-flex align-items-center flex-column">
-                                <img class="img-fluid rounded mb-3 pt-1 mt-4" :src="course.image || '/img/course.png'" onerror="this.src = '/img/course.png';" height="200" width="200" alt="Course" />
+                                <img class="img-fluid rounded mb-3 pt-1 mt-4" :src="course.image || '/img/course.png'"
+                                    onerror="this.src = '/img/course.png';" height="200" width="200" alt="Course" />
                                 <div class="user-info text-center">
                                     <h4 class="mb-2">{{ course.title_ar }}</h4>
                                     <h4 class="mb-2">{{ course.title_en }}</h4>
@@ -89,7 +113,8 @@ let counter = 0;
                             <ul class="list-unstyled">
                                 <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Total attendance') }}</span>
-                                    <span>{{ (course.members?.length || 0) + (course.subscribers?.length || 0) + (course.volunteers?.length || 0) }} {{ __('Users') }}</span>
+                                    <span>{{ (course.members?.length || 0) + (course.subscribers?.length || 0) +
+                                        (course.volunteers?.length || 0) }} {{ __('Users') }}</span>
                                 </li>
                                 <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Passed number') }}</span>
@@ -101,11 +126,13 @@ let counter = 0;
                                 </li>
                                 <li class="mb-2">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Attendance duration') }}</span>
-                                    <span>{{ course.attendance_mins ? `${course.attendance_mins} ${__('Minute')}` : __('Unspecified') }}</span>
+                                    <span>{{ course.attendance_mins ? `${course.attendance_mins} ${__('Minute')}` :
+                                        __('Unspecified') }}</span>
                                 </li>
                                 <li class="mb-2 pt-1">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Attendance link') }}</span>
-                                    <a :href="route('courses.attend', course.id)">{{ route('courses.attend', course.id) }}</a>
+                                    <a :href="route('courses.attend', course.id)">{{ route('courses.attend', course.id)
+                                    }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -119,25 +146,35 @@ let counter = 0;
                 <!-- Coursables table -->
                 <div class="card mb-4 p-4">
                     <div class="row me-2 py-3 text-end">
-                        <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column gap-1 mb-3 mb-md-0">
+                        <div
+                            class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column gap-1 mb-3 mb-md-0">
                             <div class="dt-buttons">
-                                <a :href="route('admin.course.export', course.id)" type="button" class="dt-button btn btn-primary me-1">
+                                <a :href="route('admin.course.export', course.id)" type="button"
+                                    class="dt-button btn btn-primary me-1">
                                     <span>
                                         <i class="ti ti-bell-ringing me-0 me-sm-1 ti-xs"></i>
                                         <span class="d-none d-sm-inline-block">{{ __('Export') }}</span>
                                     </span>
                                 </a>
-                                <Link :href="route('admin.courses.notify', course.id)" type="button" class="dt-button btn btn-light me-1">
+                                <Link :href="route('admin.courses.notify', course.id)" type="button"
+                                    class="dt-button btn btn-light me-1">
                                     <span>
                                         <i class="ti ti-bell-ringing me-0 me-sm-1 ti-xs"></i>
                                         <span class="d-none d-sm-inline-block">{{ __('Notify') }}</span>
                                     </span>
                                 </Link>
+                                <Link :href="route('admin.courses.notify', course.id) + notifiedQuery" type="button"
+                                    class="dt-button btn btn-light me-1">
+                                    <span>
+                                        <i class="ti ti-bell-ringing me-0 me-sm-1 ti-xs"></i>
+                                        <span class="d-none d-sm-inline-block">{{ __('Notify all') }} ({{ pageUsers.length }})</span>
+                                    </span>
+                                </Link>
                             </div>
                         </div>
                     </div>
-                    <div class="table-responsive mb-3">
-                        <table class="table datatable-project border-top">
+                    <div class="table-responsive">
+                        <table class="table datatable-project border-top mb-2">
                             <thead>
                                 <tr>
                                     <th class="cell-fit">#</th>
@@ -150,142 +187,60 @@ let counter = 0;
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(member, i) in course.members" :key="member.id">
-                                    <td>{{ ++counter }}</td>
+                                <tr v-for="(user, i) in pageUsers" :key="`${user.userType}-${user.id}`">
+                                    <td>{{ counter(i+1) }}</td>
                                     <td>
                                         <Link
-                                            :href="route('admin.members.show', member.id)"
-                                            style="display: inline-block; max-width: 150px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis"
-                                            >{{ member.fullName }}</Link
-                                        >
+                                            :href="route(user.userType === 'Member' ? 'admin.members.show' : (user.userType === 'Subscriber' ? 'admin.subscribers.show' : 'admin.volunteers.show'), user.id)"
+                                            style="display: inline-block; max-width: 150px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">
+                                        {{ user.fullName }}</Link>
                                     </td>
-                                    <td>{{ __('Member') }}</td>
-                                    <td>{{ member.mobile }}</td>
+                                    <td>{{ __(user.userType) }}</td>
+                                    <td>{{ user.userType === 'Member' ? user.mobile : user.phone_number }}</td>
                                     <td>
-                                        <span style="display: inline-block; max-width: 180px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">{{ member.email }}</span>
+                                        <span
+                                            style="display: inline-block; max-width: 180px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">{{
+                                                user.email }}</span>
                                     </td>
                                     <td>
                                         <Link
-                                            :href="route('admin.courses.attendance.toggle', { course: course.id, type: 'member', id: member.id })"
-                                            method="post"
-                                            as="span"
-                                            preserve-scroll
-                                            class="cursor-pointer"
+                                            :href="route('admin.courses.attendance.toggle', { course: course.id, type: user.userType.toLowerCase(), id: user.id })"
+                                            method="post" as="span" preserve-scroll class="cursor-pointer"
                                             data-bs-placement="top"
-                                            :title="member.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
-                                            :class="{ 'text-success': member.pivot?.attendance, 'text-body': !member.pivot?.attendance }"
-                                        >
-                                            <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': member.pivot?.attendance, 'ti-toggle-left': !member.pivot?.attendance }"></i>
+                                            :title="user.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
+                                            :class="{ 'text-success': user.pivot?.attendance, 'text-body': !user.pivot?.attendance }">
+                                        <i class="ti ti-sm me-2"
+                                            :class="{ 'ti-toggle-right': user.pivot?.attendance, 'ti-toggle-left': !user.pivot?.attendance }"></i>
                                         </Link>
                                     </td>
                                     <td>
                                         <Link
-                                            :href="route('admin.courses.attendance.delete', { course: course.id, type: 'member', id: member.id })"
-                                            method="DELETE"
-                                            as="span"
-                                            class="text-body"
-                                            data-bs-placement="top"
-                                            :aria-label="__('Delete')"
-                                            :title="__('Delete')"
-                                        >
-                                            <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
+                                            :href="route('admin.courses.attendance.delete', { course: course.id, type: user.userType.toLowerCase(), id: user.id })"
+                                            method="DELETE" as="span" class="text-body" data-bs-placement="top"
+                                            :aria-label="__('Delete')" :title="__('Delete')">
+                                        <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
                                         </Link>
                                     </td>
                                 </tr>
-
-                                <tr v-for="(subscriber, i) in course.subscribers" :key="subscriber.id">
-                                    <td>{{ ++counter }}</td>
-                                    <td>
-                                        <Link
-                                            :href="route('admin.subscribers.show', subscriber.id)"
-                                            style="display: inline-block; max-width: 150px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis"
-                                            >{{ subscriber.fullName }}</Link
-                                        >
-                                    </td>
-                                    <td>{{ __('Subscriber') }}</td>
-                                    <td>{{ subscriber.phone_number }}</td>
-                                    <td>
-                                        <span style="display: inline-block; max-width: 180px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">{{ subscriber.email }}</span>
-                                    </td>
-                                    <td>
-                                        <Link
-                                            :href="route('admin.courses.attendance.toggle', { course: course.id, type: 'subscriber', id: subscriber.id })"
-                                            method="post"
-                                            as="span"
-                                            preserve-scroll
-                                            class="cursor-pointer"
-                                            data-bs-placement="top"
-                                            :title="subscriber.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
-                                            :class="{ 'text-success': subscriber.pivot?.attendance, 'text-body': !subscriber.pivot?.attendance }"
-                                        >
-                                            <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': subscriber.pivot?.attendance, 'ti-toggle-left': !subscriber.pivot?.attendance }"></i>
-                                        </Link>
-                                    </td>
-                                    <td>
-                                        <Link
-                                            :href="route('admin.courses.attendance.delete', { course: course.id, type: 'subscriber', id: subscriber.id })"
-                                            method="DELETE"
-                                            as="span"
-                                            class="text-body"
-                                            data-bs-placement="top"
-                                            :aria-label="__('Delete')"
-                                            :title="__('Delete')"
-                                        >
-                                            <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
-                                        </Link>
-                                    </td>
-                                </tr>
-
-                                <tr v-for="(volunteer, i) in course.volunteers" :key="volunteer.id">
-                                    <td>{{ ++counter }}</td>
-                                    <td>
-                                        <Link
-                                            :href="route('admin.volunteers.show', volunteer.id)"
-                                            style="display: inline-block; max-width: 150px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis"
-                                            >{{ volunteer.fullName }}</Link
-                                        >
-                                    </td>
-                                    <td>{{ __('Volunteer') }}</td>
-                                    <td>{{ volunteer.phone_number }}</td>
-                                    <td>
-                                        <span style="display: inline-block; max-width: 180px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">{{ volunteer.email }}</span>
-                                    </td>
-                                    <td>
-                                        <Link
-                                            :href="route('admin.courses.attendance.toggle', { course: course.id, type: 'volunteer', id: volunteer.id })"
-                                            method="post"
-                                            as="span"
-                                            preserve-scroll
-                                            class="cursor-pointer"
-                                            data-bs-placement="top"
-                                            :title="volunteer.pivot?.attendance ? __('Passed') : __('Didn\'t pass')"
-                                            :class="{ 'text-success': volunteer.pivot?.attendance, 'text-body': !volunteer.pivot?.attendance }"
-                                        >
-                                            <i class="ti ti-sm me-2" :class="{ 'ti-toggle-right': volunteer.pivot?.attendance, 'ti-toggle-left': !volunteer.pivot?.attendance }"></i>
-                                        </Link>
-                                    </td>
-                                    <td>
-                                        <Link
-                                            :href="route('admin.courses.attendance.delete', { course: course.id, type: 'volunteer', id: volunteer.id })"
-                                            method="DELETE"
-                                            as="span"
-                                            class="text-body"
-                                            data-bs-placement="top"
-                                            :aria-label="__('Delete')"
-                                            :title="__('Delete')"
-                                        >
-                                            <i class="ti ti-trash mx-2 ti-sm cursor-pointer"></i>
-                                        </Link>
-                                    </td>
-                                </tr>
-
-                                <tr v-if="!all">
+                                <tr v-if="!users.length">
                                     <td colspan="7" class="text-muted text-center p-3">
                                         {{ __('No one registered for this course') }}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination mb-0">
+                                <li :class="{'page-item': true, 'disabled': page === 1}"><a class="page-link" @click.prevent="paginate(page-1)" :disabled="page === 1" href="#">{{ __('Previous') }}</a></li>
+                                <li :class="{'page-item': true, 'disabled': page === p}" v-for="p in pages" :key="p" @click.prevent="paginate(p)">
+                                    <a href="#" :class="{ 'page-link': true, 'active': page === p }" :disabled="page === p">
+                                        {{ p }}
+                                    </a>
+                                </li>
+                                <li :class="{'page-item': true, 'disabled': page === pages}"><a class="page-link" @click.prevent="paginate(page+1)" :disabled="page === pages" href="#">{{ __('Next') }}</a></li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
                 <!-- /Coursables table -->

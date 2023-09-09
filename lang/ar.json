@@ -136,6 +136,7 @@
     "Enable": "تفعيل",
     "Disable": "إيقاف",
     "Notify": "إشعار",
+    "Notify all": "إشعار الكل",
     "Edit moderator": "تعديل مدير",
     "Notify moderators": "إرسال إشعار للمدراء",
     "Message": "الرسالة",
@@ -1008,5 +1009,8 @@
     "All rights reserved to Saudi Journalists Association": "جميع الحقوق محفوظة لهيئة الصحفيين السعوديين",
     "Download": "تحميل",
     "Import": "إستيراد",
-    "Members imported successfully": "تم إستيراد الأعضاء بنجاح"
+    "Members imported successfully": "تم إستيراد الأعضاء بنجاح",
+    "Previous": "السابق",
+    "Current page": "الصفحة الحالية",
+    "Page": "الصفحة"
 }
