@@ -22,10 +22,10 @@ const props = defineProps({
 
 <template>
     <div class="homepage">
-        <!-- News Slider -->
+        <!-- News Slid
+er -->
         <Slider :articles="articles" :ads="ads" />
         <!-- News Slider -->
-
         <!-- About the organization -->
         <about-us />
         <!-- About the organization -->

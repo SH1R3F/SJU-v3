@@ -26,6 +26,7 @@ class PageResource extends JsonResource
                 'slug' => app()->getLocale() == 'ar' ? $this->slug_ar : $this->slug_en,
                 'title' => app()->getLocale() == 'ar' ? $this->title_ar : $this->title_en,
                 'content' => $this->prepareForPress($this->content),
+                
 
                 // Authorization
                 $this->merge($this->withAuthorization($request))
