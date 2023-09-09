@@ -12,6 +12,7 @@ use App\Models\Course\Questionnaire;
 use App\Models\TechnicalSupportTicket;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\ResetVolunteerPassword;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -99,7 +100,7 @@ class Volunteer extends Authenticatable implements MustVerifyEmail
 
     /**
      * Sort in admin panel
-     * 
+     *
      * @param \Illuminate\Http\Request  $request
      */
     public function scopeOrder($query, Request $request)
@@ -158,6 +159,14 @@ class Volunteer extends Authenticatable implements MustVerifyEmail
     public function getFullNameEnAttribute()
     {
         return "{$this->fname_en} {$this->sname_en} {$this->tname_en} {$this->lname_en}";
+    }
+
+    /**
+     * Age attribute
+     */
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->birthday)->age;
     }
 
     /**

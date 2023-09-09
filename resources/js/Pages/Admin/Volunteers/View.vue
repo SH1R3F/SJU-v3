@@ -62,6 +62,14 @@ const props = defineProps({
                                     <span>{{ volunteer.job_title }}</span>
                                 </li>
                                 <li class="mb-2 pt-1">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Birthday') }}</span>
+                                    <span>{{ volunteer.birthday || '' }}</span>
+                                </li>
+                                <li class="mb-2 pt-1">
+                                    <span class="fw-semibold me-2 d-inline-block">{{ __('Age') }}</span>
+                                    <span>{{ volunteer.age || '' }}</span>
+                                </li>
+                                <li class="mb-2 pt-1">
                                     <span class="fw-semibold me-2 d-inline-block">{{ __('Mobile') }}</span>
                                     <span class="badge bg-label-secondary">{{ volunteer.phone_number }}</span>
                                 </li>

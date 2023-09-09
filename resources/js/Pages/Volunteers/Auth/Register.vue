@@ -21,6 +21,7 @@ const form = useForm({
     tname_en: '',
     lname_en: '',
     gender: '',
+    birthday: '',
     country: '',
     city: '',
     nationality: '',
@@ -158,6 +159,17 @@ const onlyEnglish = (e) => {
                     </div>
                     <!-- Gender -->
 
+                    <!-- Birthday -->
+                    <div class="form-group row">
+                        <label class="col-lg-2 control-label pt-2">{{ __('Birthday') }}</label>
+
+                        <div class="col-lg-4">
+                            <input type="date" v-model="form.birthday" class="form-control" />
+                            <p class="text text-danger text-sm" v-if="form.errors.birthday">{{ form.errors.birthday }}</p>
+                        </div>
+                    </div>
+                    <!-- Birthday -->
+
                     <!-- Country -->
                     <div class="form-row">
                         <div class="form-group col-sm-6" :class="{ 'col-md-3': form.country == 'المملكة العربية السعودية', 'col-md-4': form.country !== 'المملكة العربية السعودية' }">
@@ -260,7 +272,7 @@ const onlyEnglish = (e) => {
 
                     <!-- Volunteering fields -->
                     <div class="form-group col-12">
-                        <label>{{ __('Volunteering fields') }}</label>
+                        <label>{{ __('Volunteer in') }}</label>
                         <div class="row">
                             <div class="col-4 border p-2">
                                 <div class="d-flex justify-content-between align-items-center">

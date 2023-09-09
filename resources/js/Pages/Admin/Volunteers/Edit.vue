@@ -21,6 +21,7 @@ const form = useForm({
     tname_en: props.volunteer.tname_en || '',
     lname_en: props.volunteer.lname_en || '',
     gender: props.volunteer.gender || '',
+    birthday: props.volunteer.birthday || '',
     country: props.volunteer.country || '',
     city: props.volunteer.city || '',
     nationality: props.volunteer.nationality || '',
@@ -147,6 +148,18 @@ const form = useForm({
                                 </div>
                             </div>
                             <!-- Gender -->
+
+                            <!-- Birthday -->
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    <label class="form-label" for="birthday">{{ __('Birthday') }}</label>
+                                    <div class="input-group">
+                                        <input class="form-control" type="date" id="birthday" v-model="form.birthday" :placeholder="__('Birthday')" />
+                                    </div>
+                                    <p class="fs-6 text-danger" v-if="form.errors.birthday">{{ form.errors.birthday }}</p>
+                                </div>
+                            </div>
+                            <!-- Birthday -->
 
                             <!-- Country -->
                             <div class="row">

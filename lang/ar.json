@@ -644,6 +644,7 @@
     "Gender": "الجنس",
     "Male": "ذكر",
     "Female": "أنثى",
+    "Birthday": "تاريخ الميلاد",
     "Birthday (Hijri)": "تاريخ الميلاد (هجري)",
     "Birthday (Miladi)": "تاريخ الميلاد (ميلادي)",
     "Nationality": "الجنسية",
@@ -758,6 +759,7 @@
     "You can register as a new volunteer through the following link": "يمكنك التسجيل كمتطوع جديد من خلال الرابط التالي",
     "Register a new volunteer": "تسجيل متطوع جديد",
     "Volunteering fields": "مجالات التطوع",
+    "Volunteer in": "أرغب التطوع في",
     "Photography": "التصوير الفوتوغرافي",
     "Videography": "تصوير الفيديو",
     "Cinematography": "التصوير السينمائي",
@@ -1012,5 +1014,6 @@
     "Members imported successfully": "تم إستيراد الأعضاء بنجاح",
     "Previous": "السابق",
     "Current page": "الصفحة الحالية",
-    "Page": "الصفحة"
+    "Page": "الصفحة",
+    "Age": "العمر"
 }

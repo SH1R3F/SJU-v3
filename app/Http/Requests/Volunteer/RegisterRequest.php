@@ -35,6 +35,7 @@ class RegisterRequest extends FormRequest
             'tname_en'         => ['required', 'string', 'max:255'],
             'lname_en'         => ['required', 'string', 'max:255'],
             'gender'           => ['required', 'string', 'in:male,female'],
+            'birthday'         => ['required', 'date'],
             'country'          => ['required', 'string', Rule::in(array_keys(config('sju.countries')))],
             'city'             => ['nullable', 'required_if:country,المملكة العربية السعودية', 'numeric', Rule::in(array_keys(config('sju.cities')))],
             'nationality'      => ['required', 'string', Rule::in(array_keys(config('sju.nationalities_ar')))],

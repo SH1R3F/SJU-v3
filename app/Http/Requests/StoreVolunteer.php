@@ -35,6 +35,7 @@ class StoreVolunteer extends FormRequest
             'tname_en'         => ['nullable', 'string', 'max:255'],
             'lname_en'         => ['nullable', 'string', 'max:255'],
             'gender'           => ['nullable', 'string', 'in:male,female'],
+            'birthday'         => ['nullable', 'date'],
             'country'          => ['nullable', 'string', Rule::in(array_keys(config('sju.countries')))],
             'city'             => ['nullable', 'required_if:country,المملكة العربية السعودية', 'numeric', Rule::in(array_keys(config('sju.cities')))],
             'nationality'      => ['nullable', 'string', Rule::in(array_keys(config('sju.nationalities_ar')))],

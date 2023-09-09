@@ -20,6 +20,7 @@ const form = useForm({
     tname_en: '',
     lname_en: '',
     gender: '',
+    birthday: '',
     country: '',
     city: '',
     nationality: '',
@@ -57,9 +58,11 @@ const form = useForm({
                                 <div class="mb-3 col-12 col-sm-6">
                                     <label class="form-label" for="national_id">{{ __('National ID') }}</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="number" id="national_id" v-model="form.national_id" :placeholder="__('National ID')" />
+                                        <input class="form-control" type="number" id="national_id"
+                                            v-model="form.national_id" :placeholder="__('National ID')" />
                                     </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.national_id">{{ form.errors.national_id }}</span>
+                                    <span class="fs-6 text-danger" v-if="form.errors.national_id">{{ form.errors.national_id
+                                    }}</span>
                                 </div>
                             </div>
                             <!-- National ID -->
@@ -69,30 +72,38 @@ const form = useForm({
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
                                     <label class="form-label" for="fname_ar">{{ __('First name') }}</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="fname_ar" v-model="form.fname_ar" :placeholder="__('First name')" />
+                                        <input class="form-control" type="text" id="fname_ar" v-model="form.fname_ar"
+                                            :placeholder="__('First name')" />
                                     </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.fname_ar">{{ form.errors.fname_ar }}</span>
+                                    <span class="fs-6 text-danger" v-if="form.errors.fname_ar">{{ form.errors.fname_ar
+                                    }}</span>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
                                     <label class="form-label" for="sname_ar">{{ __('Second name') }}</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="sname_ar" v-model="form.sname_ar" :placeholder="__('Second name')" />
+                                        <input class="form-control" type="text" id="sname_ar" v-model="form.sname_ar"
+                                            :placeholder="__('Second name')" />
                                     </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.sname_ar">{{ form.errors.sname_ar }}</span>
+                                    <span class="fs-6 text-danger" v-if="form.errors.sname_ar">{{ form.errors.sname_ar
+                                    }}</span>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
                                     <label class="form-label" for="tname_ar">{{ __('Third name') }}</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="tname_ar" v-model="form.tname_ar" :placeholder="__('Third name')" />
+                                        <input class="form-control" type="text" id="tname_ar" v-model="form.tname_ar"
+                                            :placeholder="__('Third name')" />
                                     </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.tname_ar">{{ form.errors.tname_ar }}</span>
+                                    <span class="fs-6 text-danger" v-if="form.errors.tname_ar">{{ form.errors.tname_ar
+                                    }}</span>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
                                     <label class="form-label" for="lname_ar">{{ __('Last name') }}</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="lname_ar" v-model="form.lname_ar" :placeholder="__('Last name')" />
+                                        <input class="form-control" type="text" id="lname_ar" v-model="form.lname_ar"
+                                            :placeholder="__('Last name')" />
                                     </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.lname_ar">{{ form.errors.lname_ar }}</span>
+                                    <span class="fs-6 text-danger" v-if="form.errors.lname_ar">{{ form.errors.lname_ar
+                                    }}</span>
                                 </div>
                             </div>
                             <!-- Full name -->
@@ -100,32 +111,44 @@ const form = useForm({
                             <!-- Full name In English -->
                             <div class="row">
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
-                                    <label class="form-label" for="fname_en">{{ __('First name') }} ({{ __('In English') }})</label>
+                                    <label class="form-label" for="fname_en">{{ __('First name') }} ({{ __('In English')
+                                    }})</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="fname_en" v-model="form.fname_en" :placeholder="__('First name')" />
+                                        <input class="form-control" type="text" id="fname_en" v-model="form.fname_en"
+                                            :placeholder="__('First name')" />
                                     </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.fname_en">{{ form.errors.fname_en }}</span>
+                                    <span class="fs-6 text-danger" v-if="form.errors.fname_en">{{ form.errors.fname_en
+                                    }}</span>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
-                                    <label class="form-label" for="sname_en">{{ __('Second name') }} ({{ __('In English') }})</label>
+                                    <label class="form-label" for="sname_en">{{ __('Second name') }} ({{ __('In English')
+                                    }})</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="sname_en" v-model="form.sname_en" :placeholder="__('Second name')" />
+                                        <input class="form-control" type="text" id="sname_en" v-model="form.sname_en"
+                                            :placeholder="__('Second name')" />
                                     </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.sname_en">{{ form.errors.sname_en }}</span>
+                                    <span class="fs-6 text-danger" v-if="form.errors.sname_en">{{ form.errors.sname_en
+                                    }}</span>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
-                                    <label class="form-label" for="tname_en">{{ __('Third name') }} ({{ __('In English') }})</label>
+                                    <label class="form-label" for="tname_en">{{ __('Third name') }} ({{ __('In English')
+                                    }})</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="tname_en" v-model="form.tname_en" :placeholder="__('Third name')" />
+                                        <input class="form-control" type="text" id="tname_en" v-model="form.tname_en"
+                                            :placeholder="__('Third name')" />
                                     </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.tname_en">{{ form.errors.tname_en }}</span>
+                                    <span class="fs-6 text-danger" v-if="form.errors.tname_en">{{ form.errors.tname_en
+                                    }}</span>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
-                                    <label class="form-label" for="lname_en">{{ __('Last name') }} ({{ __('In English') }})</label>
+                                    <label class="form-label" for="lname_en">{{ __('Last name') }} ({{ __('In English')
+                                    }})</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="lname_en" v-model="form.lname_en" :placeholder="__('Last name')" />
+                                        <input class="form-control" type="text" id="lname_en" v-model="form.lname_en"
+                                            :placeholder="__('Last name')" />
                                     </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.lname_en">{{ form.errors.lname_en }}</span>
+                                    <span class="fs-6 text-danger" v-if="form.errors.lname_en">{{ form.errors.lname_en
+                                    }}</span>
                                 </div>
                             </div>
                             <!-- Full name In English -->
@@ -135,11 +158,13 @@ const form = useForm({
                                 <div class="col-12 mb-3">
                                     <label class="form-label d-block">{{ __('Gender') }}</label>
                                     <div class="form-check form-check-inline mt-2">
-                                        <input class="form-check-input" type="radio" id="male" name="gender" value="male" v-model="form.gender" />
+                                        <input class="form-check-input" type="radio" id="male" name="gender" value="male"
+                                            v-model="form.gender" />
                                         <label class="form-check-label" for="male">{{ __('Male') }}</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" id="female" name="gender" value="female" v-model="form.gender" />
+                                        <input class="form-check-input" type="radio" id="female" name="gender"
+                                            value="female" v-model="form.gender" />
                                         <label class="form-check-label" for="female">{{ __('Female') }}</label>
                                     </div>
                                     <p class="fs-6 text-danger" v-if="form.errors.gender">{{ form.errors.gender }}</p>
@@ -147,13 +172,27 @@ const form = useForm({
                             </div>
                             <!-- Gender -->
 
+                            <!-- Birthday -->
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    <label class="form-label" for="birthday">{{ __('Birthday') }}</label>
+                                    <div class="input-group">
+                                        <input class="form-control" type="date" id="birthday" v-model="form.birthday"
+                                            :placeholder="__('Birthday')" />
+                                    </div>
+                                    <p class="fs-6 text-danger" v-if="form.errors.birthday">{{ form.errors.birthday }}</p>
+                                </div>
+                            </div>
+                            <!-- Birthday -->
+
                             <!-- Country -->
                             <div class="row">
                                 <div class="col-12 mb-3">
                                     <label class="form-label" for="country">{{ __('Country') }}</label>
                                     <select class="form-control m-select2-no" id="country" v-model="form.country">
                                         <option value="">{{ __('Choose') }}</option>
-                                        <option v-for="(key, country) in countries" :key="key" :value="country">{{ country }}</option>
+                                        <option v-for="(key, country) in countries" :key="key" :value="country">{{ country
+                                        }}</option>
                                     </select>
                                     <p class="fs-6 text-danger" v-if="form.errors.country">{{ form.errors.country }}</p>
                                 </div>
@@ -179,9 +218,11 @@ const form = useForm({
                                     <label class="form-label" for="nationality">{{ __('Nationality') }}</label>
                                     <select class="form-control m-select2-no" id="nationality" v-model="form.nationality">
                                         <option value="">{{ __('Choose') }}</option>
-                                        <option v-for="(nationality, k) in nationalities" :key="k" :value="k">{{ nationality }}</option>
+                                        <option v-for="(nationality, k) in nationalities" :key="k" :value="k">{{ nationality
+                                        }}</option>
                                     </select>
-                                    <p class="fs-6 text-danger" v-if="form.errors.nationality">{{ form.errors.nationality }}</p>
+                                    <p class="fs-6 text-danger" v-if="form.errors.nationality">{{ form.errors.nationality }}
+                                    </p>
                                 </div>
                             </div>
                             <!-- Nationality -->
@@ -189,12 +230,16 @@ const form = useForm({
                             <!-- Qualification -->
                             <div class="row">
                                 <div class="mb-3 col-12">
-                                    <label class="form-label" for="qualification">{{ __('The last academic qualification') }}</label>
-                                    <select class="form-control m-select2-no" id="qualification" v-model="form.qualification">
+                                    <label class="form-label" for="qualification">{{ __('The last academic qualification')
+                                    }}</label>
+                                    <select class="form-control m-select2-no" id="qualification"
+                                        v-model="form.qualification">
                                         <option value="">{{ __('Choose') }}</option>
-                                        <option v-for="(qualification, k) in qualifications" :key="k" :value="k">{{ qualification }}</option>
+                                        <option v-for="(qualification, k) in qualifications" :key="k" :value="k">{{
+                                            qualification }}</option>
                                     </select>
-                                    <p class="fs-6 text-danger" v-if="form.errors.qualification">{{ form.errors.qualification }}</p>
+                                    <p class="fs-6 text-danger" v-if="form.errors.qualification">{{
+                                        form.errors.qualification }}</p>
                                 </div>
                             </div>
                             <!-- Qualification -->
@@ -203,23 +248,30 @@ const form = useForm({
                             <div class="row">
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
                                     <label class="form-label" for="marital_status">{{ __('Marital status') }}</label>
-                                    <input class="form-control" type="text" id="marital_status" v-model="form.marital_status" :placeholder="__('Marital status')" />
-                                    <p class="fs-6 text-danger" v-if="form.errors.marital_status">{{ form.errors.marital_status }}</p>
+                                    <input class="form-control" type="text" id="marital_status"
+                                        v-model="form.marital_status" :placeholder="__('Marital status')" />
+                                    <p class="fs-6 text-danger" v-if="form.errors.marital_status">{{
+                                        form.errors.marital_status }}</p>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
                                     <label class="form-label" for="region">{{ __('Region') }}</label>
-                                    <input class="form-control" type="text" id="region" v-model="form.region" :placeholder="__('Region')" />
+                                    <input class="form-control" type="text" id="region" v-model="form.region"
+                                        :placeholder="__('Region')" />
                                     <p class="fs-6 text-danger" v-if="form.errors.region">{{ form.errors.region }}</p>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
                                     <label class="form-label" for="governorate">{{ __('Governorate') }}</label>
-                                    <input class="form-control" type="text" id="governorate" v-model="form.governorate" :placeholder="__('Governorate')" />
-                                    <p class="fs-6 text-danger" v-if="form.errors.governorate">{{ form.errors.governorate }}</p>
+                                    <input class="form-control" type="text" id="governorate" v-model="form.governorate"
+                                        :placeholder="__('Governorate')" />
+                                    <p class="fs-6 text-danger" v-if="form.errors.governorate">{{ form.errors.governorate }}
+                                    </p>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
                                     <label class="form-label" for="national_address">{{ __('National address') }}</label>
-                                    <input class="form-control" type="text" id="national_address" v-model="form.national_address" :placeholder="__('National address')" />
-                                    <p class="fs-6 text-danger" v-if="form.errors.national_address">{{ form.errors.national_address }}</p>
+                                    <input class="form-control" type="text" id="national_address"
+                                        v-model="form.national_address" :placeholder="__('National address')" />
+                                    <p class="fs-6 text-danger" v-if="form.errors.national_address">{{
+                                        form.errors.national_address }}</p>
                                 </div>
                             </div>
                             <!-- Marital status, Region, governorate, and national address -->
@@ -228,23 +280,29 @@ const form = useForm({
                             <div class="row">
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
                                     <label class="form-label" for="job_title">{{ __('Job title') }}</label>
-                                    <input class="form-control" type="text" id="job_title" v-model="form.job_title" :placeholder="__('Job title')" />
+                                    <input class="form-control" type="text" id="job_title" v-model="form.job_title"
+                                        :placeholder="__('Job title')" />
                                     <p class="fs-6 text-danger" v-if="form.errors.job_title">{{ form.errors.job_title }}</p>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
                                     <label class="form-label" for="residence">{{ __('Place of residence') }}</label>
-                                    <input class="form-control" type="text" id="residence" v-model="form.residence" :placeholder="__('Place of residence')" />
+                                    <input class="form-control" type="text" id="residence" v-model="form.residence"
+                                        :placeholder="__('Place of residence')" />
                                     <p class="fs-6 text-danger" v-if="form.errors.residence">{{ form.errors.residence }}</p>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
                                     <label class="form-label" for="education_level">{{ __('Educational level') }}</label>
-                                    <input class="form-control" type="text" id="education_level" v-model="form.education_level" :placeholder="__('Educational level')" />
-                                    <p class="fs-6 text-danger" v-if="form.errors.education_level">{{ form.errors.education_level }}</p>
+                                    <input class="form-control" type="text" id="education_level"
+                                        v-model="form.education_level" :placeholder="__('Educational level')" />
+                                    <p class="fs-6 text-danger" v-if="form.errors.education_level">{{
+                                        form.errors.education_level }}</p>
                                 </div>
                                 <div class="mb-3 col-12 col-sm-6 col-md-3">
                                     <label class="form-label" for="experiences">{{ __('Volunteering experiences') }}</label>
-                                    <input class="form-control" type="text" id="experiences" v-model="form.experiences" :placeholder="__('Volunteering experiences')" />
-                                    <p class="fs-6 text-danger" v-if="form.errors.experiences">{{ form.errors.experiences }}</p>
+                                    <input class="form-control" type="text" id="experiences" v-model="form.experiences"
+                                        :placeholder="__('Volunteering experiences')" />
+                                    <p class="fs-6 text-danger" v-if="form.errors.experiences">{{ form.errors.experiences }}
+                                    </p>
                                 </div>
                             </div>
                             <!-- Job title, residence, education level, and experiences -->
@@ -255,7 +313,8 @@ const form = useForm({
                                     <label class="form-label" for="branch_id">{{ __('Branch') }}</label>
                                     <select class="form-control m-select2-no" id="branch_id" v-model="form.branch_id">
                                         <option value="">{{ __('Choose') }}</option>
-                                        <option v-for="branch in branches" :key="branch.id" :value="branch.id">{{ branch.name }}</option>
+                                        <option v-for="branch in branches" :key="branch.id" :value="branch.id">{{
+                                            branch.name }}</option>
                                     </select>
                                     <p class="fs-6 text-danger" v-if="form.errors.branch_id">{{ form.errors.branch_id }}</p>
                                 </div>
@@ -267,7 +326,8 @@ const form = useForm({
                                 <div class="mb-3 col-12 col-sm-4">
                                     <label class="form-label" for="mobile">{{ __('Mobile') }}</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="number" id="mobile" v-model="form.mobile" :placeholder="__('Mobile')" />
+                                        <input class="form-control" type="number" id="mobile" v-model="form.mobile"
+                                            :placeholder="__('Mobile')" />
                                     </div>
                                     <p class="fs-6 text-danger" v-if="form.errors.mobile">{{ form.errors.mobile }}</p>
                                 </div>
@@ -275,48 +335,53 @@ const form = useForm({
                                     <label class="form-label" for="mobile_key">{{ __('Country key') }}</label>
                                     <select class="form-control m-select2-no" id="mobile_key" v-model="form.mobile_key">
                                         <option value="">{{ __('Choose') }}</option>
-                                        <option v-for="(key, country) in countries" :key="key" :value="key">{{ key }}</option>
-                                    </select>
-                                    <p class="fs-6 text-danger" v-if="form.errors.mobile_key">{{ form.errors.mobile_key }}</p>
-                                </div>
+                                    <option v-for="(key, country) in countries" :key="key" :value="key">{{ key }}
+                                    </option>
+                                </select>
+                                <p class="fs-6 text-danger" v-if="form.errors.mobile_key">{{ form.errors.mobile_key }}
+                                </p>
                             </div>
-                            <!-- Mobile and key -->
+                        </div>
+                        <!-- Mobile and key -->
 
-                            <!-- Email -->
-                            <div class="row">
-                                <div class="col-12 mb-3">
-                                    <label class="form-label" for="email">{{ __('Email') }}</label>
-                                    <div class="input-group">
-                                        <input class="form-control" type="email" id="email" v-model="form.email" :placeholder="__('Email')" />
-                                    </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.email">{{ form.errors.email }}</span>
+                        <!-- Email -->
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label class="form-label" for="email">{{ __('Email') }}</label>
+                                <div class="input-group">
+                                    <input class="form-control" type="email" id="email" v-model="form.email"
+                                        :placeholder="__('Email')" />
                                 </div>
+                                <span class="fs-6 text-danger" v-if="form.errors.email">{{ form.errors.email }}</span>
                             </div>
-                            <!-- Email -->
+                        </div>
+                        <!-- Email -->
 
-                            <!-- Password -->
-                            <div class="row">
-                                <div class="col-12 mb-3">
-                                    <label class="form-label" for="password">{{ __('Password') }}</label>
-                                    <div class="input-group">
-                                        <input class="form-control" type="password" id="password" v-model="form.password" :placeholder="__('Password')" />
-                                    </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.password">{{ form.errors.password }}</span>
+                        <!-- Password -->
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label class="form-label" for="password">{{ __('Password') }}</label>
+                                <div class="input-group">
+                                    <input class="form-control" type="password" id="password" v-model="form.password"
+                                        :placeholder="__('Password')" />
                                 </div>
+                                <span class="fs-6 text-danger" v-if="form.errors.password">{{ form.errors.password
+                                    }}</span>
                             </div>
-                            <!-- Password -->
+                        </div>
+                        <!-- Password -->
 
-                            <div>
-                                <button type="submit" class="btn btn-primary me-2">{{ __('Create') }}</button>
-                                <Link :href="route('admin.volunteers.index')" as="button" type="reset" class="btn btn-label-secondary me-2">{{ __('Cancel') }}</Link>
-                            </div>
-                        </form>
-                    </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary me-2">{{ __('Create') }}</button>
+                            <Link :href="route('admin.volunteers.index')" as="button" type="reset"
+                                class="btn btn-label-secondary me-2">{{ __('Cancel') }}</Link>
+                        </div>
+                    </form>
                 </div>
-                <!-- Volunteer information -->
             </div>
-            <!--/ Volunteer Content -->
+            <!-- Volunteer information -->
         </div>
+        <!--/ Volunteer Content -->
     </div>
-    <!-- / Content -->
-</template>
+</div>
+<!-- / Content --></template>

@@ -27,6 +27,7 @@ class VolunteerResource extends JsonResource
                 'fullName' => $this->full_name,
                 'fullName_ar' => $this->full_name_ar,
                 'fullName_en' => $this->full_name_en,
+                'age' => $this->age,
                 'phone_number' => $this->prepareMobileForSms(),
                 'state' => $this->status == 1 ? __('Active') : __('Inactive'),
                 'profile_photo' => $this->when($this->profile_photo, Storage::url($this->profile_photo), null),
