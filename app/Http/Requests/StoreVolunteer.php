@@ -37,7 +37,7 @@ class StoreVolunteer extends FormRequest
             'gender'           => ['nullable', 'string', 'in:male,female'],
             'birthday'         => ['nullable', 'date'],
             'country'          => ['nullable', 'string', Rule::in(array_keys(config('sju.countries')))],
-            'city'             => ['nullable', 'required_if:country,المملكة العربية السعودية', 'numeric', Rule::in(array_keys(config('sju.cities')))],
+            'city'             => [Rule::when($this->country === 'المملكة العربية السعودية', 'required', 'numeric', Rule::in(array_keys(config('sju.cities')))), 'nullable'],
             'nationality'      => ['nullable', 'string', Rule::in(array_keys(config('sju.nationalities_ar')))],
             'qualification'    => ['nullable', 'numeric', Rule::in(array_keys(config('sju.qualifications')))],
             'national_id'      => [
