@@ -82,6 +82,7 @@ const props = defineProps({
                                             {{ new Date(course.date_from).toLocaleString(locale == 'ar' ? 'ar-EG' : 'default', { month: 'long' }) }}
                                         </span>
                                     </h6>
+                                </div>
                                 <!-- Single Course -->
                             </div>
                         </div>
