@@ -86,15 +86,20 @@ defineProps({
 
                     <div class="row mt-3">
                         <div class="col-12 event" v-for="course in courses">
-                            <div class="date">
-                                <span>{{ new Date(course.date_from).getDate() }}</span>
-                                {{ new Date(course.date_from).toLocaleString(locale == 'ar' ? 'ar-EG' : 'default', { month: 'long' }) }}
+                            <div class="date"
+                            :style="`background: ${course.image  ? 'url(' + course.image + ')' : '#007c42'}`"
+                            :src="course.image ||  '' "
+                            >
                             </div>
 
                             <h6 class="title">
                                 <Link :href="route('courses.register', course.id)">
                                     {{ course.title }}
                                 </Link>
+                                <span>
+                                    {{ new Date(course.date_from).getDate() }}
+                                    {{ new Date(course.date_from).toLocaleString(locale == 'ar' ? 'ar-EG' : 'default', { month: 'long' }) }}
+                                </span>
                             </h6>
                         </div>
                     </div>
