@@ -652,6 +652,33 @@ const editRole = (role) => {
                                                 </td>
                                             </tr>
                                             <!-- Training bags permission -->
+
+                                            <!-- Member transfers permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Member transfers') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistTransfer" v-model="addForm.permissions['viewAny-transfer']" />
+                                                            <label class="form-check-label" for="addlistTransfer"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addcreateTransfer" v-model="addForm.permissions['create-transfer']" />
+                                                            <label class="form-check-label" for="addcreateTransfer"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addupdateTransfer" v-model="addForm.permissions['update-transfer']" />
+                                                            <label class="form-check-label" for="addupdateTransfer"> {{ __('Approve') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="adddeleteTransfer" v-model="addForm.permissions['delete-transfer']" />
+                                                            <label class="form-check-label" for="adddeleteTransfer"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Member transfers permission -->
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -1230,6 +1257,32 @@ const editRole = (role) => {
                                                 </td>
                                             </tr>
                                             <!-- Training bag permission -->
+
+                                            <!-- Member transfers -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Member transfers') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistTransfer" v-model="editForm.permissions['viewAny-transfer']" />
+                                                            <label class="form-check-label" for="editlistTransfer"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreateTransfer" v-model="editForm.permissions['create-transfer']" />
+                                                            <label class="form-check-label" for="editcreateTransfer"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editupdateTransfer" v-model="editForm.permissions['update-transfer']" />
+                                                            <label class="form-check-label" for="editupdateTransfer"> {{ __('Approve') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteTransfer" v-model="editForm.permissions['delete-transfer']" />
+                                                            <label class="form-check-label" for="editdeleteTransfer"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Member transfers -->
                                         </tbody>
                                     </table>
                                 </div>

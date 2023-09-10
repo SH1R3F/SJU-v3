@@ -30,6 +30,7 @@ use App\Http\Resources\MemberResource;
 use App\Models\TechnicalSupportTicket;
 use App\Http\Resources\VolunteerResource;
 use App\Http\Resources\SubscriberResource;
+use App\Models\MembershipTransfer;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -125,6 +126,7 @@ class HandleInertiaRequests extends Middleware
             'volunteers' => $admin->can('viewAny', Volunteer::class),
             'invoices' =>  $admin->can('viewAny', Invoice::class),
             'transactions' =>  $admin->can('viewAny', Transaction::class),
+            'transfers' =>  $admin->can('viewAny', MembershipTransfer::class),
             // Technical support
             'support_members' =>  $admin->can('viewMembers', TechnicalSupportTicket::class),
             'support_subscribers' =>  $admin->can('viewSubscribers', TechnicalSupportTicket::class),

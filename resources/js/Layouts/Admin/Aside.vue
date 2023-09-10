@@ -66,7 +66,8 @@
                 $page.props.authUser?.can_view?.adminApproval ||
                 $page.props.authUser?.can_view?.refusedMembers ||
                 $page.props.authUser?.can_view?.invoices ||
-                $page.props.authUser?.can_view?.transactions
+                $page.props.authUser?.can_view?.transactions ||
+                $page.props.authUser?.can_view?.transfers
                 " class="menu-item"
                 :class="{ 'active open': $page.component.startsWith('Admin/Members') || $page.component.startsWith('Admin/Invoices') || $page.component.startsWith('Admin/Transactions') }">
                 <a href="javascript:;" class="menu-link menu-toggle">
@@ -96,6 +97,12 @@
                         :class="{ active: $page.component == 'Admin/Members/Refused' }">
                         <Link :href="route('admin.members.refused')" class="menu-link">
                         <div>{{ __('Refused members') }}</div>
+                        </Link>
+                    </li>
+                    <li v-if="$page.props.authUser?.can_view?.transfers" class="menu-item"
+                        :class="{ active: $page.component.startsWith('Admin/Transfers') }">
+                        <Link :href="route('admin.members.transfers')" class="menu-link">
+                        <div>{{ __('Member transfers') }}</div>
                         </Link>
                     </li>
                     <li v-if="$page.props.authUser?.can_view?.invoices" class="menu-item"

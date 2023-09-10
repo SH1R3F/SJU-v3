@@ -187,6 +187,14 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::updateOrCreate(['name' => 'update-file'], ['name' => 'update-file', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'delete-file'], ['name' => 'delete-file', 'guard_name' => 'admin']);
 
+        /**
+         * Membship transfer permissions
+         */
+        Permission::updateOrCreate(['name' => 'viewAny-transfer'], ['name' => 'viewAny-transfer', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-transfer'], ['name' => 'create-transfer', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-transfer'], ['name' => 'update-transfer', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-transfer'], ['name' => 'delete-transfer', 'guard_name' => 'admin']);
+
         $admin->syncPermissions(Permission::pluck('name'));
     }
 }

@@ -32,6 +32,7 @@ use App\Policies\InvoicePolicy;
 use App\Policies\CategoryPolicy;
 use App\Policies\TemplatePolicy;
 use App\Policies\VolunteerPolicy;
+use App\Models\MembershipTransfer;
 use App\Policies\InvitationPolicy;
 use App\Policies\SiteOptionPolicy;
 use App\Policies\SubscriberPolicy;
@@ -41,6 +42,7 @@ use App\Models\Course\Questionnaire;
 use App\Policies\QuestionnairePolicy;
 use App\Models\TechnicalSupportTicket;
 use App\Policies\TechnicalSupportPolicy;
+use App\Policies\MembershipTransferPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -70,6 +72,7 @@ class AuthServiceProvider extends ServiceProvider
         Media::class => MediaPolicy::class,
         TechnicalSupportTicket::class => TechnicalSupportPolicy::class,
         Invitation::class => InvitationPolicy::class,
+        MembershipTransfer::class => MembershipTransferPolicy::class,
     ];
 
     /**

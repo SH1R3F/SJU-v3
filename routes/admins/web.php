@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\Course\CourseController;
 use App\Http\Controllers\Admin\Course\QuestionController;
 use App\Http\Controllers\Admin\Course\TemplateController;
 use App\Http\Controllers\Admin\TechnicalSupportController;
+use App\Http\Controllers\Admin\MembershipTransferController;
 use App\Http\Controllers\Admin\Course\QuestionnaireController;
 
 /*
@@ -84,6 +85,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('members/notify', [MemberController::class, 'showNotifyForm'])->name('members.notify');
         Route::get('members/notify/chuncks', [MemberController::class, 'chuncks'])->name('members.notify.chuncks');
         Route::post('members/notify', [MemberController::class, 'notify']);
+
+
+        /**
+         * Members transfers
+         */
+        Route::get('members/transfers', [MembershipTransferController::class, 'index'])->name('members.transfers');;
+        Route::get('members/transfers/create', [MembershipTransferController::class, 'create'])->name('members.transfers.create');;
+        Route::post('members/transfers/store', [MembershipTransferController::class, 'store'])->name('members.transfers.transfer');;
+        Route::post('members/transfers/{transfer}/approve', [MembershipTransferController::class, 'approve'])->name('members.transfers.approve');;
+        Route::post('members/transfers/{transfer}/disapprove', [MembershipTransferController::class, 'disapprove'])->name('members.transfers.disapprove');;
+        Route::delete('members/transfers/{transfer}', [MembershipTransferController::class, 'destroy'])->name('members.transfers.destroy');;
+
 
         /**
          * Members management

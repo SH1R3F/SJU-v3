@@ -206,6 +206,16 @@
     "Delivery fees": "رسوم التوصيل",
     "Total": "الإجمالي",
     "PAID": "مدفوعة",
+    "--------------- Member transfers -------------": "",
+    "Member transfers": "نقل الأعضاء",
+    "Transfer member": "نقل عضو",
+    "Branch from": "من الفرع",
+    "Branch to": "إلى الفرع",
+    "Requester": "مقدم الطلب",
+    "Member with this national id doesn't exist": "رقم الهوية غير مرتبط بأي عضو",
+    "Member transfer request created successfully": "تم تسجيل طلب نقل العضو",
+    "Member transfer request approved successfully": "تم موافقة طلب النقل بنجاح",
+
     "--------------- Subscriber management -------------": "",
     "Subscribers management": "إدارة المشتركين",
     "Active subscribers": "المشتركون المفعلون",
@@ -1015,5 +1025,10 @@
     "Previous": "السابق",
     "Current page": "الصفحة الحالية",
     "Page": "الصفحة",
-    "Age": "العمر"
+    "Age": "العمر",
+    "Waiting approval": "بإنتظار الموافقة",
+    "Transferred": "منقول",
+    "Member transfer request deleted successfully": "تم حذف الطلب بنجاح",
+    "Member transfer request disapproved successfully": "تم رفض الطلب بنجاح",
+    "Disapproved": "مرفوض"
 }
