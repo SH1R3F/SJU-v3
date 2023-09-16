@@ -72,7 +72,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
 
             $table->tinyInteger('status')->default(Member::STATUS_UNAPPROVED);
-            $table->string('refusal_reason')->nullable(); // In case of refusal
+            $table->text('refusal_reason')->nullable(); // In case of refusal
 
             $table->boolean('finish_all')->default(0);
 

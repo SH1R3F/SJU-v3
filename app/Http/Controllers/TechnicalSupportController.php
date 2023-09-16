@@ -73,7 +73,7 @@ class TechnicalSupportController extends Controller
 
         $ticket->messages()->create([
             'body' => $data['body'],
-            'attachment' => $data['attachment'],
+            'attachment' => $data['attachment'] ?? null,
             'sender' => TechnicalSupportTicket::SENDER_USER
         ]);
 

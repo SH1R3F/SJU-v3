@@ -309,7 +309,7 @@ class MemberController extends Controller
     {
         $data = $request->validated();
 
-        if ($data['password']) {
+        if (isset($data['password']) && !empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         } else {
             unset($data['password']);
