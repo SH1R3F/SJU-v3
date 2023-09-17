@@ -36,6 +36,8 @@ class CompetitionController extends Controller
      */
     public function show(Competition $competition)
     {
+        abort_if(!$competition->status, 404);
+
         return inertia('Competitions/Show', [
             'competition' => new CompetitionResource($competition->load('fields')),
             'registered' => $this->auth ? !!$this->auth->submissions()->where('competition_id', $competition->id)->first() : false
@@ -47,6 +49,8 @@ class CompetitionController extends Controller
      */
     public function submit(SubmitCompetitionRequest $request, Competition $competition)
     {
+        abort_if(!$competition->status, 404);
+
         $data = $request->validated();
 
         if ($this->auth) {
