@@ -450,7 +450,10 @@
     "Competition deleted successfully": "تم حذف المسابقة بنجاح",
     "Submit": "إرسال",
     "You submitted successfully": "تم الإرسال بنجاح",
-    "You've already submitted once": "لقد أرسلت هذا النموذج من قبل",
+    "You've already submitted once": "لقد أرسلت هذا النموذج بنجاح",
+    "View competition": "عرض المسابقة",
+    "No one submitted for this competition": "لم يسجل أحد في هذه المسابقة",
+    "Guest": "زائر",
 
     "------------- News section -----------": "",
     "Categories": "التصنيفات",

@@ -260,6 +260,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         /**
          * Competitions related routes
          */
+        Route::get('competitions/submission/{submission}', [CompetitionController::class, 'submission'])->name('competitions.submission.show');
         Route::resource('competitions', CompetitionController::class);
     });
 });

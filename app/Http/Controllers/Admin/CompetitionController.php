@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CompetitionRequest;
 use App\Http\Resources\CompetitionResource;
 use App\Models\CompetitionField;
+use App\Models\CompetitionSubmittion;
 
 class CompetitionController extends Controller
 {
@@ -64,9 +65,21 @@ class CompetitionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Competition $competition)
     {
-        //
+        return inertia('Admin/Competitions/View', [
+            'competition' => new CompetitionResource($competition->load('submissions', 'submissions.userable')),
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function submission(CompetitionSubmittion $submission)
+    {
+        return inertia('Admin/Competitions/View', [
+            'competition' => [],
+        ]);
     }
 
     /**

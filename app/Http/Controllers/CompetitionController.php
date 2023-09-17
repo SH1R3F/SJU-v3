@@ -9,6 +9,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\CompetitionResource;
 use App\Http\Requests\SubmitCompetitionRequest;
+use App\Models\CompetitionSubmittion;
 
 class CompetitionController extends Controller
 {
@@ -37,7 +38,7 @@ class CompetitionController extends Controller
     {
         return inertia('Competitions/Show', [
             'competition' => new CompetitionResource($competition->load('fields')),
-            'registered' => $this->auth ? !!$this->auth->answers()->where('competition_field_id', $competition->id)->first() : false
+            'registered' => $this->auth ? !!$this->auth->submissions()->where('competition_id', $competition->id)->first() : false
         ]);
     }
 
@@ -61,15 +62,16 @@ class CompetitionController extends Controller
                 'answer_text' => $field->type === 'text' ? $competition_answer['answer'] : null,
                 'answer_file' => $field->type === 'file' ? $competition_answer['answer'] : null,
                 'answer_date' => $field->type === 'date' ? $competition_answer['answer'] : null,
-                'competition_field_id' => $field->id
+                'competition_field_id' => $field->id,
             ];
 
             if ($this->auth) {
-                $this->auth->answers()->create($answer);
+                $submission = $this->auth->submissions()->create(['competition_id' => $competition->id]);
             } else {
-                CompetitionAnswer::create($answer);
+                $submission = CompetitionSubmittion::create(['competition_id' => $competition->id]);
             }
 
+            $submission->answers()->create(['competition_submittion_id' => $submission->id] + $answer);
         }
 
         return redirect()->back()->with('message', __("You submitted successfully"));

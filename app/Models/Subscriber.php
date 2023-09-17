@@ -177,11 +177,11 @@ class Subscriber extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Relation to the competition answers he has
+     * Relation to the competition submissions he has
      */
-    public function answers()
+    public function submissions()
     {
-        return $this->morphMany(CompetitionAnswer::class, 'userable');
+        return $this->morphMany(CompetitionSubmittion::class, 'userable');
     }
 
     /**

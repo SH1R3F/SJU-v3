@@ -12,11 +12,6 @@ class Competition extends Model
 
     protected $fillable = ['name', 'status', 'allow_guests'];
 
-    public function fields()
-    {
-        return $this->hasMany(CompetitionField::class);
-    }
-
     public function scopeFilter($query, Request $request)
     {
         return $query
@@ -42,5 +37,14 @@ class Competition extends Model
         );
     }
 
+    public function fields()
+    {
+        return $this->hasMany(CompetitionField::class);
+    }
 
+
+    public function submissions()
+    {
+        return $this->hasMany(CompetitionSubmittion::class);
+    }
 }

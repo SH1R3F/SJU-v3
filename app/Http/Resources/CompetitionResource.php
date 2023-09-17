@@ -18,6 +18,7 @@ class CompetitionResource extends JsonResource
             [
                 'fields' => $this->whenLoaded('fields'),
                 'state'  => $this->status ? __('Active') : __('Inactive'),
+                'submissions' => CompetitionSubmissionResource::collection($this->whenLoaded('submissions')),
 
                 // Authorization
                 $this->merge($this->withAuthorization($request))

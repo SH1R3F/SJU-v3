@@ -23,4 +23,9 @@ class CompetitionField extends Model
     {
         return $this->belongsTo(Competition::class);
     }
+
+    public function answers()
+    {
+        return $this->hasMany(CompetitionAnswer::class);
+    }
 }
