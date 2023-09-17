@@ -115,9 +115,8 @@ const copy = (text, msg) => {
                             <td>{{ competition.state }}</td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <!-- TODO: Replace with url for competition frontend -->
                                     <a href="#"
-                                        @click.prevent="copy(route('courses.register', competition.id), __('Url copied'))"
+                                        @click.prevent="copy(route('competitions.show', competition.id), __('Url copied'))"
                                         class="text-body" data-bs-placement="top" :aria-label="__('Copy link')"
                                         :title="__('Copy link')">
                                         <i class="ti ti-copy mx-2 ti-sm"></i>

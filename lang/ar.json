@@ -448,6 +448,9 @@
     "Competition created successfully": "تم إنشاء المسابقة بنجاح",
     "Competition updated successfully": "تم تعديل المسابقة بنجاح",
     "Competition deleted successfully": "تم حذف المسابقة بنجاح",
+    "Submit": "إرسال",
+    "You submitted successfully": "تم الإرسال بنجاح",
+    "You've already submitted once": "لقد أرسلت هذا النموذج من قبل",
 
     "------------- News section -----------": "",
     "Categories": "التصنيفات",

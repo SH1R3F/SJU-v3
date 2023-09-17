@@ -91,7 +91,8 @@ class CompetitionController extends Controller
                 $ids[] = $field['id'];
                 CompetitionField::find($field['id'])->update($field);
             } else {
-                $competition->fields()->create($field);
+                $record = $competition->fields()->create($field);
+                $ids[] = $record->id;
             }
         }
 

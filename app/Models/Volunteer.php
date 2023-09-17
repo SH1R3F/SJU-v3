@@ -203,6 +203,14 @@ class Volunteer extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Relation to the competition answers he has
+     */
+    public function answers()
+    {
+        return $this->morphMany(CompetitionAnswer::class, 'userable');
+    }
+
+    /**
      * Relation to the certificates he has
      */
     public function certificates()

@@ -11,6 +11,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InviteController;
 use App\Http\Controllers\ArticleController;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\TechnicalSupportController;
 
 /*
@@ -110,6 +111,13 @@ Route::get('articles/{category_id?}', [ArticleController::class, 'articles'])->n
 Route::get('invitations/{invitation}', [InviteController::class, 'show'])->name('invitation.show');
 Route::post('invitations/{invitation}', [InviteController::class, 'store'])->name('invitate.store');
 Route::get('invitations/{invite:code}/attend', [InviteController::class, 'attend'])->name('invitation.attend');
+
+
+/**
+ * Competitions Routes
+ */
+Route::get('competitions/{competition}', [CompetitionController::class, 'show'])->name('competitions.show');
+Route::post('competitions/{competition}', [CompetitionController::class, 'submit'])->name('competitions.submit');
 
 
 // Member routes

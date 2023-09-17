@@ -82,7 +82,7 @@ class Subscriber extends Authenticatable implements MustVerifyEmail
 
     /**
      * Sort in admin panel
-     * 
+     *
      * @param \Illuminate\Http\Request  $request
      */
     public function scopeOrder($query, Request $request)
@@ -174,6 +174,14 @@ class Subscriber extends Authenticatable implements MustVerifyEmail
     public function questionnaires()
     {
         return $this->morphToMany(Questionnaire::class, 'questionable')->withPivot('answers');
+    }
+
+    /**
+     * Relation to the competition answers he has
+     */
+    public function answers()
+    {
+        return $this->morphMany(CompetitionAnswer::class, 'userable');
     }
 
     /**
