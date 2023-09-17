@@ -17,6 +17,7 @@ class CompetitionResource extends JsonResource
             parent::toArray($request),
             [
                 'fields' => $this->whenLoaded('fields'),
+                'status'  => strval($this->status),
                 'state'  => $this->status ? __('Active') : __('Inactive'),
                 'submissions' => CompetitionSubmissionResource::collection($this->whenLoaded('submissions')),
 

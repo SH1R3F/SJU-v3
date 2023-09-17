@@ -7,7 +7,7 @@ const props = defineProps({
 
 const form = useForm({
     name: props.competition.name || '',
-    status: props.competition.status || 1,
+    status: props.competition.status || '1',
     allow_guests: props.competition.allow_guests || 1,
     competition_fields: props.competition.fields || [
         {
