@@ -132,7 +132,7 @@ const form = useForm({
                 <div class="event-content">
                     <div class="signing-form fw-bold" v-if="registered">{{ __("You've already submitted once") }}</div>
                     <div class="signing-form" v-else>
-                        <form method="post" @submit.prevent="form.post(route('competitions.submit', competition.id))">
+                        <form method="post" @submit.prevent="form.post(route('competitions.submit', competition.id), { onSuccess: () => form.reset() })">
 
                             <!-- Competition Field -->
                             <div class="form-row" v-for="(competition_field, i) in form.competition_fields"
