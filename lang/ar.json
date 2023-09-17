@@ -1053,5 +1053,6 @@
     "Transferred": "منقول",
     "Member transfer request deleted successfully": "تم حذف الطلب بنجاح",
     "Member transfer request disapproved successfully": "تم رفض الطلب بنجاح",
-    "Disapproved": "مرفوض"
+    "Disapproved": "مرفوض",
+    "Members statistics": "إحصائيات الأعضاء"
 }

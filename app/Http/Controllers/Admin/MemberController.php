@@ -165,6 +165,16 @@ class MemberController extends Controller
         return $service->exportPdf($status);
     }
 
+
+    /**
+     * Export stats to PDF.
+     */
+    public function statsPdf(MemberService $service)
+    {
+        $this->authorize('export', Member::class);
+        return $service->statsPdf();
+    }
+
     /**
      * Show the form for creating a new resource.
      */

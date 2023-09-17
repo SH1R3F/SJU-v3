@@ -108,6 +108,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::post('admins/import', [MemberController::class, 'import'])->name('members.import');
         Route::get('members/export/{page}', [MemberController::class, 'export'])->name('members.export');
         Route::get('members/export/{page}/pdf', [MemberController::class, 'exportPdf'])->name('members.export.pdf');
+        Route::get('members/stats/pdf', [MemberController::class, 'statsPdf'])->name('members.stats.pdf');
         Route::post('members/{member}/toggle', [MemberController::class, 'toggle'])->name('members.toggle');
         Route::post('members/{member}/accept', [MemberController::class, 'accept'])->name('members.accept');
         Route::post('members/{member}/unaccept', [MemberController::class, 'unaccept'])->name('members.unaccept');

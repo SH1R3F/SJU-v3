@@ -67,7 +67,8 @@
                 $page.props.authUser?.can_view?.refusedMembers ||
                 $page.props.authUser?.can_view?.invoices ||
                 $page.props.authUser?.can_view?.transactions ||
-                $page.props.authUser?.can_view?.transfers
+                $page.props.authUser?.can_view?.transfers ||
+                $page.props.authUser?.can_view?.statsMembers
                 " class="menu-item"
                 :class="{ 'active open': $page.component.startsWith('Admin/Members') || $page.component.startsWith('Admin/Invoices') || $page.component.startsWith('Admin/Transactions') }">
                 <a href="javascript:;" class="menu-link menu-toggle">
@@ -116,6 +117,11 @@
                         <Link :href="route('admin.transactions.index')" class="menu-link">
                         <div>{{ __('Payment attempts') }}</div>
                         </Link>
+                    </li>
+                    <li v-if="$page.props.authUser?.can_view?.statsMembers" class="menu-item">
+                        <a :href="route('admin.members.stats.pdf')" class="menu-link">
+                            <div>{{ __('Members statistics') }}</div>
+                        </a>
                     </li>
                 </ul>
             </li>

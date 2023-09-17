@@ -123,6 +123,7 @@ class HandleInertiaRequests extends Middleware
             'branchApproval' => $admin->can('viewBranch', Member::class),
             'adminApproval' => $admin->can('viewAcceptance', Member::class),
             'refusedMembers' => $admin->can('viewRefused', Member::class),
+            'statsMembers' => $admin->can('export', Member::class),
             'subscribers' => $admin->can('viewAny', Subscriber::class),
             'volunteers' => $admin->can('viewAny', Volunteer::class),
             'invoices' =>  $admin->can('viewAny', Invoice::class),

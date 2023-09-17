@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Carbon\Carbon;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -160,4 +161,49 @@ class MemberService
 
         return $pdf->Output();
     }
+
+    /**
+     * Export members stats to PDF
+     */
+    public function statsPdf()
+    {
+        $pdf = (new LaravelMpdf)->getMpdf();
+
+        $fulltime   = Member::where('status', 2)->whereHas('subscription', fn($q) => $q->where('type', 1)->where('status', 1)->where('end_date', '>', Carbon::today()))->count();
+        $ft_waiting = Member::where('status', 2)->whereHas('subscription', fn($q) => $q->where('type', 1)->where('status', '!=', 1))->count();
+        $parttime   = Member::where('status', 2)->whereHas('subscription', fn($q) => $q->where('type', 2)->where('status', 1)->where('end_date', '>', Carbon::today()))->count();
+        $pt_waiting = Member::where('status', 2)->whereHas('subscription', fn($q) => $q->where('type', 2)->where('status', '!=', 1))->count();
+        $affiliate   = Member::where('status', 2)->whereHas('subscription', fn($q) => $q->where('type', 3)->where('status', 1)->where('end_date', '>', Carbon::today()))->count();
+        $af_waiting  = Member::where('status', 2)->whereHas('subscription', fn($q) => $q->where('type', 3)->where('status', '!=', 1))->count();
+
+
+        $branch_waitlist_fulltime   = Member::where('status', 0)->whereHas('subscription', fn($q) => $q->where('type', 1))->count();
+        $branch_waitlist_parttime   = Member::where('status', 0)->whereHas('subscription', fn($q) => $q->where('type', 2))->count();
+        $branch_waitlist_affiliate  = Member::where('status', 0)->whereHas('subscription', fn($q) => $q->where('type', 3))->count();
+
+        $admin_waitlist_fulltime   = Member::where('status', 1)->whereHas('subscription', fn($q) => $q->where('type', 1))->count();
+        $admin_waitlist_parttime   = Member::where('status', 1)->whereHas('subscription', fn($q) => $q->where('type', 2))->count();
+        $admin_waitlist_affiliate  = Member::where('status', 1)->whereHas('subscription', fn($q) => $q->where('type', 3))->count();
+
+
+        $pdf->WriteHTML(view('pdf.members-stats', compact(
+            'fulltime',
+            'ft_waiting',
+            'parttime',
+            'pt_waiting',
+            'affiliate',
+            'af_waiting',
+
+            'branch_waitlist_fulltime',
+            'branch_waitlist_parttime',
+            'branch_waitlist_affiliate',
+
+            'admin_waitlist_fulltime',
+            'admin_waitlist_parttime',
+            'admin_waitlist_affiliate',
+        )));
+
+        return $pdf->Output();
+    }
+
 }
