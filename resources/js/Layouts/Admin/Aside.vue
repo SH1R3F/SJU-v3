@@ -311,6 +311,16 @@
                 </Link>
             </li>
             <!-- Training bags -->
+
+            <!-- Competitions -->
+            <li v-if="$page.props.authUser?.can_view?.competitions" class="menu-item"
+                :class="{ active: $page.component.startsWith('Admin/Competitions') }">
+                <Link :href="route('admin.competitions.index')" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-award"></i>
+                <div>{{ __('Competitions') }}</div>
+                </Link>
+            </li>
+            <!-- Competitions -->
         </ul>
     </aside>
 </template>

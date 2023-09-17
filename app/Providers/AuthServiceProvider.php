@@ -17,6 +17,7 @@ use App\Models\Invitation;
 use App\Models\SiteOption;
 use App\Models\Subscriber;
 use App\Policies\AdPolicy;
+use App\Models\Competition;
 use App\Models\Transaction;
 use App\Policies\UrlPolicy;
 use App\Policies\PagePolicy;
@@ -37,6 +38,7 @@ use App\Policies\InvitationPolicy;
 use App\Policies\SiteOptionPolicy;
 use App\Policies\SubscriberPolicy;
 use Spatie\Permission\Models\Role;
+use App\Policies\CompetitionPolicy;
 use App\Policies\TransactionPolicy;
 use App\Models\Course\Questionnaire;
 use App\Policies\QuestionnairePolicy;
@@ -73,6 +75,7 @@ class AuthServiceProvider extends ServiceProvider
         TechnicalSupportTicket::class => TechnicalSupportPolicy::class,
         Invitation::class => InvitationPolicy::class,
         MembershipTransfer::class => MembershipTransferPolicy::class,
+        Competition::class => CompetitionPolicy::class,
     ];
 
     /**

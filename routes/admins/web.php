@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdController;
 use App\Http\Controllers\Admin\UrlController;
@@ -18,6 +17,7 @@ use App\Http\Controllers\Admin\VolunteerController;
 use App\Http\Controllers\Admin\InvitationController;
 use App\Http\Controllers\Admin\SiteOptionController;
 use App\Http\Controllers\Admin\SubscriberController;
+use App\Http\Controllers\Admin\CompetitionController;
 use App\Http\Controllers\Admin\TrainingBagController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\Course\CourseController;
@@ -255,5 +255,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('training-bag/create', [TrainingBagController::class, 'create'])->name('training-bag.create');
         Route::post('training-bag', [TrainingBagController::class, 'store'])->name('training-bag.store');
         Route::delete('training-bag/{file}', [TrainingBagController::class, 'destroy'])->name('training-bag.destroy');
+
+
+        /**
+         * Competitions related routes
+         */
+        Route::resource('competitions', CompetitionController::class);
     });
 });

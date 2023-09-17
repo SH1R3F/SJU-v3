@@ -195,6 +195,14 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::updateOrCreate(['name' => 'update-transfer'], ['name' => 'update-transfer', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'delete-transfer'], ['name' => 'delete-transfer', 'guard_name' => 'admin']);
 
+        /**
+         * Compeitions permissions
+         */
+        Permission::updateOrCreate(['name' => 'viewAny-competition'], ['name' => 'viewAny-competition', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'create-competition'], ['name' => 'create-competition', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'update-competition'], ['name' => 'update-competition', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'delete-competition'], ['name' => 'delete-competition', 'guard_name' => 'admin']);
+
         $admin->syncPermissions(Permission::pluck('name'));
     }
 }

@@ -30,6 +30,7 @@ use App\Http\Resources\MemberResource;
 use App\Models\TechnicalSupportTicket;
 use App\Http\Resources\VolunteerResource;
 use App\Http\Resources\SubscriberResource;
+use App\Models\Competition;
 use App\Models\MembershipTransfer;
 
 class HandleInertiaRequests extends Middleware
@@ -144,6 +145,7 @@ class HandleInertiaRequests extends Middleware
             'studio' =>  $admin->can('viewAny', Media::class),
             'invitations' =>  $admin->can('viewAny', Invitation::class),
             'training_bag' =>  $admin->can('viewAny', TrainingBag::class),
+            'competitions' =>  $admin->can('viewAny', Competition::class),
         ];
     }
 }
