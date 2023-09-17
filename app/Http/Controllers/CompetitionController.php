@@ -49,6 +49,12 @@ class CompetitionController extends Controller
     {
         $data = $request->validated();
 
+        if ($this->auth) {
+            $submission = $this->auth->submissions()->create(['competition_id' => $competition->id]);
+        } else {
+            $submission = CompetitionSubmittion::create(['competition_id' => $competition->id]);
+        }
+
         foreach ($data['competition_fields'] as $competition_answer) {
             $field = CompetitionField::find($competition_answer['id']);
 
@@ -65,13 +71,7 @@ class CompetitionController extends Controller
                 'competition_field_id' => $field->id,
             ];
 
-            if ($this->auth) {
-                $submission = $this->auth->submissions()->create(['competition_id' => $competition->id]);
-            } else {
-                $submission = CompetitionSubmittion::create(['competition_id' => $competition->id]);
-            }
-
-            $submission->answers()->create(['competition_submittion_id' => $submission->id] + $answer);
+            $submission->answers()->create($answer);
         }
 
         return redirect()->back()->with('message', __("You submitted successfully"));

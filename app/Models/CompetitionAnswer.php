@@ -16,7 +16,7 @@ class CompetitionAnswer extends Model
         return $this->belongsTo(CompetitionSubmission::class);
     }
 
-    public function field()
+    public function competition_field()
     {
         return $this->belongsTo(CompetitionField::class);
     }

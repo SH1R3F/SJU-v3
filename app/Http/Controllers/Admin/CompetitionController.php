@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Competition;
 use Illuminate\Http\Request;
+use App\Models\CompetitionField;
 use App\Http\Controllers\Controller;
+use App\Models\CompetitionSubmittion;
 use App\Http\Requests\CompetitionRequest;
 use App\Http\Resources\CompetitionResource;
-use App\Models\CompetitionField;
-use App\Models\CompetitionSubmittion;
+use App\Http\Resources\CompetitionSubmissionResource;
 
 class CompetitionController extends Controller
 {
@@ -77,8 +78,10 @@ class CompetitionController extends Controller
      */
     public function submission(CompetitionSubmittion $submission)
     {
-        return inertia('Admin/Competitions/View', [
-            'competition' => [],
+        $this->authorize('viewAny', $submission->competition);
+
+        return inertia('Admin/Competitions/Results', [
+            'submission' => new CompetitionSubmissionResource($submission->load('answers', 'userable', 'answers.competition_field')),
         ]);
     }
 

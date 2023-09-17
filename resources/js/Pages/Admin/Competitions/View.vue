@@ -79,7 +79,7 @@ const paginate = (p) => {
                                     <td>
                                         <Link
                                             :href="route('admin.competitions.submission.show', user.id)"
-                                            method="DELETE" as="span" class="text-body" data-bs-placement="top"
+                                            class="text-body" data-bs-placement="top"
                                             :aria-label="__('Show')" :title="__('Show')">
                                         <i class="ti ti-eye mx-2 ti-sm cursor-pointer"></i>
                                         </Link>

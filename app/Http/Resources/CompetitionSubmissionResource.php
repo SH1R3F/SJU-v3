@@ -25,7 +25,9 @@ class CompetitionSubmissionResource extends JsonResource
         return array_merge(
             parent::toArray($request),
             [
-                'userable' => $this->userableResource()
+                'userable' => $this->userableResource(),
+                'answers' => CompetitionAnswerResource::collection($this->whenLoaded('answers')),
+                'competition' => new CompetitionResource($this->whenLoaded('competition')),
             ]
         );
     }
