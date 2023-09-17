@@ -75,7 +75,7 @@ const paginate = (p) => {
                                             style="display: inline-block; max-width: 200px; white-space: nowrap; overflow: hidden !important; text-overflow: ellipsis">
                                         {{ __('Guest') }}</Link>
                                     </td>
-                                    <td>{{ __(user.userable_type.split('\\')[2]) }}</td>
+                                    <td>{{ __(user.userable_type?.split('\\')[2]) ?? __('Guest') }}</td>
                                     <td>
                                         <Link
                                             :href="route('admin.competitions.submission.show', user.id)"

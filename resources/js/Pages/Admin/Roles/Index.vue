@@ -679,6 +679,33 @@ const editRole = (role) => {
                                             </tr>
                                             <!-- Member transfers permission -->
 
+                                            <!-- Competitions permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Competitions') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistCompetition" v-model="addForm.permissions['viewAny-competition']" />
+                                                            <label class="form-check-label" for="addlistCompetition"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addcreateCompetition" v-model="addForm.permissions['create-competition']" />
+                                                            <label class="form-check-label" for="addcreateCompetition"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addupdateCompetition" v-model="addForm.permissions['update-competition']" />
+                                                            <label class="form-check-label" for="addupdateCompetition"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="adddeleteCompetition" v-model="addForm.permissions['delete-competition']" />
+                                                            <label class="form-check-label" for="adddeleteCompetition"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Competitions permission -->
+
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -1283,6 +1310,32 @@ const editRole = (role) => {
                                                 </td>
                                             </tr>
                                             <!-- Member transfers -->
+
+                                            <!-- Competitions -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Competitions') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistCompetition" v-model="editForm.permissions['viewAny-competition']" />
+                                                            <label class="form-check-label" for="editlistCompetition"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreateCompetition" v-model="editForm.permissions['create-competition']" />
+                                                            <label class="form-check-label" for="editcreateCompetition"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editupdateCompetition" v-model="editForm.permissions['update-competition']" />
+                                                            <label class="form-check-label" for="editupdateCompetition"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteCompetition" v-model="editForm.permissions['delete-competition']" />
+                                                            <label class="form-check-label" for="editdeleteCompetition"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Competitions -->
                                         </tbody>
                                     </table>
                                 </div>
