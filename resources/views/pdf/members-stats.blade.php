@@ -11,7 +11,7 @@
         }
 
         .table {
-            padding: 150px 30px 0;
+            padding: 180px 30px 0;
             text-align: center;
             z-index: 9;
         }
@@ -31,64 +31,64 @@
     <div class="table">
         <table cellpadding="0" cellspacing="0" width="640" align="center" border="1">
             <tr style="background: #62963e;">
-                <th height="48" style="padding: 8px 11px;" colspan="2">الأعضاء الحاليين</th>
+                <th height="45" style="padding: 8px 11px;" colspan="2">الأعضاء الحاليين</th>
             </tr>
             <tr>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #a7d08c">
                     المتفرغين
                 </td>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
                     {{$fulltime}}
                 </td>
             </tr>
             <tr>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #a7d08c">
                     المتفرغين بإنتظار الدفع
                 </td>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
                     {{$ft_waiting}}
                 </td>
             </tr>
             <tr>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #a7d08c">
                     الغير متفرغين
                 </td>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
                     {{$parttime}}
                 </td>
             </tr>
             <tr>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #a7d08c">
                     الغير متفرغين بإنتظار الدفع
                 </td>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
                     {{$pt_waiting}}
                 </td>
             </tr>
             <tr>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #a7d08c">
                     المنتسبين
                 </td>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
                     {{$affiliate}}
                 </td>
             </tr>
             <tr>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #a7d08c">
                     المنتسبين بإنتظار الدفع
                 </td>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
                     {{$af_waiting}}
                 </td>
@@ -97,34 +97,34 @@
 
         <table cellpadding="0" cellspacing="0" width="640" align="center" border="1">
             <tr style="background: #62963e;">
-                <th height="48" style="padding: 8px 11px;" colspan="2">بإنتظار موافقة الفروع</th>
+                <th height="45" style="padding: 8px 11px;" colspan="2">بإنتظار موافقة الفروع</th>
             </tr>
             <tr>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #a7d08c">
                     المتفرغين
                 </td>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
                     {{$branch_waitlist_fulltime}}
                 </td>
             </tr>
             <tr>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #a7d08c">
                     الغير متفرغين
                 </td>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
                     {{$branch_waitlist_parttime}}
                 </td>
             </tr>
             <tr>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #a7d08c">
                     المنتسبين
                 </td>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
                     {{$branch_waitlist_affiliate}}
                 </td>
@@ -133,34 +133,34 @@
 
         <table cellpadding="0" cellspacing="0" width="640" align="center" border="1">
             <tr style="background: #62963e;">
-                <th height="48" style="padding: 8px 11px;" colspan="2">بإنتظار الموافقة النهائية</th>
+                <th height="45" style="padding: 8px 11px;" colspan="2">بإنتظار الموافقة النهائية</th>
             </tr>
             <tr>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #a7d08c">
                     المتفرغين
                 </td>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
                     {{$admin_waitlist_fulltime}}
                 </td>
             </tr>
             <tr>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #a7d08c">
                     الغير متفرغين
                 </td>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
                     {{$admin_waitlist_parttime}}
                 </td>
             </tr>
             <tr>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #a7d08c">
                     المنتسبين
                 </td>
-                <td height="48"
+                <td height="45"
                     style="overflow-wrap: break-word; text-align:center; padding: 8px 11px; background: #FFF;">
                     {{$admin_waitlist_affiliate}}
                 </td>
