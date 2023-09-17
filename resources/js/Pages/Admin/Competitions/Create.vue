@@ -19,6 +19,7 @@ const competition_field = {
     type: 'text',
     required: false,
 };
+
 </script>
 
 <template>
@@ -69,6 +70,7 @@ const competition_field = {
                                     <div class="input-group">
                                         <input class="form-control" :id="`text-${i}`" v-model="competition_field.title" :placeholder="__('Field')" />
                                     </div>
+                                    <p class="fs-6 text-danger" v-if="form.errors[`competition_fields.${i}.title`]">{{ form.errors[`competition_fields.${i}.title`] }}</p>
                                 </div>
 
                                 <div class="mb-3 col-12 col-md-4">
@@ -80,6 +82,7 @@ const competition_field = {
                                             <option value="file">{{ __('file') }}</option>
                                         </select>
                                     </div>
+                                    <p class="fs-6 text-danger" v-if="form.errors[`competition_fields.${i}.type`]">{{ form.errors[`competition_fields.${i}.type`] }}</p>
                                 </div>
 
                                 <div class="mb-3 col-12 col-md-2 row">
@@ -100,9 +103,9 @@ const competition_field = {
                                 </div>
                             </div>
                             <button class="btn btn-default" @click.prevent="form.competition_fields.push(JSON.parse(JSON.stringify(competition_field)))">{{ __('Add field') }}</button>
-                            <!-- Variables to be added -->
-                            <hr />
+                            <!-- Competition Fields -->
 
+                            <hr />
 
 
                             <div>

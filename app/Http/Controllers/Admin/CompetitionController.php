@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Competition;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CompetitionRequest;
 use App\Http\Resources\CompetitionResource;
 
 class CompetitionController extends Controller
@@ -47,9 +48,16 @@ class CompetitionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CompetitionRequest $request)
     {
-        //
+        $data = $request->validated();
+        $competition = Competition::create($data);
+
+        foreach ($data['competition_fields'] as $field) {
+            $competition->fields()->create($field);
+        }
+
+        return redirect()->route('admin.competitions.index')->with('message', __('Competition created successfully'));
     }
 
     /**

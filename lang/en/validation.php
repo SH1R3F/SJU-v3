@@ -209,5 +209,7 @@ return [
         'sname' => 'Second name',
         'tname' => 'Third name',
         'hearabout' => 'How did you know the authority',
+        'competition_fields.*.title' => 'Field',
+        'competition_fields.*.type' => 'Type',
     ],
 ];

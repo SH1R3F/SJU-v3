@@ -318,7 +318,9 @@ return [
         'Group' => 'المجموعة',
         'only_image' => 'الصورة فقط',
         'welcome_message' => 'رسالة الترحيب',
-        'transfer_to' => 'إلى الفرع'
+        'transfer_to' => 'إلى الفرع',
+        'competition_fields.*.title' => 'الحقل',
+        'competition_fields.*.type' => 'نوع الحقل',
     ],
 
 ];

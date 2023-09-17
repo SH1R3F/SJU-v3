@@ -444,6 +444,9 @@
     "required": "مطلوب",
     "date": "تاريخ",
     "file": "ملف",
+    "Competition created successfully": "تم إنشاء المسابقة بنجاح",
+    "Competition updated successfully": "تم تعديل المسابقة بنجاح",
+    "Competition deleted successfully": "تم حذف المسابقة بنجاح",
 
     "------------- News section -----------": "",
     "Categories": "التصنيفات",
