@@ -29,6 +29,7 @@ class CompetitionRequest extends FormRequest
             'allow_guests' => ['required', 'boolean'],
             'competition_fields' => ['required', 'array'],
             'competition_fields.*' => ['required', 'array'],
+            'competition_fields.*.id' => ['nullable'],
             'competition_fields.*.title' => ['required', 'string', 'max:255'],
             'competition_fields.*.type' => ['required', 'string', 'in:text,date,file'],
             'competition_fields.*.required' => ['required', 'boolean'],

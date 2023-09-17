@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompetitionRequest;
 use App\Http\Resources\CompetitionResource;
+use App\Models\CompetitionField;
 
 class CompetitionController extends Controller
 {
@@ -62,9 +63,6 @@ class CompetitionController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -73,25 +71,34 @@ class CompetitionController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Competition $competition)
     {
-        //
+        return inertia('Admin/Competitions/Edit', ['competition' => new CompetitionResource($competition->load('fields'))]);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CompetitionRequest $request, Competition $competition)
     {
-        //
+        $data = $request->validated();
+        $competition->update($data);
+
+        $ids = [];
+        foreach ($data['competition_fields'] as $field) {
+            if (isset($field['id']) && !empty($field['id'])) {
+                $ids[] = $field['id'];
+                CompetitionField::find($field['id'])->update($field);
+            } else {
+                $competition->fields()->create($field);
+            }
+        }
+
+        $deleted = $competition->fields->pluck('id')->diff($ids);
+        CompetitionField::whereIn('id', $deleted)->delete();
+
+        return redirect()->route('admin.competitions.index')->with('message', __('Competition updated successfully'));
     }
 
     /**

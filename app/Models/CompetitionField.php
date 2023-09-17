@@ -15,6 +15,10 @@ class CompetitionField extends Model
 
     protected $fillable = ['title', 'type', 'required', 'competition_id'];
 
+    protected $casts = [
+        'required' => 'boolean'
+    ];
+
     public function competition()
     {
         return $this->belongsTo(Competition::class);
