@@ -57,6 +57,6 @@ class AdminsExport implements FromCollection, WithHeadings, WithMapping, WithEve
      */
     public function collection()
     {
-        return Admin::with('branch', 'roles')->get();
+        return Admin::with('branch', 'roles')->whereHas('roles', fn($query) => $query->whereNot('name', 'Employee'))->get();
     }
 }

@@ -52,13 +52,13 @@ class AdminService
     {
         switch ($data['to_type']) {
             case 'select':
-                return Admin::whereIn('id', $data['recipients'])->get();
+                return Admin::whereIn('id', $data['recipients'])->whereHas('roles', fn($query) => $query->whereNot('name', 'Employee'))->get();
                 break;
             case 'all':
-                return Admin::where('active', 1)->get();
+                return Admin::where('active', 1)->whereHas('roles', fn($query) => $query->whereNot('name', 'Employee'))->get();
                 break;
             default:
-                return Admin::where('active', 1)->whereHas('roles', fn ($query) => $query->where('name', $data['to_type']))->get();
+                return Admin::where('active', 1)->whereHas('roles', fn($query) => $query->whereNot('name', 'Employee'))->whereHas('roles', fn ($query) => $query->where('name', $data['to_type']))->get();
                 break;
         }
     }

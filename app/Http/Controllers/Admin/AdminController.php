@@ -29,12 +29,11 @@ class AdminController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $admins = Admin::with('branch', 'roles')
+            ->whereHas('roles', fn($query) => $query->whereNot('name', 'Employee'))
             ->filter(request())
             ->order(request())
             ->paginate(request()->perPage ?: 10)
@@ -44,7 +43,7 @@ class AdminController extends Controller
             'admins' => AdminResource::collection($admins)
                 ->additional([
                     'roles' => RoleResource::collection(
-                        Role::withCount('users')->orderBy('id')->get(['id', 'name'])
+                        Role::withCount('users')->whereNot('name', 'Employee')->orderBy('id')->get(['id', 'name'])
                     ),
                     'branches' => BranchResource::collection(
                         Branch::orderBy('id')->get(['id', 'name'])
@@ -58,13 +57,11 @@ class AdminController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
 
-        $roles   = Role::orderBy('id')->get();
+        $roles   = Role::whereNot('name', 'Employee')->orderBy('id')->get();
         $branches = Branch::orderBy('id')->get();
 
         return inertia('Admin/Admins/Create', [
@@ -75,10 +72,6 @@ class AdminController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\AdminRequest  $request
-     * @param  \App\Services\AdminService  $service
-     * @return \Illuminate\Http\Response
      */
     public function store(AdminRequest $request, AdminService $service)
     {
@@ -89,13 +82,10 @@ class AdminController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Http\Response
      */
     public function edit(Admin $admin)
     {
-        $roles   = Role::orderBy('id')->get();
+        $roles   = Role::whereNot('name', 'Employee')->orderBy('id')->get();
         $branches = Branch::orderBy('id')->get();
 
         return inertia('Admin/Admins/Edit', [
@@ -107,11 +97,6 @@ class AdminController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\AdminRequest  $request
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Services\AdminService  $service
-     * @return \Illuminate\Http\Response
      */
     public function update(AdminRequest $request, Admin $admin, AdminService $service)
     {
@@ -121,10 +106,6 @@ class AdminController extends Controller
 
     /**
      * Toggle active status for a resource.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Http\Response
      */
     public function toggle(Request $request, Admin $admin)
     {
@@ -136,9 +117,6 @@ class AdminController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Admin $admin)
     {
@@ -148,8 +126,6 @@ class AdminController extends Controller
 
     /**
      * Export a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function export()
     {
@@ -160,14 +136,12 @@ class AdminController extends Controller
 
     /**
      * Show the form to send a notification to admins.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function showNotifyForm()
     {
         $this->authorize('notify', Admin::class);
 
-        $admins = Admin::orderBy('id')->get(['id', 'fname', 'lname']);
+        $admins = Admin::orderBy('id')->whereHas('roles', fn($query) => $query->whereNot('name', 'Employee'))->get(['id', 'fname', 'lname']);
 
         return inertia('Admin/Admins/Notifications/Create', [
             'admins' => AdminResource::collection($admins)
@@ -176,10 +150,6 @@ class AdminController extends Controller
 
     /**
      * Send the notification to specified users.
-     *
-     * @param  \App\Http\Requests\NotifyAdminsRequest  $request
-     * @param  \App\Services\AdminService  $service
-     * @return \Illuminate\Http\Response
      */
     public function notify(NotifyAdminsRequest $request, AdminService $service)
     {
