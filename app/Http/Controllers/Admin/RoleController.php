@@ -19,12 +19,10 @@ class RoleController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $roles = Role::with('users:id,fname,lname', 'permissions:id,name')->withCount('users')->get();
+        $roles = Role::whereNot('name', 'Employee')->with('users:id,fname,lname', 'permissions:id,name')->withCount('users')->get();
 
         return inertia('Admin/Roles/Index', [
             'roles' => RoleResource::collection($roles)->additional([
@@ -35,10 +33,6 @@ class RoleController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\RoleRequest  $request
-     * @param  \App\Services\RoleService  $service
-     * @return \Illuminate\Http\Response
      */
     public function store(RoleRequest $request, RoleService $service)
     {
@@ -48,11 +42,6 @@ class RoleController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\RoleRequest  $request
-     * @param  \Spatie\Permission\Models\Role  $role
-     * @param  \App\Services\RoleService  $service
-     * @return \Illuminate\Http\Response
      */
     public function update(RoleRequest $request, Role $role, RoleService $service)
     {
@@ -62,9 +51,6 @@ class RoleController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \Spatie\Permission\Models\Role  $role
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Role $role)
     {

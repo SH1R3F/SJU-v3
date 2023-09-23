@@ -21,7 +21,7 @@ class RolePolicy
     public function before(Admin $admin, $ability, mixed $role)
     {
         // Basic roles should never be edited or deleted
-        if ($ability === 'delete' && in_array($role->name, ['Site admin', 'Branch manager', 'News editor'])) return false;
+        if ($ability === 'delete' && in_array($role->name, ['Site admin', 'Branch manager', 'News editor', 'Employee'])) return false;
 
         if ($admin->hasRole('Site admin')) {
             return true;

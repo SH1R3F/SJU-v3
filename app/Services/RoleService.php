@@ -29,7 +29,7 @@ class RoleService
     {
 
         // The basic role names can't be changed
-        if (in_array($role->name, ['Site admin', 'Branch manager', 'News editor'])) unset($data['name']);
+        if (in_array($role->name, ['Site admin', 'Branch manager', 'News editor', 'Employee'])) unset($data['name']);
 
         // Update
         $role->update($data);

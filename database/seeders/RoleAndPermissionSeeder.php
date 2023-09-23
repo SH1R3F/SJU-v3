@@ -17,9 +17,10 @@ class RoleAndPermissionSeeder extends Seeder
     public function run()
     {
         // Seed roles
-        $admin   = Role::updateOrCreate(['name' => 'Site admin'], ['name' => 'Site admin', 'guard_name' => 'admin']);
-        $manager = Role::updateOrCreate(['name' => 'Branch manager'], ['name' => 'Branch manager', 'guard_name' => 'admin']);
-        $editor  = Role::updateOrCreate(['name' => 'News editor'], ['name' => 'News editor', 'guard_name' => 'admin']);
+        $admin    = Role::updateOrCreate(['name' => 'Site admin'], ['name' => 'Site admin', 'guard_name' => 'admin']);
+        $manager  = Role::updateOrCreate(['name' => 'Branch manager'], ['name' => 'Branch manager', 'guard_name' => 'admin']);
+        $editor   = Role::updateOrCreate(['name' => 'News editor'], ['name' => 'News editor', 'guard_name' => 'admin']);
+        $employee = Role::updateOrCreate(['name' => 'Employee'], ['name' => 'Employee', 'guard_name' => 'admin']);
 
         /**
          * Permissions Seeding
