@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EmployeeRequest extends FormRequest
@@ -45,7 +46,7 @@ class EmployeeRequest extends FormRequest
                 'digits_between:1,13',
                 Rule::when(request()->isMethod('POST'), Rule::unique('admins'), Rule::unique('admins')->ignore($this->employee))
             ],
-            'branch_id' => ['nullable', 'numeric', 'exists:branches,id'],
+            'branch_id' => [Auth::user()->hasRole('Site admin') ? 'required' : 'nullable', 'numeric', 'exists:branches,id'],
             'password' => [
                 Rule::when(request()->isMethod('POST'), 'required', 'nullable'),
                 'string',
