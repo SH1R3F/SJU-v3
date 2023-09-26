@@ -83,6 +83,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::resource('admins', AdminController::class);
 
         // Manage employees
+        Route::post('employees/{employee}/permissions', [EmployeeController::class, 'permissions'])->name('employees.permissions');
         Route::resource('employees', EmployeeController::class);
 
 

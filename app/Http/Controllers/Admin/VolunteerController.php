@@ -31,13 +31,11 @@ class VolunteerController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index($status = 'active')
     {
         $volunteers = Volunteer::withCount('courses')
-            ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+            ->when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
             ->when($status == 'active', fn ($query) => $query->where('status', 1))
             ->when($status == 'inactive', fn ($query) => $query->where('status', '!=', 1))
             ->addSelect([
@@ -71,7 +69,7 @@ class VolunteerController extends Controller
         $this->authorize('export', Volunteer::class);
 
         $volunteers = Volunteer::withCount('courses')
-            ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+            ->when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
             ->when($status == 'active', fn ($query) => $query->where('status', 1))
             ->when($status == 'inactive', fn ($query) => $query->where('status', '!=', 1))
             ->filter(request())
@@ -254,7 +252,7 @@ class VolunteerController extends Controller
     {
         $this->authorize('viewAny', Volunteer::class);
         $volunteers = Volunteer::filter(request())
-            ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+            ->when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
             ->when(
                 app()->getLocale() == 'ar',
                 fn ($q) => $q->select('id', DB::raw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar) AS text")),
@@ -278,24 +276,24 @@ class VolunteerController extends Controller
 
         switch ($request['to_type']) {
             case 'select':
-                $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->whereIn('id', $request['recipients'])
                     // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
             case 'all':
-                $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
             case 'active':
-                $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->where('status', 1)
                     // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
             case 'inactive':
-                $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                $recipients = Volunteer::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->where('status', '!=', 1)
                     // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();

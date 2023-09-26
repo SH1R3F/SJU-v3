@@ -2,8 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\Admin;
 use App\Models\Url;
+use App\Models\Admin;
+use App\Models\Employee;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UrlPolicy
@@ -12,11 +13,6 @@ class UrlPolicy
 
     /**
      * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  string  $ability
-     * @param  mixed  $model
-     * @return void|bool
      */
     public function before(Admin $admin, $ability, mixed $model)
     {
@@ -29,47 +25,33 @@ class UrlPolicy
 
     /**
      * Determine whether the admin can view any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-url');
+        return $admin->hasPermissionTo('viewAny-url') || Employee::find($admin->id)?->can('viewAny-url');
     }
 
     /**
      * Determine whether the admin can create models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-url');
+        return $admin->hasPermissionTo('create-url') || Employee::find($admin->id)?->can('create-url');
     }
 
     /**
      * Determine whether the admin can update the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Url  $url
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Admin $admin, Url $url)
     {
-        return $admin->hasPermissionTo('update-url');
+        return $admin->hasPermissionTo('update-url') || Employee::find($admin->id)?->can('update-url');
     }
 
     /**
      * Determine whether the admin can delete the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Url  $url
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(Admin $admin, Url $url)
     {
-        return $admin->hasPermissionTo('delete-url');
+        return $admin->hasPermissionTo('delete-url') || Employee::find($admin->id)?->can('delete-url');
     }
 }

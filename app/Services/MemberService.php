@@ -23,7 +23,7 @@ class MemberService
     {
         return Member::with('subscription', 'branch')
             ->whereIn('status', $statuses)
-            ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+            ->when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
             ->filter($request)
             ->order($request)
             ->when($export, fn ($query) => $query->get(), fn ($query) => $query->paginate($request->perPage ?: 10)->withQueryString());
@@ -40,9 +40,9 @@ class MemberService
         $members = $this->getMembers($request, $statuses);
 
         return MemberResource::collection($members)->additional([
-            'fulltime'  => Member::whereIn('status', $statuses)->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
-            'parttime'  => Member::whereIn('status', $statuses)->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
-            'affiliate' => Member::whereIn('status', $statuses)->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
+            'fulltime'  => Member::whereIn('status', $statuses)->when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))->whereHas('subscription', fn ($builder) => $builder->where('type', 1))->count(),
+            'parttime'  => Member::whereIn('status', $statuses)->when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))->whereHas('subscription', fn ($builder) => $builder->where('type', 2))->count(),
+            'affiliate' => Member::whereIn('status', $statuses)->when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))->whereHas('subscription', fn ($builder) => $builder->where('type', 3))->count(),
             'can_create' => request()->user()->can('create', Member::class),
             'can_export' => request()->user()->can('export', Member::class),
             'can_notify' => request()->user()->can('notify', Member::class),
@@ -77,33 +77,33 @@ class MemberService
     {
         switch ($data['to_type']) {
             case 'select':
-                return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                return Member::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->whereIn('id', $data['recipients'])
                     // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
             case 'all':
-                return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                return Member::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->where('status', '!=', Member::STATUS_DISABLED)
                     // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
             case 'fulltime':
-                return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                return Member::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->where('status', '!=', Member::STATUS_DISABLED)
                     ->whereHas('subscription', fn ($query) => $query->where('type', 1))
                     // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
             case 'parttime':
-                return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                return Member::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->where('status', '!=', Member::STATUS_DISABLED)
                     ->whereHas('subscription', fn ($query) => $query->where('type', 2))
                     // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
             case 'affiliate':
-                return Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                return Member::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
                     ->where('status', '!=', Member::STATUS_DISABLED)
                     ->whereHas('subscription', fn ($query) => $query->where('type', 3))
                     // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
@@ -119,7 +119,7 @@ class MemberService
     {
         $members = Member::with('subscription', 'branch')
             ->whereIn('status', $status)
-            ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+            ->when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
             ->filter(request())
             ->order(request());
 

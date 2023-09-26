@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Admin;
+use App\Models\Employee;
 use App\Models\Volunteer;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -12,17 +13,12 @@ class VolunteerPolicy
 
     /**
      * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  string  $ability
-     * @param  mixed  $model
-     * @return void|bool
      */
     public function before(Admin $admin, $ability, mixed $model)
     {
         if ($admin->hasRole('Site admin')) {
             return true;
-        } else if ($admin->hasRole('Branch manager')) {
+        } else if ($admin->hasRole('Branch manager') || $admin->hasRole('Employee')) {
             // Branch managers can only update/edit the volunteers of their branches
             if (is_object($model)) {
                 if ($model->branch_id != $admin->branch_id) return false;
@@ -32,70 +28,49 @@ class VolunteerPolicy
 
     /**
      * Determine whether the admin can view any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-volunteer');
+        return $admin->hasPermissionTo('viewAny-volunteer') || Employee::find($admin->id)?->can('viewAny-volunteer');
     }
 
     /**
      * Determine whether the admin can export any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function export(Admin $admin)
     {
-        return $admin->hasPermissionTo('export-volunteer');
+        return $admin->hasPermissionTo('export-volunteer') || Employee::find($admin->id)?->can('export-volunteer');
     }
 
     /**
      * Determine whether the admin can view the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Volunteer  $volunteer
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(Admin $admin, Volunteer $volunteer)
     {
-        return $admin->hasPermissionTo('view-volunteer');
+        return $admin->hasPermissionTo('view-volunteer') || Employee::find($admin->id)?->can('view-volunteer');
     }
 
     /**
      * Determine whether the admin can create models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-volunteer');
+        return $admin->hasPermissionTo('create-volunteer') || Employee::find($admin->id)?->can('create-volunteer');
     }
 
     /**
      * Determine whether the admin can update the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Volunteer  $volunteer
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Admin $admin, Volunteer $volunteer)
     {
-        return $admin->hasPermissionTo('update-volunteer');
+        return $admin->hasPermissionTo('update-volunteer') || Employee::find($admin->id)?->can('update-volunteer');
     }
 
     /**
      * Determine whether the admin can delete the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Volunteer  $volunteer
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(Admin $admin, Volunteer $volunteer)
     {
-        return $admin->hasPermissionTo('delete-volunteer');
+        return $admin->hasPermissionTo('delete-volunteer') || Employee::find($admin->id)?->can('delete-volunteer');
     }
 }

@@ -2,8 +2,9 @@
 
 namespace App\Policies;
 
-use Spatie\Permission\Models\Role;
 use App\Models\Admin;
+use App\Models\Employee;
+use Spatie\Permission\Models\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class RolePolicy
@@ -12,11 +13,6 @@ class RolePolicy
 
     /**
      * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  string  $ability
-     * @param  mixed  $role
-     * @return void|bool
      */
     public function before(Admin $admin, $ability, mixed $role)
     {
@@ -30,47 +26,33 @@ class RolePolicy
 
     /**
      * Determine whether the admin can view any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-role');
+        return $admin->hasPermissionTo('viewAny-role') || Employee::find($admin->id)?->can('viewAny-role');;
     }
 
     /**
      * Determine whether the admin can create models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-role');
+        return $admin->hasPermissionTo('create-role') || Employee::find($admin->id)?->can('create-role');;
     }
 
     /**
      * Determine whether the admin can update the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \Spatie\Permission\Models\Role  $role
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Admin $admin, Role $role)
     {
-        return $admin->hasPermissionTo('update-role');
+        return $admin->hasPermissionTo('update-role') || Employee::find($admin->id)?->can('update-role');;
     }
 
     /**
      * Determine whether the admin can delete the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \Spatie\Permission\Models\Role  $role
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(Admin $admin, Role $role)
     {
-        return $admin->hasPermissionTo('delete-role');
+        return $admin->hasPermissionTo('delete-role') || Employee::find($admin->id)?->can('delete-role');;
     }
 }

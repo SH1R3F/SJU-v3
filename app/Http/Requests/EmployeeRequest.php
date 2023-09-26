@@ -31,19 +31,19 @@ class EmployeeRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::when(request()->isMethod('POST'), Rule::unique('admins'), Rule::unique('admins')->ignore($this->admin))
+                Rule::when(request()->isMethod('POST'), Rule::unique('admins'), Rule::unique('admins')->ignore($this->employee))
             ],
             'email' => [
                 'required',
                 'string',
                 'max:255',
-                Rule::when(request()->isMethod('POST'), Rule::unique('admins'), Rule::unique('admins')->ignore($this->admin))
+                Rule::when(request()->isMethod('POST'), Rule::unique('admins'), Rule::unique('admins')->ignore($this->employee))
             ],
             'mobile' => [
                 'nullable',
                 'numeric',
                 'digits_between:1,13',
-                Rule::when(request()->isMethod('POST'), Rule::unique('admins'), Rule::unique('admins')->ignore($this->admin))
+                Rule::when(request()->isMethod('POST'), Rule::unique('admins'), Rule::unique('admins')->ignore($this->employee))
             ],
             'branch_id' => ['nullable', 'numeric', 'exists:branches,id'],
             'password' => [

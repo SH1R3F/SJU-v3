@@ -2,8 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\SiteOption;
 use App\Models\Admin;
+use App\Models\Employee;
+use App\Models\SiteOption;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SiteOptionPolicy
@@ -12,11 +13,6 @@ class SiteOptionPolicy
 
     /**
      * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  string  $ability
-     * @param  mixed  $model
-     * @return void|bool
      */
     public function before(Admin $admin, $ability, mixed $model)
     {
@@ -27,12 +23,9 @@ class SiteOptionPolicy
 
     /**
      * Determine whether the admin can view any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function manage(Admin $admin)
     {
-        return $admin->hasPermissionTo('manage-site-options');
+        return $admin->hasPermissionTo('manage-site-options') || Employee::find($admin->id)?->can('manage-site-options');
     }
 }

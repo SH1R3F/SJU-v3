@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Admin;
+use App\Models\Employee;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AdminPolicy
@@ -11,11 +12,6 @@ class AdminPolicy
 
     /**
      * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  string  $ability
-     * @param  mixed  $model
-     * @return void|bool
      */
     public function before(Admin $admin, $ability, mixed $model)
     {
@@ -31,21 +27,14 @@ class AdminPolicy
 
     /**
      * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-admin');
+        return $admin->hasPermissionTo('viewAny-admin') || Employee::find($admin->id)?->can('viewAny-admin');
     }
 
     /**
      * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Admin  $model
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(Admin $admin, Admin $model)
     {
@@ -53,59 +42,41 @@ class AdminPolicy
 
     /**
      * Determine whether the user can create models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-admin');
+        return $admin->hasPermissionTo('create-admin') || Employee::find($admin->id)?->can('create-admin');
     }
 
     /**
      * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Admin  $model
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Admin $admin, Admin $model)
     {
-        return $admin->hasPermissionTo('update-admin');
+        return $admin->hasPermissionTo('update-admin') || Employee::find($admin->id)?->can('update-admin');
     }
 
     /**
      * Determine whether the user can toggle the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Admin  $model
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function toggle(Admin $admin, Admin $model)
     {
-        return $admin->hasPermissionTo('update-admin');
+        return $admin->hasPermissionTo('update-admin') || Employee::find($admin->id)?->can('update-admin');
     }
 
     /**
      * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Admin  $model
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(Admin $admin, Admin $model)
     {
-        return $admin->hasPermissionTo('delete-admin');
+        return $admin->hasPermissionTo('delete-admin') || Employee::find($admin->id)?->can('delete-admin');
     }
 
     /**
      * Determine whether the user can notify models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function notify(Admin $admin)
     {
-        return $admin->hasPermissionTo('notify-admin');
+        return $admin->hasPermissionTo('notify-admin') || Employee::find($admin->id)?->can('notify-admin');
     }
 }

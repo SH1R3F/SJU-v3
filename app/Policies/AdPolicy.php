@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Admin;
+use App\Models\Employee;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AdPolicy
@@ -11,11 +12,6 @@ class AdPolicy
 
     /**
      * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  string  $ability
-     * @param  mixed  $model
-     * @return void|bool
      */
     public function before(Admin $admin, $ability, mixed $model)
     {
@@ -28,47 +24,33 @@ class AdPolicy
 
     /**
      * Determine whether the admin can view any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-ad');
+        return $admin->hasPermissionTo('viewAny-ad') || Employee::find($admin->id)?->can('viewAny-ad');
     }
 
     /**
      * Determine whether the admin can create models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-ad');
+        return $admin->hasPermissionTo('create-ad') || Employee::find($admin->id)?->can('create-ad');
     }
 
     /**
      * Determine whether the admin can update the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Ad  $ad
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Admin $admin, Ad $ad)
     {
-        return $admin->hasPermissionTo('update-ad');
+        return $admin->hasPermissionTo('update-ad') || Employee::find($admin->id)?->can('update-ad');
     }
 
     /**
      * Determine whether the admin can delete the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Ad  $ad
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(Admin $admin, Ad $ad)
     {
-        return $admin->hasPermissionTo('delete-ad');
+        return $admin->hasPermissionTo('delete-ad') || Employee::find($admin->id)?->can('delete-ad');
     }
 }

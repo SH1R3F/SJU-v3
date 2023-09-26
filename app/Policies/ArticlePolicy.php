@@ -2,8 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\Article;
 use App\Models\Admin;
+use App\Models\Article;
+use App\Models\Employee;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ArticlePolicy
@@ -12,11 +13,6 @@ class ArticlePolicy
 
     /**
      * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  string  $ability
-     * @param  mixed  $model
-     * @return void|bool
      */
     public function before(Admin $admin, $ability, mixed $model)
     {
@@ -29,83 +25,41 @@ class ArticlePolicy
 
     /**
      * Determine whether the admin can view any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-article');
+        return $admin->hasPermissionTo('viewAny-article') || Employee::find($admin->id)?->can('viewAny-article');
     }
 
     /**
      * Determine whether the admin can view the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Article  $article
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(Admin $admin, Article $article)
     {
-        return $admin->hasPermissionTo('view-article');
+        return $admin->hasPermissionTo('view-article') || Employee::find($admin->id)?->can('view-article');
     }
 
     /**
      * Determine whether the admin can create models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-article');
+        return $admin->hasPermissionTo('create-article') || Employee::find($admin->id)?->can('create-article');
     }
 
     /**
      * Determine whether the admin can update the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Article  $article
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Admin $admin, Article $article)
     {
-        return $admin->hasPermissionTo('update-article');
+        return $admin->hasPermissionTo('update-article') || Employee::find($admin->id)?->can('update-article');
     }
 
     /**
      * Determine whether the admin can delete the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Article  $article
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(Admin $admin, Article $article)
     {
-        return $admin->hasPermissionTo('delete-article');
-    }
-
-    /**
-     * Determine whether the admin can restore the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Article  $article
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(Admin $admin, Article $article)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the admin can permanently delete the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Article  $article
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(Admin $admin, Article $article)
-    {
-        //
+        return $admin->hasPermissionTo('delete-article') || Employee::find($admin->id)?->can('delete-article');
     }
 }

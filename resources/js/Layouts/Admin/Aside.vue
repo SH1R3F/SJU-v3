@@ -38,8 +38,8 @@
             <!-- Site options -->
 
             <!-- Roles and moderators -->
-            <li v-if="$page.props.authUser?.can_view?.roles || $page.props.authUser?.can_view?.admins" class="menu-item"
-                :class="{ 'active open': $page.component.startsWith('Admin/Roles') || $page.component.startsWith('Admin/Admins') }">
+            <li v-if="$page.props.authUser?.can_view?.roles || $page.props.authUser?.can_view?.admins || $page.props.authUser?.can_view?.employees" class="menu-item"
+                :class="{ 'active open': $page.component.startsWith('Admin/Roles') || $page.component.startsWith('Admin/Admins') || $page.props.authUser?.can_view?.employees }">
                 <a href="javascript:;" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-key"></i>
                     <div>{{ __('Roles & moderators') }}</div>
@@ -55,6 +55,12 @@
                         :class="{ active: $page.component.startsWith('Admin/Admins') }">
                         <Link :href="route('admin.admins.index')" class="menu-link">
                         <div>{{ __('Moderators') }}</div>
+                        </Link>
+                    </li>
+                    <li v-if="$page.props.authUser?.can_view?.employees" class="menu-item"
+                        :class="{ active: $page.component.startsWith('Admin/Employees') }">
+                        <Link :href="route('admin.employees.index')" class="menu-link">
+                        <div>{{ __('Employees') }}</div>
                         </Link>
                     </li>
                 </ul>

@@ -24,7 +24,7 @@ class MembershipTransferController extends Controller
     public function index()
     {
         $subscribers = MembershipTransfer::with('member', 'branchFrom', 'branchTo', 'requester')
-            ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('transfer_from', Auth::guard('admin')->user()->branch_id)->orWhere('transfer_to', Auth::guard('admin')->user()->branch_id))
+            ->when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('transfer_from', Auth::guard('admin')->user()->branch_id)->orWhere('transfer_to', Auth::guard('admin')->user()->branch_id))
             ->filter(request())
             ->order(request())
             ->paginate(request()->perPage ?: 10)
@@ -58,7 +58,7 @@ class MembershipTransferController extends Controller
         MembershipTransfer::create([
             'member_id' => $member->id,
             'transfer_from' => $member->branch_id,
-            'transfer_to' => Auth::user()->hasRole('Branch manager') ? Auth::guard('admin')->user()->branch_id : $request->transfer_to,
+            'transfer_to' => (Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee')) ? Auth::guard('admin')->user()->branch_id : $request->transfer_to,
             'status' => MembershipTransfer::STATUS_PENDING,
             'request_by' => request()->user()->id,
         ]);

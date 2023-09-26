@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Admin;
+use App\Models\Employee;
 use App\Models\Course\Template;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -12,11 +13,6 @@ class TemplatePolicy
 
     /**
      * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  string  $ability
-     * @param  mixed  $model
-     * @return void|bool
      */
     public function before(Admin $admin, $ability, mixed $model)
     {
@@ -29,59 +25,41 @@ class TemplatePolicy
 
     /**
      * Determine whether the admin can view any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-template');
+        return $admin->hasPermissionTo('viewAny-template') || Employee::find($admin->id)?->can('viewAny-template');
     }
 
     /**
      * Determine whether the admin can view the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Course\Template  $template
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(Admin $admin, Template $template)
     {
-        return $admin->hasPermissionTo('viewAny-template');
+        return $admin->hasPermissionTo('viewAny-template') || Employee::find($admin->id)?->can('viewAny-template');
     }
 
     /**
      * Determine whether the admin can create models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-template');
+        return $admin->hasPermissionTo('create-template') || Employee::find($admin->id)?->can('create-template');
     }
 
     /**
      * Determine whether the admin can update the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Course\Template  $template
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Admin $admin, Template $template)
     {
-        return $admin->hasPermissionTo('update-template');
+        return $admin->hasPermissionTo('update-template') || Employee::find($admin->id)?->can('update-template');
     }
 
     /**
      * Determine whether the admin can delete the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Course\Template  $template
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(Admin $admin, Template $template)
     {
-        return $admin->hasPermissionTo('delete-template');
+        return $admin->hasPermissionTo('delete-template') || Employee::find($admin->id)?->can('delete-template');
     }
 }

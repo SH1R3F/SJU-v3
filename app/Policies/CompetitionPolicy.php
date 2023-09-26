@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Admin;
+use App\Models\Employee;
 use App\Models\Competition;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -25,7 +26,7 @@ class CompetitionPolicy
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-competition');
+        return $admin->hasPermissionTo('viewAny-competition') || Employee::find($admin->id)?->can('viewAny-competition');
     }
 
     /**
@@ -33,7 +34,7 @@ class CompetitionPolicy
      */
     public function view(Admin $admin, Competition $competition)
     {
-        return $admin->hasPermissionTo('viewAny-competition');
+        return $admin->hasPermissionTo('viewAny-competition') || Employee::find($admin->id)?->can('viewAny-competition');
     }
 
     /**
@@ -41,7 +42,7 @@ class CompetitionPolicy
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-competition');
+        return $admin->hasPermissionTo('create-competition') || Employee::find($admin->id)?->can('create-competition');
     }
 
     /**
@@ -49,7 +50,7 @@ class CompetitionPolicy
      */
     public function update(Admin $admin, Competition $competition)
     {
-        return $admin->hasPermissionTo('update-competition');
+        return $admin->hasPermissionTo('update-competition') || Employee::find($admin->id)?->can('update-competition');
     }
 
     /**
@@ -57,7 +58,7 @@ class CompetitionPolicy
      */
     public function delete(Admin $admin, Competition $competition)
     {
-        return $admin->hasPermissionTo('delete-competition');
+        return $admin->hasPermissionTo('delete-competition') || Employee::find($admin->id)?->can('delete-competition');
     }
 
 }

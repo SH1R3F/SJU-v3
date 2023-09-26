@@ -23,7 +23,7 @@ class InvoiceController extends Controller
         $this->authorize('viewAny', Invoice::class);
 
         $invoices = Invoice::with('member', 'member.subscription')
-            ->when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->whereHas('member', fn ($builder) => $builder->where('member_id', Auth::guard('admin')->user()->branch_id)))
+            ->when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->whereHas('member', fn ($builder) => $builder->where('member_id', Auth::guard('admin')->user()->branch_id)))
             ->filter($request)
             ->order($request)
             ->paginate($request->perPage ?: 10)

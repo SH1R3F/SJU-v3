@@ -18,6 +18,10 @@ class EmployeePolicy
         if ($admin->hasRole('Site admin')) {
             return true;
         }
+
+        if (($admin->hasRole('Branch manager') || $admin->hasRole('Employee')) && is_object($employee) && $employee->branch_id !== $admin->branch_id){
+            return false;
+        }
     }
 
     /**
@@ -25,7 +29,7 @@ class EmployeePolicy
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-employee');
+        return $admin->hasPermissionTo('viewAny-employee') || Employee::find($admin->id)?->can('viewAny-employee');
     }
 
     /**
@@ -33,7 +37,7 @@ class EmployeePolicy
      */
     public function view(Admin $admin, Employee $employee)
     {
-        return $admin->hasPermissionTo('viewAny-employee');
+        return $admin->hasPermissionTo('viewAny-employee') || Employee::find($admin->id)?->can('viewAny-employee');
     }
 
     /**
@@ -41,7 +45,7 @@ class EmployeePolicy
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-employee');
+        return $admin->hasPermissionTo('create-employee') || Employee::find($admin->id)?->can('create-employee');
     }
 
     /**
@@ -49,7 +53,7 @@ class EmployeePolicy
      */
     public function update(Admin $admin, Employee $employee)
     {
-        return $admin->hasPermissionTo('update-employee');
+        return $admin->hasPermissionTo('update-employee') || Employee::find($admin->id)?->can('update-employee');
     }
 
     /**
@@ -57,6 +61,6 @@ class EmployeePolicy
      */
     public function delete(Admin $admin, Employee $employee)
     {
-        return $admin->hasPermissionTo('delete-employee');
+        return $admin->hasPermissionTo('delete-employee') || Employee::find($admin->id)?->can('delete-employee');
     }
 }

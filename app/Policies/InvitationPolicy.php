@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Admin;
+use App\Models\Employee;
 use App\Models\Invitation;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -12,11 +13,6 @@ class InvitationPolicy
 
     /**
      * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  string  $ability
-     * @param  mixed  $model
-     * @return void|bool
      */
     public function before(Admin $admin, $ability, mixed $model)
     {
@@ -27,71 +23,49 @@ class InvitationPolicy
 
     /**
      * Determine whether the admin can view any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-invitation');
+        return $admin->hasPermissionTo('viewAny-invitation') || Employee::find($admin->id)?->can('viewAny-invitation');
     }
 
     /**
      * Determine whether the admin can view the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Invitation  $invitation
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(Admin $admin, Invitation $invitation)
     {
-        return $admin->hasPermissionTo('view-invitation');
+        return $admin->hasPermissionTo('view-invitation') || Employee::find($admin->id)?->can('view-invitation');
     }
 
     /**
      * Determine whether the admin can create models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-invitation');
+        return $admin->hasPermissionTo('create-invitation') || Employee::find($admin->id)?->can('create-invitation');
     }
 
     /**
      * Determine whether the admin can update the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Invitation  $invitation
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Admin $admin, Invitation $invitation)
     {
-        return $admin->hasPermissionTo('update-invitation');
+        return $admin->hasPermissionTo('update-invitation') || Employee::find($admin->id)?->can('update-invitation');
     }
 
     /**
      * Determine whether the user can toggle the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Invitation  $invitation
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function toggle(Admin $admin, Invitation $invitation)
     {
-        return $admin->hasPermissionTo('update-invitation');
+        return $admin->hasPermissionTo('update-invitation') || Employee::find($admin->id)?->can('update-invitation');
     }
 
     /**
      * Determine whether the admin can delete the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Invitation  $invitation
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(Admin $admin, Invitation $invitation)
     {
-        return $admin->hasPermissionTo('delete-invitation');
+        return $admin->hasPermissionTo('delete-invitation') || Employee::find($admin->id)?->can('delete-invitation');
     }
 }

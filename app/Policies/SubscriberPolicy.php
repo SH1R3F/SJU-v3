@@ -2,8 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\Subscriber;
 use App\Models\Admin;
+use App\Models\Employee;
+use App\Models\Subscriber;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SubscriberPolicy
@@ -12,11 +13,6 @@ class SubscriberPolicy
 
     /**
      * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  string  $ability
-     * @param  mixed  $model
-     * @return void|bool
      */
     public function before(Admin $admin, $ability, mixed $model)
     {
@@ -27,74 +23,53 @@ class SubscriberPolicy
 
     /**
      * Determine whether the admin can view any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-subscriber');
+        return $admin->hasPermissionTo('viewAny-subscriber') || Employee::find($admin->id)?->can('viewAny-subscriber');
     }
 
     /**
      * Determine whether the admin can export any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function export(Admin $admin)
     {
-        return $admin->hasPermissionTo('export-subscriber');
+        return $admin->hasPermissionTo('export-subscriber') || Employee::find($admin->id)?->can('export-subscriber');
     }
 
     /**
      * Determine whether the admin can view the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Subscriber  $subscriber
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(Admin $admin, Subscriber $subscriber)
     {
-        return $admin->hasPermissionTo('view-subscriber');
+        return $admin->hasPermissionTo('view-subscriber') || Employee::find($admin->id)?->can('view-subscriber');
         //
     }
 
     /**
      * Determine whether the admin can create models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-subscriber');
+        return $admin->hasPermissionTo('create-subscriber') || Employee::find($admin->id)?->can('create-subscriber');
         //
     }
 
     /**
      * Determine whether the admin can update the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Subscriber  $subscriber
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Admin $admin, Subscriber $subscriber)
     {
-        return $admin->hasPermissionTo('update-subscriber');
+        return $admin->hasPermissionTo('update-subscriber') || Employee::find($admin->id)?->can('update-subscriber');
         //
     }
 
     /**
      * Determine whether the admin can delete the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Subscriber  $subscriber
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(Admin $admin, Subscriber $subscriber)
     {
-        return $admin->hasPermissionTo('delete-subscriber');
+        return $admin->hasPermissionTo('delete-subscriber') || Employee::find($admin->id)?->can('delete-subscriber');
         //
     }
 }

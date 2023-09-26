@@ -157,6 +157,12 @@
     "Create employee": "إنشاء موظف",
     "Employee created successfully": "تم إنشاء الموظف بنجاح",
     "Employee": "موظف",
+    "Edit employee": "تعديل موظف",
+    "Employee updated successfully": "تم تعديل الموظف بنجاح",
+    "Employee deleted successfully": "تم حذف الموظف بنجاح",
+    "Employees": "الموظفين",
+    "Edit permissions": "تعديل الصلاحيات",
+    "Permissions": "الصلاحيات",
 
     "--------------- Members management -------------": "",
     "All members": "كل الأعضاء",

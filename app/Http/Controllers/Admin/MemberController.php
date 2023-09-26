@@ -529,7 +529,7 @@ class MemberController extends Controller
     public function chuncks()
     {
         $this->authorize('notify', Member::class);
-        $members = Member::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+        $members = Member::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
             ->filter(request())
             ->when(
                 app()->getLocale() == 'ar',

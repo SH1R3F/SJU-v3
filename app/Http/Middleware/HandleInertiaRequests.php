@@ -12,16 +12,19 @@ use App\Models\Article;
 use App\Models\Invoice;
 use Inertia\Middleware;
 use App\Models\Category;
+use App\Models\Employee;
 use App\Models\Volunteer;
 use App\Models\Invitation;
 use App\Models\SiteOption;
 use App\Models\Subscriber;
+use App\Models\Competition;
 use App\Models\TrainingBag;
 use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Course\Course;
 use App\Models\Course\Template;
+use App\Models\MembershipTransfer;
 use Spatie\Permission\Models\Role;
 use App\Models\Course\Questionnaire;
 use Illuminate\Support\Facades\Auth;
@@ -30,8 +33,6 @@ use App\Http\Resources\MemberResource;
 use App\Models\TechnicalSupportTicket;
 use App\Http\Resources\VolunteerResource;
 use App\Http\Resources\SubscriberResource;
-use App\Models\Competition;
-use App\Models\MembershipTransfer;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -115,10 +116,14 @@ class HandleInertiaRequests extends Middleware
      */
     private function adminPermissions(Admin $admin)
     {
+        if (!!$admin->roles && Employee::find($admin->id)?->hasRole('Employee')) {
+            $admin = Employee::find($admin->id);
+        }
         return [
             'options' => $admin->can('manage', SiteOption::class),
             'roles' => $admin->can('viewAny', Role::class),
             'admins' => $admin->can('viewAny', Admin::class),
+            'employees' => $admin->can('viewAny', Employee::class),
             'acceptedMembers' => $admin->can('viewAny', Member::class),
             'branchApproval' => $admin->can('viewBranch', Member::class),
             'adminApproval' => $admin->can('viewAcceptance', Member::class),

@@ -2,8 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\Course\Questionnaire;
 use App\Models\Admin;
+use App\Models\Employee;
+use App\Models\Course\Questionnaire;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class QuestionnairePolicy
@@ -12,11 +13,6 @@ class QuestionnairePolicy
 
     /**
      * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  string  $ability
-     * @param  mixed  $model
-     * @return void|bool
      */
     public function before(Admin $admin, $ability, mixed $model)
     {
@@ -32,59 +28,41 @@ class QuestionnairePolicy
 
     /**
      * Determine whether the admin can view any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-questionnaire');
+        return $admin->hasPermissionTo('viewAny-questionnaire') || Employee::find($admin->id)?->can('viewAny-questionnaire');
     }
 
     /**
      * Determine whether the admin can view the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Course\Questionnaire  $questionnaire
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(Admin $admin, Questionnaire $questionnaire)
     {
-        return $admin->hasPermissionTo('view-questionnaire');
+        return $admin->hasPermissionTo('view-questionnaire') || Employee::find($admin->id)?->can('view-questionnaire');
     }
 
     /**
      * Determine whether the admin can create models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-questionnaire');
+        return $admin->hasPermissionTo('create-questionnaire') || Employee::find($admin->id)?->can('create-questionnaire');
     }
 
     /**
      * Determine whether the admin can update the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Course\Questionnaire  $questionnaire
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Admin $admin, Questionnaire $questionnaire)
     {
-        return $admin->hasPermissionTo('update-questionnaire');
+        return $admin->hasPermissionTo('update-questionnaire') || Employee::find($admin->id)?->can('update-questionnaire');
     }
 
     /**
      * Determine whether the admin can delete the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Course\Questionnaire  $questionnaire
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(Admin $admin, Questionnaire $questionnaire)
     {
-        return $admin->hasPermissionTo('delete-questionnaire');
+        return $admin->hasPermissionTo('delete-questionnaire') || Employee::find($admin->id)?->can('delete-questionnaire');
     }
 }

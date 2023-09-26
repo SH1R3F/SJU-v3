@@ -42,7 +42,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('course_branch_id', Auth::guard('admin')->user()->branch_id))
+        $courses = Course::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('course_branch_id', Auth::guard('admin')->user()->branch_id))
             ->filter(request())
             ->addSelect([
                 'course_type' => Type::select('name')->whereColumn('courses_types.id', 'courses.course_type_id')->take(1),
@@ -72,7 +72,7 @@ class CourseController extends Controller
     {
         $this->authorize('viewAny', Course::class);
 
-        $courses = Course::when(Auth::user()->hasRole('Branch manager'), fn ($query) => $query->where('course_branch_id', Auth::guard('admin')->user()->branch_id))
+        $courses = Course::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('course_branch_id', Auth::guard('admin')->user()->branch_id))
             ->filter(request())
             ->addSelect([
                 'course_type' => Type::select('name')->whereColumn('courses_types.id', 'courses.course_type_id')->take(1),

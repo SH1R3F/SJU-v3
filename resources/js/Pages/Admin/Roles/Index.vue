@@ -197,6 +197,29 @@ const editRole = (role) => {
                                                     </div>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Employees management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="listEmployee" v-model="addForm.permissions['viewAny-employee']" />
+                                                            <label class="form-check-label" for="listEmployee"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="createEmployee" v-model="addForm.permissions['create-employee']" />
+                                                            <label class="form-check-label" for="createEmployee"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="updateEmployee" v-model="addForm.permissions['update-employee']" />
+                                                            <label class="form-check-label" for="updateEmployee"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="deleteEmployee" v-model="addForm.permissions['delete-employee']" />
+                                                            <label class="form-check-label" for="deleteEmployee"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                             <!-- Members permission -->
                                             <tr>
                                                 <td rowspan="3" class="text-nowrap fw-semibold">{{ __('Members management') }}</td>
@@ -825,6 +848,29 @@ const editRole = (role) => {
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" id="editnotifyAdmin" v-model="editForm.permissions['notify-admin']" />
                                                             <label class="form-check-label" for="editnotifyAdmin"> {{ __('Notify') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Employees management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistEmployee" v-model="editForm.permissions['viewAny-employee']" />
+                                                            <label class="form-check-label" for="editlistEmployee"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreateEmployee" v-model="editForm.permissions['create-employee']" />
+                                                            <label class="form-check-label" for="editcreateEmployee"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editupdateEmployee" v-model="editForm.permissions['update-employee']" />
+                                                            <label class="form-check-label" for="editupdateEmployee"> {{ __('Edit') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteEmployee" v-model="editForm.permissions['delete-employee']" />
+                                                            <label class="form-check-label" for="editdeleteEmployee"> {{ __('Delete') }} </label>
                                                         </div>
                                                     </div>
                                                 </td>

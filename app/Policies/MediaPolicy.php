@@ -2,8 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\Media;
 use App\Models\Admin;
+use App\Models\Media;
+use App\Models\Employee;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MediaPolicy
@@ -12,11 +13,6 @@ class MediaPolicy
 
     /**
      * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  string  $ability
-     * @param  mixed  $model
-     * @return void|bool
      */
     public function before(Admin $admin, $ability, mixed $model)
     {
@@ -29,59 +25,41 @@ class MediaPolicy
 
     /**
      * Determine whether the admin can view any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-media');
+        return $admin->hasPermissionTo('viewAny-media') || Employee::find($admin->id)?->can('viewAny-media');
     }
 
     /**
      * Determine whether the admin can view the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Media  $media
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(Admin $admin, Media $media)
     {
-        return $admin->hasPermissionTo('viewAny-media');
+        return $admin->hasPermissionTo('viewAny-media') || Employee::find($admin->id)?->can('viewAny-media');
     }
 
     /**
      * Determine whether the admin can create models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-media');
+        return $admin->hasPermissionTo('create-media') || Employee::find($admin->id)?->can('create-media');
     }
 
     /**
      * Determine whether the admin can update the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Media  $media
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Admin $admin, Media $media)
     {
-        return $admin->hasPermissionTo('viewAny-media');
+        return $admin->hasPermissionTo('viewAny-media') || Employee::find($admin->id)?->can('viewAny-media');
     }
 
     /**
      * Determine whether the admin can delete the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Media  $media
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(Admin $admin, Media $media)
     {
-        return $admin->hasPermissionTo('delete-media');
+        return $admin->hasPermissionTo('delete-media') || Employee::find($admin->id)?->can('delete-media');
     }
 }

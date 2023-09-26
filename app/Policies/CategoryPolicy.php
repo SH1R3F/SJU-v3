@@ -3,6 +3,8 @@
 namespace App\Policies;
 
 use App\Models\Admin;
+use App\Models\Category;
+use App\Models\Employee;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CategoryPolicy
@@ -11,11 +13,6 @@ class CategoryPolicy
 
     /**
      * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  string  $ability
-     * @param  mixed  $model
-     * @return void|bool
      */
     public function before(Admin $admin, $ability, mixed $model)
     {
@@ -28,59 +25,41 @@ class CategoryPolicy
 
     /**
      * Determine whether the admin can view any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-category');
+        return $admin->hasPermissionTo('viewAny-category') || Employee::find($admin->id)?->can('viewAny-category');
     }
 
     /**
      * Determine whether the admin can view the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function view(Admin $admin, Category $category)
     {
-        return $admin->hasPermissionTo('view-category');
+        return $admin->hasPermissionTo('view-category') || Employee::find($admin->id)?->can('view-category');
     }
 
     /**
      * Determine whether the admin can create models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-category');
+        return $admin->hasPermissionTo('create-category') || Employee::find($admin->id)?->can('create-category');
     }
 
     /**
      * Determine whether the admin can update the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(Admin $admin, Category $category)
     {
-        return $admin->hasPermissionTo('update-category');
+        return $admin->hasPermissionTo('update-category') || Employee::find($admin->id)?->can('update-category');
     }
 
     /**
      * Determine whether the admin can delete the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(Admin $admin, Category $category)
     {
-        return $admin->hasPermissionTo('delete-category');
+        return $admin->hasPermissionTo('delete-category') || Employee::find($admin->id)?->can('delete-category');
     }
 }

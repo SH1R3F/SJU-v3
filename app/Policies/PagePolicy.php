@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Page;
 use App\Models\Admin;
+use App\Models\Employee;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PagePolicy
@@ -12,11 +13,6 @@ class PagePolicy
 
     /**
      * Perform pre-authorization checks.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  string  $ability
-     * @param  mixed  $model
-     * @return void|bool
      */
     public function before(Admin $admin, $ability, mixed $model)
     {
@@ -29,59 +25,44 @@ class PagePolicy
 
     /**
      * Determine whether the admin can view any models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(Admin $admin)
     {
-        return $admin->hasPermissionTo('viewAny-page');
+        return $admin->hasPermissionTo('viewAny-page') || Employee::find($admin->id)?->can('viewAny-page');
     }
 
     /**
      * Determine whether the admin can view the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Page  $page
-     * @return \Illuminate\Auth\Access\Response|bool
+
      */
     public function view(Admin $admin, Page $page)
     {
-        return $admin->hasPermissionTo('view-page');
+        return $admin->hasPermissionTo('view-page') || Employee::find($admin->id)?->can('view-page');
     }
 
     /**
      * Determine whether the admin can create models.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(Admin $admin)
     {
-        return $admin->hasPermissionTo('create-page');
+        return $admin->hasPermissionTo('create-page') || Employee::find($admin->id)?->can('create-page');
     }
 
     /**
      * Determine whether the admin can update the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Page  $page
-     * @return \Illuminate\Auth\Access\Response|bool
+
      */
     public function update(Admin $admin, Page $page)
     {
-        return $admin->hasPermissionTo('update-page');
+        return $admin->hasPermissionTo('update-page') || Employee::find($admin->id)?->can('update-page');
     }
 
     /**
      * Determine whether the admin can delete the model.
-     *
-     * @param  \App\Models\Admin  $admin
-     * @param  \App\Models\Page  $page
-     * @return \Illuminate\Auth\Access\Response|bool
+
      */
     public function delete(Admin $admin, Page $page)
     {
-        return $admin->hasPermissionTo('delete-page');
+        return $admin->hasPermissionTo('delete-page') || Employee::find($admin->id)?->can('delete-page');
     }
 }
