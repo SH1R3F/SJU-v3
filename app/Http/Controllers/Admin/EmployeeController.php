@@ -7,6 +7,7 @@ use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AdminResource;
+use App\Http\Requests\EmployeeRequest;
 use App\Http\Resources\BranchResource;
 
 class EmployeeController extends Controller
@@ -42,23 +43,26 @@ class EmployeeController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        $branches = Branch::orderBy('id')->get();
+
+        return inertia('Admin/Employees/Create', [
+            'branches' => BranchResource::collection($branches),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['password'] = bcrypt($data['password']);
+        $employee = Employee::create($data);
+        $employee->assignRole('Employee');
+        return redirect()->route('admin.employees.index')->with('message', __('Employee created successfully'));
     }
 
     /**

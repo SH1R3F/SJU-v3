@@ -2,7 +2,6 @@
 import { useForm } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
-    roles: Object,
     branches: Object,
 });
 
@@ -13,14 +12,13 @@ const form = useForm({
     email: '',
     mobile: '',
     branch_id: '',
-    role: '',
     password: '',
     password_confirmation: '',
 });
 </script>
 
 <template>
-    <Head :title="__('Create moderator')" />
+    <Head :title="__('Create employee')" />
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
@@ -34,7 +32,6 @@ const form = useForm({
                                 <img class="img-fluid rounded mb-3 pt-1 mt-4" src="/img/admin.png" height="100" width="100" alt="User avatar" />
                                 <div class="user-info text-center">
                                     <h4 class="mb-2">{{ `${form.fname} ${form.lname}` }}</h4>
-                                    <span class="badge bg-label-secondary mt-1">{{ __(roles.data.find((r) => r.name === form.role)?.name) }}</span>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +46,7 @@ const form = useForm({
                                     <span class="fw-semibold me-1">{{ __('Email') }}:</span>
                                     <span>{{ form.email }}</span>
                                 </li>
-                                <li class="mb-2 pt-1">
+                                <li v-if="$page.props.authUser.data.role === 'Site admin'" class="mb-2 pt-1">
                                     <span class="fw-semibold me-1">{{ __('Branch') }}:</span>
                                     <span>{{ branches.data.find((b) => b.id === form.branch_id)?.name }}</span>
                                 </li>
@@ -69,9 +66,9 @@ const form = useForm({
             <div class="col-xl-9 col-lg-7 col-md-7">
                 <!-- User information -->
                 <div class="card mb-4">
-                    <h5 class="card-header">{{ __('Create moderator') }}</h5>
+                    <h5 class="card-header">{{ __('Create employee') }}</h5>
                     <div class="card-body">
-                        <form method="POST" @submit.prevent="form.post(route('admin.admins.store'))">
+                        <form method="POST" @submit.prevent="form.post(route('admin.employees.store'))">
                             <!-- Full name -->
                             <div class="row">
                                 <div class="mb-3 col-12 col-sm-6">
@@ -122,18 +119,9 @@ const form = useForm({
                             </div>
                             <!-- Email -->
 
-                            <!-- Role and branch -->
+                            <!-- branch -->
                             <div class="row">
-                                <div class="mb-3 col-12 col-sm-6">
-                                    <label for="role" class="form-label">{{ __('Role') }}</label>
-                                    <div class="position-relative">
-                                        <select v-model="form.role" id="role" class="select2 form-select" data-allow-clear="true" tabindex="-1" aria-hidden="true">
-                                            <option v-for="role in roles.data" :key="role.id" :value="role.name">{{ __(role.name) }}</option>
-                                        </select>
-                                    </div>
-                                    <span class="fs-6 text-danger" v-if="form.errors.role">{{ form.errors.role }}</span>
-                                </div>
-                                <div class="mb-3 col-12 col-sm-6">
+                                <div v-if="$page.props.authUser.data.role === 'Site admin'" class="mb-3 col-12">
                                     <label for="branch" class="form-label">{{ __('Branch') }}</label>
                                     <div class="position-relative">
                                         <select v-model="form.branch_id" id="branch" class="select2 form-select" data-allow-clear="true" tabindex="-1" aria-hidden="true">
@@ -143,7 +131,7 @@ const form = useForm({
                                     <span class="fs-6 text-danger" v-if="form.errors.branch_id">{{ form.errors.branch_id }}</span>
                                 </div>
                             </div>
-                            <!-- Role and branch -->
+                            <!-- branch -->
 
                             <!-- Password -->
                             <div class="row">
@@ -182,7 +170,7 @@ const form = useForm({
 
                             <div>
                                 <button type="submit" class="btn btn-primary me-2">{{ __('Create') }}</button>
-                                <Link :href="route('admin.admins.index')" as="button" type="reset" class="btn btn-label-secondary me-2">{{ __('Cancel') }}</Link>
+                                <Link :href="route('admin.employees.index')" as="button" type="reset" class="btn btn-label-secondary me-2">{{ __('Cancel') }}</Link>
                             </div>
                         </form>
                     </div>

@@ -103,13 +103,12 @@ const sortBy = (column) => {
                             <th @click.prevent="sortBy('name')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'name' }">{{ __('User') }}</th>
                             <th @click.prevent="sortBy('username')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'username' }">{{ __('Username') }}</th>
                             <th @click.prevent="sortBy('mobile')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'mobile' }">{{ __('Mobile') }}</th>
-                            <th @click.prevent="sortBy('role')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'role' }">{{ __('Role') }}</th>
                             <th v-if="$page.props.authUser.data.role === 'Site admin'" @click.prevent="sortBy('branch_id')" class="cursor-pointer" :class="{ 'link-primary': filters.order == 'branch_id' }">{{ __('Branch') }}</th>
                             <th>{{ __('Actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="employee in employees.data" :key="admin.id">
+                        <tr v-for="employee in employees.data" :key="employee.id">
                             <td class="sorting_1">
                                 <div class="d-flex justify-content-start align-items-center user-name">
                                     <div class="avatar-wrapper">
@@ -127,9 +126,6 @@ const sortBy = (column) => {
                             </td>
                             <td>
                                 {{ employee.mobile }}
-                            </td>
-                            <td>
-                                {{ __(employee.role) }}
                             </td>
                             <td v-if="$page.props.authUser.data.role === 'Site admin'">
                                 {{ __(employee.branch?.name) }}

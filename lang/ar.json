@@ -155,6 +155,8 @@
     "--------------- Employees management -------------": "",
     "Employees management": "إدارة الموظفين",
     "Create employee": "إنشاء موظف",
+    "Employee created successfully": "تم إنشاء الموظف بنجاح",
+    "Employee": "موظف",
 
     "--------------- Members management -------------": "",
     "All members": "كل الأعضاء",
