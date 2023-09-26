@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\AdminResource;
 use App\Http\Resources\MemberResource;
 use App\Models\TechnicalSupportTicket;
+use App\Http\Resources\EmployeeResource;
 use App\Http\Resources\VolunteerResource;
 use App\Http\Resources\SubscriberResource;
 
@@ -76,7 +77,13 @@ class HandleInertiaRequests extends Middleware
         $notifications = [];
         if ($request->is('admin*') && Auth::guard('admin')->check()) {
             $admin = Auth::guard('admin')->user();
-            $auth = (new AdminResource($admin))->additional(['can_view' => $this->adminPermissions($admin)]);
+
+            if (!!$admin->roles && Employee::find($admin->id)?->hasRole('Employee')) {
+                $auth = (new EmployeeResource(Employee::find($admin->id)))->additional(['can_view' => $this->adminPermissions($admin)]);
+            } else {
+                $auth = (new AdminResource($admin))->additional(['can_view' => $this->adminPermissions($admin)]);
+            }
+
             $notifications = $admin->unreadNotifications()->orderBy('created_at', 'DESC')->get();
         }
         if (Auth::guard('member')->check()) {
