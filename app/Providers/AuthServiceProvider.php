@@ -13,6 +13,7 @@ use App\Models\Member;
 use App\Models\Article;
 use App\Models\Invoice;
 use App\Models\Category;
+use App\Models\Employee;
 use App\Models\Invitation;
 use App\Models\SiteOption;
 use App\Models\Subscriber;
@@ -31,6 +32,7 @@ use App\Models\Course\Template;
 use App\Policies\ArticlePolicy;
 use App\Policies\InvoicePolicy;
 use App\Policies\CategoryPolicy;
+use App\Policies\EmployeePolicy;
 use App\Policies\TemplatePolicy;
 use App\Policies\VolunteerPolicy;
 use App\Models\MembershipTransfer;
@@ -76,6 +78,7 @@ class AuthServiceProvider extends ServiceProvider
         Invitation::class => InvitationPolicy::class,
         MembershipTransfer::class => MembershipTransferPolicy::class,
         Competition::class => CompetitionPolicy::class,
+        Employee::class => EmployeePolicy::class,
     ];
 
     /**

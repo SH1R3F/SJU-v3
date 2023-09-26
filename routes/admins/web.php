@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\VolunteerController;
 use App\Http\Controllers\Admin\InvitationController;
@@ -80,6 +81,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('admins/export', [AdminController::class, 'export'])->name('admins.export');
         Route::post('admins/{admin}/toggle', [AdminController::class, 'toggle'])->name('admins.toggle');
         Route::resource('admins', AdminController::class);
+
+        // Manage employees
+        Route::resource('employees', EmployeeController::class);
+
 
         // Send notification to members
         Route::get('members/notify', [MemberController::class, 'showNotifyForm'])->name('members.notify');
