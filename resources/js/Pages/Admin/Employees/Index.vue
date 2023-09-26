@@ -127,7 +127,7 @@ const editPermissions = (employee) => {
                                         <div class="avatar avatar-sm me-3"><img src="/img/admin.png" alt="Avatar" class="rounded-circle" /></div>
                                     </div>
                                     <div class="d-flex flex-column">
-                                        <a href="app-user-view-account.html" class="text-body text-truncate"
+                                        <a href="#" class="text-body text-truncate"
                                             ><span class="fw-semibold">{{ employee.fullName }}</span></a
                                         ><small class="text-muted">{{ employee.email }}</small>
                                     </div>
