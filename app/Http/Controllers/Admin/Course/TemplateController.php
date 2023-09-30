@@ -20,8 +20,6 @@ class TemplateController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -41,8 +39,6 @@ class TemplateController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -51,10 +47,6 @@ class TemplateController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Course\TemplateRequest  $request
-     * @param  \App\Services\TemplateService  $service
-     * @return \Illuminate\Http\Response
      */
     public function store(TemplateRequest $request, TemplateService $service)
     {
@@ -66,21 +58,7 @@ class TemplateController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Course\Template  $template
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Template $template)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Course\Template  $template
-     * @return \Illuminate\Http\Response
      */
     public function edit(Template $template)
     {
@@ -91,11 +69,6 @@ class TemplateController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Course\TemplateRequest  $request
-     * @param  \App\Models\Course\Template  $template
-     * @param  \App\Services\TemplateService  $service
-     * @return \Illuminate\Http\Response
      */
     public function update(TemplateRequest $request, Template $template, TemplateService $service)
     {
@@ -108,14 +81,12 @@ class TemplateController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Course\Template  $template
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Template $template)
     {
         // Delete files
-        Storage::delete($template->file ?? '', $template->preview ?? '');
+        Storage::delete($template->file ?? '');
+        Storage::delete($template->preview ?? '');
         $template->delete();
         return redirect()->back()->with('message', __('Template deleted successfully'));
     }

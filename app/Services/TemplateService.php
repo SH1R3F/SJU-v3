@@ -11,7 +11,7 @@ class TemplateService
 {
     /**
      * Create template
-     * 
+     *
      * @param array  $data
      */
     public function create(array $data)
@@ -31,7 +31,7 @@ class TemplateService
 
     /**
      * Update template
-     * 
+     *
      * @param array  $data
      * @param \App\Models\Course\Template  $template
      */
@@ -57,7 +57,7 @@ class TemplateService
 
     /**
      * Prepare the preview file
-     * 
+     *
      * @param \App\Models\Course\Template  $template
      */
     private function preview(Template $template)
@@ -90,7 +90,7 @@ class TemplateService
 
     /**
      * Prepare fields HTML
-     * 
+     *
      * @param \App\Models\Course\Template  $template
      */
     private function fields(Template $template)
@@ -133,7 +133,7 @@ class TemplateService
 
     /**
      * Prepare QR code HTML
-     * 
+     *
      * @param \App\Models\Course\Template  $template
      */
     private function QRCode(Template $template)

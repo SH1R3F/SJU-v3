@@ -184,11 +184,19 @@ const variable = {
                                     <label class="form-label" :for="`fontfamily-${i}`">{{ __('Font family') }}</label>
                                     <div class="input-group">
                                         <select class="form-control m-select2-no" :id="`fontfamily-${i}`" v-model="variable.fontfamily">
+                                            <option value="cairo">{{ __('Cairo Arabic') }}</option>
                                             <option value="gess">{{ __('gess Arabic') }}</option>
                                             <option value="almarai">{{ __('almarai Arabic') }}</option>
                                             <option value="tajawal">{{ __('tajawal Arabic') }}</option>
                                             <option value="amiri">{{ __('amiri Arabic') }}</option>
                                             <option value="xbriyaz">{{ __('xbriyaz Arabic') }}</option>
+                                            <option value="pointart">{{ __('Pointart Arabic') }}</option>
+                                            <option value="khayma">{{ __('khayma Arabic') }}</option>
+                                            <option value="diwani">{{ __('Diwani Arabic') }}</option>
+                                            <option value="lemonada">{{ __('Lemonada Arabic') }}</option>
+                                            <option value="kufam">{{ __('Kufam Arabic') }}</option>
+                                            <option value="marhey">{{ __('Marhey Arabic') }}</option>
+                                            <option value="rakkas">{{ __('Rakkas Arabic') }}</option>
                                             <option value="dejavusans">{{ __('dejavusans English') }}</option>
                                         </select>
                                     </div>

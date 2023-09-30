@@ -63,6 +63,42 @@ return [
             'useOTL' => 0xFF,
             'useKashida' => 75,
         ],
+        "pointart" => [
+            'R' => "pointart-sans-serif-Bold.ttf",
+            'B' => "pointart-sans-serif-Bold.ttf",
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
+        "khayma" => [
+            'R' => "KhaymaDEMO-Regular.ttf",
+            'useOTL' => 0xFF,
+        ],
+        "diwani" => [
+            'R' => "alfont_com_AlFont_com_Diwani-Letter.ttf",
+            'B' => "alfont_com_AlFont_com_Diwani-Letter.ttf",
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
+        "lemonada" => [
+            'R' => "Lemonada-Regular.ttf",
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
+        "kufam" => [
+            'R' => "Kufam-Regular.ttf",
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
+        "marhey" => [
+            'R' => "Marhey-Regular.ttf",
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
+        "rakkas" => [
+            'R' => "Rakkas-Regular.ttf",
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
         "gess" => [
             'R' => "GE_SS_TWO_MEDIUM.ttf",
             'B' => "GE_SS_TWO_MEDIUM.ttf",
