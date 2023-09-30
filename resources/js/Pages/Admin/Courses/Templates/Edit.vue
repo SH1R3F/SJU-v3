@@ -198,6 +198,7 @@ const variable = {
                                             <option value="kufam">{{ __('Kufam Arabic') }}</option>
                                             <option value="marhey">{{ __('Marhey Arabic') }}</option>
                                             <option value="rakkas">{{ __('Rakkas Arabic') }}</option>
+                                            <option value="granada">{{ __('Granada Arabic') }}</option>
                                             <option value="dejavusans">{{ __('dejavusans English') }}</option>
                                         </select>
                                     </div>

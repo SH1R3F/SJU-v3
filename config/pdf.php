@@ -94,6 +94,16 @@ return [
             'useOTL' => 0xFF,
             'useKashida' => 75,
         ],
+        "granada" => [
+            'R' => "Granada-Regular.ttf",
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
+        "29ltbukraregular" => [
+            'R' => "29ltbukraregular.ttf",
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ],
         "rakkas" => [
             'R' => "Rakkas-Regular.ttf",
             'useOTL' => 0xFF,
