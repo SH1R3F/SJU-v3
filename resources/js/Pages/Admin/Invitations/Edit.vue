@@ -134,17 +134,7 @@ const form = useForm({
                                 <div class="mb-3 col-12 col-md-2">
                                     <label class="form-label" for="fontsize">{{ __('Font size') }}</label>
                                     <div class="input-group">
-                                        <select class="form-control m-select2-no" id="fontsize"
-                                            v-model="form.variables.fontsize">
-                                            <option value="40">40</option>
-                                            <option value="35">35</option>
-                                            <option value="30">30</option>
-                                            <option value="25">25</option>
-                                            <option value="20">20</option>
-                                            <option value="18">18</option>
-                                            <option value="16">16</option>
-                                            <option value="14">14</option>
-                                        </select>
+                                        <input class="form-control" type="number" id="fontsize" v-model="form.variables.fontsize" :placeholder="__('Font size')" />
                                     </div>
                                 </div>
                                 <div class="mb-3 col-12 col-md-2">
