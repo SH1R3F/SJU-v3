@@ -1,9 +1,16 @@
 <script setup>
+import { computed } from 'vue';
+
 const props = defineProps({
     submission: Object,
 });
 
-console.log(props.submission);
+const linedText = computed(() => {
+    return (html) => {
+        return html.replace(/<(?!\/?br( |>))/g, "&lt;").replace(/(?<=&lt;[^>]+)>/g, "&gt;")
+    }
+});
+
 </script>
 
 <template>
@@ -31,7 +38,7 @@ console.log(props.submission);
                                 <tbody>
                                     <tr v-for="answer in props.submission.answers" :key="answer.id">
                                         <td class="text-nowrap">{{ answer.competition_field.title }}</td>
-                                        <td class="text-nowrap" v-if="answer.competition_field.type === 'text'">{{ answer.answer_text }}</td>
+                                        <td class="text-nowrap" v-if="answer.competition_field.type === 'text'" v-html="linedText(answer.answer_text)"></td>
                                         <td class="text-nowrap" v-if="answer.competition_field.type === 'date'">{{ answer.answer_date }}</td>
                                         <td class="text-nowrap" v-if="answer.competition_field.type === 'file'">
                                             <a :href="answer.answer_file" target="_blank">{{__('View')}}</a>

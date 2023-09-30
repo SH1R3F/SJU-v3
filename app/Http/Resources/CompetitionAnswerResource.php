@@ -20,6 +20,7 @@ class CompetitionAnswerResource extends JsonResource
         return array_merge(
             parent::toArray($request),
             [
+                'answer_text' => nl2br($this->answer_text),
                 'answer_file' => $this->answer_file ? Storage::url($this->answer_file) : $this->answer_file
             ]
         );
