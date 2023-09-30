@@ -31,8 +31,8 @@ const linedText = computed(() => {
                             <table class="table m-0">
                                 <thead>
                                     <tr>
-                                        <th>{{ __('Question') }}</th>
-                                        <th>{{ __('Answer') }}</th>
+                                        <th class="cell-fit">{{ __('Question') }}</th>
+                                        <th class="cell-fit">{{ __('Answer') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
