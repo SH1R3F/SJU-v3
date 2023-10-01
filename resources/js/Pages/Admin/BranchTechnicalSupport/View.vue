@@ -22,7 +22,6 @@ const form = useForm({
     body: '',
     attachment: '',
 });
-console.log(props.ticket);
 </script>
 
 <script defer>
