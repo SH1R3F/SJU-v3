@@ -40,9 +40,9 @@ const form = useForm({
                             <!-- Full name -->
                             <div class="row">
                                 <div class="mb-3 col-12 col-sm-6">
-                                    <label class="form-label" for="fname">{{ __('First name') }}</label>
+                                    <label class="form-label" for="fname_ar">{{ __('First name') }}</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" id="fname" v-model="form.fname_ar" :placeholder="__('First name')" />
+                                        <input class="form-control" type="text" id="fname_ar" v-model="form.fname_ar" :placeholder="__('First name')" />
                                     </div>
                                     <span class="fs-6 text-danger" v-if="form.errors.fname_ar">{{ form.errors.fname_ar }}</span>
                                 </div>

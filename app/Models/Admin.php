@@ -24,8 +24,8 @@ class Admin extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'fname',
-        'lname',
+        'fname_ar',
+        'lname_ar',
         'username',
         'email',
         'mobile',
@@ -47,7 +47,7 @@ class Admin extends Authenticatable
 
     public function scopeFilter($query, Request $request)
     {
-        return $query->when($request->search, fn ($builder, $search) => $builder->whereRaw("CONCAT(fname, ' ', lname) LIKE '%{$search}%'"))
+        return $query->when($request->search, fn ($builder, $search) => $builder->whereRaw("CONCAT(fname_ar, ' ', lname_ar) LIKE '%{$search}%'"))
             ->when($request->role, fn ($builder, $role) => $builder->whereHas('roles', fn ($query) => $query->where('id', $role)))
             ->when($request->branch, fn ($builder, $branch) => $builder->whereHas('branch', fn ($query) => $query->where('id', $branch)));
     }
@@ -67,7 +67,7 @@ class Admin extends Authenticatable
                         }, $direction);
                         break;
                     case 'name':
-                        return $builder->orderByRaw("CONCAT(fname, ' ', lname) $direction");
+                        return $builder->orderByRaw("CONCAT(fname_ar, ' ', lname_ar) $direction");
                         break;
                     default:
                         $order = in_array($order, \Illuminate\Support\Facades\Schema::getColumnListing($this->getTable())) ? $order : 'id';
@@ -84,7 +84,7 @@ class Admin extends Authenticatable
      */
     public function getFullNameAttribute()
     {
-        return "{$this->fname} {$this->lname}";
+        return "{$this->fname_ar} {$this->lname_ar}";
     }
 
     /**

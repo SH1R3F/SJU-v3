@@ -22,7 +22,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::whereNot('name', 'Employee')->with('users:id,fname,lname', 'permissions:id,name')->withCount('users')->get();
+        $roles = Role::whereNot('name', 'Employee')->with('users:id,fname_ar,lname_ar', 'permissions:id,name')->withCount('users')->get();
 
         return inertia('Admin/Roles/Index', [
             'roles' => RoleResource::collection($roles)->additional([

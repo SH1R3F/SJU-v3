@@ -34,11 +34,10 @@ class TechnicalSupportTicket extends Model
             ->when($request->title, fn ($builder, $title) => $builder->where('title', 'LIKE', "%$title%"))
             // Filter Full Name [ar, en]
             ->when($request->name, function ($builder, $name) {
-                return $builder->whereHas('admins', function ($query) use ($name) {
+                return $builder->whereHas('supportable', function ($query) use ($name) {
                     return $query
-                    ->where(DB::raw("CONCAT(fname, ' ', lname)"), 'LIKE', "%$name%");
-                    // ->where(DB::raw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar)"), 'LIKE', "%$name%")
-                    // ->orWhere(DB::raw("CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en)"), 'LIKE', "%$name%");
+                        ->where(DB::raw("CONCAT(IFNULL(CONCAT(fname_ar, ' '), ''), IFNULL(CONCAT(sname_ar, ' '), ''), IFNULL(CONCAT(tname_ar, ' '), ''), lname_ar)"), 'LIKE', "%$name%")
+                        ->orWhere(DB::raw("CONCAT(IFNULL(CONCAT(fname_en, ' '), ''), IFNULL(CONCAT(sname_en, ' '), ''), IFNULL(CONCAT(tname_en, ' '), ''), lname_en)"), 'LIKE', "%$name%");
                 });
             })
             // Filter by status
@@ -123,7 +122,7 @@ class TechnicalSupportTicket extends Model
                         return $builder->orderBy(function ($q) {
                             return $q->from('admins')
                                 ->whereRaw("`technical_support_tickets`.supportable_id = `admins`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Admin'")
-                                ->selectRaw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar)");
+                                ->selectRaw("CONCAT(IFNULL(CONCAT(fname_ar, ' '), ''), IFNULL(CONCAT(sname_ar, ' '), ''), IFNULL(CONCAT(tname_ar, ' '), ''), lname_ar)");
                         }, $direction);
                         break;
                     case 'manager_mobile':
