@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\TechnicalSupportMessage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Admin;
 
 class TechnicalSupportTicket extends Model
 {
@@ -33,11 +34,11 @@ class TechnicalSupportTicket extends Model
             ->when($request->title, fn ($builder, $title) => $builder->where('title', 'LIKE', "%$title%"))
             // Filter Full Name [ar, en]
             ->when($request->name, function ($builder, $name) {
-                // Operator precedence
-                return $builder->whereHas('supportable', function ($query) use ($name) {
+                return $builder->whereHas('admins', function ($query) use ($name) {
                     return $query
-                        ->where(DB::raw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar)"), 'LIKE', "%$name%")
-                        ->orWhere(DB::raw("CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en)"), 'LIKE', "%$name%");
+                    ->where(DB::raw("CONCAT(fname, ' ', lname)"), 'LIKE', "%$name%");
+                    // ->where(DB::raw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar)"), 'LIKE', "%$name%")
+                    // ->orWhere(DB::raw("CONCAT(fname_en, ' ', sname_en, ' ', tname_en, ' ', lname_en)"), 'LIKE', "%$name%");
                 });
             })
             // Filter by status
@@ -116,6 +117,20 @@ class TechnicalSupportTicket extends Model
                             return $q->from('volunteers')
                                 ->whereRaw("`technical_support_tickets`.supportable_id = `volunteers`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Volunteer'")
                                 ->selectRaw('CONCAT(mobile_key, mobile)');
+                        }, $direction);
+                        break;
+                    case 'manager':
+                        return $builder->orderBy(function ($q) {
+                            return $q->from('admins')
+                                ->whereRaw("`technical_support_tickets`.supportable_id = `admins`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Admin'")
+                                ->selectRaw("CONCAT(fname_ar, ' ', sname_ar, ' ', tname_ar, ' ', lname_ar)");
+                        }, $direction);
+                        break;
+                    case 'manager_mobile':
+                        return $builder->orderBy(function ($q) {
+                            return $q->from('admins')
+                                ->whereRaw("`technical_support_tickets`.supportable_id = `admins`.id AND `technical_support_tickets`.supportable_type = 'App\\\Models\\\Admin'")
+                                ->select('mobile');
                         }, $direction);
                         break;
                     default:

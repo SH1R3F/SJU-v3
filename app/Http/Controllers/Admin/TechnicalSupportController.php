@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Inertia\Inertia;
+use App\Models\Admin;
 use App\Models\Member;
 use App\Models\Volunteer;
 use App\Models\Subscriber;
@@ -80,6 +81,27 @@ class TechnicalSupportController extends Controller
     }
 
     /**
+     * Display branch managers tickets.
+     */
+    public function managers(Request $request)
+    {
+        $this->authorize('viewManagers', TechnicalSupportTicket::class);
+
+        $tickets = TechnicalSupportTicket::with('supportable')
+            ->where('supportable_type', Admin::class)
+            ->whereHas('supportable', fn ($query) => $query->whereNotNull('id'))
+            ->filter($request)
+            ->order($request)
+            ->paginate($request->perPage ?: 10)
+            ->withQueryString();
+
+        return inertia('Admin/TechnicalSupport/Managers', [
+            'tickets' => TechnicalSupportTicketResource::collection($tickets),
+            'filters'  => request()->only(['perPage', 'title', 'name', 'status', 'mobile', 'email', 'order', 'dir'])
+        ]);
+    }
+
+    /**
      * Export tickets.
      */
     public function export($type = 'members')
@@ -96,6 +118,10 @@ class TechnicalSupportController extends Controller
             case 'volunteers':
                 $this->authorize('viewVolunteers', TechnicalSupportTicket::class);
                 $class = Volunteer::class;
+                break;
+            case 'managers':
+                $this->authorize('viewManagers', TechnicalSupportTicket::class);
+                $class = Admin::class;
                 break;
         }
 

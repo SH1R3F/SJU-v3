@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Http\Request;
+use App\Models\TechnicalSupportTicket;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -91,13 +92,20 @@ class Admin extends Authenticatable
      */
     public function prepareMobileForSms()
     {
-        // Make sure mobile is in format +[Key][Number]
-        return '+201003384936'; // I hard code it for now
+        return "+{$this->mobile}";
     }
 
 
     public function branch(): BelongsTo
     {
         return $this->belongsTo(Branch::class);
+    }
+
+    /**
+     * Technical support tickets relationship
+     */
+    public function tickets()
+    {
+        return $this->morphMany(TechnicalSupportTicket::class, 'supportable');
     }
 }

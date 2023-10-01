@@ -68,20 +68,16 @@ export default {
                                         />
                                     </div>
                                     <div class="chat-contact-info flex-grow-1 ms-2">
-                                        <Link
-                                            :href="
+                                        <Link :href="ticket.supportable_type.includes('Admin') ? '#' :
                                                 route(
                                                     ticket.supportable_type.includes('Member')
                                                         ? 'admin.members.show'
                                                         : ticket.supportable_type.includes('Subscriber')
-                                                        ? 'admin.subscribers.show'
-                                                        : 'admin.volunteers.show',
+                                                            ? 'admin.subscribers.show'
+                                                            : 'admin.volunteers.show',
                                                     ticket.supportable.id
                                                 )
-                                            "
-                                            class="m-0"
-                                            >{{ ticket.supportable.fullName }}</Link
-                                        >
+                                            " class="m-0">{{ ticket.supportable.fullName }}</Link>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center">

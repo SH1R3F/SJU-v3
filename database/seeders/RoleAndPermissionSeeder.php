@@ -93,6 +93,7 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::updateOrCreate(['name' => 'members-ticket'], ['name' => 'members-ticket', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'subscribers-ticket'], ['name' => 'subscribers-ticket', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'volunteers-ticket'], ['name' => 'volunteers-ticket', 'guard_name' => 'admin']);
+        Permission::updateOrCreate(['name' => 'managers-ticket'], ['name' => 'managers-ticket', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'view-ticket'], ['name' => 'view-ticket', 'guard_name' => 'admin']);
         Permission::updateOrCreate(['name' => 'delete-ticket'], ['name' => 'delete-ticket', 'guard_name' => 'admin']);
 

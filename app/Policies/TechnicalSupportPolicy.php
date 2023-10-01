@@ -45,6 +45,13 @@ class TechnicalSupportPolicy
     {
         return $admin->hasPermissionTo('volunteers-ticket') || Employee::find($admin->id)?->can('volunteers-ticket');
     }
+    /**
+     * Determine whether the admin can view any tickets of branch managers.
+     */
+    public function viewManagers(Admin $admin)
+    {
+        return $admin->hasPermissionTo('managers-ticket') || Employee::find($admin->id)?->can('managers-ticket');
+    }
 
     /**
      * Determine whether the admin can view the model.

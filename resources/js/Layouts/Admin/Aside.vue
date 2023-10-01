@@ -284,6 +284,12 @@
                 </a>
                 <ul class="menu-sub">
                     <li v-if="$page.props.authUser?.can_view?.support_members" class="menu-item"
+                        :class="{ active: $page.component == 'Admin/TechnicalSupport/Managers' }">
+                        <Link :href="route('admin.tickets.managers')" class="menu-link">
+                        <div>{{ __('Branch managers tickets') }}</div>
+                        </Link>
+                    </li>
+                    <li v-if="$page.props.authUser?.can_view?.support_members" class="menu-item"
                         :class="{ active: $page.component == 'Admin/TechnicalSupport/Members' }">
                         <Link :href="route('admin.tickets.index')" class="menu-link">
                         <div>{{ __('Members tickets') }}</div>

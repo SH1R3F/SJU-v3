@@ -62,7 +62,7 @@ class TechnicalSupportTicketResource extends JsonResource
     private function withAuthorization($request)
     {
         // Only for admin panel member's resource
-        if (in_array($request->route()->getAction()['as'], ['admin.tickets.index', 'admin.tickets.subscribers', 'admin.tickets.volunteers'])) {
+        if (in_array($request->route()->getAction()['as'], ['admin.tickets.index', 'admin.tickets.subscribers', 'admin.tickets.volunteers', 'admin.tickets.managers'])) {
             return [
                 'viewable'   => $request->user()->can('view', $this->resource),
                 'deleteable' => $request->user()->can('delete', $this->resource),
