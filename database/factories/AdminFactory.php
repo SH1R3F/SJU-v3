@@ -18,8 +18,8 @@ class AdminFactory extends Factory
     public function definition()
     {
         return [
-            'fname' => $fname = fake()->firstName,
-            'lname' => $lname = fake()->lastName,
+            'fname_ar' => $fname = fake()->firstName,
+            'lname_ar' => $lname = fake()->lastName,
             'username' => Str::slug("$fname $lname"),
             'email' => fake()->unique()->safeEmail(),
             'mobile' => fake()->phoneNumber,

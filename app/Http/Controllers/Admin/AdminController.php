@@ -141,7 +141,7 @@ class AdminController extends Controller
     {
         $this->authorize('notify', Admin::class);
 
-        $admins = Admin::orderBy('id')->whereHas('roles', fn($query) => $query->whereNot('name', 'Employee'))->get(['id', 'fname', 'lname']);
+        $admins = Admin::orderBy('id')->whereHas('roles', fn($query) => $query->whereNot('name', 'Employee'))->get(['id', 'fname_ar', 'lname_ar']);
 
         return inertia('Admin/Admins/Notifications/Create', [
             'admins' => AdminResource::collection($admins)

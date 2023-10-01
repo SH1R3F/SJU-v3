@@ -27,8 +27,8 @@ class ProfileController extends Controller
     {
         $admin = Auth::guard('admin')->user();
         $data = $request->validate([
-            'fname' => ['required', 'string', 'max:255'],
-            'lname' => ['required', 'string', 'max:255'],
+            'fname_ar' => ['required', 'string', 'max:255'],
+            'lname_ar' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', Rule::unique('admins')->ignore($admin)],
             'email' => ['required', 'string', 'max:255', Rule::unique('admins')->ignore($admin)],
             'mobile' => ['required', 'numeric', 'digits_between:1,13', Rule::unique('admins')->ignore($admin)],
