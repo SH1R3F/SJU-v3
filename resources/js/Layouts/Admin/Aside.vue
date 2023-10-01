@@ -333,6 +333,16 @@
                 </Link>
             </li>
             <!-- Competitions -->
+
+            <!-- Technical support for branch managers -->
+            <li v-if="$page.props.authUser?.data.role === 'Branch manager'" class="menu-item"
+                :class="{ active: $page.component.startsWith('Admin/BranchTechnicalSupport') }">
+                <Link :href="route('admin.branch-issues.index')" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-headset"></i>
+                <div>{{ __('Technical support') }}</div>
+                </Link>
+            </li>
+            <!-- Technical support for branch managers -->
         </ul>
     </aside>
 </template>

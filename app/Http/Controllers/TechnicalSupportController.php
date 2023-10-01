@@ -30,8 +30,6 @@ class TechnicalSupportController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -43,8 +41,6 @@ class TechnicalSupportController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -53,9 +49,6 @@ class TechnicalSupportController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -82,9 +75,6 @@ class TechnicalSupportController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\TechnicalSupportTicket  $ticket
-     * @return \Illuminate\Http\Response
      */
     public function show(TechnicalSupportTicket $ticket)
     {
@@ -98,10 +88,6 @@ class TechnicalSupportController extends Controller
 
     /**
      * Store a new message to the ticket.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TechnicalSupportTicket  $ticket
-     * @return \Illuminate\Http\Response
      */
     public function message(Request $request, TechnicalSupportTicket $ticket)
     {
@@ -131,10 +117,6 @@ class TechnicalSupportController extends Controller
 
     /**
      * toggle status of a ticket.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TechnicalSupportTicket  $ticket
-     * @return \Illuminate\Http\Response
      */
     public function toggle(Request $request, TechnicalSupportTicket $ticket)
     {

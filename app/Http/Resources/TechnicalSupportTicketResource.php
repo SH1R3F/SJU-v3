@@ -2,9 +2,11 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Admin;
 use App\Models\Member;
 use App\Models\Volunteer;
 use App\Models\Subscriber;
+use App\Http\Resources\AdminResource;
 use App\Http\Resources\VolunteerResource;
 use App\Http\Resources\SubscriberResource;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -34,6 +36,8 @@ class TechnicalSupportTicketResource extends JsonResource
                         return new SubscriberResource($this->supportable);
                     } else if ($this->supportable instanceof Volunteer) {
                         return new VolunteerResource($this->supportable);
+                    } else if ($this->supportable instanceof Admin) {
+                        return new AdminResource($this->supportable);
                     }
 
                     return $this->supportable;

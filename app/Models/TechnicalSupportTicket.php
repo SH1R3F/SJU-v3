@@ -12,7 +12,7 @@ class TechnicalSupportTicket extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'status'];
+    protected $fillable = ['title', 'status', 'supportable_type', 'supportable_id'];
     protected $casts = ['status' => 'boolean'];
 
     public const STATUS_OPEN   = 0;
@@ -23,7 +23,7 @@ class TechnicalSupportTicket extends Model
 
     /**
      * Filtering
-     * 
+     *
      * @param \Illuminate\Http\Request  $request
      */
     public function scopeFilter($query, Request $request)
@@ -54,7 +54,7 @@ class TechnicalSupportTicket extends Model
 
     /**
      * Sort in admin panel
-     * 
+     *
      * @param \Illuminate\Http\Request  $request
      */
     public function scopeOrder($query, Request $request)

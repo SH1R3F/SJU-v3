@@ -18,9 +18,6 @@ class TechnicalSupportController extends Controller
 
     /**
      * Display members tickets.
-     *
-     * @param \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
@@ -42,9 +39,6 @@ class TechnicalSupportController extends Controller
 
     /**
      * Display subscribers tickets.
-     *
-     * @param \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function subscribers(Request $request)
     {
@@ -66,9 +60,6 @@ class TechnicalSupportController extends Controller
 
     /**
      * Display volunteers tickets.
-     *
-     * @param \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function volunteers(Request $request)
     {
@@ -90,9 +81,6 @@ class TechnicalSupportController extends Controller
 
     /**
      * Export tickets.
-     *
-     * @param string  $type
-     * @return \Illuminate\Http\Response
      */
     public function export($type = 'members')
     {
@@ -123,9 +111,6 @@ class TechnicalSupportController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\TechnicalSupportTicket  $ticket
-     * @return \Illuminate\Http\Response
      */
     public function show(TechnicalSupportTicket $ticket)
     {
@@ -140,9 +125,6 @@ class TechnicalSupportController extends Controller
 
     /**
      * Toggle status for a ticket.
-     *
-     * @param  \App\Models\TechnicalSupportTicket  $ticket
-     * @return \Illuminate\Http\Response
      */
     public function toggle(TechnicalSupportTicket $ticket)
     {
@@ -155,10 +137,6 @@ class TechnicalSupportController extends Controller
 
     /**
      * Toggle status for a ticket.
-     *
-     * @param \Illuminate\Http\Request  $request
-     * @param  \App\Models\TechnicalSupportTicket  $ticket
-     * @return \Illuminate\Http\Response
      */
     public function message(Request $request, TechnicalSupportTicket $ticket)
     {
@@ -187,9 +165,6 @@ class TechnicalSupportController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\TechnicalSupportTicket  $ticket
-     * @return \Illuminate\Http\Response
      */
     public function destroy(TechnicalSupportTicket $ticket)
     {

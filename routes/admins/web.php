@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\Course\TemplateController;
 use App\Http\Controllers\Admin\TechnicalSupportController;
 use App\Http\Controllers\Admin\MembershipTransferController;
 use App\Http\Controllers\Admin\Course\QuestionnaireController;
+use App\Http\Controllers\Admin\BranchTechnicalSupportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -269,5 +270,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
          */
         Route::get('competitions/submission/{submission}', [CompetitionController::class, 'submission'])->name('competitions.submission.show');
         Route::resource('competitions', CompetitionController::class);
+
+
+        /**
+         * Technical support for branch managers
+         */
+        Route::prefix('technical-issues')->middleware('role:Branch manager')->group(function() {
+            Route::get('/tickets', [BranchTechnicalSupportController::class, 'index'])->name('branch-issues.index');
+            Route::get('/create', [BranchTechnicalSupportController::class, 'create'])->name('branch-issues.create');
+            Route::post('/store', [BranchTechnicalSupportController::class, 'store'])->name('branch-issues.store');
+            Route::get('/tickets/{ticket}', [BranchTechnicalSupportController::class, 'show'])->name('branch-issues.show');
+            Route::post('/tickets/{ticket}/toggle', [BranchTechnicalSupportController::class, 'toggle'])->name('branch-issues.toggle');
+            Route::post('/tickets/{ticket}/message', [BranchTechnicalSupportController::class, 'message'])->name('branch-issues.message');
+            Route::delete('/tickets/{ticket}', [BranchTechnicalSupportController::class, 'destroy'])->name('branch-issues.destroy');
+        });
     });
 });
