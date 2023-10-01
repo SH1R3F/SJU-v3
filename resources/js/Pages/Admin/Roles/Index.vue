@@ -600,6 +600,10 @@ const editRole = (role) => {
                                                 <td>
                                                     <div class="d-flex">
                                                         <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistSupportmanager" v-model="addForm.permissions['managers-ticket']" />
+                                                            <label class="form-check-label" for="addlistSupportmanager"> {{ __('List managers tickets') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
                                                             <input class="form-check-input" type="checkbox" id="addlistSupportmember" v-model="addForm.permissions['members-ticket']" />
                                                             <label class="form-check-label" for="addlistSupportmember"> {{ __('List members tickets') }} </label>
                                                         </div>
@@ -1254,23 +1258,27 @@ const editRole = (role) => {
                                                 <td class="text-nowrap fw-semibold">{{ __('Technical support') }}</td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <div class="form-check me-2 me-lg-3">
+                                                        <div class="form-check me-2" v-if="editForm.name !== 'Branch manager'">
+                                                            <input class="form-check-input" type="checkbox" id="editlistSupportmanager" v-model="editForm.permissions['managers-ticket']" />
+                                                            <label class="form-check-label" for="editlistSupportmanager"> {{ __('List managers tickets') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2">
                                                             <input class="form-check-input" type="checkbox" id="editlistSupportmember" v-model="editForm.permissions['members-ticket']" />
                                                             <label class="form-check-label" for="editlistSupportmember"> {{ __('List members tickets') }} </label>
                                                         </div>
-                                                        <div class="form-check me-2 me-lg-3">
+                                                        <div class="form-check me-2">
                                                             <input class="form-check-input" type="checkbox" id="editlistSupportsubscriber" v-model="editForm.permissions['subscribers-ticket']" />
                                                             <label class="form-check-label" for="editlistSupportsubscriber"> {{ __('List subscribers tickets') }} </label>
                                                         </div>
-                                                        <div class="form-check me-2 me-lg-3">
+                                                        <div class="form-check me-2">
                                                             <input class="form-check-input" type="checkbox" id="editlistSupportvolunteer" v-model="editForm.permissions['volunteers-ticket']" />
                                                             <label class="form-check-label" for="editlistSupportvolunteer"> {{ __('List volunteers tickets') }} </label>
                                                         </div>
-                                                        <div class="form-check me-2 me-lg-3">
+                                                        <div class="form-check me-2">
                                                             <input class="form-check-input" type="checkbox" id="editViewTicket" v-model="editForm.permissions['view-ticket']" />
                                                             <label class="form-check-label" for="editViewTicket"> {{ __('View ticket') }} </label>
                                                         </div>
-                                                        <div class="form-check me-2 me-lg-3">
+                                                        <div class="form-check me-2">
                                                             <input class="form-check-input" type="checkbox" id="editdeleteTicket" v-model="editForm.permissions['delete-ticket']" />
                                                             <label class="form-check-label" for="editdeleteTicket"> {{ __('Delete ticket') }} </label>
                                                         </div>
