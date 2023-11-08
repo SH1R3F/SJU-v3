@@ -227,7 +227,7 @@ const form = useForm({
                                             </td>
                                         </tr>
 
-                                        <tr v-if="$page.props.userAuth && !registered">
+                                        <tr v-if="$page.props.userAuth && !registered && course.status !== 2">
                                             <!-- If registered -->
                                             <th colspan="2" class="text-success text-start">
                                                 <div class="checkbox-custom">
@@ -240,12 +240,19 @@ const form = useForm({
                                     </tbody>
                                 </table>
 
-                                <button type="submit" class="btn btn-sm btn-success p-2" v-if="$page.props.userAuth && !registered">{{ __('Register for the course') }}</button>
+                                <button type="submit" class="btn btn-sm btn-success p-2" v-if="$page.props.userAuth && !registered && course.status !== 2">{{ __('Register for the course') }}</button>
 
                                 <div class="alert alert-success alert-lg" v-if="$page.props.userAuth && registered">
                                     <strong>
                                         <i class="far fa-thumbs-up"></i>
                                         {{ __('You are registered to the course') }}
+                                    </strong>
+                                    <Link :href="$page.props.userHome" class="text-success">{{ __('Go to my account') }}</Link>
+                                </div>
+
+                                <div class="alert alert-success alert-lg" v-if="$page.props.userAuth && course.status === 2">
+                                    <strong>
+                                        {{ __('Registeration ended for this course') }}
                                     </strong>
                                     <Link :href="$page.props.userHome" class="text-success">{{ __('Go to my account') }}</Link>
                                 </div>

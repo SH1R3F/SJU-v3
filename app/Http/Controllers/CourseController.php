@@ -75,6 +75,8 @@ class CourseController extends Controller
      */
     public function register(Request $request, Course $course)
     {
+        abort_if(in_array($course->status, [0, 2]), 403);
+
         $request->validate(['agreement' => 'required|accepted']);
 
         // Register the user.
