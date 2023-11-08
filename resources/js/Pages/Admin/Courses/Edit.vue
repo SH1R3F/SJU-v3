@@ -449,7 +449,7 @@ const handleImages = ($event) => {
                                         <select class="form-control m-select2-no" id="status" v-model="form.status">
                                             <option value="1">{{ __('Available') }}</option>
                                             <option value="0">{{ __('Hidden') }}</option>
-                                            <option value="2">{{ __('Ended') }}</option>
+                                            <option value="2">{{ __('Registration ended') }}</option>
                                             <option value="3">{{ __('Postponed') }}</option>
                                             <option value="4">{{ __('Completed') }}</option>
                                             <option value="5">{{ __('Private') }}</option>

@@ -34,8 +34,8 @@ class Course extends Model
         'status' => 'integer',
     ];
 
-    public const STATUS_AVAILABLE = 1;
     public const STATUS_HIDDEN = 0;
+    public const STATUS_AVAILABLE = 1;
     public const STATUS_ENDED = 2;
     public const STATUS_POSTPONED = 3;
     public const STATUS_COMPLETED = 4;
@@ -72,7 +72,7 @@ class Course extends Model
 
     /**
      * Sort in admin panel
-     * 
+     *
      * @param \Illuminate\Http\Request  $request
      */
     public function scopeOrder($query, Request $request)

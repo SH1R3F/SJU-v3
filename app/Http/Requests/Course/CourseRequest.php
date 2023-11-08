@@ -35,7 +35,7 @@ class CourseRequest extends FormRequest
             'lng' => ['nullable'],
             'lat' => ['nullable'],
             'seats' => ['nullable', 'numeric', 'max:1000'],
-            'seats' => ['nullable', 'numeric'],
+            'status' => ['nullable', 'numeric'],
             'date_from' => ['required', 'date'],
             'date_to' => ['required', 'date'],
             'time_from' => ['required'],

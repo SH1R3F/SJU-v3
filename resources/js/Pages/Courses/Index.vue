@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <Head :title="__('Recent courses')" />
+    <Head :title="__('Courses')" />
     <div class="sjupage eventspage">
         <!-- News Header -->
 
