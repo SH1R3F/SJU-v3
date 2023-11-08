@@ -254,7 +254,6 @@ const form = useForm({
                                     <strong>
                                         {{ __('Registeration ended for this course') }}
                                     </strong>
-                                    <Link :href="$page.props.userHome" class="text-success">{{ __('Go to my account') }}</Link>
                                 </div>
                             </form>
                         </div>
