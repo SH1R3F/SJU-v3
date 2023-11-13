@@ -23,16 +23,20 @@ class MembersImport implements ToCollection
         foreach ($rows as $row) {
             if (count($row) != 15) {
                 continue;
-                //
             }
 
             [$name_ar, $name_en, $gender, $national_id, $mobile, $birthday_h, $birthday_m, $branch, $qualification, $major, $journalistic_profession, $journalistic_employer, $newspaper_type, $email, $type] = $row;
 
 
             if(empty($national_id ?? '')) {
+                logger('Importing skipped row national_id is empty');
                 continue;
             }
 
+            if (!$branch || !$branches[$branch]) {
+                logger("Skipped $national_id because no branch ({$branch})");
+                continue;
+            }
 
             $member = Member::firstOrCreate(['national_id' => $national_id], [
                 // Name ar
