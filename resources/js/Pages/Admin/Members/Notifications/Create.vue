@@ -2,11 +2,18 @@
 import { useForm } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue';
 
+
+defineProps({
+    branches: Object,
+});
+
 const form = useForm({
     message: '',
     via: {},
     to_type: 'select',
     recipients: [],
+    branch: 'all',
+    status: 'all'
 });
 
 const somethin = ref(null);
@@ -94,6 +101,54 @@ const sendNotification = () => {
                             </div>
 
                             <span class="fs-6 text-danger" v-if="form.errors.to_type">{{ form.errors.to_type }}</span>
+                        </div>
+                    </div>
+                    <!-- Send to -->
+
+                    <!-- Branch -->
+                    <div class="row" v-if="form.to_type !== 'select' && !['Branch manager', 'Employee'].includes($page.props.authUser.data.role)">
+                        <div class="mb-3 col-12">
+                            <label class="form-label">{{ __('Branch') }}</label>
+                            <div class="input-group">
+                                <select class="form-select" v-model='form.branch'>
+                                    <option value='all'>{{__('All')}}</option>
+                                    <option v-for='branch in branches' :key='branch.id' :value='branch.id'>{{branch.name}}</option>
+                                </select>
+                            </div>
+                            <span class="fs-6 text-danger" v-if="form.errors.to_type">{{ form.errors.branch }}</span>
+                        </div>
+                    </div>
+                    <!-- Branch -->
+
+
+                    <!-- Send to -->
+                    <div class="row" v-if="form.to_type !== 'select'">
+                        <div class="mb-3 col-12">
+                            <label class="form-label">{{ __('Status') }}</label>
+                            <div class="d-flex gap-3 flex-wrap">
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" type="radio" name="sendStatus" id="all" value="all" v-model="form.status" />
+                                    <label class="form-check-label" for="all"> {{ __('All') }} </label>
+                                </div>
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" type="radio" name="sendStatus" id="members" value="members" v-model="form.status" />
+                                    <label class="form-check-label" for="members"> {{ __('Members') }} </label>
+                                </div>
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" type="radio" name="sendStatus" id="branch_approval" value="branch_approval" v-model="form.status" />
+                                    <label class="form-check-label" for="branch_approval"> {{ __('Branch approval') }} </label>
+                                </div>
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" type="radio" name="sendStatus" id="admin_approval" value="admin_approval" v-model="form.status" />
+                                    <label class="form-check-label" for="admin_approval"> {{ __('Admin approval') }} </label>
+                                </div>
+                                <div class="form-check mt-1">
+                                    <input class="form-check-input" type="radio" name="sendStatus" id="refused" value="refused" v-model="form.status" />
+                                    <label class="form-check-label" for="refused"> {{ __('Refused members') }} </label>
+                                </div>
+                            </div>
+
+                            <span class="fs-6 text-danger" v-if="form.errors.status">{{ form.errors.status }}</span>
                         </div>
                     </div>
                     <!-- Send to -->

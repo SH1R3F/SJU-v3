@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class NotifyMembersRequest extends FormRequest
 {
@@ -29,7 +30,13 @@ class NotifyMembersRequest extends FormRequest
             'via.*' => ['required', 'string', 'in:mail,sms,database'],
             'to_type' => ['required', 'string', 'in:select,all,fulltime,parttime,affiliate'],
             'recipients' => ['required_if:to_type,select', 'array'],
-            'recipients.*' => ['required_if:to_type,select', 'numeric', 'exists:members,id']
+            'recipients.*' => ['required_if:to_type,select', 'numeric', 'exists:members,id'],
+            'branch' => ['required', Rule::when(
+                is_numeric($this->branch),
+                Rule::exists('branches', 'id'),
+                Rule::in(['all'])
+            )],
+            'status' => ['required', 'string', 'in:all,members,branch_approval,admin_approval,refused']
         ];
     }
 

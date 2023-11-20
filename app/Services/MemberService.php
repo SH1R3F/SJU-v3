@@ -84,12 +84,16 @@ class MemberService
                 break;
             case 'all':
                 return Member::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->when($data['branch'] !== 'all', fn($query) => $query->where('branch_id', $data['branch']))
+                    ->when($data['status'] !== 'all', fn ($query) => $query->where('status', $this->getRecipientsStatus($data['status'])))
                     ->where('status', '!=', Member::STATUS_DISABLED)
                     // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
                     ->get();
                 break;
             case 'fulltime':
                 return Member::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->when($data['branch'] !== 'all', fn($query) => $query->where('branch_id', $data['branch']))
+                    ->when($data['status'] !== 'all', fn ($query) => $query->where('status', $this->getRecipientsStatus($data['status'])))
                     ->where('status', '!=', Member::STATUS_DISABLED)
                     ->whereHas('subscription', fn ($query) => $query->where('type', 1))
                     // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
@@ -97,6 +101,8 @@ class MemberService
                 break;
             case 'parttime':
                 return Member::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->when($data['branch'] !== 'all', fn($query) => $query->where('branch_id', $data['branch']))
+                    ->when($data['status'] !== 'all', fn ($query) => $query->where('status', $this->getRecipientsStatus($data['status'])))
                     ->where('status', '!=', Member::STATUS_DISABLED)
                     ->whereHas('subscription', fn ($query) => $query->where('type', 2))
                     // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
@@ -104,6 +110,8 @@ class MemberService
                 break;
             case 'affiliate':
                 return Member::when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('branch_id', Auth::guard('admin')->user()->branch_id))
+                    ->when($data['branch'] !== 'all', fn($query) => $query->where('branch_id', $data['branch']))
+                    ->when($data['status'] !== 'all', fn ($query) => $query->where('status', $this->getRecipientsStatus($data['status'])))
                     ->where('status', '!=', Member::STATUS_DISABLED)
                     ->whereHas('subscription', fn ($query) => $query->where('type', 3))
                     // ->whereRaw("email REGEXP '^[^@]+@[^@]+\.[^@]{2,}$'")
@@ -204,6 +212,22 @@ class MemberService
         )));
 
         return $pdf->Output();
+    }
+
+
+    /**
+     * Get recipients status by status name
+     * @param string $status
+     * @return int
+     */
+    private function getRecipientsStatus(string $status)
+    {
+        return match ($status) {
+            'members' => Member::STATUS_ACCEPTED,
+            'branch_approval' => Member::STATUS_UNAPPROVED,
+            'admin_approval' => Member::STATUS_APPROVED,
+            'refused' => Member::STATUS_REFUSED
+        };
     }
 
 }

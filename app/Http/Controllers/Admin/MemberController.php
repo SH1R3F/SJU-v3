@@ -520,7 +520,9 @@ class MemberController extends Controller
     public function showNotifyForm()
     {
         $this->authorize('notify', Member::class);
-        return inertia('Admin/Members/Notifications/Create');
+        return inertia('Admin/Members/Notifications/Create', [
+            'branches' => Branch::orderBy('id')->get(['id', 'name']),
+        ]);
     }
 
     /**
