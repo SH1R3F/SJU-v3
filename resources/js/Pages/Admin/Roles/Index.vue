@@ -733,6 +733,28 @@ const editRole = (role) => {
                                             <!-- Competitions permission -->
 
 
+                                            <!-- Elections permission -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Candidates management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addlistCandidate" v-model="addForm.permissions['viewAny-candidate']" />
+                                                            <label class="form-check-label" for="addlistCandidate"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="addcreateCandidate" v-model="addForm.permissions['create-candidate']" />
+                                                            <label class="form-check-label" for="addcreateCandidate"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="adddeleteCandidate" v-model="addForm.permissions['delete-candidate']" />
+                                                            <label class="form-check-label" for="adddeleteCandidate"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Elections permission -->
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -1390,6 +1412,28 @@ const editRole = (role) => {
                                                 </td>
                                             </tr>
                                             <!-- Competitions -->
+
+                                            <!-- Candidates -->
+                                            <tr>
+                                                <td class="text-nowrap fw-semibold">{{ __('Candidates management') }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editlistCandidate" v-model="editForm.permissions['viewAny-candidate']" />
+                                                            <label class="form-check-label" for="editlistCandidate"> {{ __('List') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editcreateCandidate" v-model="editForm.permissions['create-candidate']" />
+                                                            <label class="form-check-label" for="editcreateCandidate"> {{ __('Create') }} </label>
+                                                        </div>
+                                                        <div class="form-check me-2 me-lg-3">
+                                                            <input class="form-check-input" type="checkbox" id="editdeleteCandidate" v-model="editForm.permissions['delete-candidate']" />
+                                                            <label class="form-check-label" for="editdeleteCandidate"> {{ __('Delete') }} </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- Candidates -->
                                         </tbody>
                                     </table>
                                 </div>
