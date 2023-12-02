@@ -320,6 +320,13 @@ class Member extends Authenticatable
         }
     }
 
+    public function activeMember()
+    {
+        return $this->status === self::STATUS_ACCEPTED
+            && $this->subscription?->status == Subscription::SUBSCRIPTION_ACTIVE
+            && !$this->subscription?->end_date?->lt(Carbon::today());
+    }
+
     /**
      * Technical support tickets relationship
      */
@@ -358,6 +365,14 @@ class Member extends Authenticatable
     public function certificates()
     {
         return $this->morphMany(Certificate::class, 'certificatable');
+    }
+
+    /**
+     * Relation to the vote he has
+     */
+    public function vote()
+    {
+        return $this->hasOne(Vote::class, 'voter_id');
     }
 
     /**

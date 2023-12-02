@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ElectionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\Member\MemberController;
@@ -126,6 +127,15 @@ Route::group(['prefix' => 'members', 'as' => 'member.'], function () {
                 Route::get('/payment/gateway', fn () => redirect()->route('member.payment-card'));
                 Route::get('/payment/response', [PaymentController::class, 'response'])->name('payment-response');
             });
+        });
+
+        /**
+         * Elections routes
+         */
+        Route::prefix('elections')->group(function () {
+            Route::get('/subscribed', [ElectionController::class, 'subscribed']);
+            Route::get('/candidates', [ElectionController::class, 'candidates']);
+            Route::post('/vote/{candidate}', [ElectionController::class, 'vote'])->name('elections.vote');
         });
     });
 });

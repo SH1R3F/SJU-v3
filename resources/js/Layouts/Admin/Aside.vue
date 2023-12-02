@@ -349,6 +349,16 @@
                 </Link>
             </li>
             <!-- Technical support for branch managers -->
+
+            <!-- Candidates -->
+            <li v-if="$page.props.authUser?.can_view?.candidates" class="menu-item"
+                :class="{ active: $page.component.startsWith('Admin/Candidates') }">
+                <Link :href="route('admin.candidates.index')" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-star"></i>
+                <div>{{ __('Elections') }}</div>
+                </Link>
+            </li>
+            <!-- Candidates -->
         </ul>
     </aside>
 </template>

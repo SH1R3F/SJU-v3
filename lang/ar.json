@@ -1080,5 +1080,20 @@
     "Member transfer request deleted successfully": "تم حذف الطلب بنجاح",
     "Member transfer request disapproved successfully": "تم رفض الطلب بنجاح",
     "Disapproved": "مرفوض",
-    "Members statistics": "إحصائيات الأعضاء"
+    "Members statistics": "إحصائيات الأعضاء",
+    "------------- Elecions -----------": "",
+    "Elections": "الإنتخابات",
+    "Create candidate": "إضافة مرشح",
+    "Candidates management": "إدارة المرشحين",
+    "Votes": "الأصوات",
+    "Candidate": "المرشح",
+    "Candidates": "المرشحين",
+    "This field is required": "هذا الحقل مطلوب",
+    "Candidate created successfully": "تم تسجيل المرشح بنجاح",
+    "Candidate deleted successfully": "تم حذف المرشح بنجاح",
+    "You have successfully participated in the elections": "تم الاشتراك بنجاح في الانتخابات",
+    "Elections for the Saudi Journalists Association": "انتخابات هيئة الصحفيين السعوديين",
+    "Vote": "تصويت",
+    "Voted": "تم التصويت",
+    "Your vote has been registered successfully": "تم تسجيل تصويتك بنجاح"
 }

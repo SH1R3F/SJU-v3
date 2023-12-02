@@ -34,6 +34,7 @@ use App\Models\TechnicalSupportTicket;
 use App\Http\Resources\EmployeeResource;
 use App\Http\Resources\VolunteerResource;
 use App\Http\Resources\SubscriberResource;
+use App\Models\Candidate;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -159,6 +160,7 @@ class HandleInertiaRequests extends Middleware
             'invitations' =>  $admin->can('viewAny', Invitation::class),
             'training_bag' =>  $admin->can('viewAny', TrainingBag::class),
             'competitions' =>  $admin->can('viewAny', Competition::class),
+            'candidates' =>  $admin->can('viewAny', Candidate::class),
         ];
     }
 }

@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\TechnicalSupportController;
 use App\Http\Controllers\Admin\MembershipTransferController;
 use App\Http\Controllers\Admin\Course\QuestionnaireController;
 use App\Http\Controllers\Admin\BranchTechnicalSupportController;
+use App\Http\Controllers\Admin\CandidateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -285,5 +286,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
             Route::post('/tickets/{ticket}/message', [BranchTechnicalSupportController::class, 'message'])->name('branch-issues.message');
             Route::delete('/tickets/{ticket}', [BranchTechnicalSupportController::class, 'destroy'])->name('branch-issues.destroy');
         });
+
+        /**
+         * Elections
+         */
+        Route::get('/export', [CandidateController::class, 'export'])->name('candidates.export');
+        Route::get('/chuncks', [CandidateController::class, 'chuncks'])->name('candidates.chuncks');
+        Route::resource('candidates', CandidateController::class);
     });
 });
