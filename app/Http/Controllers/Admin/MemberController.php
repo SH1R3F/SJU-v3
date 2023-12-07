@@ -315,7 +315,7 @@ class MemberController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(MemberRequest $request, Member $member)
+    public function update(MemberRequest $request, Member $member, MemberService $service)
     {
         $data = $request->validated();
 
@@ -328,8 +328,15 @@ class MemberController extends Controller
         // Update member
         $member->update($data);
 
-        // Create subscription
-        if ($data['type']) $member->subscription()->update(['type' => $data['type']]);
+        // Update subscription
+        if ($data['type']) {
+            $member->subscription()->update(['type' => $data['type']]);
+
+            // Update membership number if had one
+            if ($member->membership_number) {
+                $service->membershipNumber($member);
+            }
+        };
 
         // Response
         return redirect()->route('admin.members.index')->with('message', __('Member updated successfully'));
@@ -496,7 +503,7 @@ class MemberController extends Controller
             'set_by' => Auth::guard('admin')->user()->id
         ]);
 
-        // Give membershipt number!
+        // Give membership number!
         $service->membershipNumber($member);
 
         return redirect()->back()->with('message', __('Member updated successfully'));

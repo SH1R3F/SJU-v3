@@ -321,7 +321,8 @@ return [
         'transfer_to' => 'إلى الفرع',
         'competition_fields.*.title' => 'الحقل',
         'competition_fields.*.type' => 'نوع الحقل',
-        'candidate_id' => 'المرشح'
+        'candidate_id' => 'المرشح',
+        'membership_number' => 'رقم العضوية'
     ],
 
 ];
