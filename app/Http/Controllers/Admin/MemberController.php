@@ -329,7 +329,7 @@ class MemberController extends Controller
         $member->update($data);
 
         // Update subscription
-        if ($data['type']) {
+        if ($data['type'] !== $member->subscription->type) {
             $member->subscription()->update(['type' => $data['type']]);
 
             // Update membership number if had one
