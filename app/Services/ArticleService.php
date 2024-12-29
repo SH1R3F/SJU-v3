@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Article;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleService
 {
@@ -18,6 +19,24 @@ class ArticleService
         // Set first image as the default one
         $data['image'] = count($data['images']) ? $data['images'][0] : null;
 
+        // Save images in storage instead of base64.
+        $pattern = '/<img\s+[^>]*src="data:image\/[a-zA-Z]+;base64,[^"]+"[^>]*>/';
+        preg_match_all($pattern, $data['content_ar'], $matches);
+        foreach ($matches[0] as $image) {
+            $path = upload_base64_image($image, "uploads/images/wysiwyg/" . $data['news_date']);
+            $url = Storage::url($path);
+            $img = "<img src='$url' />";
+            $data['content_ar'] = str_replace($image, $img, $data['content_ar']);
+        }
+
+        preg_match_all($pattern, $data['content_en'], $matches);
+        foreach ($matches[0] as $image) {
+            $path = upload_base64_image($image, "uploads/images/wysiwyg/" . $data['news_date']);
+            $url = Storage::url($path);
+            $img = "<img src='$url' />";
+            $data['content_en'] = str_replace($image, $img, $data['content_en']);
+        }
+
         return Article::create($data);
     }
 
@@ -30,6 +49,24 @@ class ArticleService
         $data['images'] = $this->handleImages($data['images'], $data['news_date'], $article->images);
         // Set first image as the default one
         $data['image'] = count($data['images']) ? $data['images'][0] : null;
+
+        // Save images in storage instead of base64.
+        $pattern = '/<img\s+[^>]*src="data:image\/[a-zA-Z]+;base64,[^"]+"[^>]*>/';
+        preg_match_all($pattern, $data['content_ar'], $matches);
+        foreach ($matches[0] as $image) {
+            $path = upload_base64_image($image, "uploads/images/wysiwyg/" . $data['news_date']);
+            $url = Storage::url($path);
+            $img = "<img src='$url' />";
+            $data['content_ar'] = str_replace($image, $img, $data['content_ar']);
+        }
+
+        preg_match_all($pattern, $data['content_en'], $matches);
+        foreach ($matches[0] as $image) {
+            $path = upload_base64_image($image, "uploads/images/wysiwyg/" . $data['news_date']);
+            $url = Storage::url($path);
+            $img = "<img src='$url' />";
+            $data['content_en'] = str_replace($image, $img, $data['content_en']);
+        }
 
         $article->update($data);
     }
