@@ -30,7 +30,7 @@ class PaymentController extends Controller
 
     /**
      * Generate & display the payment gateway for selected card type
-     * 
+     *
      * @param \Illuminate\Http\Request  $request
      */
     public function gateway(Request $request)
@@ -45,7 +45,7 @@ class PaymentController extends Controller
 
     /**
      * Handle the payment response
-     * 
+     *
      * @param \Illuminate\Http\Request  $request
      * @param \App\Services\InvoiceService  $request
      * @param \App\Services\MemberService  $request
@@ -62,7 +62,7 @@ class PaymentController extends Controller
         $member = Auth::guard('member')->user();
         $member->subscription()->update([
             'start_date' => Carbon::today(),
-            'end_date' => Carbon::now()->endOfYear(),
+            'end_date' => Carbon::today()->addYear()->subDays(1),
             'status' => Subscription::SUBSCRIPTION_ACTIVE
         ]);
         $member->notify(new MembershipPaid);

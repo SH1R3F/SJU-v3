@@ -8,9 +8,9 @@ const props = defineProps({
 });
 const form = useForm({
     exp_flds_lngs: props.member.exp_flds_lngs || {
-        experiences: experiences || [],
-        fields: fields || [],
-        languages: languages || [],
+        experiences: [],
+        fields: [],
+        languages: [],
     },
 });
 </script>

@@ -267,7 +267,7 @@ class MemberAuthController extends Controller
         // Register the member
         $member->save();
         // Register his subscription
-        $member->subscription()->create(['type' => $member_type, 'end_date' => Carbon::now()->endOfYear()]);
+        $member->subscription()->create(['type' => $member_type, 'end_date' => Carbon::today()->addYear()->subDays(1)]);
         // Fire event
         event(new MemberRegistered($member));
 

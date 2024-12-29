@@ -23,7 +23,7 @@ class MembershipTransferController extends Controller
      */
     public function index()
     {
-        $subscribers = MembershipTransfer::with('member', 'branchFrom', 'branchTo', 'requester')
+        $subscribers = MembershipTransfer::has('member')->with('member', 'branchFrom', 'branchTo', 'requester')
             ->when(Auth::user()->hasRole('Branch manager') || \App\Models\Employee::find(Auth::user()->id)?->hasRole('Employee'), fn ($query) => $query->where('transfer_from', Auth::guard('admin')->user()->branch_id)->orWhere('transfer_to', Auth::guard('admin')->user()->branch_id))
             ->filter(request())
             ->order(request())

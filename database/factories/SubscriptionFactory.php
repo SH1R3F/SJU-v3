@@ -20,7 +20,7 @@ class SubscriptionFactory extends Factory
         return [
             'type' => rand(1, 3),
             'start_date' => $date = fake()->date,
-            'end_date' => Carbon::parse($date)->endOfYear(),
+            'end_date' => Carbon::parse($date)->addYear()->subDays(1),
         ];
     }
 }

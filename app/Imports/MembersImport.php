@@ -67,7 +67,7 @@ class MembersImport implements ToCollection
 
                 // Create subscription
                 if (!$member->subscription) {
-                    $member->subscription()->create(['type' => $type == 'عضو متفرغ' ? 1 : ($type == 'عضو غير متفرغ' ? 2 : 3), 'end_date' => Carbon::now()->endOfYear()]);
+                    $member->subscription()->create(['type' => $type == 'عضو متفرغ' ? 1 : ($type == 'عضو غير متفرغ' ? 2 : 3), 'end_date' => Carbon::today()->addYear()->subDays(1)]);
                 }
             } catch (\Exception $e) {
                 logger("$national_id had error importing " . $e->getMessage());

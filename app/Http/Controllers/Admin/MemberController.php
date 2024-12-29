@@ -490,7 +490,7 @@ class MemberController extends Controller
         // Update member's subscription
         $member->subscription()->update([
             'start_date' => Carbon::today(),
-            'end_date' => Carbon::now()->endOfYear(),
+            'end_date' => Carbon::today()->addYear()->subDays(1),
             'status' => Subscription::SUBSCRIPTION_ACTIVE
         ]);
         $member->notify(new MembershipPaid);
