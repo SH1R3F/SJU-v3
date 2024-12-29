@@ -17,14 +17,14 @@ class AdminSeeder extends Seeder
     public function run()
     {
         $admin = Admin::factory()->create([
-            'fname' => 'مدير',
-            'lname' => 'النظام',
+            'fname_ar' => 'مدير',
+            'lname_ar' => 'النظام',
             'username' => 'admin',
             'email' => 'admin@sju.org.sa',
             'mobile' => '1234',
             'password' => bcrypt('Y#34603460m')
         ]);
         $admin->assignRole('Site admin');
-        // Admin::factory(10)->create();
+         Admin::factory(10)->create();
     }
 }

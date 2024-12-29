@@ -23,13 +23,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(RoleAndPermissionSeeder::class);
-        // $this->call(BranchSeeder::class);
-        // $this->call(AdminSeeder::class);
-        // $this->call(MemberSeeder::class);
-        // $this->call(InvoiceSeeder::class);
-        // $this->call(TechnicalSupportSeeder::class);
-        // $this->call(CourseSeeder::class);
-        // $this->call(NewsSeeder::class);
-        // $this->call(SiteOptionSeeder::class);
+         $this->call(BranchSeeder::class);
+         $this->call(AdminSeeder::class);
+         $this->call(MemberSeeder::class);
+         $this->call(InvoiceSeeder::class);
+         $this->call(TechnicalSupportSeeder::class);
+         $this->call(CourseSeeder::class);
+         $this->call(NewsSeeder::class);
+         $this->call(SiteOptionSeeder::class);
     }
 }
